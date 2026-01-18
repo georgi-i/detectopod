@@ -26,12 +26,19 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # Debug: List structure to confirm paths
+        ls -R
         python -m pip install -r detection/requirements.txt
+        # Debug: Confirm installation
+        python -m pip list
         
     - name: Run detection script
+      env:
+        PYTHONPATH: ${{ github.workspace }}
       run: |
         # Run for 900 seconds (15 minutes) - leaving 5 min buffer for setup/commit
-        python detection/detectopod.py --duration 900
+        # Run as module to ensure imports work correctly
+        python -m detection.detectopod --duration 900
         
     - name: Check for changes
       id: check_changes
