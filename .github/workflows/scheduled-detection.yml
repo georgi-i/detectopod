@@ -26,7 +26,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f detection/requirements.txt ]; then pip install -r detection/requirements.txt; fi
+        # Debug: List structure to confirm paths
+        ls -R
+        pip install -r detection/requirements.txt
         
     - name: Run detection script
       run: |
