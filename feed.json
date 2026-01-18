@@ -1,0 +1,23 @@
+[
+    {
+        "domain": "econt-tracking-update-bg.web.app",
+        "score": 90,
+        "timestamp": "2026-01-18T20:30:00.000000",
+        "status": "active",
+        "source": "CertStream"
+    },
+    {
+        "domain": "speedy-delivery-payment.firebaseapp.com",
+        "score": 90,
+        "timestamp": "2026-01-18T20:45:00.000000",
+        "status": "active",
+        "source": "CertStream"
+    },
+    {
+        "domain": "bgpost-fees-pay.web.app",
+        "score": 70,
+        "timestamp": "2026-01-18T21:00:00.000000",
+        "status": "active",
+        "source": "CertStream"
+    }
+]
