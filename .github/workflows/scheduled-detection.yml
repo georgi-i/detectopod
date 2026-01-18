@@ -7,12 +7,18 @@ on:
   # Allow manual trigger for testing
   workflow_dispatch:
 
+# Prevent multiple workflows from running at the same time
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
 jobs:
   detect:
     runs-on: ubuntu-latest
+    timeout-minutes: 20  # Safety net: Kill job if script hangs > 20 mins
     steps:
     - uses: actions/checkout@v4
       with:
