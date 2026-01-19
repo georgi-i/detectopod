@@ -43,8 +43,8 @@ jobs:
     - name: Run detection script in polling mode
       run: |
         # Use polling mode with crt.sh (most reliable and comprehensive)
-        # Run for 600 seconds (10 minutes) - leaving 10 min buffer for setup/commit
-        python detection/detectopod.py --duration 600 --mode poll
+        # Run for 900 seconds (15 minutes) - leaving 5 min buffer for setup/commit
+        python detection/detectopod.py --duration 900 --mode poll
         
     - name: Check for changes
       id: check_changes
@@ -72,9 +72,27 @@ jobs:
       run: |
         echo "### Detection Run Summary" >> $GITHUB_STEP_SUMMARY
         echo "- **Mode**: Polling (crt.sh API)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Duration**: 600 seconds (10 minutes)" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Check if run stats exist
+        if [[ -f run_stats.json ]]; then
+          CERTS=$(cat run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('certs_analyzed', 0))" 2>/dev/null || echo "0")
+          DOMAINS=$(cat run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('domains_processed', 0))" 2>/dev/null || echo "0")
+          NEW_FINDINGS=$(cat run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('new_findings', 0))" 2>/dev/null || echo "0")
+          ELAPSED=$(cat run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('elapsed_time', 0))" 2>/dev/null || echo "0")
+          
+          echo "**📊 Analysis Stats:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Certificates analyzed: **$CERTS**" >> $GITHUB_STEP_SUMMARY
+          echo "- Unique domains processed: **$DOMAINS**" >> $GITHUB_STEP_SUMMARY
+          echo "- New suspicious domains found: **$NEW_FINDINGS** 🚨" >> $GITHUB_STEP_SUMMARY
+          echo "- Runtime: **${ELAPSED}s**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        # Total entries in feed
         if [[ -f feed.json ]]; then
-          ENTRY_COUNT=$(cat feed.json | python -c "import sys, json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
-          echo "- **Total entries in feed**: $ENTRY_COUNT" >> $GITHUB_STEP_SUMMARY
+          TOTAL_ENTRIES=$(cat feed.json | python -c "import sys, json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
+          echo "**📋 Feed Status:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Total entries in threat feed: **$TOTAL_ENTRIES**" >> $GITHUB_STEP_SUMMARY
         fi
