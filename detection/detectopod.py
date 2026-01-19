@@ -103,6 +103,25 @@ def calculate_score(domain):
 
     return score
 
+def save_run_stats(certs_analyzed, domains_processed, new_findings, elapsed_time):
+    """Save run statistics to a file for GitHub Actions summary"""
+    stats_file = os.path.join(os.path.dirname(OUTPUT_FILE), 'run_stats.json')
+    
+    stats = {
+        "certs_analyzed": certs_analyzed,
+        "domains_processed": domains_processed,
+        "new_findings": new_findings,
+        "elapsed_time": round(elapsed_time, 1),
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+    
+    try:
+        with open(stats_file, 'w') as f:
+            json.dump(stats, f, indent=2)
+        logging.info(f"Run stats saved to {stats_file}")
+    except Exception as e:
+        logging.error(f"Error saving run stats: {e}")
+
 
 def add_to_feed(domain, score):
     """Add a suspicious domain to the feed"""
