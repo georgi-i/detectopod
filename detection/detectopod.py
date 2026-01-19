@@ -11,6 +11,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Usage: python detectopod.py [--duration SECONDS] [--mode stream|poll]
 
 # Configuration
+SCORE_THRESHOLD = 80
+
 KEYWORDS = [
     'econt', 'speedy', 'bulgariapost', 'bgpost',
     'tracking', 'delivery', 'shipment', 'parcel',
@@ -237,7 +239,7 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                         # Calculate score
                         score = calculate_score(domain)
                         
-                        if score >= 70:
+                        if score >= SCORE_THRESHOLD:
                             logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score}, Source: {source_name})")
                             if add_to_feed(domain, score):
                                 findings_count += 1
@@ -290,7 +292,7 @@ def process_message(message, context):
 
             score = calculate_score(domain)
 
-            if score >= 70:
+            if score >= SCORE_THRESHOLD:
                 logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score})")
                 add_to_feed(domain, score)
 
