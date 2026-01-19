@@ -72,7 +72,7 @@ jobs:
       run: |
         echo "### Detection Run Summary" >> $GITHUB_STEP_SUMMARY
         echo "- **Mode**: Polling (crt.sh API)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Duration**: 900 seconds (15 minutes)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Duration**: 600 seconds (10 minutes)" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         if [[ -f feed.json ]]; then
           ENTRY_COUNT=$(cat feed.json | python -c "import sys, json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
