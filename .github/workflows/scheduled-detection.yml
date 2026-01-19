@@ -18,41 +18,43 @@ permissions:
 jobs:
   detect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20  # Safety net: Kill job if script hangs > 20 mins
+    timeout-minutes: 20  # Safety timeout
+    
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: "3.10"
         
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Debug: List structure to confirm paths
-        ls -R
+        echo "Installing dependencies from requirements.txt..."
+        cat detection/requirements.txt
         python -m pip install -r detection/requirements.txt
-        # Debug: Confirm installation
-        python -m pip list
+        echo "Verifying requests installation..."
+        python -c "import requests; print(f'requests {requests.__version__} installed successfully')"
         
-    - name: Run detection script
-      env:
-        PYTHONPATH: ${{ github.workspace }}
+    - name: Run detection script in polling mode
       run: |
+        # Use polling mode with crt.sh (most reliable and comprehensive)
         # Run for 900 seconds (15 minutes) - leaving 5 min buffer for setup/commit
-        # Run as module to ensure imports work correctly
-        python -m detection.detectopod --duration 900
+        python detection/detectopod.py --duration 900 --mode poll
         
     - name: Check for changes
       id: check_changes
       run: |
         if [[ -n $(git status -s feed.json) ]]; then
           echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected in feed.json"
         else
           echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "No changes detected"
         fi
         
     - name: Commit and push changes
@@ -61,5 +63,18 @@ jobs:
         git config --global user.name 'Detectopod Bot'
         git config --global user.email 'bot@detectopod'
         git add feed.json
-        git commit -m "Update threat feed [skip ci]"
+        TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        git commit -m "Update threat feed - $TIMESTAMP [skip ci]"
         git push
+        
+    - name: Summary
+      if: always()
+      run: |
+        echo "### Detection Run Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Mode**: Polling (crt.sh API)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Duration**: 900 seconds (15 minutes)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+        if [[ -f feed.json ]]; then
+          ENTRY_COUNT=$(cat feed.json | python -c "import sys, json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
+          echo "- **Total entries in feed**: $ENTRY_COUNT" >> $GITHUB_STEP_SUMMARY
+        fi
