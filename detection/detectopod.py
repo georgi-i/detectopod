@@ -43,8 +43,13 @@ TARGET_SUFFIXES = (
     '.azure-api.net'
 )
 
-# CT Log URLs for direct polling (crt.sh is a public CT search service)
-CT_SEARCH_URL = "https://crt.sh/?q=%25&output=json"
+# CT Log URLs for direct polling
+CT_LOG_SOURCES = {
+    'crtsh': {
+        'name': 'crt.sh',
+        'enabled': True
+    }
+}
 
 # CertStream URLs (for streaming mode)
 CT_STREAMS = [
@@ -125,7 +130,7 @@ def add_to_feed(domain, score):
 
 # ==================== POLLING MODE (Direct CT Log Access) ====================
 
-def query_crtsh(suffix, max_results=1000):
+def query_crtsh(suffix, max_results=1000, retry_count=0, max_retries=2):
     """Query crt.sh for certificates matching a specific suffix"""
     try:
         # Search for domains ending with the suffix
@@ -133,76 +138,112 @@ def query_crtsh(suffix, max_results=1000):
         url = f"https://crt.sh/?q={search_query}&output=json"
         
         logging.info(f"Querying crt.sh for: {suffix}")
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, timeout=45)
         
         if response.status_code == 200:
             data = response.json()
             logging.info(f"Found {len(data)} certificates for {suffix}")
-            return data[:max_results]  # Limit results
+            return data[:max_results]
+        elif response.status_code == 503:
+            # Service unavailable - retry with backoff
+            if retry_count < max_retries:
+                wait_time = (retry_count + 1) * 3
+                logging.warning(f"crt.sh returned 503 for {suffix}, retrying in {wait_time}s (attempt {retry_count + 1}/{max_retries})")
+                time.sleep(wait_time)
+                return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
+            else:
+                logging.error(f"crt.sh returned 503 for {suffix} after {max_retries} retries, skipping")
+                return []
         else:
             logging.warning(f"crt.sh returned status {response.status_code} for {suffix}")
             return []
     except requests.exceptions.Timeout:
-        logging.error(f"Timeout querying crt.sh for {suffix}")
-        return []
+        # Timeout - retry with longer timeout
+        if retry_count < max_retries:
+            wait_time = (retry_count + 1) * 3
+            logging.warning(f"Timeout querying crt.sh for {suffix}, retrying in {wait_time}s (attempt {retry_count + 1}/{max_retries})")
+            time.sleep(wait_time)
+            return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
+        else:
+            logging.error(f"Timeout querying crt.sh for {suffix} after {max_retries} retries, skipping")
+            return []
     except Exception as e:
         logging.error(f"Error querying crt.sh for {suffix}: {e}")
         return []
 
 
-def poll_ct_logs(duration=None):
-    """Poll CT logs directly via crt.sh"""
+
+
+
+def poll_ct_logs(duration=None, sources=['crtsh']):
+    """Poll CT logs directly via multiple sources"""
     start_time = datetime.datetime.now()
     processed_domains = set()
     findings_count = 0
     
     logging.info("Starting CT log polling mode...")
+    logging.info(f"Using sources: {', '.join(sources)}")
     logging.info(f"Querying {len(TARGET_SUFFIXES)} target suffixes")
     
-    # Use ThreadPoolExecutor to query multiple suffixes in parallel
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        # Submit queries for all suffixes
-        future_to_suffix = {
-            executor.submit(query_crtsh, suffix): suffix 
-            for suffix in TARGET_SUFFIXES
-        }
+    # Determine which query function to use for each source
+    query_functions = []
+    
+    if 'crtsh' in sources and CT_LOG_SOURCES['crtsh']['enabled']:
+        query_functions.append(('crt.sh', query_crtsh))
+    
+    if not query_functions:
+        logging.error("No CT log sources enabled!")
+        return
+    
+    # Query each source
+    for source_name, query_func in query_functions:
+        logging.info(f"Querying {source_name}...")
         
-        for future in as_completed(future_to_suffix):
-            suffix = future_to_suffix[future]
+        # Use ThreadPoolExecutor to query multiple suffixes in parallel
+        # Reduced workers to 3 to avoid overwhelming crt.sh
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            # Submit queries for all suffixes
+            future_to_suffix = {
+                executor.submit(query_func, suffix): suffix 
+                for suffix in TARGET_SUFFIXES
+            }
             
-            # Check timeout
-            if duration:
-                elapsed = (datetime.datetime.now() - start_time).total_seconds()
-                if elapsed > duration:
-                    logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
-                    return
-            
-            try:
-                results = future.result()
+            for future in as_completed(future_to_suffix):
+                suffix = future_to_suffix[future]
                 
-                for cert in results:
-                    # Extract domain name
-                    domain = cert.get('name_value', '').strip()
+                # Check timeout
+                if duration:
+                    elapsed = (datetime.datetime.now() - start_time).total_seconds()
+                    if elapsed > duration:
+                        logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
+                        return
+                
+                try:
+                    results = future.result()
                     
-                    if not domain or domain in processed_domains:
-                        continue
-                    
-                    processed_domains.add(domain)
-                    
-                    # Skip wildcards
-                    if domain.startswith('*'):
-                        continue
-                    
-                    # Calculate score
-                    score = calculate_score(domain)
-                    
-                    if score >= 70:
-                        logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score})")
-                        if add_to_feed(domain, score):
-                            findings_count += 1
-                            
-            except Exception as e:
-                logging.error(f"Error processing results for {suffix}: {e}")
+                    for cert in results:
+                        # Extract domain name
+                        domain = cert.get('name_value', '').strip()
+                        
+                        if not domain or domain in processed_domains:
+                            continue
+                        
+                        processed_domains.add(domain)
+                        
+                        # Skip wildcards
+                        if domain.startswith('*'):
+                            continue
+                        
+                        # Calculate score
+                        score = calculate_score(domain)
+                        
+                        if score >= 70:
+                            logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score}, Source: {source_name})")
+                            if add_to_feed(domain, score):
+                                findings_count += 1
+                                
+                except Exception as e:
+                    logging.error(f"Error processing results for {suffix} from {source_name}: {e}")
     
     elapsed = (datetime.datetime.now() - start_time).total_seconds()
     logging.info(f"Polling completed in {elapsed:.1f}s. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
@@ -325,7 +366,9 @@ def main():
     parser = argparse.ArgumentParser(description='Phishing Domain Detector')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
     parser.add_argument('--mode', choices=['stream', 'poll', 'auto'], default='auto',
-                       help='Mode: stream (certstream), poll (crt.sh API), auto (try stream, fallback to poll)')
+                       help='Mode: stream (certstream), poll (crt.sh), auto (try stream, fallback to poll)')
+    parser.add_argument('--sources', nargs='+', choices=['crtsh'], default=['crtsh'],
+                       help='CT log sources to use in poll mode (default: crtsh only)')
     args = parser.parse_args()
 
     MAX_DURATION = args.duration
@@ -347,16 +390,16 @@ def main():
 
     # Choose mode
     if args.mode == 'poll':
-        poll_ct_logs(duration=MAX_DURATION)
+        poll_ct_logs(duration=MAX_DURATION, sources=args.sources)
     elif args.mode == 'stream':
-        if not run_stream_mode():
+        if not run_stream_mode(connection_timeout=10):
             logging.error("Streaming mode failed. Exiting.")
             sys.exit(1)
     else:  # auto mode
         logging.info("Auto mode: Trying stream first (10s timeout), will fallback to polling if needed")
         if not run_stream_mode(connection_timeout=10):
             logging.warning("Streaming failed, falling back to polling mode...")
-            poll_ct_logs(duration=MAX_DURATION)
+            poll_ct_logs(duration=MAX_DURATION, sources=args.sources)
 
 
 if __name__ == "__main__":
