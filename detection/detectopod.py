@@ -5,10 +5,19 @@ import os
 import sys
 import time
 import requests
+import base64
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+try:
+    from cryptography import x509
+    from cryptography.hazmat.backends import default_backend
+    CRYPTOGRAPHY_AVAILABLE = True
+except ImportError:
+    CRYPTOGRAPHY_AVAILABLE = False
+    logging.warning("cryptography module not available. Install with: pip install cryptography")
 
-# Usage: python detectopod.py [--duration SECONDS] [--mode stream|poll]
+
+# Usage: python detectopod.py [--duration SECONDS] [--mode stream|poll] [--sources crtsh google cloudflare]
 
 # Configuration
 SCORE_THRESHOLD = 80
@@ -49,20 +58,51 @@ TARGET_SUFFIXES = (
 CT_LOG_SOURCES = {
     'crtsh': {
         'name': 'crt.sh',
+        'type': 'aggregator',
         'enabled': True
+    },
+    'google_argon2025h2': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2025h2',
+        'type': 'ct_log',
+        'description': 'Google Argon2025h2 log'
+    },
+    'google_argon2026h1': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2026h1',
+        'type': 'ct_log',
+        'description': 'Google Argon2026h1 log'
+    },
+    'google_argon2026h2': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2026h2',
+        'type': 'ct_log',
+        'description': 'Google Argon2026h2 log'
+    },
+    'cloudflare_nimbus2025': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2025',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2025'
+    },
+    'cloudflare_nimbus2026': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2026',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2026'
+    },
+    'cloudflare_nimbus2027': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2027',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2027'
     }
 }
 
-# CertStream URLs (for streaming mode)
-CT_STREAMS = [
-    'wss://certstream.calidog.io/',
-    'wss://certstream-v2.calidog.io/',
-]
+OUTPUT_FILE = 'feed/phishing_feed.json'
+STATS_FILE = 'feed/stats.json'
+START_TIME = None
+MAX_DURATION = None
 
-OUTPUT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'feed.json')
-
-logging.basicConfig(format='[%(levelname)s] %(asctime)s - %(message)s', level=logging.INFO)
-
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 def load_existing_feed():
     if os.path.exists(OUTPUT_FILE):
@@ -102,6 +142,7 @@ def calculate_score(domain):
             score += 20
 
     return score
+
 
 def save_run_stats(certs_analyzed, domains_processed, new_findings, elapsed_time):
     """Save run statistics to a file for GitHub Actions summary"""
@@ -151,16 +192,118 @@ def add_to_feed(domain, score):
 
 # ==================== POLLING MODE (Direct CT Log Access) ====================
 
+
+
+def extract_domains_from_cert(cert_data):
+    """Extract all domain names from a certificate"""
+    if not CRYPTOGRAPHY_AVAILABLE:
+        return []
+
+    try:
+        cert = x509.load_pem_x509_certificate(cert_data, default_backend())
+        domains = []
+
+        # Get Common Name
+        try:
+            cn = cert.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)[0].value
+            domains.append(cn)
+        except:
+            pass
+
+        # Get Subject Alternative Names
+        try:
+            san_ext = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)
+            for san in san_ext.value:
+                if isinstance(san, x509.DNSName):
+                    domains.append(san.value)
+        except:
+            pass
+
+        return domains
+    except Exception as e:
+        logging.debug(f"Error extracting domains from cert: {e}")
+        return []
+
+
+def query_ct_log_direct(log_url, max_entries=500):
+    """Query a CT log directly using RFC 6962 API"""
+    try:
+        # Get the current tree size
+        sth_url = f"{log_url}/ct/v1/get-sth"
+        response = requests.get(sth_url, timeout=10)
+
+        if response.status_code != 200:
+            logging.warning(f"Failed to get STH from {log_url}: {response.status_code}")
+            return []
+
+        tree_size = response.json().get('tree_size', 0)
+
+        if tree_size == 0:
+            return []
+
+        # Get recent entries (last max_entries)
+        start = max(0, tree_size - max_entries)
+        end = min(start + max_entries - 1, tree_size - 1)
+
+        entries_url = f"{log_url}/ct/v1/get-entries?start={start}&end={end}"
+        response = requests.get(entries_url, timeout=30)
+
+        if response.status_code != 200:
+            logging.warning(f"Failed to get entries from {log_url}: {response.status_code}")
+            return []
+
+        entries_data = response.json().get('entries', [])
+        results = []
+
+        for entry in entries_data:
+            try:
+                # Decode the extra_data which contains the certificate chain
+                extra_data = base64.b64decode(entry['extra_data'])
+
+                # Parse the certificate
+                if len(extra_data) > 3:
+                    # Read certificate length (3 bytes, big-endian)
+                    cert_len = int.from_bytes(extra_data[0:3], 'big')
+                    cert_data = extra_data[3:3+cert_len]
+
+                    # Convert DER to PEM
+                    pem_cert = b'-----BEGIN CERTIFICATE-----\n'
+                    pem_cert += base64.b64encode(cert_data)
+                    pem_cert += b'\n-----END CERTIFICATE-----\n'
+
+                    # Extract domains
+                    domains = extract_domains_from_cert(pem_cert)
+
+                    for domain in domains:
+                        results.append({
+                            'name_value': domain,
+                            'source': log_url
+                        })
+            except Exception as e:
+                logging.debug(f"Error parsing CT log entry: {e}")
+                continue
+
+        logging.info(f"Retrieved {len(results)} certificates from {log_url}")
+        return results
+
+    except requests.exceptions.Timeout:
+        logging.warning(f"Timeout querying {log_url}")
+        return []
+    except Exception as e:
+        logging.error(f"Error querying CT log {log_url}: {e}")
+        return []
+
+
 def query_crtsh(suffix, max_results=1000, retry_count=0, max_retries=2):
     """Query crt.sh for certificates matching a specific suffix"""
     try:
         # Search for domains ending with the suffix
         search_query = f"%25.{suffix.lstrip('.')}"
         url = f"https://crt.sh/?q={search_query}&output=json"
-        
+
         logging.info(f"Querying crt.sh for: {suffix}")
         response = requests.get(url, timeout=45)
-        
+
         if response.status_code == 200:
             data = response.json()
             logging.info(f"Found {len(data)} certificates for {suffix}")
@@ -193,89 +336,112 @@ def query_crtsh(suffix, max_results=1000, retry_count=0, max_retries=2):
         return []
 
 
-
-
-
 def poll_ct_logs(duration=None, sources=['crtsh']):
     """Poll CT logs directly via multiple sources"""
     start_time = datetime.datetime.now()
     processed_domains = set()
     findings_count = 0
-    
+
     logging.info("Starting CT log polling mode...")
     logging.info(f"Using sources: {', '.join(sources)}")
-    logging.info(f"Querying {len(TARGET_SUFFIXES)} target suffixes")
-    
-    # Determine which query function to use for each source
-    query_functions = []
-    
+    logging.info(f"Monitoring {len(TARGET_SUFFIXES)} target suffixes")
+
+    # Determine which query tasks to run
+    query_tasks = []
+
     if 'crtsh' in sources and CT_LOG_SOURCES['crtsh']['enabled']:
-        query_functions.append(('crt.sh', query_crtsh))
-    
-    if not query_functions:
+        # crt.sh: query each suffix
+        for suffix in TARGET_SUFFIXES:
+            query_tasks.append(('crt.sh', suffix, lambda s=suffix: query_crtsh(s)))
+
+    # Add Google CT logs
+    if 'google' in sources:
+        if not CRYPTOGRAPHY_AVAILABLE:
+            logging.error("Cannot use Google CT logs: cryptography module not installed")
+            logging.error("Install with: pip install cryptography")
+        else:
+            for log_key, log_info in CT_LOG_SOURCES.items():
+                if log_key.startswith('google_') and log_info.get('type') == 'ct_log':
+                    query_tasks.append((f"Google-{log_key}", log_info['url'], 
+                                      lambda url=log_info['url']: query_ct_log_direct(url, max_entries=500)))
+
+    # Add Cloudflare CT logs  
+    if 'cloudflare' in sources:
+        if not CRYPTOGRAPHY_AVAILABLE:
+            logging.error("Cannot use Cloudflare CT logs: cryptography module not installed")
+            logging.error("Install with: pip install cryptography")
+        else:
+            for log_key, log_info in CT_LOG_SOURCES.items():
+                if log_key.startswith('cloudflare_') and log_info.get('type') == 'ct_log':
+                    query_tasks.append((f"Cloudflare-{log_key}", log_info['url'],
+                                      lambda url=log_info['url']: query_ct_log_direct(url, max_entries=500)))
+
+    if not query_tasks:
         logging.error("No CT log sources enabled!")
         return
-    
-    # Query each source
-    for source_name, query_func in query_functions:
-        logging.info(f"Querying {source_name}...")
-        
-        # Use ThreadPoolExecutor to query multiple suffixes in parallel
-        # Reduced workers to 3 to avoid overwhelming crt.sh
-        with ThreadPoolExecutor(max_workers=3) as executor:
-            # Submit queries for all suffixes
-            future_to_suffix = {
-                executor.submit(query_func, suffix): suffix 
-                for suffix in TARGET_SUFFIXES
-            }
-            
-            for future in as_completed(future_to_suffix):
-                suffix = future_to_suffix[future]
-                
-                # Check timeout
-                if duration:
-                    elapsed = (datetime.datetime.now() - start_time).total_seconds()
-                    if elapsed > duration:
-                        logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
-                        return
-                
-                try:
-                    results = future.result()
-                    
-                    for cert in results:
-                        # Extract domain name
-                        domain = cert.get('name_value', '').strip()
-                        
-                        if not domain or domain in processed_domains:
-                            continue
-                        
-                        processed_domains.add(domain)
-                        
-                        # Skip wildcards
-                        if domain.startswith('*'):
-                            continue
-                        
-                        # Calculate score
+
+    logging.info(f"Prepared {len(query_tasks)} query tasks")
+
+    # Execute queries with thread pool
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_task = {}
+
+        for source_name, target, query_func in query_tasks:
+            future = executor.submit(query_func)
+            future_to_task[future] = (source_name, target)
+
+        for future in as_completed(future_to_task):
+            source_name, target = future_to_task[future]
+
+            # Check timeout
+            if duration:
+                elapsed = (datetime.datetime.now() - start_time).total_seconds()
+                if elapsed > duration:
+                    logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
+                    return
+
+            try:
+                results = future.result()
+
+                for cert in results:
+                    # Extract domain name
+                    domain = cert.get('name_value', '').strip()
+
+                    if not domain or domain in processed_domains:
+                        continue
+
+                    processed_domains.add(domain)
+
+                    # Check if domain matches our target suffixes
+                    matches_suffix = any(domain.endswith(suffix) for suffix in TARGET_SUFFIXES)
+
+                    if matches_suffix:
+                        # Calculate suspicion score
                         score = calculate_score(domain)
-                        
+
                         if score >= SCORE_THRESHOLD:
-                            logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score}, Source: {source_name})")
-                            if add_to_feed(domain, score):
-                                findings_count += 1
-                                
-                except Exception as e:
-                    logging.error(f"Error processing results for {suffix} from {source_name}: {e}")
-    
+                            findings_count += 1
+                            logging.warning(f"[SUSPICIOUS] {domain} (score: {score}) from {source_name}")
+
+                            # Add to feed
+                            entry = {
+                                'domain': domain,
+                                'score': score,
+                                'source': source_name,
+                                'cert_data': cert
+                            }
+                            add_to_feed(entry)
+                        else:
+                            logging.info(f"[OK] {domain} (score: {score})")
+
+            except Exception as e:
+                logging.error(f"Error processing results from {source_name}/{target}: {e}")
+
+    # Save final stats
     elapsed = (datetime.datetime.now() - start_time).total_seconds()
-    logging.info(f"Polling completed in {elapsed:.1f}s. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
+    save_run_stats(len(processed_domains), findings_count, elapsed, 0)
 
-
-# ==================== STREAMING MODE (CertStream) ====================
-
-START_TIME = None
-MAX_DURATION = None
-STREAM_CONNECTED = False
-DOMAINS_PROCESSED = 0
+    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
 
 
 def process_message(message, context):
@@ -380,6 +546,8 @@ def run_stream_mode(connection_timeout=10):
 
 # ==================== MAIN ====================
 
+
+
 def main():
     global START_TIME, MAX_DURATION
 
@@ -387,8 +555,9 @@ def main():
     parser = argparse.ArgumentParser(description='Phishing Domain Detector')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
     parser.add_argument('--mode', choices=['stream', 'poll', 'auto'], default='auto',
-                       help='Mode: stream (certstream), poll (crt.sh), auto (try stream, fallback to poll)')
-    parser.add_argument('--sources', nargs='+', choices=['crtsh'], default=['crtsh'],
+                       help='Mode: stream (certstream), poll (CT logs), auto (try stream, fallback to poll)')
+    parser.add_argument('--sources', nargs='+', choices=['crtsh', 'google', 'cloudflare'], 
+                       default=['crtsh'],
                        help='CT log sources to use in poll mode (default: crtsh only)')
     args = parser.parse_args()
 
