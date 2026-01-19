@@ -43,8 +43,8 @@ jobs:
     - name: Run detection script in polling mode
       run: |
         # Use polling mode with crt.sh (most reliable and comprehensive)
-        # Run for 900 seconds (15 minutes) - leaving 5 min buffer for setup/commit
-        python detection/detectopod.py --duration 900 --mode poll
+        # Run for 600 seconds (10 minutes) - leaving 10 min buffer for setup/commit
+        python detection/detectopod.py --duration 600 --mode poll
         
     - name: Check for changes
       id: check_changes
