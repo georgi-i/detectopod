@@ -1,23 +1,184 @@
 [
-    {
-        "domain": "econt-tracking-update-bg.web.app",
-        "score": 90,
-        "timestamp": "2026-01-18T20:30:00.000000",
-        "status": "active",
-        "source": "CertStream"
-    },
-    {
-        "domain": "speedy-delivery-payment.firebaseapp.com",
-        "score": 90,
-        "timestamp": "2026-01-18T20:45:00.000000",
-        "status": "active",
-        "source": "CertStream"
-    },
-    {
-        "domain": "bgpost-fees-pay.web.app",
-        "score": 70,
-        "timestamp": "2026-01-18T21:00:00.000000",
-        "status": "active",
-        "source": "CertStream"
-    }
+  {
+    "domain": "volo-live-feed-server.eu-west-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.936919",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "paxton-blu-live-feed-server.us-east-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.936442",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "gendis-live-feed-server-env.eu-west-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.935983",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "dev-prosync-live-feed-server.eu-west-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.935328",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "prosync-live-feed.eu-west-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.934831",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "growlabs-tracking-prod.8fmjhwybqy.us-east-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.933889",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "payments-api-dev.8grhw9ai7r.us-west-2.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.933237",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "dailycoinfeed-env.iswk3paejd.eu-central-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.932770",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "feed-prio-uat-env.us-east-2.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.932289",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "voicecontrolbe-dev.eu-central-1.elasticbeanstalk.com",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:37.931597",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "sendvsfeedback.cloudapp.net",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:09.056369",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "maodatafeedsservice.cloudapp.net",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:09.054728",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "Feedback-BAY-ACRSPTiC.cloudapp.net\nFeedback-BAY-CollectPTiC.cloudapp.net\nFeedback-BAY-CorePrivateTiC.cloudapp.net\nFeedback-BAY-INT2.cloudapp.net\nFeedback-BAY-INT3.cloudapp.net\nFeedback-BAY-INT4.cloudapp.net\nFeedback-BLU-CorePrivateTiC.cloudapp.net\nFeedback-BLU-EnginePTiC.cloudapp.net\nFeedback-BLU-INT2.cloudapp.net\nFeedback-BLU-INT3.cloudapp.net\nFeedback-BLU-INT4.cloudapp.net",
+    "score": 70,
+    "timestamp": "2026-01-19T08:03:09.053772",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "potential-lamp.soytax.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.286552",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "fee3e048-12345678.near-dimension.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.285965",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "fee3e048.near-dimension.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.285520",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "fee3e048-12345678-2979f7-d3df90.near-dimension.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.285091",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "fee3e048-12345678-2979f7.near-dimension.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.284641",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "fee3e048-12345678-2979f7-d9bdc4.near-dimension.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.284223",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "issue-template-feedback.gh-community.github.io",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:51.283357",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "subdueduncomfortablecontrolflowgraph.john-wardward.repl.co",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:45.682586",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "nicetransparentactivecontent.jamesdownes.repl.co",
+    "score": 70,
+    "timestamp": "2026-01-19T08:00:45.681640",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "feedback.render.com",
+    "score": 70,
+    "timestamp": "2026-01-19T07:58:56.825403",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "econt-tracking-update-bg.web.app",
+    "score": 90,
+    "timestamp": "2026-01-18T20:30:00.000000",
+    "status": "active",
+    "source": "CertStream"
+  },
+  {
+    "domain": "speedy-delivery-payment.firebaseapp.com",
+    "score": 90,
+    "timestamp": "2026-01-18T20:45:00.000000",
+    "status": "active",
+    "source": "CertStream"
+  },
+  {
+    "domain": "bgpost-fees-pay.web.app",
+    "score": 70,
+    "timestamp": "2026-01-18T21:00:00.000000",
+    "status": "active",
+    "source": "CertStream"
+  }
 ]
