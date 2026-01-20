@@ -120,6 +120,11 @@ FREE_HOSTING_SUFFIXES = (
 # Combined - all suspicious patterns to monitor
 TARGET_SUFFIXES = FREE_HOSTING_SUFFIXES + SUSPICIOUS_TLDS
 
+# Hybrid strategy for CT log sources
+CRTSH_SEARCHABLE = FREE_HOSTING_SUFFIXES  # Only search these via crt.sh
+CT_LOG_ONLY = SUSPICIOUS_TLDS              # These need Google/Cloudflare CT logs
+
+
 # Infrastructure patterns to EXCLUDE (not customer domains)
 INFRASTRUCTURE_PATTERNS = (
     # Render.com internal services
@@ -524,10 +529,14 @@ def query_ct_log_direct(log_url, max_entries=500):
     except Exception as e:
         logging.error(f"Error querying CT log {log_url}: {e}")
         return []
+        
 
-
-def query_crtsh(suffix, max_results=1000, retry_count=0, max_retries=2):
-    """Query crt.sh for certificates matching a specific suffix"""
+def query_crtsh(suffix, max_results=2000, retry_count=0, max_retries=2):
+    """
+    Query crt.sh for certificates matching a specific suffix
+    Only used for hosting platforms (.web.app, .herokuapp.com, etc.)
+    Suspicious TLDs (.cfd, .tk) are too large and require direct CT log access
+    """
     try:
         # Search for domains ending with the suffix
         search_query = f"%25.{suffix.lstrip('.')}"
@@ -541,31 +550,30 @@ def query_crtsh(suffix, max_results=1000, retry_count=0, max_retries=2):
             logging.info(f"Found {len(data)} certificates for {suffix}")
             return data[:max_results]
         elif response.status_code == 503:
-            # Service unavailable - retry with backoff
             if retry_count < max_retries:
                 wait_time = (retry_count + 1) * 3
-                logging.warning(f"crt.sh returned 503 for {suffix}, retrying in {wait_time}s (attempt {retry_count + 1}/{max_retries})")
+                logging.warning(f"crt.sh returned 503 for {suffix}, retrying in {wait_time}s")
                 time.sleep(wait_time)
                 return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
             else:
-                logging.error(f"crt.sh returned 503 for {suffix} after {max_retries} retries, skipping")
+                logging.error(f"crt.sh returned 503 for {suffix} after {max_retries} retries")
                 return []
         else:
             logging.warning(f"crt.sh returned status {response.status_code} for {suffix}")
             return []
     except requests.exceptions.Timeout:
-        # Timeout - retry with longer timeout
         if retry_count < max_retries:
             wait_time = (retry_count + 1) * 3
-            logging.warning(f"Timeout querying crt.sh for {suffix}, retrying in {wait_time}s (attempt {retry_count + 1}/{max_retries})")
+            logging.warning(f"Timeout querying crt.sh for {suffix}, retrying in {wait_time}s")
             time.sleep(wait_time)
             return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
         else:
-            logging.error(f"Timeout querying crt.sh for {suffix} after {max_retries} retries, skipping")
+            logging.error(f"Timeout querying crt.sh for {suffix} after {max_retries} retries")
             return []
     except Exception as e:
         logging.error(f"Error querying crt.sh for {suffix}: {e}")
         return []
+
 
 
 def poll_ct_logs(duration=None, sources=['crtsh']):
@@ -582,9 +590,19 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
     query_tasks = []
 
     if 'crtsh' in sources and CT_LOG_SOURCES['crtsh']['enabled']:
-        # crt.sh: query each suffix
-        for suffix in TARGET_SUFFIXES:
+        # crt.sh: ONLY search manageable platforms (not suspicious TLDs)
+        for suffix in CRTSH_SEARCHABLE:
             query_tasks.append(('crt.sh', suffix, lambda s=suffix: query_crtsh(s)))
+    
+        logging.info(f"crt.sh: Searching {len(CRTSH_SEARCHABLE)} hosting platforms")
+        logging.warning(
+            f"Note: Suspicious TLDs ({len(CT_LOG_ONLY)} domains: .cfd, .tk, etc.) "
+            f"skipped for crt.sh - too many results"
+        )
+        if 'google' not in sources and 'cloudflare' not in sources:
+            logging.warning(
+                f"⚠️  Add --sources google cloudflare to monitor suspicious TLDs"
+            )
 
     # Add Google CT logs
     if 'google' in sources:
