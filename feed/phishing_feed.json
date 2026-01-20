@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "domain": "cnt-00.content-eu.drive.amazonaws.com\ncnt-00.content-eu-gamma.drive.amazonaws.com\ncnt-01.content-eu.drive.amazonaws.com\ncnt-01.content-eu-gamma.drive.amazonaws.com\ncnt-02.content-eu.drive.amazonaws.com\ncnt-02.content-eu-gamma.drive.amazonaws.com\ncnt-03.content-eu.drive.amazonaws.com\ncnt-03.content-eu-gamma.drive.amazonaws.com\ncontent-eu.drive.amazonaws.com\ncontent-eu-gamma.drive.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:33.002921",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "cnt-00.content-jp.drive.amazonaws.com\ncnt-00.content-jp-gamma.drive.amazonaws.com\ncnt-01.content-jp.drive.amazonaws.com\ncnt-01.content-jp-gamma.drive.amazonaws.com\ncnt-02.content-jp.drive.amazonaws.com\ncnt-02.content-jp-gamma.drive.amazonaws.com\ncnt-03.content-jp.drive.amazonaws.com\ncnt-03.content-jp-gamma.drive.amazonaws.com\ncontent-jp.drive.amazonaws.com\ncontent-jp-gamma.drive.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:33.002086",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "kms-a.eu-central-1.amazonaws.com\nkms-b.eu-central-1.amazonaws.com\nkms-c.eu-central-1.amazonaws.com\nkms-d.eu-central-1.amazonaws.com\nkms-e.eu-central-1.amazonaws.com\nkms.eu-central-1.amazonaws.com\nkms-f.eu-central-1.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:33.001478",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "*.s3.amazonaws.com\ns3.amazonaws.com\n*.s3-deprecated-ap-northeast-1.amazonaws.com\ns3-deprecated-ap-northeast-1.amazonaws.com\n*.s3-deprecated-ap-southeast-1.amazonaws.com\ns3-deprecated-ap-southeast-1.amazonaws.com\n*.s3-deprecated-ap-southeast-2.amazonaws.com\ns3-deprecated-ap-southeast-2.amazonaws.com\n*.s3-deprecated.eu-central-1.amazonaws.com\ns3-deprecated.eu-central-1.amazonaws.com\n*.s3-deprecated-eu-west-1.amazonaws.com\ns3-deprecated-eu-west-1.amazonaws.com\n*.s3-deprecated-sa-east-1.amazonaws.com\ns3-deprecated-sa-east-1.amazonaws.com\n*.s3-deprecated-us-east-1.amazonaws.com\ns3-deprecated-us-east-1.amazonaws.com\n*.s3-deprecated-us-west-1.amazonaws.com\ns3-deprecated-us-west-1.amazonaws.com\n*.s3-deprecated-us-west-2.amazonaws.com\ns3-deprecated-us-west-2.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:32.998634",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "*.s3.amazonaws.com\ns3.amazonaws.com\n*.s3-deprecated-ap-northeast-1.amazonaws.com\n*.s3-deprecated-ap-southeast-1.amazonaws.com\n*.s3-deprecated-ap-southeast-2.amazonaws.com\n*.s3-deprecated.eu-central-1.amazonaws.com\n*.s3-deprecated-eu-west-1.amazonaws.com\n*.s3-deprecated-sa-east-1.amazonaws.com\n*.s3-deprecated-us-east-1.amazonaws.com\n*.s3-deprecated-us-west-1.amazonaws.com\n*.s3-deprecated-us-west-2.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:32.997376",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "kms-a.us-gov-west-1.amazonaws.com\nkms-b.us-gov-west-1.amazonaws.com\nkms-c.us-gov-west-1.amazonaws.com\nkms-d.us-gov-west-1.amazonaws.com\nkms-e.us-gov-west-1.amazonaws.com\nkms-f.us-gov-west-1.amazonaws.com\nkms-g.us-gov-west-1.amazonaws.com\nkms.us-gov-west-1.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:32.991376",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "kms-a.ap-northeast-2.amazonaws.com\nkms.ap-northeast-2.amazonaws.com\nkms-b.ap-northeast-2.amazonaws.com\nkms-c.ap-northeast-2.amazonaws.com\nkms-d.ap-northeast-2.amazonaws.com\nkms-e.ap-northeast-2.amazonaws.com\nkms-f.ap-northeast-2.amazonaws.com\nkms-g.ap-northeast-2.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:32.983371",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "*.s3.amazonaws.com\ns3.amazonaws.com\n*.s3-ap-northeast-1.amazonaws.com\ns3-ap-northeast-1.amazonaws.com\n*.s3-ap-southeast-1.amazonaws.com\ns3-ap-southeast-1.amazonaws.com\n*.s3-ap-southeast-2.amazonaws.com\ns3-ap-southeast-2.amazonaws.com\n*.s3-eu-west-1.amazonaws.com\ns3-eu-west-1.amazonaws.com\n*.s3-external-1.amazonaws.com\ns3-external-1.amazonaws.com\n*.s3-external-2.amazonaws.com\ns3-external-2.amazonaws.com\n*.s3-external-3.amazonaws.com\ns3-external-3.amazonaws.com\n*.s3-sa-east-1.amazonaws.com\ns3-sa-east-1.amazonaws.com\n*.s3-us-west-1.amazonaws.com\ns3-us-west-1.amazonaws.com\n*.s3-us-west-2.amazonaws.com\ns3-us-west-2.amazonaws.com",
+    "score": 100,
+    "timestamp": "2026-01-20T13:03:32.961089",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "*.restaurant-online-ordering-frontend-base-2-0-sjt6.pages.dev\nrestaurant-online-ordering-frontend-base-2-0-sjt6.pages.dev",
+    "score": 80,
+    "timestamp": "2026-01-20T12:59:22.159025",
+    "status": "active",
+    "source": "CT Logs"
+  },
+  {
+    "domain": "*.how-to-ask-questions-the-smart-way-1.pages.dev\nhow-to-ask-questions-the-smart-way-1.pages.dev",
+    "score": 80,
+    "timestamp": "2026-01-20T12:59:22.150344",
+    "status": "active",
+    "source": "CT Logs"
+  }
+]
