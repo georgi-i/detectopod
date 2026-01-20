@@ -679,7 +679,8 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                             f"[LOW SCORE] {domain} (score: {score}) - "
                             f"Keywords: {', '.join(courier_keywords)}"
                         )
-
+            except Exception as e:
+                logging.error(f"Error processing results from {source_name}/{target}: {e}")
 
 def process_message(message, context):
     """Process certstream messages"""
