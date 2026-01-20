@@ -669,11 +669,17 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                 
                     if score >= SCORE_THRESHOLD:
                         findings_count += 1
+    
+                        # Simple console notification
                         logging.warning(
-                            f"[SUSPICIOUS] {domain} (score: {score}) - "
-                            f"Keywords: {', '.join(courier_keywords)} from {source_name}"
+                            f"🚨 PHISHING DETECTED: {domain} | "
+                            f"Score: {score}/100 | "
+                            f"Keywords: {', '.join(courier_keywords)} | "
+                            f"Source: {source_name}"
                         )
+    
                         add_to_feed(domain, score, source_name)
+
                     else:
                         logging.info(
                             f"[LOW SCORE] {domain} (score: {score}) - "
