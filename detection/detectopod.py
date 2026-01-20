@@ -6,6 +6,7 @@ import sys
 import time
 import requests
 import base64
+import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
@@ -122,27 +123,37 @@ TARGET_SUFFIXES = FREE_HOSTING_SUFFIXES + SUSPICIOUS_TLDS
 # Infrastructure patterns to EXCLUDE (not customer domains)
 INFRASTRUCTURE_PATTERNS = (
     # Render.com internal services
-    '.postgres.render.com',           # Database replicas
-    '.redis.render.com',              # Redis instances
-    '.internal.render.com',           # Internal services
-    'replica-',                       # Database replica naming pattern
+    '.postgres.render.com',
+    '.redis.render.com',
+    '.internal.render.com',
+    'replica-',
     
-    # AWS internal
-    '.rds.amazonaws.com',             # RDS databases
-    '.elb.amazonaws.com',             # Load balancers
-    '.elasticache.amazonaws.com',     # ElastiCache
+    # AWS internal services - EXPANDED
+    '.rds.amazonaws.com',
+    '.elb.amazonaws.com',
+    '.elasticache.amazonaws.com',
+    '.drive.amazonaws.com',           # Amazon Drive
+    'kms.amazonaws.com',              # AWS KMS
+    'kms-a.', 'kms-b.', 'kms-c.',     # KMS endpoints
+    'kms-d.', 'kms-e.', 'kms-f.',
+    's3.amazonaws.com',               # S3 infrastructure
+    's3-deprecated',                  # Deprecated S3
+    'content-eu.drive',               # Drive content
+    'content-jp.drive',
+    'cnt-00.', 'cnt-01.', 'cnt-02.', 'cnt-03.',  # Content nodes
     
     # Azure internal
-    '.database.windows.net',          # Azure SQL
-    '.redis.cache.windows.net',       # Azure Redis
+    '.database.windows.net',
+    '.redis.cache.windows.net',
     
     # Cloudflare internal
-    '.workers.dev',                   # Some are infrastructure
+    '.workers.dev',
     
-    # Netlify/Vercel deployment previews (can be noisy)
-    '--deploy-preview-',              # Netlify preview deployments
-    'preview.vercel.app',             # Vercel previews
+    # Netlify/Vercel deployment previews
+    '--deploy-preview-',
+    'preview.vercel.app',
 )
+
 
 # CT Log URLs for direct polling
 CT_LOG_SOURCES = {
@@ -317,20 +328,52 @@ def is_infrastructure_domain(domain):
         if pattern in domain_lower:
             return True
     
-    # Render.com specific: Database replica pattern
+    # Render.com specific
     if 'render.com' in domain_lower:
-        if 'postgres' in domain_lower and 'replica' in domain_lower:
-            return True
-        if 'redis' in domain_lower:
+        if 'postgres' in domain_lower or 'redis' in domain_lower:
             return True
     
-    # AWS specific: RDS and internal service domains
+    # AWS specific - expanded
     if '.amazonaws.com' in domain_lower:
-        aws_internal = ['.rds.', '.elb.', '.elasticache.', '.vpc.', '.ec2.internal']
+        aws_internal = [
+            '.rds.', '.elb.', '.elasticache.', '.vpc.', '.ec2.internal',
+            'kms.', 'kms-', '.drive.', 's3.', 's3-', 'content-'
+        ]
         if any(svc in domain_lower for svc in aws_internal):
             return True
     
+    # Random/generic Cloudflare Pages projects (no courier keywords)
+    if '.pages.dev' in domain_lower:
+        has_courier, _ = contains_courier_keyword(domain_lower)
+        if not has_courier:
+            return True
+    
     return False
+
+
+def contains_courier_keyword(domain):
+    """
+    Check if domain contains any courier/logistics company keyword
+    Uses word boundaries to avoid partial matches (e.g., "cnt" in "content")
+    Returns (has_keyword, matched_keywords)
+    """
+    domain_lower = domain.lower()
+    matched = []
+    
+    for keyword in COURIER_KEYWORDS:
+        # Use word boundary matching to avoid partial matches
+        # \b ensures we match whole words only
+        pattern = r'\b' + re.escape(keyword) + r'\b'
+        if re.search(pattern, domain_lower):
+            matched.append(keyword)
+    
+    # Special handling for DHL + Bulgaria combination
+    if 'dhl' in domain_lower:
+        if 'bulgaria' in domain_lower or '.bg' in domain_lower or 'bg-' in domain_lower:
+            if 'dhl-bulgaria' not in matched:
+                matched.append('dhl-bulgaria')
+    
+    return len(matched) > 0, matched
 
 
 def save_run_stats(certs_analyzed, domains_processed, new_findings, elapsed_time):
@@ -595,47 +638,47 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                 for cert in results:
                     # Extract domain name
                     domain = cert.get('name_value', '').strip()
-
-                    if not domain or domain in processed_domains:
+                
+                    # Skip empty, wildcards, or duplicates
+                    if not domain or domain.startswith('*') or domain in processed_domains:
                         continue
-
+                
                     processed_domains.add(domain)
-
-                    # Skip infrastructure/internal domains
+                    
+                    # STEP 1: Skip infrastructure/internal domains
                     if is_infrastructure_domain(domain):
-                        logging.debug(f"[SKIP] Infrastructure domain: {domain}")
+                        logging.debug(f"[SKIP] Infrastructure: {domain}")
                         continue
-
-                    # Check if domain matches our target suffixes
+                    
+                    # STEP 2: Require courier keywords (PRIMARY FILTER)
+                    has_courier, courier_keywords = contains_courier_keyword(domain)
+                    
+                    if not has_courier:
+                        logging.debug(f"[SKIP] No courier keywords: {domain}")
+                        continue
+                    
+                    # STEP 3: Check if on monitored platforms/TLDs
                     matches_suffix = any(domain.endswith(suffix) for suffix in TARGET_SUFFIXES)
-
-                    if matches_suffix:
-                        # Calculate suspicion score
-                        score = calculate_score(domain)
-
-                        if score >= SCORE_THRESHOLD:
-                            findings_count += 1
-                            logging.warning(f"[SUSPICIOUS] {domain} (score: {score}) from {source_name}")
-
-                            # Add to feed
-                            entry = {
-                                'domain': domain,
-                                'score': score,
-                                'source': source_name,
-                                'cert_data': cert
-                            }
-                            add_to_feed(domain, score)
-                        else:
-                            logging.info(f"[OK] {domain} (score: {score})")
-
-            except Exception as e:
-                logging.error(f"Error processing results from {source_name}/{target}: {e}")
-
-    # Save final stats
-    elapsed = (datetime.datetime.now() - start_time).total_seconds()
-    save_run_stats(len(processed_domains), findings_count, elapsed, 0)
-
-    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
+                    
+                    if not matches_suffix:
+                        logging.debug(f"[SKIP] Not on suspicious platform: {domain}")
+                        continue
+                
+                    # STEP 4: Calculate score (domain has courier keyword + suspicious platform)
+                    score = calculate_score(domain)
+                
+                    if score >= SCORE_THRESHOLD:
+                        findings_count += 1
+                        logging.warning(
+                            f"[SUSPICIOUS] {domain} (score: {score}) - "
+                            f"Keywords: {', '.join(courier_keywords)} from {source_name}"
+                        )
+                        add_to_feed(domain, score, source_name)
+                    else:
+                        logging.info(
+                            f"[LOW SCORE] {domain} (score: {score}) - "
+                            f"Keywords: {', '.join(courier_keywords)}"
+                        )
 
 
 def process_message(message, context):
