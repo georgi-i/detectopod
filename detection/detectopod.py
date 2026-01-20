@@ -22,6 +22,7 @@ except ImportError:
 # Configuration
 SCORE_THRESHOLD = 80
 
+# Keywords for Bulgarian courier phishing
 KEYWORDS = [
     'econt', 'speedy', 'bulgariapost', 'bgpost',
     'tracking', 'delivery', 'shipment', 'parcel',
@@ -29,7 +30,39 @@ KEYWORDS = [
     'customer-center', 'klient', 'pratka'
 ]
 
-TARGET_SUFFIXES = (
+# Legitimate Bulgarian courier brands (for impersonation detection)
+BULGARIAN_COURIER_BRANDS = [
+    'econt',
+    'speedy',
+    'bulgariapost',
+    'bgpost'
+]
+
+# Geographic indicators that suggest impersonation
+GEO_INDICATORS = ['.bg', 'bulgaria', 'bg-', '-bg']
+
+# Suspicious/Free TLDs commonly used in phishing
+SUSPICIOUS_TLDS = (
+    '.cfd',      # Cloudflare - free, commonly abused 
+    '.tk',       # Tokelau - free 
+    '.ml',       # Mali - free 
+    '.ga',       # Gabon - free 
+    '.cf',       # Central African Republic - free 
+    '.gq',       # Equatorial Guinea - free 
+    '.top',      # Cheap, popular with phishers 
+    '.xyz',      # Cheap 
+    '.club',     # Cheap 
+    '.online',   # Commonly abused 
+    '.site',     # Commonly abused 
+    '.space',    # Commonly abused 
+    '.click',    # Red flag for phishing 
+    '.link',     # Red flag 
+    '.live',     # Commonly abused 
+    '.icu',      # Cheap 
+)
+
+# Free/serverless hosting platforms
+FREE_HOSTING_SUFFIXES = (
     '.web.app',
     '.firebaseapp.com',
     '.herokuapp.com',
@@ -53,6 +86,9 @@ TARGET_SUFFIXES = (
     '.windows.net',
     '.azure-api.net'
 )
+
+# Combined - all suspicious patterns to monitor
+TARGET_SUFFIXES = FREE_HOSTING_SUFFIXES + SUSPICIOUS_TLDS
 
 # CT Log URLs for direct polling
 CT_LOG_SOURCES = {
@@ -124,22 +160,94 @@ def save_feed(feed_data):
 
 
 def calculate_score(domain):
+    """
+    Calculate suspicion score for a domain (0-100)
+    Enhanced to detect brand impersonation patterns like speedy.bg-pk.cfd
+    """
     score = 0
     domain_lower = domain.lower()
 
-    # Base score for target platforms
-    for suffix in TARGET_SUFFIXES:
-        if domain_lower.endswith(suffix):
-            score += 50
+    # Remove 'www.' prefix if present
+    if domain_lower.startswith('www.'):
+        domain_lower = domain_lower[4:]
+
+    # --- BRAND IMPERSONATION DETECTION (HIGH PRIORITY) ---
+    # Check for Bulgarian courier brand + geo indicator + suspicious TLD
+    has_brand = False
+    has_geo = False
+    has_suspicious_tld = False
+
+    for brand in BULGARIAN_COURIER_BRANDS:
+        if brand in domain_lower:
+            has_brand = True
+            score += 30  # Base score for brand presence
             break
 
-    if score == 0:
-        return 0  # Not interesting
+    for geo in GEO_INDICATORS:
+        if geo in domain_lower:
+            has_geo = True
+            score += 15  # Geographic indicator suggests impersonation
+            break
 
-    # Keyword scoring
+    for tld in SUSPICIOUS_TLDS:
+        if domain_lower.endswith(tld):
+            has_suspicious_tld = True
+            score += 25  # Suspicious TLD
+            break
+
+    # CRITICAL: Brand + geo + suspicious TLD = classic phishing pattern
+    if has_brand and has_geo and has_suspicious_tld:
+        score += 40  # Major boost for this combo
+
+    # Even brand + suspicious TLD without geo is highly suspicious
+    if has_brand and has_suspicious_tld:
+        score += 20
+
+    # --- KEYWORD MATCHING ---
+    keywords_found = []
     for keyword in KEYWORDS:
         if keyword in domain_lower:
-            score += 20
+            keywords_found.append(keyword)
+            # Higher weight for courier brands
+            if keyword in BULGARIAN_COURIER_BRANDS:
+                score += 15
+            else:
+                score += 8
+
+    # --- SUSPICIOUS PATTERNS ---
+    # Multiple hyphens (often used to create fake subdomains)
+    hyphen_count = domain_lower.count('-')
+    if hyphen_count >= 2:
+        score += hyphen_count * 5
+
+    # Mixed numbers and letters (e.g., speedy1, econt24)
+    if any(c.isdigit() for c in domain_lower) and any(c.isalpha() for c in domain_lower):
+        score += 10
+
+    # Specific phishing patterns
+    if 'verify' in domain_lower or 'confirm' in domain_lower:
+        score += 12
+    if 'secure' in domain_lower or 'account' in domain_lower:
+        score += 12
+    if 'update' in domain_lower or 'suspended' in domain_lower:
+        score += 15
+
+    # --- LENGTH ANALYSIS ---
+    # Very long domains are suspicious
+    domain_parts = domain_lower.split('.')
+    if len(domain_parts[0]) > 20:  # Long subdomain/domain name
+        score += 10
+
+    # --- FREE HOSTING PLATFORM ---
+    # If on free hosting + has keywords, boost score
+    for suffix in FREE_HOSTING_SUFFIXES:
+        if domain_lower.endswith(suffix):
+            if keywords_found:
+                score += 15  # Courier keywords + free hosting = suspicious
+            break
+
+    # Cap score at 100
+    score = min(score, 100)
 
     return score
 
