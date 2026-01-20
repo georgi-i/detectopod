@@ -22,20 +22,49 @@ except ImportError:
 # Configuration
 SCORE_THRESHOLD = 80
 
-# Keywords for Bulgarian courier phishing
-KEYWORDS = [
-    'econt', 'speedy', 'bulgariapost', 'bgpost',
-    'tracking', 'delivery', 'shipment', 'parcel',
-    'payment', 'secure-pay', 'tax', 'fee',
-    'customer-center', 'klient', 'pratka'
+# PRIMARY TARGET: Bulgarian courier/logistics companies
+COURIER_KEYWORDS = [
+    'econt',
+    'speedy', 
+    'bulgariapost',
+    'bgpost',
+    'bg-post',
+    'samedaybg',
+    'boxnowbg',
+    'cityexpressbg',
+    'expressonebg',
+    'dhl',           # DHL Bulgaria
 ]
+
+# SECONDARY: Generic logistics/delivery terms (lower priority)
+SECONDARY_KEYWORDS = [
+    'tracking',
+    'delivery', 
+    'shipment',
+    'parcel',
+    'payment',
+    'secure-pay',
+    'tax',
+    'fee',
+    'customer-center',
+    'klient',
+    'pratka'
+]
+
+# Combined for backward compatibility with calculate_score
+KEYWORDS = COURIER_KEYWORDS + SECONDARY_KEYWORDS
 
 # Legitimate Bulgarian courier brands (for impersonation detection)
 BULGARIAN_COURIER_BRANDS = [
     'econt',
     'speedy',
     'bulgariapost',
-    'bgpost'
+    'bgpost',
+    'bg-post',
+    'samedaybg',
+    'boxnowbg',
+    'cityexpressbg',
+    'expressonebg'
 ]
 
 # Geographic indicators that suggest impersonation
@@ -89,6 +118,31 @@ FREE_HOSTING_SUFFIXES = (
 
 # Combined - all suspicious patterns to monitor
 TARGET_SUFFIXES = FREE_HOSTING_SUFFIXES + SUSPICIOUS_TLDS
+
+# Infrastructure patterns to EXCLUDE (not customer domains)
+INFRASTRUCTURE_PATTERNS = (
+    # Render.com internal services
+    '.postgres.render.com',           # Database replicas
+    '.redis.render.com',              # Redis instances
+    '.internal.render.com',           # Internal services
+    'replica-',                       # Database replica naming pattern
+    
+    # AWS internal
+    '.rds.amazonaws.com',             # RDS databases
+    '.elb.amazonaws.com',             # Load balancers
+    '.elasticache.amazonaws.com',     # ElastiCache
+    
+    # Azure internal
+    '.database.windows.net',          # Azure SQL
+    '.redis.cache.windows.net',       # Azure Redis
+    
+    # Cloudflare internal
+    '.workers.dev',                   # Some are infrastructure
+    
+    # Netlify/Vercel deployment previews (can be noisy)
+    '--deploy-preview-',              # Netlify preview deployments
+    'preview.vercel.app',             # Vercel previews
+)
 
 # CT Log URLs for direct polling
 CT_LOG_SOURCES = {
@@ -250,6 +304,33 @@ def calculate_score(domain):
     score = min(score, 100)
 
     return score
+
+def is_infrastructure_domain(domain):
+    """
+    Check if domain is infrastructure/internal service (not customer-facing)
+    Returns True if domain should be EXCLUDED from scanning
+    """
+    domain_lower = domain.lower()
+    
+    # Check infrastructure patterns
+    for pattern in INFRASTRUCTURE_PATTERNS:
+        if pattern in domain_lower:
+            return True
+    
+    # Render.com specific: Database replica pattern
+    if 'render.com' in domain_lower:
+        if 'postgres' in domain_lower and 'replica' in domain_lower:
+            return True
+        if 'redis' in domain_lower:
+            return True
+    
+    # AWS specific: RDS and internal service domains
+    if '.amazonaws.com' in domain_lower:
+        aws_internal = ['.rds.', '.elb.', '.elasticache.', '.vpc.', '.ec2.internal']
+        if any(svc in domain_lower for svc in aws_internal):
+            return True
+    
+    return False
 
 
 def save_run_stats(certs_analyzed, domains_processed, new_findings, elapsed_time):
@@ -519,6 +600,11 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                         continue
 
                     processed_domains.add(domain)
+
+                    # Skip infrastructure/internal domains
+                    if is_infrastructure_domain(domain):
+                        logging.debug(f"[SKIP] Infrastructure domain: {domain}")
+                        continue
 
                     # Check if domain matches our target suffixes
                     matches_suffix = any(domain.endswith(suffix) for suffix in TARGET_SUFFIXES)
