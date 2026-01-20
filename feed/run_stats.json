@@ -1,7 +1,7 @@
 {
-  "certs_analyzed": 5090,
-  "domains_processed": 0,
-  "new_findings": 314.421192,
+  "certs_analyzed": 4240,
+  "domains_processed": 2,
+  "new_findings": 290.605262,
   "elapsed_time": 0,
-  "timestamp": "2026-01-20T11:06:15.840455"
+  "timestamp": "2026-01-20T11:22:04.521550"
 }
