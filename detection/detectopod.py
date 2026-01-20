@@ -538,7 +538,7 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
                                 'source': source_name,
                                 'cert_data': cert
                             }
-                            add_to_feed(entry)
+                            add_to_feed(domain, score)
                         else:
                             logging.info(f"[OK] {domain} (score: {score})")
 
