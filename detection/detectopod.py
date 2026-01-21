@@ -381,50 +381,34 @@ def contains_courier_keyword(domain):
     return len(matched) > 0, matched
 
 
-def save_run_stats(certs_analyzed, domains_processed, new_findings, elapsed_time):
+def save_run_stats(domains_scanned, phishing_found, elapsed_time):
     """Save run statistics to a file for GitHub Actions summary"""
-    stats_file = os.path.join(os.path.dirname(OUTPUT_FILE), 'run_stats.json')
+    stats_dir = os.path.dirname(OUTPUT_FILE)
+    if not stats_dir:
+        stats_dir = 'feed'
+    
+    stats_file = os.path.join(stats_dir, 'run_stats.json')
     
     stats = {
-        "certs_analyzed": certs_analyzed,
-        "domains_processed": domains_processed,
-        "new_findings": new_findings,
+        "domains_scanned": domains_scanned,
+        "phishing_found": phishing_found,
         "elapsed_time": round(elapsed_time, 1),
-        "timestamp": datetime.datetime.now().isoformat()
+        "timestamp": datetime.datetime.now().isoformat(),
+        "last_run": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
     }
     
     try:
+        # Ensure directory exists
+        os.makedirs(stats_dir, exist_ok=True)
+        
         with open(stats_file, 'w') as f:
             json.dump(stats, f, indent=2)
-        logging.info(f"Run stats saved to {stats_file}")
+        
+        logging.info(f"✓ Run stats saved to {stats_file}")
+        logging.info(f"  Domains scanned: {domains_scanned}, Phishing found: {phishing_found}")
     except Exception as e:
         logging.error(f"Error saving run stats: {e}")
 
-
-def add_to_feed(domain, score):
-    """Add a suspicious domain to the feed"""
-    feed = load_existing_feed()
-
-    # Check for duplicates
-    if any(entry['domain'] == domain for entry in feed):
-        return False
-
-    new_entry = {
-        "domain": domain,
-        "score": score,
-        "timestamp": datetime.datetime.now().isoformat(),
-        "status": "active",
-        "source": "CT Logs"
-    }
-
-    feed.insert(0, new_entry)  # Add to top
-
-    # Keep only last 100
-    if len(feed) > 100:
-        feed = feed[:100]
-
-    save_feed(feed)
-    return True
 
 
 # ==================== POLLING MODE (Direct CT Log Access) ====================
@@ -631,6 +615,13 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
         return
 
     logging.info(f"Prepared {len(query_tasks)} query tasks")
+
+    # Save final stats
+    elapsed = (datetime.datetime.now() - start_time).total_seconds()
+    save_run_stats(len(processed_domains), findings_count, elapsed)  # ✅ 3 parameters
+
+    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
+
 
     # Execute queries with thread pool
     with ThreadPoolExecutor(max_workers=5) as executor:
