@@ -616,12 +616,6 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
 
     logging.info(f"Prepared {len(query_tasks)} query tasks")
 
-    # Save final stats
-    elapsed = (datetime.datetime.now() - start_time).total_seconds()
-    save_run_stats(len(processed_domains), findings_count, elapsed)  # ✅ 3 parameters
-
-    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
-
 
     # Execute queries with thread pool
     with ThreadPoolExecutor(max_workers=5) as executor:
@@ -698,6 +692,10 @@ def poll_ct_logs(duration=None, sources=['crtsh']):
             except Exception as e:
                 logging.error(f"Error processing results from {source_name}/{target}: {e}")
 
+    # Save final stats
+    elapsed = (datetime.datetime.now() - start_time).total_seconds()
+    save_run_stats(len(processed_domains), findings_count, elapsed)
+    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
 
 def process_message(message, context):
     """Process certstream messages"""
