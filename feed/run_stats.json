@@ -1,7 +1,7 @@
 {
-  "certs_analyzed": 2526,
-  "domains_processed": 2,
-  "new_findings": 278.290185,
-  "elapsed_time": 0,
-  "timestamp": "2026-01-20T14:02:52.389678"
+  "domains_scanned": 0,
+  "phishing_found": 0,
+  "elapsed_time": 0.0,
+  "timestamp": "2026-01-21T05:36:37.014734",
+  "last_run": "2026-01-21 05:36:37 UTC"
 }
