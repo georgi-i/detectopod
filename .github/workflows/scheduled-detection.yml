@@ -2,8 +2,8 @@ name: Scheduled Detection
 
 on:
   schedule:
-    # Run every 20 minutes to maximize coverage within free tier limits
-    - cron: '*/20 * * * *'
+  # Run once every hour at the beginning of the hour
+    - cron: '0 * * * *'
   # Allow manual trigger for testing
   workflow_dispatch:
 
