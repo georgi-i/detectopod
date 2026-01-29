@@ -59,10 +59,10 @@ Detection Rate: 5.3%
                            └──────────────────┘
                                     │
                                     ▼
-                           ┌──────────────────┐
-                           │  Threat Feed     │
+                           ┌────────────────── ┐
+                           │  Threat Feed      │
                            │ phishing_feed.json│
-                           └──────────────────┘
+                           └────────────────── ┘
 ```
 
 ## 🔧 Installation
@@ -252,8 +252,8 @@ MIT License - see LICENSE file for details.
 
 ## 📞 Contact
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/detectopod/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/detectopod/discussions)
+- **Issues**: [GitHub Issues](https://github.com/georgi-i/detectopod/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/georgi-i/detectopod/discussions)
 
 ## ⚠️ Disclaimer
 
