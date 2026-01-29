@@ -44,10 +44,10 @@ jobs:
         python -c "import cryptography; print(f'cryptography {cryptography.__version__} installed')"
 
     - name: Run detection script with all sources
+      env:
+        URLSCAN_API_KEY: ${{ secrets.URLSCAN_API_KEY }}
       run: |
         # Use polling mode with ALL sources: urlscan.io, Google CT, and Cloudflare CT
-        env:
-          URLSCAN_API_KEY: ${{ secrets.URLSCAN_API_KEY }}
         python detection/detectopod.py
 
     - name: Check for changes
