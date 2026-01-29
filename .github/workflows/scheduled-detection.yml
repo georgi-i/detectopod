@@ -47,7 +47,7 @@ jobs:
       run: |
         # Use polling mode with ALL sources: crt.sh, Google CT, and Cloudflare CT
         # Run for 600 seconds (10 minutes) - leaving 5 min buffer for setup/commit
-        python detection/detectopod.py --duration 600 --mode poll --sources crtsh google cloudflare
+        python detection/detectopod.py
 
     - name: Check for changes
       id: check_changes
