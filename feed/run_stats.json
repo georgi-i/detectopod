@@ -1,7 +1,7 @@
 {
-  "domains_scanned": 1813,
+  "domains_scanned": 5626,
   "phishing_found": 0,
-  "elapsed_time": 104.2,
-  "timestamp": "2026-01-29T07:01:43.039594",
-  "last_run": "2026-01-29 07:01:43 UTC"
+  "elapsed_time": 266.6,
+  "timestamp": "2026-01-29T07:55:10.025029",
+  "last_run": "2026-01-29 07:55:10 UTC"
 }
