@@ -13,6 +13,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Configuration
 SCORE_THRESHOLD = 80
 
+URLSCAN_API_KEY = os.environ.get("URLSCAN_API_KEY")
+
+if not URLSCAN_API_KEY:
+    logging.error("URLSCAN_API_KEY environment variable is not set. API calls will fail.")
+
 # PRIMARY TARGET: Bulgarian courier/logistics companies
 COURIER_KEYWORDS = [
     'econt',
