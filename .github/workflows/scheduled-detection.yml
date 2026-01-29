@@ -45,8 +45,9 @@ jobs:
 
     - name: Run detection script with all sources
       run: |
-        # Use polling mode with ALL sources: crt.sh, Google CT, and Cloudflare CT
-        # Run for 600 seconds (10 minutes) - leaving 5 min buffer for setup/commit
+        # Use polling mode with ALL sources: urlscan.io, Google CT, and Cloudflare CT
+        env:
+          URLSCAN_API_KEY: ${{ secrets.URLSCAN_API_KEY }}
         python detection/detectopod.py
 
     - name: Check for changes
@@ -99,8 +100,8 @@ jobs:
       if: always()
       run: |
         echo "### Detection Run Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- **Mode**: Polling (crt.sh + Google CT + Cloudflare CT)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Sources**: 3 (crt.sh API, Google Argon logs, Cloudflare Nimbus logs)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Mode**: Polling (urlscan.io + Google CT + Cloudflare CT)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Sources**: 3 (urlscan.io API, Google Argon logs, Cloudflare Nimbus logs)" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
