@@ -5,20 +5,10 @@ import os
 import sys
 import time
 import requests
-import base64
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-try:
-    from cryptography import x509
-    from cryptography.hazmat.backends import default_backend
-    CRYPTOGRAPHY_AVAILABLE = True
-except ImportError:
-    CRYPTOGRAPHY_AVAILABLE = False
-    logging.warning("cryptography module not available. Install with: pip install cryptography")
-
-
-# Usage: python detectopod.py [--duration SECONDS] [--mode stream|poll] [--sources crtsh google cloudflare]
+# Usage: python detectopod.py [--duration SECONDS] [--sources urlscan google cloudflare]
 
 # Configuration
 SCORE_THRESHOLD = 80
@@ -120,11 +110,6 @@ FREE_HOSTING_SUFFIXES = (
 # Combined - all suspicious patterns to monitor
 TARGET_SUFFIXES = FREE_HOSTING_SUFFIXES + SUSPICIOUS_TLDS
 
-# Hybrid strategy for CT log sources
-CRTSH_SEARCHABLE = FREE_HOSTING_SUFFIXES  # Only search these via crt.sh
-CT_LOG_ONLY = SUSPICIOUS_TLDS              # These need Google/Cloudflare CT logs
-
-
 # Infrastructure patterns to EXCLUDE (not customer domains)
 INFRASTRUCTURE_PATTERNS = (
     # Render.com internal services
@@ -159,46 +144,6 @@ INFRASTRUCTURE_PATTERNS = (
     'preview.vercel.app',
 )
 
-
-# CT Log URLs for direct polling
-CT_LOG_SOURCES = {
-    'crtsh': {
-        'name': 'crt.sh',
-        'type': 'aggregator',
-        'enabled': True
-    },
-    'google_argon2025h2': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2025h2',
-        'type': 'ct_log',
-        'description': 'Google Argon2025h2 log'
-    },
-    'google_argon2026h1': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2026h1',
-        'type': 'ct_log',
-        'description': 'Google Argon2026h1 log'
-    },
-    'google_argon2026h2': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2026h2',
-        'type': 'ct_log',
-        'description': 'Google Argon2026h2 log'
-    },
-    'cloudflare_nimbus2025': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2025',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2025'
-    },
-    'cloudflare_nimbus2026': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2026',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2026'
-    },
-    'cloudflare_nimbus2027': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2027',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2027'
-    }
-}
-
 OUTPUT_FILE = 'feed/phishing_feed.json'
 STATS_FILE = 'feed/stats.json'
 START_TIME = None
@@ -229,10 +174,32 @@ def save_feed(feed_data):
         logging.error(f"Error saving feed: {e}")
 
 
+def add_to_feed(domain, score, source='urlscan'):
+    """Add a suspicious domain to the feed"""
+    feed_data = load_existing_feed()
+    
+    # Check if already in feed
+    for entry in feed_data:
+        if entry['domain'] == domain:
+            logging.debug(f"Domain {domain} already in feed")
+            return
+    
+    entry = {
+        'domain': domain,
+        'score': score,
+        'detected_at': datetime.datetime.now().isoformat(),
+        'source': source
+    }
+    
+    feed_data.append(entry)
+    save_feed(feed_data)
+
+
 def calculate_score(domain):
     """
     Calculate suspicion score for a domain (0-100)
     Enhanced to detect brand impersonation patterns like speedy.bg-pk.cfd
+    and courier brands on free hosting like speedy-37a.pages.dev
     """
     score = 0
     domain_lower = domain.lower()
@@ -242,36 +209,56 @@ def calculate_score(domain):
         domain_lower = domain_lower[4:]
 
     # --- BRAND IMPERSONATION DETECTION (HIGH PRIORITY) ---
-    # Check for Bulgarian courier brand + geo indicator + suspicious TLD
     has_brand = False
     has_geo = False
     has_suspicious_tld = False
+    has_free_hosting = False
 
+    # Check for Bulgarian courier brand
     for brand in BULGARIAN_COURIER_BRANDS:
         if brand in domain_lower:
             has_brand = True
-            score += 30  # Base score for brand presence
+            score += 35  # Increased base score for brand presence
             break
 
+    # Check for geographic indicators
     for geo in GEO_INDICATORS:
         if geo in domain_lower:
             has_geo = True
             score += 15  # Geographic indicator suggests impersonation
             break
 
+    # Check for suspicious TLDs
     for tld in SUSPICIOUS_TLDS:
         if domain_lower.endswith(tld):
             has_suspicious_tld = True
-            score += 25  # Suspicious TLD
+            score += 30  # Increased - suspicious TLD is a strong signal
             break
 
-    # CRITICAL: Brand + geo + suspicious TLD = classic phishing pattern
-    if has_brand and has_geo and has_suspicious_tld:
-        score += 40  # Major boost for this combo
+    # Check for free hosting platforms
+    for suffix in FREE_HOSTING_SUFFIXES:
+        if domain_lower.endswith(suffix):
+            has_free_hosting = True
+            score += 25  # Free hosting is suspicious for courier brands
+            break
 
-    # Even brand + suspicious TLD without geo is highly suspicious
+    # --- CRITICAL COMBINATIONS ---
+    # Brand + geo + suspicious TLD = classic phishing (e.g., econt.bg-g63829.cfd)
+    if has_brand and has_geo and has_suspicious_tld:
+        score += 45  # Maximum boost for this combo
+
+    # Brand + suspicious TLD (even without geo)
     if has_brand and has_suspicious_tld:
-        score += 20
+        score += 25
+
+    # Brand + free hosting = HIGHLY SUSPICIOUS (e.g., speedy-37a.pages.dev)
+    # Legitimate courier companies don't use free hosting platforms
+    if has_brand and has_free_hosting:
+        score += 40  # Major boost - this is a key phishing indicator
+
+    # Brand + geo + free hosting
+    if has_brand and has_geo and has_free_hosting:
+        score += 30
 
     # --- KEYWORD MATCHING ---
     keywords_found = []
@@ -280,46 +267,57 @@ def calculate_score(domain):
             keywords_found.append(keyword)
             # Higher weight for courier brands
             if keyword in BULGARIAN_COURIER_BRANDS:
-                score += 15
+                score += 10
             else:
-                score += 8
+                score += 5
 
     # --- SUSPICIOUS PATTERNS ---
-    # Multiple hyphens (often used to create fake subdomains)
+    # Multiple hyphens (often used to create fake subdomains like speedy-37a)
     hyphen_count = domain_lower.count('-')
-    if hyphen_count >= 2:
-        score += hyphen_count * 5
+    if hyphen_count >= 1:
+        if has_brand:
+            # Courier brand with hyphens is very suspicious
+            score += hyphen_count * 8
+        else:
+            score += hyphen_count * 3
 
-    # Mixed numbers and letters (e.g., speedy1, econt24)
+    # Mixed numbers and letters (e.g., speedy37a, econt24, g63829)
     if any(c.isdigit() for c in domain_lower) and any(c.isalpha() for c in domain_lower):
-        score += 10
+        if has_brand:
+            # Brand + random numbers/letters = phishing pattern
+            score += 15
+        else:
+            score += 8
+
+    # Random-looking strings (e.g., g63829, 37a, e37)
+    # Check for patterns like: letter + digits or digits + letter
+    domain_name = domain_lower.split('.')[0]  # Get subdomain/domain part
+    if re.search(r'[a-z]\d{2,}|\d{2,}[a-z]', domain_name):
+        score += 12  # Random-looking identifier
 
     # Specific phishing patterns
     if 'verify' in domain_lower or 'confirm' in domain_lower:
-        score += 12
+        score += 15
     if 'secure' in domain_lower or 'account' in domain_lower:
-        score += 12
+        score += 15
     if 'update' in domain_lower or 'suspended' in domain_lower:
+        score += 18
+    if 'payment' in domain_lower or 'billing' in domain_lower:
+        score += 15
+    if 'login' in domain_lower or 'signin' in domain_lower:
         score += 15
 
     # --- LENGTH ANALYSIS ---
     # Very long domains are suspicious
     domain_parts = domain_lower.split('.')
     if len(domain_parts[0]) > 20:  # Long subdomain/domain name
-        score += 10
-
-    # --- FREE HOSTING PLATFORM ---
-    # If on free hosting + has keywords, boost score
-    for suffix in FREE_HOSTING_SUFFIXES:
-        if domain_lower.endswith(suffix):
-            if keywords_found:
-                score += 15  # Courier keywords + free hosting = suspicious
-            break
+        score += 12
 
     # Cap score at 100
     score = min(score, 100)
 
     return score
+
 
 def is_infrastructure_domain(domain):
     """
@@ -410,9 +408,301 @@ def save_run_stats(domains_scanned, phishing_found, elapsed_time):
         logging.error(f"Error saving run stats: {e}")
 
 
+# ==================== URLSCAN.IO API INTEGRATION ====================
 
-# ==================== POLLING MODE (Direct CT Log Access) ====================
 
+def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
+    """
+    Query urlscan.io API for domains matching courier keywords
+    
+    Args:
+        keywords: List of keywords to search for
+        max_results: Maximum number of results to retrieve
+        retry_count: Current retry attempt
+        max_retries: Maximum number of retries
+        
+    Returns:
+        List of domain dictionaries with domain info
+    """
+    try:
+        headers = {
+            "API-Key": URLSCAN_API_KEY,
+            "Content-Type": "application/json"
+        }
+        
+        # Build search query for urlscan.io
+        # We'll do multiple queries to be comprehensive
+        
+        # Strategy 1: Direct domain keyword search
+        domain_queries = []
+        for keyword in keywords:
+            # Search for keyword anywhere in the domain
+            domain_queries.append(f'domain:*{keyword}*')
+        
+        # Strategy 2: Page domain search (more specific)
+        page_queries = []
+        for keyword in keywords:
+            page_queries.append(f'page.domain:*{keyword}*')
+        
+        # Combine both strategies
+        all_queries = domain_queries + page_queries
+        search_query = ' OR '.join(all_queries)
+        
+        logging.info(f"Querying urlscan.io for courier keywords...")
+        logging.debug(f"Query: {search_query[:300]}...")
+        
+        # API parameters
+        params = {
+            'q': search_query,
+            'size': min(max_results, 10000),  # API limit is 10000
+        }
+        
+        url = "https://urlscan.io/api/v1/search/"
+        response = requests.get(url, headers=headers, params=params, timeout=45)
+        
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get('results', [])
+            total = data.get('total', 0)
+            
+            logging.info(f"Found {len(results)} results (total available: {total})")
+            
+            # Extract unique domains from results
+            domains = []
+            seen_domains = set()
+            
+            for result in results:
+                # Extract domain from various fields
+                domain = None
+                
+                # Try page.domain first (most reliable)
+                if 'page' in result and 'domain' in result['page']:
+                    domain = result['page']['domain']
+                # Fallback to task.domain
+                elif 'task' in result and 'domain' in result['task']:
+                    domain = result['task']['domain']
+                # Last resort: parse from URL
+                elif 'page' in result and 'url' in result['page']:
+                    try:
+                        from urllib.parse import urlparse
+                        parsed = urlparse(result['page']['url'])
+                        domain = parsed.netloc
+                    except:
+                        pass
+                
+                if domain and domain not in seen_domains:
+                    seen_domains.add(domain)
+                    domains.append({
+                        'domain': domain,
+                        'url': result.get('page', {}).get('url', ''),
+                        'scan_time': result.get('task', {}).get('time', ''),
+                        'verdict': result.get('verdicts', {}).get('overall', {}).get('malicious', False),
+                        'source': 'urlscan.io'
+                    })
+            
+            logging.info(f"Extracted {len(domains)} unique domains")
+            
+            # If we have space for more results, do targeted searches for suspicious TLDs
+            if len(domains) < max_results * 0.8:  # If we got less than 80% of max
+                logging.info("Performing targeted searches for suspicious TLDs...")
+                
+                # Search for courier brands on specific suspicious TLDs
+                for tld in ['.cfd', '.tk', '.pages.dev', '.web.app', '.ml', '.ga']:
+                    tld_query = ' OR '.join([f'domain:*{kw}*{tld}' for kw in keywords])
+                    
+                    tld_params = {
+                        'q': tld_query,
+                        'size': 500,
+                    }
+                    
+                    try:
+                        logging.debug(f"Searching {tld} domains...")
+                        tld_response = requests.get(url, headers=headers, params=tld_params, timeout=30)
+                        
+                        if tld_response.status_code == 200:
+                            tld_data = tld_response.json()
+                            tld_results = tld_data.get('results', [])
+                            
+                            for result in tld_results:
+                                domain = None
+                                if 'page' in result and 'domain' in result['page']:
+                                    domain = result['page']['domain']
+                                elif 'task' in result and 'domain' in result['task']:
+                                    domain = result['task']['domain']
+                                
+                                if domain and domain not in seen_domains:
+                                    seen_domains.add(domain)
+                                    domains.append({
+                                        'domain': domain,
+                                        'url': result.get('page', {}).get('url', ''),
+                                        'scan_time': result.get('task', {}).get('time', ''),
+                                        'verdict': result.get('verdicts', {}).get('overall', {}).get('malicious', False),
+                                        'source': f'urlscan.io-{tld}'
+                                    })
+                            
+                            logging.debug(f"  Found {len(tld_results)} on {tld}")
+                        
+                        # Small delay to avoid rate limiting
+                        time.sleep(0.5)
+                        
+                    except Exception as e:
+                        logging.debug(f"Error searching {tld}: {e}")
+                        continue
+            
+            logging.info(f"Total unique domains collected: {len(domains)}")
+            return domains
+            
+        elif response.status_code == 429:
+            # Rate limited
+            if retry_count < max_retries:
+                wait_time = (retry_count + 1) * 10
+                logging.warning(f"Rate limited by urlscan.io, retrying in {wait_time}s")
+                time.sleep(wait_time)
+                return query_urlscan(keywords, max_results, retry_count + 1, max_retries)
+            else:
+                logging.error(f"Rate limited by urlscan.io after {max_retries} retries")
+                return []
+                
+        elif response.status_code == 400:
+            logging.error(f"Bad request to urlscan.io: {response.text}")
+            return []
+            
+        else:
+            logging.warning(f"urlscan.io returned status {response.status_code}: {response.text}")
+            return []
+            
+    except requests.exceptions.Timeout:
+        if retry_count < max_retries:
+            wait_time = (retry_count + 1) * 5
+            logging.warning(f"Timeout querying urlscan.io, retrying in {wait_time}s")
+            time.sleep(wait_time)
+            return query_urlscan(keywords, max_results, retry_count + 1, max_retries)
+        else:
+            logging.error(f"Timeout querying urlscan.io after {max_retries} retries")
+            return []
+            
+    except Exception as e:
+        logging.error(f"Error querying urlscan.io: {e}")
+        return []
+
+
+def query_urlscan_recent(days=7, max_results=1000):
+    """
+    Query urlscan.io for recent submissions containing courier keywords
+    
+    Args:
+        days: Number of days to look back
+        max_results: Maximum results to return
+    """
+    try:
+        headers = {
+            "API-Key": URLSCAN_API_KEY,
+            "Content-Type": "application/json"
+        }
+        
+        # Calculate date range
+        end_date = datetime.datetime.now()
+        start_date = end_date - datetime.timedelta(days=days)
+        
+        # Build query for recent scans with courier keywords
+        keyword_query = ' OR '.join([f'page.domain:*{k}*' for k in COURIER_KEYWORDS])
+        
+        # Add time filter
+        date_filter = f'date:>{start_date.strftime("%Y-%m-%d")}'
+        
+        full_query = f'({keyword_query}) AND {date_filter}'
+        
+        logging.info(f"Querying urlscan.io for last {days} days")
+        
+        params = {
+            'q': full_query,
+            'size': min(max_results, 10000),
+        }
+        
+        url = "https://urlscan.io/api/v1/search/"
+        response = requests.get(url, headers=headers, params=params, timeout=45)
+        
+        if response.status_code == 200:
+            data = response.json()
+            results = data.get('results', [])
+            
+            logging.info(f"Found {len(results)} recent submissions")
+            
+            # Process results same as query_urlscan
+            domains = []
+            seen_domains = set()
+            
+            for result in results:
+                domain = None
+                
+                if 'page' in result and 'domain' in result['page']:
+                    domain = result['page']['domain']
+                elif 'task' in result and 'domain' in result['task']:
+                    domain = result['task']['domain']
+                
+                if domain and domain not in seen_domains:
+                    seen_domains.add(domain)
+                    domains.append({
+                        'domain': domain,
+                        'url': result.get('page', {}).get('url', ''),
+                        'scan_time': result.get('task', {}).get('time', ''),
+                        'source': 'urlscan.io'
+                    })
+            
+            return domains
+        else:
+            logging.warning(f"urlscan.io returned status {response.status_code}")
+            return []
+            
+    except Exception as e:
+        logging.error(f"Error querying recent urlscan submissions: {e}")
+        return []
+
+
+# ==================== CT LOG SOURCES (Google/Cloudflare) ====================
+
+try:
+    from cryptography import x509
+    from cryptography.hazmat.backends import default_backend
+    CRYPTOGRAPHY_AVAILABLE = True
+except ImportError:
+    CRYPTOGRAPHY_AVAILABLE = False
+    logging.warning("cryptography module not available. Install with: pip install cryptography")
+
+
+# CT Log URLs for direct polling
+CT_LOG_SOURCES = {
+    'google_argon2025h2': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2025h2',
+        'type': 'ct_log',
+        'description': 'Google Argon2025h2 log'
+    },
+    'google_argon2026h1': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2026h1',
+        'type': 'ct_log',
+        'description': 'Google Argon2026h1 log'
+    },
+    'google_argon2026h2': {
+        'url': 'https://ct.googleapis.com/logs/us1/argon2026h2',
+        'type': 'ct_log',
+        'description': 'Google Argon2026h2 log'
+    },
+    'cloudflare_nimbus2025': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2025',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2025'
+    },
+    'cloudflare_nimbus2026': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2026',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2026'
+    },
+    'cloudflare_nimbus2027': {
+        'url': 'https://ct.cloudflare.com/logs/nimbus2027',
+        'type': 'ct_log',
+        'description': 'Cloudflare Nimbus2027'
+    }
+}
 
 
 def extract_domains_from_cert(cert_data):
@@ -449,6 +739,8 @@ def extract_domains_from_cert(cert_data):
 def query_ct_log_direct(log_url, max_entries=500):
     """Query a CT log directly using RFC 6962 API"""
     try:
+        import base64
+        
         # Get the current tree size
         sth_url = f"{log_url}/ct/v1/get-sth"
         response = requests.get(sth_url, timeout=10)
@@ -497,7 +789,7 @@ def query_ct_log_direct(log_url, max_entries=500):
 
                     for domain in domains:
                         results.append({
-                            'name_value': domain,
+                            'domain': domain,
                             'source': log_url
                         })
             except Exception as e:
@@ -513,316 +805,207 @@ def query_ct_log_direct(log_url, max_entries=500):
     except Exception as e:
         logging.error(f"Error querying CT log {log_url}: {e}")
         return []
-        
 
-def query_crtsh(suffix, max_results=2000, retry_count=0, max_retries=2):
+
+# ==================== MAIN SCANNING LOGIC ====================
+
+
+def scan_domains(duration=None, sources=['urlscan']):
     """
-    Query crt.sh for certificates matching a specific suffix
-    Only used for hosting platforms (.web.app, .herokuapp.com, etc.)
-    Suspicious TLDs (.cfd, .tk) are too large and require direct CT log access
+    Main scanning function using configured sources
+    
+    Args:
+        duration: Maximum duration in seconds (None for unlimited)
+        sources: List of sources to use ['urlscan', 'google', 'cloudflare']
     """
-    try:
-        # Search for domains ending with the suffix
-        search_query = f"%25.{suffix.lstrip('.')}"
-        url = f"https://crt.sh/?q={search_query}&output=json"
-
-        logging.info(f"Querying crt.sh for: {suffix}")
-        response = requests.get(url, timeout=45)
-
-        if response.status_code == 200:
-            data = response.json()
-            logging.info(f"Found {len(data)} certificates for {suffix}")
-            return data[:max_results]
-        elif response.status_code == 503:
-            if retry_count < max_retries:
-                wait_time = (retry_count + 1) * 3
-                logging.warning(f"crt.sh returned 503 for {suffix}, retrying in {wait_time}s")
-                time.sleep(wait_time)
-                return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
-            else:
-                logging.error(f"crt.sh returned 503 for {suffix} after {max_retries} retries")
-                return []
-        else:
-            logging.warning(f"crt.sh returned status {response.status_code} for {suffix}")
-            return []
-    except requests.exceptions.Timeout:
-        if retry_count < max_retries:
-            wait_time = (retry_count + 1) * 3
-            logging.warning(f"Timeout querying crt.sh for {suffix}, retrying in {wait_time}s")
-            time.sleep(wait_time)
-            return query_crtsh(suffix, max_results, retry_count + 1, max_retries)
-        else:
-            logging.error(f"Timeout querying crt.sh for {suffix} after {max_retries} retries")
-            return []
-    except Exception as e:
-        logging.error(f"Error querying crt.sh for {suffix}: {e}")
-        return []
-
-
-
-def poll_ct_logs(duration=None, sources=['crtsh']):
-    """Poll CT logs directly via multiple sources"""
     start_time = datetime.datetime.now()
     processed_domains = set()
     findings_count = 0
 
-    logging.info("Starting CT log polling mode...")
+    logging.info("Starting phishing domain scanner...")
     logging.info(f"Using sources: {', '.join(sources)}")
-    logging.info(f"Monitoring {len(TARGET_SUFFIXES)} target suffixes")
+    logging.info(f"Score threshold: {SCORE_THRESHOLD}")
 
-    # Determine which query tasks to run
-    query_tasks = []
+    # Collect domains from all sources
+    all_domains = []
 
-    if 'crtsh' in sources and CT_LOG_SOURCES['crtsh']['enabled']:
-        # crt.sh: ONLY search manageable platforms (not suspicious TLDs)
-        for suffix in CRTSH_SEARCHABLE:
-            query_tasks.append(('crt.sh', suffix, lambda s=suffix: query_crtsh(s)))
-    
-        logging.info(f"crt.sh: Searching {len(CRTSH_SEARCHABLE)} hosting platforms")
-        logging.warning(
-            f"Note: Suspicious TLDs ({len(CT_LOG_ONLY)} domains: .cfd, .tk, etc.) "
-            f"skipped for crt.sh - too many results"
-        )
-        if 'google' not in sources and 'cloudflare' not in sources:
-            logging.warning(
-                f"⚠️  Add --sources google cloudflare to monitor suspicious TLDs"
-            )
+    # URLScan.io - PRIMARY SOURCE
+    if 'urlscan' in sources:
+        logging.info("=" * 60)
+        logging.info("Querying URLScan.io...")
+        logging.info("=" * 60)
+        
+        # Query with courier keywords
+        urlscan_domains = query_urlscan(COURIER_KEYWORDS, max_results=1000)
+        all_domains.extend(urlscan_domains)
+        
+        logging.info(f"URLScan.io returned {len(urlscan_domains)} domains")
+        
+        # Also query recent submissions (last 7 days)
+        recent_domains = query_urlscan_recent(days=7, max_results=500)
+        all_domains.extend(recent_domains)
+        
+        logging.info(f"Recent submissions: {len(recent_domains)} domains")
 
-    # Add Google CT logs
+    # Google CT Logs - SUPPLEMENTARY
     if 'google' in sources:
         if not CRYPTOGRAPHY_AVAILABLE:
             logging.error("Cannot use Google CT logs: cryptography module not installed")
             logging.error("Install with: pip install cryptography")
         else:
+            logging.info("=" * 60)
+            logging.info("Querying Google CT Logs...")
+            logging.info("=" * 60)
+            
             for log_key, log_info in CT_LOG_SOURCES.items():
                 if log_key.startswith('google_') and log_info.get('type') == 'ct_log':
-                    query_tasks.append((f"Google-{log_key}", log_info['url'], 
-                                      lambda url=log_info['url']: query_ct_log_direct(url, max_entries=500)))
+                    # Check timeout
+                    if duration:
+                        elapsed = (datetime.datetime.now() - start_time).total_seconds()
+                        if elapsed > duration:
+                            logging.info("Duration limit reached")
+                            break
+                    
+                    ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
+                    
+                    # Convert format
+                    for item in ct_domains:
+                        all_domains.append({
+                            'domain': item['domain'],
+                            'source': f"Google-{log_key}"
+                        })
 
-    # Add Cloudflare CT logs  
+    # Cloudflare CT Logs - SUPPLEMENTARY
     if 'cloudflare' in sources:
         if not CRYPTOGRAPHY_AVAILABLE:
             logging.error("Cannot use Cloudflare CT logs: cryptography module not installed")
             logging.error("Install with: pip install cryptography")
         else:
+            logging.info("=" * 60)
+            logging.info("Querying Cloudflare CT Logs...")
+            logging.info("=" * 60)
+            
             for log_key, log_info in CT_LOG_SOURCES.items():
                 if log_key.startswith('cloudflare_') and log_info.get('type') == 'ct_log':
-                    query_tasks.append((f"Cloudflare-{log_key}", log_info['url'],
-                                      lambda url=log_info['url']: query_ct_log_direct(url, max_entries=500)))
-
-    if not query_tasks:
-        logging.error("No CT log sources enabled!")
-        return
-
-    logging.info(f"Prepared {len(query_tasks)} query tasks")
-
-
-    # Execute queries with thread pool
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        future_to_task = {}
-
-        for source_name, target, query_func in query_tasks:
-            future = executor.submit(query_func)
-            future_to_task[future] = (source_name, target)
-
-        for future in as_completed(future_to_task):
-            source_name, target = future_to_task[future]
-
-            # Check timeout
-            if duration:
-                elapsed = (datetime.datetime.now() - start_time).total_seconds()
-                if elapsed > duration:
-                    logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
-                    return
-
-            try:
-                results = future.result()
-
-                for cert in results:
-                    # Extract domain name
-                    domain = cert.get('name_value', '').strip()
-                
-                    # Skip empty, wildcards, or duplicates
-                    if not domain or domain.startswith('*') or domain in processed_domains:
-                        continue
-                
-                    processed_domains.add(domain)
+                    # Check timeout
+                    if duration:
+                        elapsed = (datetime.datetime.now() - start_time).total_seconds()
+                        if elapsed > duration:
+                            logging.info("Duration limit reached")
+                            break
                     
-                    # STEP 1: Skip infrastructure/internal domains
-                    if is_infrastructure_domain(domain):
-                        logging.debug(f"[SKIP] Infrastructure: {domain}")
-                        continue
+                    ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
                     
-                    # STEP 2: Require courier keywords (PRIMARY FILTER)
-                    has_courier, courier_keywords = contains_courier_keyword(domain)
-                    
-                    if not has_courier:
-                        logging.debug(f"[SKIP] No courier keywords: {domain}")
-                        continue
-                    
-                    # STEP 3: Check if on monitored platforms/TLDs
-                    matches_suffix = any(domain.endswith(suffix) for suffix in TARGET_SUFFIXES)
-                    
-                    if not matches_suffix:
-                        logging.debug(f"[SKIP] Not on suspicious platform: {domain}")
-                        continue
-                
-                    # STEP 4: Calculate score (domain has courier keyword + suspicious platform)
-                    score = calculate_score(domain)
-                
-                    if score >= SCORE_THRESHOLD:
-                        findings_count += 1
-    
-                        # Simple console notification
-                        logging.warning(
-                            f"🚨 PHISHING DETECTED: {domain} | "
-                            f"Score: {score}/100 | "
-                            f"Keywords: {', '.join(courier_keywords)} | "
-                            f"Source: {source_name}"
-                        )
-    
-                        add_to_feed(domain, score, source_name)
+                    # Convert format
+                    for item in ct_domains:
+                        all_domains.append({
+                            'domain': item['domain'],
+                            'source': f"Cloudflare-{log_key}"
+                        })
 
-                    else:
-                        logging.info(
-                            f"[LOW SCORE] {domain} (score: {score}) - "
-                            f"Keywords: {', '.join(courier_keywords)}"
-                        )
-            
-            except Exception as e:
-                logging.error(f"Error processing results from {source_name}/{target}: {e}")
+    # Process all collected domains
+    logging.info("=" * 60)
+    logging.info(f"Processing {len(all_domains)} total domains...")
+    logging.info("=" * 60)
+
+    for item in all_domains:
+        # Check timeout
+        if duration:
+            elapsed = (datetime.datetime.now() - start_time).total_seconds()
+            if elapsed > duration:
+                logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains")
+                break
+
+        domain = item.get('domain', '').strip()
+        source = item.get('source', 'unknown')
+
+        # Skip empty, wildcards, or duplicates
+        if not domain or domain.startswith('*') or domain in processed_domains:
+            continue
+
+        processed_domains.add(domain)
+
+        # STEP 1: Skip infrastructure/internal domains
+        if is_infrastructure_domain(domain):
+            logging.debug(f"[SKIP] Infrastructure: {domain}")
+            continue
+
+        # STEP 2: Require courier keywords (PRIMARY FILTER)
+        has_courier, courier_keywords = contains_courier_keyword(domain)
+
+        if not has_courier:
+            logging.debug(f"[SKIP] No courier keywords: {domain}")
+            continue
+
+        # STEP 3: Check if on monitored platforms/TLDs
+        matches_suffix = any(domain.endswith(suffix) for suffix in TARGET_SUFFIXES)
+
+        if not matches_suffix:
+            logging.debug(f"[SKIP] Not on suspicious platform: {domain}")
+            continue
+
+        # STEP 4: Calculate score (domain has courier keyword + suspicious platform)
+        score = calculate_score(domain)
+
+        if score >= SCORE_THRESHOLD:
+            findings_count += 1
+
+            # Console notification
+            logging.warning(
+                f"🚨 PHISHING DETECTED: {domain} | "
+                f"Score: {score}/100 | "
+                f"Keywords: {', '.join(courier_keywords)} | "
+                f"Source: {source}"
+            )
+
+            add_to_feed(domain, score, source)
+
+        else:
+            logging.info(
+                f"[LOW SCORE] {domain} (score: {score}) - "
+                f"Keywords: {', '.join(courier_keywords)}"
+            )
 
     # Save final stats
     elapsed = (datetime.datetime.now() - start_time).total_seconds()
     save_run_stats(len(processed_domains), findings_count, elapsed)
-    logging.info(f"Polling complete. Processed {len(processed_domains)} domains, found {findings_count} suspicious.")
-
-def process_message(message, context):
-    """Process certstream messages"""
-    global STREAM_CONNECTED, DOMAINS_PROCESSED
     
-    # Check for timeout
-    if MAX_DURATION and START_TIME:
-        if (datetime.datetime.now() - START_TIME).total_seconds() > MAX_DURATION:
-            logging.info(f"Max duration of {MAX_DURATION}s reached. Processed {DOMAINS_PROCESSED} domains. Exiting.")
-            sys.exit(0)
-
-    if message['message_type'] == "heartbeat":
-        if not STREAM_CONNECTED:
-            logging.info("Stream connected and receiving heartbeats")
-            STREAM_CONNECTED = True
-        return
-
-    if message['message_type'] == "certificate_update":
-        all_domains = message['data']['leaf_cert']['all_domains']
-        DOMAINS_PROCESSED += len(all_domains)
-
-        for domain in all_domains:
-            # Check if relevant platform
-            is_target_platform = False
-            for suffix in TARGET_SUFFIXES:
-                if domain.endswith(suffix):
-                    is_target_platform = True
-                    break
-
-            if not is_target_platform:
-                continue
-
-            score = calculate_score(domain)
-
-            if score >= SCORE_THRESHOLD:
-                logging.info(f"SUSPICIOUS DOMAIN FOUND: {domain} (Score: {score})")
-                add_to_feed(domain, score)
-
-
-def try_connect_stream(url, timeout=10):
-    """Try to connect to a CT stream with a timeout"""
-    try:
-        import certstream
-    except ImportError:
-        logging.error("certstream library not installed. Install with: pip install certstream")
-        return False
-    
-    import threading
-    global STREAM_CONNECTED
-    
-    connection_successful = threading.Event()
-    
-    def connect_thread():
-        try:
-            logging.info(f"Attempting to connect to: {url}")
-            certstream.listen_for_events(
-                process_message, 
-                url=url,
-                skip_heartbeats=False
-            )
-        except Exception as e:
-            logging.error(f"Error in stream connection: {e}")
-    
-    # Start connection in a thread
-    thread = threading.Thread(target=connect_thread, daemon=True)
-    thread.start()
-    
-    # Wait for connection or timeout
-    logging.info(f"Waiting {timeout}s for stream connection...")
-    time.sleep(timeout)
-    
-    if STREAM_CONNECTED:
-        logging.info("Stream connected successfully!")
-        # Let the thread continue running
-        thread.join()
-        return True
-    else:
-        logging.warning(f"Stream connection timeout after {timeout}s")
-        return False
-
-
-def run_stream_mode(connection_timeout=10):
-    """Run in streaming mode using certstream"""
-    global START_TIME, MAX_DURATION, STREAM_CONNECTED
-    
-    # Try each CT stream until one works (with quick timeout)
-    for stream_url in CT_STREAMS:
-        logging.info(f"Trying CT stream: {stream_url}")
-        
-        if try_connect_stream(stream_url, timeout=connection_timeout):
-            logging.info(f"Successfully connected to {stream_url}")
-            return True
-        else:
-            logging.warning(f"Failed to connect to {stream_url}, trying next...")
-            STREAM_CONNECTED = False  # Reset for next attempt
-            
-    # No streams worked
-    logging.error("All CT streams failed.")
-    return False
+    logging.info("=" * 60)
+    logging.info("Scan complete!")
+    logging.info(f"Domains processed: {len(processed_domains)}")
+    logging.info(f"Phishing domains found: {findings_count}")
+    logging.info(f"Elapsed time: {elapsed:.1f}s")
+    logging.info("=" * 60)
 
 
 # ==================== MAIN ====================
-
 
 
 def main():
     global START_TIME, MAX_DURATION
 
     import argparse
-    parser = argparse.ArgumentParser(description='Phishing Domain Detector')
+    parser = argparse.ArgumentParser(description='Phishing Domain Detector - URLScan.io Edition')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
-    parser.add_argument('--mode', choices=['stream', 'poll', 'auto'], default='auto',
-                       help='Mode: stream (certstream), poll (CT logs), auto (try stream, fallback to poll)')
-    parser.add_argument('--sources', nargs='+', choices=['crtsh', 'google', 'cloudflare'], 
-                       default=['crtsh'],
-                       help='CT log sources to use in poll mode (default: crtsh only)')
+    parser.add_argument('--sources', nargs='+', 
+                       choices=['urlscan', 'google', 'cloudflare'], 
+                       default=['urlscan'],
+                       help='Sources to use (default: urlscan only)')
     args = parser.parse_args()
 
     MAX_DURATION = args.duration
     START_TIME = datetime.datetime.now()
 
-    logging.info("Starting Phishing Domain Detector...")
-    logging.info(f"Mode: {args.mode}")
-    logging.info(f"Monitoring output to: {OUTPUT_FILE}")
-
+    logging.info("=" * 60)
+    logging.info("Phishing Domain Detector - URLScan.io Edition")
+    logging.info("=" * 60)
+    logging.info(f"Sources: {', '.join(args.sources)}")
+    logging.info(f"Output: {OUTPUT_FILE}")
+    
     if MAX_DURATION:
-        logging.info(f"Running for {MAX_DURATION} seconds.")
+        logging.info(f"Max duration: {MAX_DURATION} seconds")
+    
+    logging.info("=" * 60)
 
     # Ensure output dir exists
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
@@ -831,18 +1014,8 @@ def main():
     if not os.path.exists(OUTPUT_FILE):
         save_feed([])
 
-    # Choose mode
-    if args.mode == 'poll':
-        poll_ct_logs(duration=MAX_DURATION, sources=args.sources)
-    elif args.mode == 'stream':
-        if not run_stream_mode(connection_timeout=10):
-            logging.error("Streaming mode failed. Exiting.")
-            sys.exit(1)
-    else:  # auto mode
-        logging.info("Auto mode: Trying stream first (10s timeout), will fallback to polling if needed")
-        if not run_stream_mode(connection_timeout=10):
-            logging.warning("Streaming failed, falling back to polling mode...")
-            poll_ct_logs(duration=MAX_DURATION, sources=args.sources)
+    # Run scanner
+    scan_domains(duration=MAX_DURATION, sources=args.sources)
 
 
 if __name__ == "__main__":
