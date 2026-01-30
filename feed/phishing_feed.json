@@ -3,19 +3,40 @@
     "domain": "speedy-dev-1cc7ff6ca661.herokuapp.com",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.145007",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a free/serverless platform (Heroku), which is often exploited by phishers.\n\t* The domain name includes \"speedy-dev\", which may be an attempt to impersonate the legitimate Bulgarian courier service \"Speedy\".\n\t* The presence of a random string (\"1cc7ff6ca661\") in the domain name is a common pattern in phishing domains.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:12:32.242634",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transek-aio.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.150020",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a hyphenated prefix (\"speedy-transek-\") that resembles a legitimate brand (Speedy), a common phishing tactic.\n\t* The domain is hosted on a free/serverless platform (pages.dev), which is often used by attackers due to its ease of use and anonymity.\n\t* The domain has a generic suffix (\"-aio\"), which may indicate an attempt to appear legitimate while avoiding detection.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:12:44.523364",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns9.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.154348",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a free/serverless platform, which is often used by phishing campaigns.\n\t* The domain name \"speedy-earns9\" appears to be typosquatted, attempting to mimic the legitimate Bulgarian courier service \"Speedy\".\n\t* The lack of clear branding or official affiliation with the targeted courier services raises suspicions.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:12:51.265501",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns38.pages.dev",
@@ -117,31 +138,66 @@
     "domain": "speedy.bg-pu.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.169926",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a free/serverless platform, which is often used by phishing campaigns.\n\t* The domain contains a hyphen and a country-code top-level domain (ccTLD) variation (.bg), which is a common pattern in phishing domains.\n\t* The domain name closely resembles a legitimate Bulgarian courier service (Speedy), which is a typical tactic used in phishing attacks to create trust.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:13:13.028120",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-poi.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.170741",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level**: HIGH\n2. **Confidence**: 90%\n3. **Key Indicators**:\n\t* The domain uses a hyphenated subdomain (`bg-poi`) which is a common tactic used in phishing to create a sense of legitimacy.\n\t* The domain is hosted on a free/serverless platform, which is often used by attackers due to its low cost and ease of setup.\n\t* The domain contains a well-known brand name (`speedy`) which is a common target for phishing attacks, particularly in the context of Bulgarian courier services.\n4. **Decision**: BLOCK",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:13:22.592094",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pof.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.171331",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a hyphenated prefix (\"bg-pof\") which is a common phishing tactic to create a similar-looking domain.\n\t* The domain is hosted on a free/serverless platform, which is often used by attackers due to its anonymity and low cost.\n\t* The domain contains a well-known brand name (\"Speedy\") which is a target for phishing attacks, especially in the context of Bulgarian courier services.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:13:32.860262",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pst.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.171821",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a hyphenated prefix (\"bg-pst\") which is a common phishing tactic to create a similar-looking domain.\n\t* The domain is hosted on a free/serverless platform, which is often used by phishing campaigns due to its low cost and ease of setup.\n\t* The domain contains a well-known brand name (\"Speedy\") which is a target of the phishing campaign, increasing the likelihood of deception.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:13:43.140985",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-poq.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.172290",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a hyphen (-) and a country-code top-level domain (ccTLD) variation (.bg) to mimic a legitimate Bulgarian domain.\n\t* The presence of \"bg-poq\" suggests a potential typo-squatting or domain squatting attempt.\n\t* The use of a free/serverless platform for hosting raises suspicions about the domain's legitimacy.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:13:52.085461",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pstl.cfd",
@@ -261,25 +317,53 @@
     "domain": "bgpost.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.188820",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a similar name to a legitimate Bulgarian courier service (BulgariaPost), which is a common phishing tactic.\n\t* The domain is hosted on a free/serverless platform, which is often used by attackers due to its anonymity and low cost.\n\t* The domain has a very recent registration (not explicitly stated, but implied by the \".cfd\" TLD, which is a relatively new and untrusted domain extension).\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:14:11.053991",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt.id6643788.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.190614",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level**: HIGH\n2. **Confidence**: 90%\n3. **Key Indicators**:\n\t* Randomized subdomain (id6643788) typical of phishing campaigns.\n\t* Use of a free/serverless platform, often exploited by attackers for phishing.\n\t* Targeting of specific Bulgarian courier services (Econt, Speedy, BulgariaPost) suggests a tailored phishing attempt.\n4. **Decision**: BLOCK",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:14:25.018783",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.hskdfh3.tk",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.191430",
-    "source": "urlscan.io-.tk"
+    "source": "urlscan.io-.tk",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a free/serverless platform, which is often used by phishing campaigns.\n\t* The domain name \"speedy\" is a clear reference to the targeted Bulgarian courier service, Speedy, which is a common phishing tactic.\n\t* The top-level domain \".tk\" is a known haven for phishing and malicious activities.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:14:35.659294",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.gyufi.tk",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.192036",
-    "source": "urlscan.io-.tk"
+    "source": "urlscan.io-.tk",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a free/serverless platform, which is often used by phishing campaigns.\n\t* The domain name \"speedy\" is likely intended to impersonate the Bulgarian courier service \"Speedy\", which is a common phishing tactic.\n\t* The top-level domain \".tk\" is a known haven for phishing and spam activities.\n4. **Decision: BLOCK**",
+      "model": "meta-llama/llama-3.3-70b-instruct:free",
+      "timestamp": "2026-01-30T04:14:43.467165",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-cash-home-offers.pages.dev",
