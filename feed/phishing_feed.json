@@ -664,5 +664,11 @@
     "score": 100,
     "detected_at": "2026-01-30T09:37:09.317331",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-01-30T19:31:14.310041",
+    "source": "urlscan.io"
   }
 ]
