@@ -850,5 +850,11 @@
     "score": 100,
     "detected_at": "2026-01-31T16:27:09.300782",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-couponscom.pages.dev",
+    "score": 100,
+    "detected_at": "2026-01-31T21:20:29.311262",
+    "source": "urlscan.io"
   }
 ]
