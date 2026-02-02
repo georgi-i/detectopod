@@ -868,5 +868,17 @@
     "score": 100,
     "detected_at": "2026-02-02T07:49:02.096625",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "kyr-speedy-net-worth.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-02T12:56:59.817171",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-bookings.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-02T12:56:59.819014",
+    "source": "urlscan.io"
   }
 ]
