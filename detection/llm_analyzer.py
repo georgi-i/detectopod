@@ -13,7 +13,7 @@ import requests
 from datetime import datetime, timedelta
 
 class OpenRouterAnalyzer:
-    def __init__(self, api_key, model="meta-llama/llama-3.3-70b-instruct:free"):
+    def __init__(self, api_key, model="openrouter/free"):
         self.api_key = api_key
         self.model = model
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
