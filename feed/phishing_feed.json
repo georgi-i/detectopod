@@ -886,5 +886,11 @@
     "score": 100,
     "detected_at": "2026-02-02T17:37:22.050629",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy.edusa.online",
+    "score": 100,
+    "detected_at": "2026-02-03T04:45:40.396118",
+    "source": "urlscan.io"
   }
 ]
