@@ -1197,5 +1197,11 @@
     "score": 100,
     "detected_at": "2026-02-04T04:11:36.716233",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-loan.site",
+    "score": 100,
+    "detected_at": "2026-02-04T15:41:42.216056",
+    "source": "urlscan.io"
   }
 ]
