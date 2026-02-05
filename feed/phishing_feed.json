@@ -978,7 +978,14 @@
     "domain": "speedy-earns14.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.225164",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain structure with \"speedy-earns14\" suggesting financial gain\n   - Free hosting on pages.dev (common for phishing)\n   - Targets multiple Bulgarian courier services simultaneously\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:13.988848",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns53.pages.dev",
@@ -990,7 +997,14 @@
     "domain": "speedy-earns35.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.226976",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain pattern with \"speedy-earns35\" suggesting financial gain\n   - Free hosting on pages.dev (common phishing tactic)\n   - Targeting Bulgarian courier services with generic subdomain\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:24.338387",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns.pages.dev",
@@ -1046,7 +1060,14 @@
     "domain": "speedy-earns43.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.233262",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain pattern: \"speedy-earns43\" suggests financial gain\n   - Free hosting on pages.dev (common for phishing)\n   - Targets Bulgarian courier services (Econt, Speedy, BulgariaPost)\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:39.389451",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-nanie.web.app",
@@ -1064,13 +1085,27 @@
     "domain": "client.speedy-panels.ml",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.247731",
-    "source": "urlscan.io-.ml"
+    "source": "urlscan.io-.ml",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious subdomain structure (client.speedy-panels.ml)\n   - Free hosting (.ml domain) commonly used for phishing\n   - Targets multiple Bulgarian courier services simultaneously\n4. Decision: BLOCK\n\nThis domain exhibits classic phishing characteristics: free hosting, generic subdomain pattern, and multi-target approach targeting Bulgarian logistics companies.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:46.159463",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "dhl-payment-tracking-en.ml",
     "score": 81,
     "detected_at": "2026-01-29T18:11:25.250354",
-    "source": "urlscan.io-.ml"
+    "source": "urlscan.io-.ml",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain structure mimicking DHL tracking\n   - Free hosting (.ml) often used for phishing campaigns\n   - Targets Bulgarian users with local courier services\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:17:49.772374",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "login-dhl-ondemand-delivery-678w9434764526.ml",
@@ -1082,7 +1117,14 @@
     "domain": "login-dhl-ondemand-delivery-48379862824.ml",
     "score": 87,
     "detected_at": "2026-01-29T18:11:25.253229",
-    "source": "urlscan.io-.ml"
+    "source": "urlscan.io-.ml",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain structure with random numbers\n   - Free hosting (.ml TLD)\n   - Impersonating DHL delivery service\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:17:43.040535",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "dhl-confirmation-account.ga",
@@ -1112,7 +1154,14 @@
     "domain": "ultra-speedy.icu",
     "score": 100,
     "detected_at": "2026-01-29T18:59:28.400072",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious TLD (.icu) often used in phishing\n   - Free hosting suggests disposable infrastructure\n   - Name mimics legitimate courier services (Speedy)\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:50.932984",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.site",
@@ -1124,7 +1173,14 @@
     "domain": "speedy-math-calculator.pages.dev",
     "score": 100,
     "detected_at": "2026-01-30T19:31:14.310041",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain mimicking legitimate courier services (Speedy)\n   - Free hosting platform (pages.dev) commonly used for phishing\n   - Generic calculator theme unrelated to courier services\n4. Decision: BLOCK\n\nThe domain exhibits classic phishing patterns: impersonation of a known brand, use of free hosting, and a generic theme designed to appear legitimate while hosting malicious content targeting Bulgarian users.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:16:59.099905",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-shop.vercel.app",
@@ -1136,7 +1192,14 @@
     "domain": "speedy-dmm.pages.dev",
     "score": 100,
     "detected_at": "2026-01-31T16:27:09.300782",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious subdomain structure mimicking legitimate courier services\n   - Free hosting platform (pages.dev) commonly used for phishing\n   - Generic domain lacking company-specific branding\n4. Decision: BLOCK\n\nThis domain exhibits classic phishing characteristics targeting Bulgarian courier services, using a free hosting platform to create a deceptive appearance.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:17:06.600188",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-couponscom.pages.dev",
@@ -1202,7 +1265,14 @@
     "domain": "speedy-loan.site",
     "score": 100,
     "detected_at": "2026-02-04T15:41:42.216056",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain (.site TLD) mimicking legitimate courier services\n   - Free/serverless hosting (common in phishing campaigns)\n   - Rule-based score of 100/100 (automated detection triggered)\n4. Decision: BLOCK\n\nThis domain exhibits classic phishing characteristics targeting Bulgarian courier services through domain impersonation and suspicious hosting infrastructure.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:17:28.872207",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "backoffice.speedy.csro.xyz",
@@ -1214,7 +1284,14 @@
     "domain": "speedy.bg-pk.cfd",
     "score": 100,
     "detected_at": "2026-02-05T14:08:54.982393",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain structure mimicking legitimate courier services\n   - Free serverless hosting (common in phishing campaigns)\n   - Generic TLD (.cfd) not associated with official courier services\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-05T18:17:34.096103",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-wow.pages.dev",
