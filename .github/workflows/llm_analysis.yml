@@ -2,8 +2,9 @@ name: Daily LLM Analysis
 
 on:
   schedule:
-    # Run once daily at 2 AM UTC (after day's detections)
-    - cron: '0 2 * * *'
+    # Run twice daily: 2 AM and 2 PM UTC
+    - cron: '0 2 * * *'   # 2 AM UTC
+    - cron: '0 14 * * *'  # 2 PM UTC
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
