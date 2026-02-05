@@ -52,11 +52,20 @@ jobs:
       run: |
         git config --global user.name 'LLM Analyzer Bot'
         git config --global user.email 'llm-bot@detectopod'
-        git pull origin main --rebase
+        
+        # 1. Stage the changes
         git add feed/
+        
+        # 2. Commit locally
         TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
         git commit -m "Add LLM analysis - $TIMESTAMP [skip ci]"
-        git push
+        
+        # 3. Pull the very latest changes and put our commit on top
+        # Using --autostash helps if there are any lingering local changes
+        git pull origin main --rebase --autostash
+        
+        # 4. Finally push
+        git push origin main
 
     - name: Analysis Summary
       if: always()
