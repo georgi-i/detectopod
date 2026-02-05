@@ -52,6 +52,7 @@ jobs:
       run: |
         git config --global user.name 'LLM Analyzer Bot'
         git config --global user.email 'llm-bot@detectopod'
+        git pull origin main --rebase
         git add feed/
         TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
         git commit -m "Add LLM analysis - $TIMESTAMP [skip ci]"
