@@ -1480,5 +1480,11 @@
       "threat_level": "HIGH",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "rent-to-own-speedy-now.online",
+    "score": 100,
+    "detected_at": "2026-02-06T08:39:59.796396",
+    "source": "urlscan.io"
   }
 ]
