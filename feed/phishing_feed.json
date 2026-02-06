@@ -991,7 +991,14 @@
     "domain": "speedy-earns53.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.226043",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "**Analysis**\n\n**Threat Level:** HIGH\n\n**Confidence:** 95%\n\n**Key Indicators:**\n\n1. **Domain pattern:** `.pages.dev` is a suspicious TLD often used by phishing domains. It's not a standard TLD and may indicate a phishing attempt.\n2. **Keyword absence:** The lack of keywords related to Bulgarian courier services (e.g., \"Econt\", \"Speedy\", \"BulgariaPost\") is unusual, as phishing emails often contain specific details about the target company.\n3. **Free/serverless hosting:** The use of a free/serverless platform may indicate a phishing attempt, as legitimate companies usually have more secure and reliable hosting options.\n\n**Decision:** BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:19:54.668093",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns35.pages.dev",
@@ -1010,7 +1017,14 @@
     "domain": "speedy-earns.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.227820",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "\n\n1. **Threat Level**: HIGH  \n2. **Confidence**: 95%  \n3. **Key",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:20:26.264285",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-earns5.pages.dev",
@@ -1042,19 +1056,40 @@
     "domain": "speedy-earns33.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.230550",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n\n2. **Confidence:** 95%\n\n3. **Key Indicators:**\n   - **Random Numeric Suffix:** \"33\" in \"speedy-earns33\" suggests a randomly generated string, common in phishing domains.\n   - **Free Hosting Platform:** Use of \"pages.dev\" indicates a free, serverless platform, often exploited for phishing due to ease of setup and low cost.\n   - **Targeted Brand Impersonation:** \"Speedy\" in the domain name mimics a legitimate Bulgarian courier service, aiming to deceive users.\n\n4. **Decision:** BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:20:31.854272",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns39.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.231446",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain pattern: \"speedy-earns39\" combines legitimate brand name with \"earns\" suggesting financial scam\n   - Free hosting platform (pages.dev) commonly used for phishing campaigns\n   - Generic subdomain structure lacking company verification\n4. Decision: BLOCK\n\nThis domain exhibits classic phishing characteristics targeting Bulgarian courier services through brand impersonation and financial lure language.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:20:37.132248",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns37.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.232356",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH  \n2. **Confidence:** 95%  \n3. **Key Indic",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:20:44.099228",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-earns43.pages.dev",
@@ -1073,13 +1108,27 @@
     "domain": "speedy-nanie.web.app",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.235755",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:21:18.235274",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy.chomikujpremium.ml",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.239772",
-    "source": "urlscan.io-.ml"
+    "source": "urlscan.io-.ml",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:21:25.076321",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "client.speedy-panels.ml",
@@ -1111,7 +1160,14 @@
     "domain": "login-dhl-ondemand-delivery-678w9434764526.ml",
     "score": 99,
     "detected_at": "2026-01-29T18:11:25.252303",
-    "source": "urlscan.io-.ml"
+    "source": "urlscan.io-.ml",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:24:36.777140",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "login-dhl-ondemand-delivery-48379862824.ml",
@@ -1130,25 +1186,53 @@
     "domain": "dhl-confirmation-account.ga",
     "score": 83,
     "detected_at": "2026-01-29T18:11:25.259438",
-    "source": "urlscan.io-.ga"
+    "source": "urlscan.io-.ga",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:25:00.249485",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.dhl-confirmation-account.ga",
     "score": 83,
     "detected_at": "2026-01-29T18:11:25.260352",
-    "source": "urlscan.io-.ga"
+    "source": "urlscan.io-.ga",
+    "llm_analysis": {
+      "analysis": "\n\n1. **Threat Level**: HIGH  \n2. **Confidence**: 90%  \n3. **Key Indicators**:  \n   - **Suspicious TLD**: `.ga",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:25:19.159137",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "dhl-payment-tracking-en.ga",
     "score": 81,
     "detected_at": "2026-01-29T18:11:25.261329",
-    "source": "urlscan.io-.ga"
+    "source": "urlscan.io-.ga",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 95%  \n3. Key Indicators:  \n   - Use of .ga (Gabon) free TLD, common in phishing  \n   - Mimics DHL branding + \u201cpayment-tracking\u201d to exploit courier trust  \n   - Hosted on free/serverless platform \u2014 atypical for legitimate logistics services  \n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:25:25.214825",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "login-dhl-ondemand-delivery-48379862824.ga",
     "score": 87,
     "detected_at": "2026-01-29T18:11:25.264919",
-    "source": "urlscan.io-.ga"
+    "source": "urlscan.io-.ga",
+    "llm_analysis": {
+      "analysis": "**Analysis**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n\n* **Domain pattern:** `.ga` is a generic top-level domain (gTLD) often used by phishing domains.\n* **Keyword absence:** The domain lacks any relevant keywords related to DHL or logistics, which is unusual for a legitimate login page.\n* **Targeted country:** The domain is targeted at Bulgarian courier services, which is a specific and potentially vulnerable group.\n\n**4. Decision:** BLOCK\n\nThe combination of a suspicious domain pattern, lack of relevant keywords, and targeted country make this domain a high-risk phishing attempt. Blocking the domain is the recommended course of action to prevent potential phishing attacks.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:24:46.743412",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "ultra-speedy.icu",
@@ -1167,7 +1251,14 @@
     "domain": "speedy.site",
     "score": 100,
     "detected_at": "2026-01-30T09:37:09.317331",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:21:55.604398",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-math-calculator.pages.dev",
@@ -1186,7 +1277,14 @@
     "domain": "speedy-shop.vercel.app",
     "score": 100,
     "detected_at": "2026-01-31T04:04:49.923281",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Subdomain \"speedy-shop\" mimics legitimate courier Speedy\n   - Free hosting on Vercel (common for phishing)\n   - Targets Bulgarian services (localized phishing)\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:01.055864",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-dmm.pages.dev",
@@ -1205,61 +1303,131 @@
     "domain": "speedy-couponscom.pages.dev",
     "score": 100,
     "detected_at": "2026-01-31T21:20:29.311262",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 95%  \n3. Key Indicators:  \n   - Subdomain spoofing: \u201cspeedy-couponscom\u201d mimics legitimate brands (Speedy) + fake offer (\u201ccoupons\u201d)  \n   - Hosted on free serverless platform (pages.dev), common for phishing to evade detection  \n   - Targeted at Bulgarian courier services \u2014 high-value local phishing vector  \n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:06.364380",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-solve.pages.dev",
     "score": 100,
     "detected_at": "2026-02-01T21:22:20.089398",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH  \n2. **Confidence**: 85%",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:14.225593",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-transporta.pages.dev",
     "score": 100,
     "detected_at": "2026-02-02T07:49:02.096625",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**Threat Level:** HIGH  \n**Confidence:** 95%  \n**Key Indicators:**  \n1. **Typosquatting:**",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:19.763069",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "kyr-speedy-net-worth.pages.dev",
     "score": 100,
     "detected_at": "2026-02-02T12:56:59.817171",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:54.825155",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-bookings.pages.dev",
     "score": 100,
     "detected_at": "2026-02-02T12:56:59.819014",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "\n\n1. Threat Level: HIGH2. Confidence: 95%  \n3. Key Indicators:  \n   - Exact brand impersonation (\"Speedy\")  \n   - Free serverless hosting (common for phishing)  \n   - Rule-based score 100/100 (known malicious pattern)  \n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:22:59.456905",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pki.cfd",
     "score": 100,
     "detected_at": "2026-02-02T17:37:22.050629",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:23:23.554820",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "ww38.speedy.edusa.online",
     "score": 100,
     "detected_at": "2026-02-03T04:45:40.396118",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a numeric prefix (ww38) which is a common phishing tactic to create multiple similar domains.\n\t* The domain is hosted on a free/serverless platform, which is often used by attackers due to its anonymity and low cost.\n\t* The domain contains a legitimate company name (Speedy) but with a suspicious suffix (.edusa.online), indicating potential brandjacking.\n4. **Decision: BLOCK**",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:23:30.610376",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-test.pages.dev",
     "score": 100,
     "detected_at": "2026-02-03T08:35:11.166379",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Phishing Domain Analysis: speedy-test.pages.dev\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 90%\n\n**3. Key Indicators:**\n- Uses free/serverless platform (pages.dev) - common in phishing campaigns\n- Domain name mimics \"Speedy\" - matches targeted Bulgarian courier service\n- Suspicious subdomain pattern \"speedy-test\" - typical phishing naming convention\n\n**4. Decision:** BLOCK\n\nThe domain exhibits classic phishing patterns: free hosting platform, brand impersonation of targeted services, and suspicious subdomain naming. High confidence malicious.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:23:36.967608",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.customerjourney.live",
     "score": 100,
     "detected_at": "2026-02-04T04:11:36.714709",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain contains a brand name (\"Speedy\") which is a common phishing tactic to gain trust.\n\t* The use of a generic top-level domain (\".live\") and a subdomain (\"customerjourney\") which is unusual for a legitimate company website.\n\t* The hosting on a free/serverless platform, which is often used by phishing campaigns due to its low cost and anonymity.\n4. **Decision: BLOCK**",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:23:45.823492",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-qa.customerjourney.live",
     "score": 100,
     "detected_at": "2026-02-04T04:11:36.716233",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:23:54.400942",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-loan.site",
@@ -1278,7 +1446,14 @@
     "domain": "backoffice.speedy.csro.xyz",
     "score": 100,
     "detected_at": "2026-02-05T06:57:24.450851",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "\n\n1. **Threat Level**: HIGH  \n2. **",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:24:11.431388",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy.bg-pk.cfd",
@@ -1297,6 +1472,13 @@
     "domain": "speedy-wow.pages.dev",
     "score": 100,
     "detected_at": "2026-02-05T15:39:40.870440",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH  \n2. **Confidence**: 95%  \n3. **Key Indicators**:  \n   - Free/serverless hosting (Pages.dev) often used for transient phishing.  \n   - Mimics",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-06T04:24:28.888952",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   }
 ]
