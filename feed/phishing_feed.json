@@ -1498,6 +1498,13 @@
     "domain": "speedy-cdv.pages.dev",
     "score": 100,
     "detected_at": "2026-02-06T16:42:32.098603",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH  \n2. **Confidence:** 90%  \n3",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-07T04:11:33.925838",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   }
 ]
