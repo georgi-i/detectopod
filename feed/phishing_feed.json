@@ -1537,6 +1537,13 @@
     "domain": "speedy-marketing.pages.dev",
     "score": 100,
     "detected_at": "2026-02-10T22:38:26.356699",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH  \n2. **Confidence**: 95%  \n3. **Key Indicators**:  \n   - Rule-based score of 100/100 (maxim",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-11T04:33:33.458875",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   }
 ]
