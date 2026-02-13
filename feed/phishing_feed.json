@@ -1571,5 +1571,11 @@
       "threat_level": "HIGH",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "speedy-air-hockey.online",
+    "score": 100,
+    "detected_at": "2026-02-13T07:07:25.729058",
+    "source": "urlscan.io"
   }
 ]
