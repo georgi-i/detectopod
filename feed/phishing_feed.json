@@ -1563,6 +1563,13 @@
     "domain": "speedy-servies.site",
     "score": 100,
     "detected_at": "2026-02-12T17:58:01.788116",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**Threat Level:** HIGH  \n**Confidence:** 100%  \n**Key Indicators:**  \n1. **Typo-squatting:** \"servies\" (miss",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-13T04:25:02.098618",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   }
 ]
