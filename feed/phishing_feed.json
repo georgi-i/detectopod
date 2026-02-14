@@ -1609,5 +1609,11 @@
     "score": 100,
     "detected_at": "2026-02-14T10:25:04.481737",
     "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-14T12:44:08.262243",
+    "source": "urlscan.io"
   }
 ]
