@@ -1597,5 +1597,17 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "speedy-car.busines.site",
+    "score": 100,
+    "detected_at": "2026-02-14T10:25:04.479000",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-14T10:25:04.481737",
+    "source": "urlscan.io"
   }
 ]
