@@ -1636,5 +1636,11 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "econt-bg.bg-an462831.cfd",
+    "score": 100,
+    "detected_at": "2026-02-14T20:24:39.538868",
+    "source": "urlscan.io"
   }
 ]
