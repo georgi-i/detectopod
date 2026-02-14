@@ -1602,18 +1602,39 @@
     "domain": "speedy-car.busines.site",
     "score": 100,
     "detected_at": "2026-02-14T10:25:04.479000",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-14T14:33:47.330629",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-medical-services.pages.dev",
     "score": 100,
     "detected_at": "2026-02-14T10:25:04.481737",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-14T14:33:56.692238",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-assignment.pages.dev",
     "score": 100,
     "detected_at": "2026-02-14T12:44:08.262243",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-14T14:34:02.938607",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   }
 ]
