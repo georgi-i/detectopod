@@ -1199,72 +1199,156 @@
     "domain": "speedy-math-calculator.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.354955",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 100%  \n3. Key Indicators: Mimics legitimate math calculator, targets Bulgarian courier services.  \n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:18.895472",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-assignment.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.362729",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 100%  \n3. Key Indicators: Misspelled domain, suspicious subdomain, mismatched TLD  \n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:22.390705",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-car.busines.site",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.365418",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 100%  \n3. Key Indicators: Suspicious domain structure, generic \"busines.site\" suffix, generic TLD.  \n4. Decision: BLOCK.",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:27.670917",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-medical-services.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.367439",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious domain pattern: \"speedy-medical-services.pages.dev\" mimics legitimate courier \"Speedy\" but adds unrelated \"medical-services\"\n   - Free hosting platform (pages.dev) commonly used for phishing campaigns\n   - Targets Bulgarian courier services (Econt, Speedy, BulgariaPost) - high-value targets for credential theft\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:32.982814",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "ww38.speedy-tower-battles.visioniq.cfd",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.376880",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:40.656388",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.380767",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:52.155700",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-glass.cfd",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.398355",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Suspicious TLD (.cfd - typically used for phishing)\n   - Free hosting platform (common for disposable phishing sites)\n   - Targets multiple Bulgarian courier services simultaneously\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:34:58.583652",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-marketing.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.413052",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:35:05.101344",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-test-project.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.417093",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH  \n",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:35:25.354612",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-removals.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.419259",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Subdomain structure mimicking legitimate courier services\n   - Free hosting platform (pages.dev) commonly used for phishing\n   - Targets multiple Bulgarian courier brands simultaneously\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:35:36.474834",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-cash-home-offers.pages.dev",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.421586",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 90%\n3. Key Indicators:\n   - Impersonation of legitimate Bulgarian courier Speedy\n",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:36:40.212786",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy-nanie.web.app",
     "score": 100,
     "detected_at": "2026-02-15T14:26:38.426512",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "",
+      "model": "openrouter/free",
+      "timestamp": "2026-02-15T14:36:48.984256",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   }
 ]
