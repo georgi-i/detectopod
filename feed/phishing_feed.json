@@ -1053,19 +1053,6 @@
     }
   },
   {
-    "domain": "ww38.speedy.edusa.online",
-    "score": 100,
-    "detected_at": "2026-02-03T04:45:40.396118",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a numeric prefix (ww38) which is a common phishing tactic to create multiple similar domains.\n\t* The domain is hosted on a free/serverless platform, which is often used by attackers due to its anonymity and low cost.\n\t* The domain contains a legitimate company name (Speedy) but with a suspicious suffix (.edusa.online), indicating potential brandjacking.\n4. **Decision: BLOCK**",
-      "model": "openrouter/free",
-      "timestamp": "2026-02-06T04:23:30.610376",
-      "threat_level": "HIGH",
-      "decision": "BLOCK"
-    }
-  },
-  {
     "domain": "speedy.bg-pk.cfd",
     "score": 100,
     "detected_at": "2026-02-05T14:08:54.982393",
@@ -1142,77 +1129,5 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.336474",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.345200",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-car.busines.site",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.347993",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.350087",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.360536",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.365038",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.387576",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-marketing.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.401967",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.405708",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.407709",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.409871",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-nanie.web.app",
-    "score": 100,
-    "detected_at": "2026-02-15T15:24:02.414427",
-    "source": "urlscan.io-.web.app"
   }
 ]
