@@ -13,19 +13,6 @@
     }
   },
   {
-    "domain": "speedy-transek-aio.pages.dev",
-    "score": 100,
-    "detected_at": "2026-01-29T18:11:25.150020",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "Here is the analysis:\n\n1. **Threat Level: HIGH**\n2. **Confidence: 90%**\n3. **Key Indicators:**\n\t* The domain uses a hyphenated prefix (\"speedy-transek-\") that resembles a legitimate brand (Speedy), a common phishing tactic.\n\t* The domain is hosted on a free/serverless platform (pages.dev), which is often used by attackers due to its ease of use and anonymity.\n\t* The domain has a generic suffix (\"-aio\"), which may indicate an attempt to appear legitimate while avoiding detection.\n4. **Decision: BLOCK**",
-      "model": "meta-llama/llama-3.3-70b-instruct:free",
-      "timestamp": "2026-01-30T04:12:44.523364",
-      "threat_level": "HIGH",
-      "decision": "BLOCK"
-    }
-  },
-  {
     "domain": "speedy-earns9.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.154348",
@@ -676,19 +663,6 @@
     }
   },
   {
-    "domain": "speedy-transek.pages.dev",
-    "score": 100,
-    "detected_at": "2026-01-29T18:11:25.213248",
-    "source": "urlscan.io-.pages.dev",
-    "llm_analysis": {
-      "analysis": "Alright, let's break this down. The domain in question is speedy-transek.pages.dev. First, I notice that the domain is hosted on a free/serverless platform, pages.dev, which is often used by attackers because it's cost-effective and easy to set up. Free hosting services are common in phishing campaigns since they allow attackers to quickly deploy malicious sites without much investment.\n\nNext, the domain name itself is a combination of \"speedy\" and \"transek.\" Speedy is a well-known Bulgarian courier service, so the inclusion of that name is a red flag. It's trying to mimic a legitimate service. \"Transek\" doesn't seem to relate to any known service, which makes it suspicious—it might be a misspelling or a random addition to make the domain look less obvious.\n\nThe rule-based score is 100/100, which suggests that automated systems have flagged this as highly suspicious. Even though there are no specific keywords listed, the domain's structure and the target (Bulgarian courier services) are strong indicators. Phishing domains often target financial or logistics services because they can harvest sensitive user data like login credentials or payment information.\n\nGiven that the target is Bulgarian courier services like Econt, Speedy, and BulgariaPost, the domain is likely attempting to impersonate one of these companies. The lack of HTTPS or other security features might also be a factor, but since it's on a free platform, it might",
-      "model": "openrouter/free",
-      "timestamp": "2026-02-04T04:18:48.148353",
-      "threat_level": "LOW",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
     "domain": "speedy-bna.pages.dev",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.214052",
@@ -724,19 +698,6 @@
       "model": "openrouter/free",
       "timestamp": "2026-02-04T04:19:31.865764",
       "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
-    "domain": "speedy-transs.pages.dev",
-    "score": 100,
-    "detected_at": "2026-01-29T18:11:25.217552",
-    "source": "urlscan.io-.pages.dev",
-    "llm_analysis": {
-      "analysis": "\n\n1. Threat Level: HIGH  \n2. Confidence: 95%  \n3. Key Indicators:  \n   - **100/100 rule-based score** (flags multiple phishing patterns)  \n   - **Free serverless hosting** (common for transient phishing sites)  \n",
-      "model": "openrouter/free",
-      "timestamp": "2026-02-04T04:19:37.228253",
-      "threat_level": "HIGH",
       "decision": "UNKNOWN"
     }
   },
@@ -1076,19 +1037,6 @@
       "timestamp": "2026-02-06T04:22:06.364380",
       "threat_level": "HIGH",
       "decision": "BLOCK"
-    }
-  },
-  {
-    "domain": "speedy-transporta.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-02T07:49:02.096625",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "**Threat Level:** HIGH  \n**Confidence:** 95%  \n**Key Indicators:**  \n1. **Typosquatting:**",
-      "model": "openrouter/free",
-      "timestamp": "2026-02-06T04:22:19.763069",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
     }
   },
   {
