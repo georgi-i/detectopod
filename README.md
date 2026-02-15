@@ -56,6 +56,7 @@ Detection Rate: 5.3%
                            ┌──────────────────┐
                            │ LLM Analyzer     │
                            │ (Llama 3.3 70B)  │
+                           | (Claude S. 4.5)  |
                            └──────────────────┘
                                     │
                                     ▼
