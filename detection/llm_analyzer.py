@@ -13,12 +13,12 @@ import requests
 from datetime import datetime, timedelta
 
 class OpenRouterAnalyzer:
-    def __init__(self, api_key, model="openrouter/free"):
+    def __init__(self, api_key, model="anthropic/claude-sonnet-4-5"):
         self.api_key = api_key
         self.model = model
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.requests_made = 0
-        self.max_requests = 50  # Free tier daily limit
+        self.max_requests = 1000  # BYOK — no artificial daily cap
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
         """Analyze a domain using LLM"""
@@ -26,7 +26,7 @@ class OpenRouterAnalyzer:
             print(f"⚠️  Daily limit reached ({self.max_requests} requests)")
             return None
 
-        prompt = f"""Analyze this potential phishing domain:
+        prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian courier services (Econt, Speedy, BulgariaPost).
 
 Domain: {domain}
 Rule-based Score: {score}/100
@@ -34,13 +34,24 @@ Keywords: {', '.join(keywords_found) if keywords_found else 'None'}
 Hosting: Free/serverless platform
 Target: Bulgarian courier services (Econt, Speedy, BulgariaPost)
 
+IMPORTANT - False Positive Check:
+Before assuming phishing, consider whether the domain name clearly indicates a legitimate non-courier business or personal use. Examples that should be marked FALSE_POSITIVE:
+- Clearly unrelated businesses: medical, legal, tech support, bookkeeping, real estate, loans, marketing, removals, glass, car services
+- Personal or entertainment pages: birthdays, pets, gaming (e.g. "tower-battles", "wow"), celebrity net worth pages
+- Educational or productivity tools: calculators, assignment helpers, exam prep PDFs
+- Developer/test pages: domains containing "test", "test-project", "qa", "backoffice", or generic placeholders
+- Router/IoT hostnames (e.g. keenetic.link subdomains)
+- CRM or analytics platforms (e.g. customerjourney.live)
+- Booking, coupon, or e-commerce platforms clearly unrelated to courier impersonation
+The word "speedy" is a common English adjective - its presence alone does not confirm courier phishing.
+
 Provide structured analysis:
 1. Threat Level: HIGH/MEDIUM/LOW
 2. Confidence: 0-100%
-3. Key Indicators: List 2-3 specific red flags
+3. Key Indicators: List 2-3 specific reasons for your decision
 4. Decision: BLOCK/INVESTIGATE/FALSE_POSITIVE
 
-Be concise. Focus on domain patterns typical of phishing."""
+Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearly belongs to an unrelated legitimate category."""
 
         try:
             response = requests.post(
@@ -163,7 +174,7 @@ def main():
         return
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
-    print(f"   Model: Llama 3.3 70B")
+    print(f"   Model: Claude Sonnet 4.5 (via OpenRouter BYOK)")
     print(f"   Limit: {args.max_analyze} domains\n")
 
     # Initialize analyzer
@@ -208,11 +219,46 @@ def main():
             stats['errors'] += 1
             print(f"   ❌ Analysis failed")
 
-    # Save updated feed
-    with open(args.feed_file, 'w') as f:
-        json.dump(feed, f, indent=2)
+    # Separate false positives from the clean feed
+    false_positive_domains = [
+        entry for entry in feed
+        if entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
+        or entry.get('flagged_false_positive')
+    ]
+    clean_feed = [
+        entry for entry in feed
+        if not (
+            entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
+            or entry.get('flagged_false_positive')
+        )
+    ]
 
-    # Save stats
+    # Save cleaned feed (false positives removed)
+    with open(args.feed_file, 'w') as f:
+        json.dump(clean_feed, f, indent=2)
+
+    # Save false positives to a separate audit file for review
+    fp_file = os.path.join(os.path.dirname(args.feed_file), 'false_positives.json')
+    existing_fps = []
+    if os.path.exists(fp_file):
+        with open(fp_file, 'r') as f:
+            try:
+                existing_fps = json.load(f)
+            except json.JSONDecodeError:
+                existing_fps = []
+    existing_fp_domains = {e['domain'] for e in existing_fps}
+    new_fps = [e for e in false_positive_domains if e['domain'] not in existing_fp_domains]
+    existing_fps.extend(new_fps)
+    with open(fp_file, 'w') as f:
+        json.dump(existing_fps, f, indent=2)
+
+    if false_positive_domains:
+        print(f"\n🗑️  Removed {len(false_positive_domains)} false positive(s) from feed:")
+        for fp in false_positive_domains:
+            print(f"   - {fp['domain']}")
+        print(f"   Saved to: {fp_file}")
+
+    stats['false_positives'] = len(false_positive_domains)
     stats['timestamp'] = datetime.utcnow().isoformat()
     stats_file = os.path.join(os.path.dirname(args.feed_file), 'llm_analysis_stats.json')
     with open(stats_file, 'w') as f:
@@ -222,11 +268,12 @@ def main():
     print(f"\n{'='*60}")
     print(f"✓ Analysis Complete")
     print(f"{'='*60}")
-    print(f"  Domains analyzed: {stats['analyzed_count']}")
-    print(f"  High confidence threats: {stats['high_confidence']}")
-    print(f"  Medium threats: {stats['medium_confidence']}")
-    print(f"  False positives identified: {stats['false_positives']}")
-    print(f"  Errors: {stats['errors']}")
+    print(f"  Domains analyzed:          {stats['analyzed_count']}")
+    print(f"  High confidence threats:   {stats['high_confidence']}")
+    print(f"  Medium threats:            {stats['medium_confidence']}")
+    print(f"  False positives removed:   {stats['false_positives']}")
+    print(f"  Errors:                    {stats['errors']}")
+    print(f"  Clean feed size:           {len(clean_feed)}")
     print(f"{'='*60}\n")
 
 
