@@ -122,9 +122,11 @@ Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearl
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
-    parser.add_argument('--max-analyze', type=int, default=50, help='Maximum domains to analyze')
+    parser.add_argument('--max-analyze', type=int, default=1000, help='Maximum domains to analyze')
     parser.add_argument('--min-score', type=int, default=75, help='Minimum score to analyze')
     parser.add_argument('--feed-file', default='feed/phishing_feed.json', help='Feed file path')
+    parser.add_argument('--reanalyze', action='store_true',
+                        help='Strip existing llm_analysis and re-evaluate all entries (backfill mode)')
     args = parser.parse_args()
 
     # Get API key from environment
@@ -140,6 +142,14 @@ def main():
 
     with open(args.feed_file, 'r') as f:
         feed = json.load(f)
+
+    # In reanalyze mode, strip existing analysis so all entries are re-evaluated
+    if args.reanalyze:
+        stripped = sum(1 for e in feed if 'llm_analysis' in e)
+        for entry in feed:
+            entry.pop('llm_analysis', None)
+            entry.pop('flagged_false_positive', None)
+        print(f"🔄 Reanalyze mode: stripped existing analysis from {stripped} entries")
 
     # Filter domains to analyze
     cutoff_date = datetime.now() - timedelta(days=args.days)
