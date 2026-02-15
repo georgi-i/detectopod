@@ -73,7 +73,7 @@ jobs:
       if: always()
       run: |
         echo "### LLM Analysis Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- **Model**: Llama 3.3 70B" >> $GITHUB_STEP_SUMMARY
+        echo "- **Model**: Claude Sonnet 4.5 (via OpenRouter BYOK)" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
