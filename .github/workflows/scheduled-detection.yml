@@ -2,11 +2,11 @@ name: Scheduled Detection
 
 on:
   schedule:
-  # Run once every hour at the beginning of the hour
-    - cron: '0 * * * *'
+    - cron: '0 0 * * *'   # midnight UTC (2h before 2 AM analysis)
+    - cron: '0 12 * * *'  # noon UTC    (2h before 2 PM analysis)
   # Allow manual trigger for testing
   workflow_dispatch:
-
+  
 # Prevent multiple workflows from running at the same time
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
