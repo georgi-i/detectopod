@@ -36,7 +36,7 @@ jobs:
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       run: |
-        python detection/llm_analyzer.py --days 1 --max-analyze 50 --min-score 75
+        python detection/llm_analyzer.py --days 1 --max-analyze 1000 --min-score 75
 
     - name: Check for changes
       id: check_changes
