@@ -1129,5 +1129,77 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "speedy-transs.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.936193",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.944174",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.958451",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.961910",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.975664",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.986852",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.988682",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.990418",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.993313",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.996536",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.998649",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-nanie.web.app",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:27.003001",
+    "source": "urlscan.io-.web.app"
   }
 ]
