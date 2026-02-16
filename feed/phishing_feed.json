@@ -1129,41 +1129,5 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.136972",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.145969",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.158503",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.161901",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.176197",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-nanie.web.app",
-    "score": 100,
-    "detected_at": "2026-02-16T01:15:45.189717",
-    "source": "urlscan.io-.web.app"
   }
 ]
