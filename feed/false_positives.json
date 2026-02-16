@@ -1,1 +1,142 @@
-[]
+[
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.944174",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-test-project.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain explicitly contains \"test-project\" indicating development/testing environment\n- Hosted on Cloudflare Pages (.pages.dev), commonly used for legitimate web development and staging\n- No additional phishing indicators (no urgency keywords, no typosquatting patterns beyond the test context)\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:**\nThis appears to be a legitimate developer testing project. The explicit \"test-project\" naming convention is standard practice for development environments and directly contradicts phishing intent (attackers avoid labeling their domains as tests). While \"speedy\" matches the Bulgarian courier keyword, the context clearly indicates a development/QA environment rather than an impersonation attempt.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:04.130057",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.958451",
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "## Analysis: ww38.speedy-tower-battles.visioniq.cfd\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- \"tower-battles\" clearly indicates a gaming/entertainment context, not courier services\n- The \"ww38\" subdomain prefix is typical of gaming or web application hosting\n- While \"speedy\" appears in the domain, it's used as a gaming modifier (fast-paced gameplay), not courier branding\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This domain is clearly related to a tower defense or battle game (\"tower-battles\"), where \"speedy\" describes gameplay mechanics rather than impersonating Speedy courier service. The gaming context is unambiguous and unrelated to Bulgarian courier phishing campaigns.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:13.004249",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.961910",
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "## Analysis: ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly references \"current-affairs-2023-english-pdf\" - indicating educational/exam preparation content, not courier services\n- \"Speedy\" used as adjective modifier for PDF access/download, not as courier brand impersonation\n- Subdomain pattern (ww38) + .cfd TLD typical of content distribution networks or file-sharing platforms, not phishing infrastructure\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This appears to be an educational resource platform offering current affairs PDF materials. While \"speedy\" is present and the domain uses free hosting (common phishing indicators), the context clearly indicates exam preparation/study materials rather than courier service impersonation. The Bulgarian courier \"Speedy\" is not being mimicked here - the word functions as a descriptor for fast PDF access.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:23.863617",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.975664",
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-glass.cfd\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Legitimate business category**: \"glass\" clearly indicates a glass-related business (windows, auto glass, glass repair/installation) - unrelated to courier services\n- **Common word usage**: \"speedy\" is a generic adjective commonly used in service industries (speedy glass repair, speedy service)\n- **Industry context**: \"Speedy Glass\" is a recognized legitimate business name in glass repair/replacement industry\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: Despite containing \"speedy\" (a Bulgarian courier brand), the domain clearly indicates a glass-related business. The combination \"speedy-glass\" is a common legitimate business naming pattern in the glass repair industry, not an attempt to impersonate Speedy courier service. The rule-based system triggered on the keyword alone without semantic context.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:35.179180",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.986852",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-math-calculator.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly indicates a **math calculator tool** - legitimate educational/productivity purpose\n- \"speedy\" used as common adjective meaning \"fast\" in context of calculator performance, not courier brand reference\n- No courier-related keywords or phishing indicators beyond coincidental word match\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This is an educational/productivity tool (math calculator) where \"speedy\" describes the calculator's performance characteristic. The rule-based system triggered on the word \"speedy\" alone, but the full domain context shows no courier service impersonation intent. This falls squarely into the \"Educational or productivity tools: calculators\" exception category.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:45.010298",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.988682",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-assignment.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 75%\n\n**3. Key Indicators:**\n- \"assignment\" strongly suggests educational/academic context (homework, coursework assistance)\n- Hosted on pages.dev (Cloudflare Pages) - common for legitimate student/educational projects\n- While \"speedy\" appears, the full context \"speedy-assignment\" reads as \"fast assignment help\" rather than courier impersonation\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This domain most likely represents an educational tool or assignment helper service. The combination of \"speedy\" (fast) + \"assignment\" (academic work) is a natural pairing for student services, not courier phishing. The rule-based system flagged \"speedy\" in isolation, but context matters - this doesn't mimic Speedy courier branding or typical phishing patterns (no tracking, delivery, parcel keywords).",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:44:56.830575",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.990418",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-medical-services.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly indicates medical services business, not courier/delivery services\n- \"Speedy\" used as adjective for fast medical services (common legitimate usage in healthcare)\n- No courier-specific terminology (tracking, delivery, parcel, shipment) present in domain\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This domain represents a medical services business emphasizing quick/fast service delivery. While \"speedy\" matches the Bulgarian courier brand name, the full context \"speedy-medical-services\" clearly indicates a healthcare provider, not an attempt to impersonate Speedy courier service. The rule-based system triggered on keyword matching alone without semantic context analysis.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:45:06.002273",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.993313",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-marketing.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **Marketing business context**: The domain explicitly includes \"marketing\" suggesting a legitimate marketing service/agency, not courier impersonation\n- **Free hosting platform**: While Cloudflare Pages is commonly used for phishing, it's also widely used for legitimate marketing landing pages and campaigns\n- **Generic term usage**: \"Speedy\" is a common English adjective frequently used in marketing contexts (speedy service, speedy results, etc.)\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: The domain name structure \"speedy-marketing\" clearly indicates a marketing-related business or service. There's no courier-specific terminology (tracking, delivery, parcel, shipment) or impersonation attempt. The combination suggests legitimate marketing services emphasizing speed/efficiency rather than an attempt to impersonate Speedy courier service. While the free hosting warrants minor caution, the domain purpose is transparently non-courier related.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:45:17.343915",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.996536",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-removals.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- \"Removals\" clearly indicates a moving/relocation service, not courier/parcel delivery\n- Business context is distinct: household/office removals vs. package delivery services\n- While \"speedy\" appears, the compound term \"speedy-removals\" represents a legitimate business category (fast moving services)\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:**\nThis domain represents a removal/moving company service, which is a legitimate business category unrelated to courier impersonation. \"Speedy removals\" is a common business naming pattern in the moving industry, emphasizing quick service delivery. No indicators suggest attempted impersonation of Speedy courier service specifically.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:45:30.785667",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-16T12:39:26.998649",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-cash-home-offers.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly indicates a **real estate/cash home buying service** (\"cash-home-offers\"), not courier/delivery services\n- \"Speedy\" used as generic adjective for fast service, common in real estate marketing (\"quick cash offers\")\n- No courier-specific terminology (tracking, delivery, parcel, shipment) present in domain\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This appears to be a legitimate real estate investor/home buying service using \"speedy\" to emphasize quick transactions. The rule-based system flagged it solely due to the word \"speedy,\" but the full context (\"cash-home-offers\") clearly indicates an unrelated business vertical. While hosted on a free platform (which warrants general caution), there's no evidence of courier service impersonation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:45:40.802368",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  }
+]

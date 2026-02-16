@@ -1134,72 +1134,26 @@
     "domain": "speedy-transs.pages.dev",
     "score": 100,
     "detected_at": "2026-02-16T12:39:26.936193",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.944174",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.958451",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.961910",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.975664",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.986852",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.988682",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.990418",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-marketing.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.993313",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.996536",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-16T12:39:26.998649",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct typosquatting of \"Speedy\" (major Bulgarian courier brand) with appended \"transs\" to appear transport-related\n- Hosted on free Pages.dev platform - common for disposable phishing infrastructure\n- No legitimate business would use \"speedy-transs\" format; appears designed to deceive Speedy courier customers\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear impersonation attempt. The domain specifically targets the Speedy brand name with a transport-related suffix (\"transs\") to create false legitimacy. Unlike generic uses of \"speedy,\" this construction directly mimics courier branding patterns. Combined with free hosting typically used for quick phishing campaigns, this represents a credible threat to Bulgarian users expecting courier communications.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:43:54.581053",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-nanie.web.app",
     "score": 100,
     "detected_at": "2026-02-16T12:39:27.003001",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-nanie.web.app\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Bulgarian courier service Speedy Express exactly, combined with \"nanie\" (Bulgarian for \"delivery/pickup\")\n- **Suspicious hosting**: Free Firebase platform (web.app) - common for disposable phishing sites, not legitimate courier operations\n- **Targeted localization**: Bulgarian language element (\"nanie\") specifically targets Bulgarian users expecting courier services\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear phishing attempt. The combination of \"speedy\" (exact courier brand) with \"nanie\" (Bulgarian courier terminology) on a free hosting platform is textbook courier impersonation targeting Bulgarian victims. Unlike generic uses of \"speedy,\" this domain specifically mimics courier service language patterns.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-16T15:45:50.211796",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
