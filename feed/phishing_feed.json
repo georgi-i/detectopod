@@ -1160,66 +1160,13 @@
     "domain": "speedy.uber.space",
     "score": 100,
     "detected_at": "2026-02-17T01:14:59.436388",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.449341",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.460383",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.464541",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.485702",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.499583",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.501703",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.503727",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-marketing.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.506869",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.510397",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T01:14:59.512673",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.uber.space\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - this is not generic usage of the word\n- **Free hosting platform**: uber.space is a free/low-cost hosting service commonly used for phishing campaigns\n- **Targeted context**: Domain flagged specifically in Bulgarian courier phishing detection context, where Speedy is a well-known brand\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" can be a common adjective, in the context of Bulgarian courier service targeting, this domain directly mimics the Speedy brand name. Combined with free hosting (uber.space) and no legitimate business indicators, this shows classic phishing patterns. No evidence of unrelated legitimate business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-17T01:15:25.112278",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
