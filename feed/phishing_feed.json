@@ -1173,72 +1173,26 @@
     "domain": "speedy-coupons-com-006765c8.pages.dev",
     "score": 100,
     "detected_at": "2026-02-17T12:39:04.277068",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-coupons-com-006765c8.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation structure**: Domain mimics URL format \"speedy-coupons-com\" suggesting impersonation of speedy.com (legitimate Bulgarian courier Speedy AD)\n- **Deceptive TLD manipulation**: Uses \".pages.dev\" subdomain to disguise actual domain structure, making it appear like \"speedy-coupons.com\"\n- **Coupon lure tactic**: \"coupons\" keyword combined with courier brand is classic phishing bait to harvest credentials or payment information\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word and \"coupons\" could indicate a legitimate deals platform, the specific construction \"speedy-coupons-com\" on a free hosting platform directly targets the Bulgarian courier service Speedy. The hyphenated structure mimicking a legitimate domain format, combined with free serverless hosting and the coupon lure, indicates credential/payment harvesting phishing rather than a legitimate coupon aggregator.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-17T12:39:31.457333",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-coupons-e0ecae84.pages.dev",
     "score": 100,
     "detected_at": "2026-02-17T12:39:04.279348",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.298721",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.303049",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.322593",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.335247",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.337542",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.339577",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.341518",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-marketing.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.344506",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.347719",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-17T12:39:04.349718",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-coupons-e0ecae84.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" combined with \"coupons\" mimics Speedy courier's promotional campaigns commonly used in phishing attacks targeting Bulgarian users\n- **Suspicious infrastructure**: Random hexadecimal subdomain (e0ecae84) on free Cloudflare Pages hosting - typical phishing deployment pattern to create disposable domains\n- **Social engineering vector**: \"coupons\" keyword designed to lure victims with fake delivery discounts/promotions, a known courier phishing tactic\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of \"speedy-coupons\" specifically targets courier service expectations in the Bulgarian context where Speedy is a major brand. The random hex identifier and free hosting eliminate legitimate business use cases. This matches established phishing patterns for courier scams.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-17T12:39:43.787211",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
