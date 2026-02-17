@@ -1168,5 +1168,77 @@
       "threat_level": "HIGH",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-coupons-com-006765c8.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.277068",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-coupons-e0ecae84.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.279348",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.298721",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.303049",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.322593",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.335247",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.337542",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.339577",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.341518",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.344506",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.347719",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-17T12:39:04.349718",
+    "source": "urlscan.io-.pages.dev"
   }
 ]
