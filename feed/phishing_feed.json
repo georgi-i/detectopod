@@ -1194,5 +1194,65 @@
       "threat_level": "HIGH",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.139265",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.154379",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.158388",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.176218",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.190797",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.192959",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.194971",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.196912",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.199727",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T01:16:22.203085",
+    "source": "urlscan.io-.pages.dev"
   }
 ]
