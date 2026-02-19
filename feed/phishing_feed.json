@@ -1199,90 +1199,26 @@
     "domain": "www.speedy-public.top",
     "score": 100,
     "detected_at": "2026-02-19T12:39:54.350820",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-youtube-grabber.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.352935",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: www.speedy-public.top\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service (a major Bulgarian logistics company), combined with \"public\" suggesting official access portal\n- **Suspicious TLD**: `.top` domain paired with free/serverless hosting - classic phishing infrastructure pattern\n- **Targeted context**: No legitimate business context evident; structure mimics courier service customer portal naming convention\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is highly likely credential phishing targeting Speedy courier customers. The domain specifically combines the Speedy brand name with \"public\" (suggesting a customer-facing portal) on a cheap TLD with free hosting - hallmarks of phishing infrastructure. Unlike generic uses of \"speedy\" (e.g., \"speedy-glass\" or \"speedy-loans\"), this domain structure directly mimics how courier services name their tracking/customer portals.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-19T12:40:22.712184",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "ww38.speedy.edusa.online",
     "score": 100,
     "detected_at": "2026-02-19T12:39:54.355382",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.359408",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "www.speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.361380",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.374214",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.386600",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.391028",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-glass.cfd",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.408887",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.423180",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.425313",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.427339",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.429296",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-marketing.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.432139",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-02-19T12:39:54.435470",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: ww38.speedy.edusa.online\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Subdomain typosquatting pattern**: \"ww38\" prefix mimics common typos for \"www\" - a classic phishing technique to catch mistyped URLs\n- **Brand impersonation**: \"speedy\" directly matches Speedy, a major Bulgarian courier service explicitly listed as a target\n- **Suspicious domain structure**: Legitimate Speedy would use speedy.bg, not a third-level subdomain under \"edusa.online\" on free hosting\n\n**4. Decision:** BLOCK\n\n---\n\n**Rationale:** This is not a false positive. The combination of www-typo subdomain, exact courier brand name, and free hosting infrastructure on an unrelated TLD creates a clear phishing pattern targeting users attempting to reach the legitimate Speedy courier service. No indicators suggest legitimate alternative business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-19T12:40:43.774958",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]

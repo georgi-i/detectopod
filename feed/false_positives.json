@@ -138,5 +138,47 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-youtube-grabber.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.352935",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-youtube-grabber.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly describes a YouTube content downloading tool (\"youtube-grabber\"), not courier services\n- \"Speedy\" used as descriptive adjective for download speed, not referencing Speedy courier brand\n- Functional context (media grabber/downloader) is entirely unrelated to package delivery or logistics\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This is a YouTube video/audio downloading utility where \"speedy\" describes performance characteristics. No courier service impersonation indicators present despite keyword match. The rule-based system flagged it solely on \"speedy\" keyword without contextual analysis.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-19T12:40:32.996976",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.359408",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-concrete.adtrakwl.185-124-160-15.cpanel.site\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **\"concrete\" keyword suggests construction/building materials business** - not courier-related\n- **Generic cPanel hosting subdomain structure** - common for small business websites, not typical phishing infrastructure\n- **\"speedy\" as adjective in construction context** - likely refers to fast concrete services/delivery, not Speedy courier brand impersonation\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale:** This appears to be a legitimate construction/concrete business website using \"speedy\" as a descriptive adjective (e.g., \"speedy concrete services\"). The domain structure suggests a small business hosted on shared cPanel infrastructure. While the rule flagged \"speedy,\" the full context \"speedy-concrete\" clearly indicates a construction-related business, not an attempt to impersonate Speedy courier service. No courier-specific terminology or deceptive patterns present.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-19T12:40:54.221127",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "www.speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.361380",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: www.speedy-concrete.adtrakwl.185-124-160-15.cpanel.site\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly references \"concrete\" - indicating a construction/building materials business, not courier services\n- \"speedy-concrete\" is a logical business name for fast concrete delivery/services (legitimate construction industry use)\n- While hosted on cPanel infrastructure (common for small businesses), the domain purpose is unambiguous and unrelated to courier impersonation\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This appears to be a legitimate construction/concrete business website. The word \"speedy\" in this context is an adjective describing fast concrete services, not an attempt to impersonate Speedy courier company. The rule-based system flagged it solely due to the \"speedy\" keyword, but the full domain name clearly indicates a different business vertical with no courier service impersonation intent.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-19T12:41:04.087854",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
