@@ -1194,5 +1194,95 @@
       "threat_level": "HIGH",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "www.speedy-public.top",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.350820",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-youtube-grabber.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.352935",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy.edusa.online",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.355382",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.359408",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.361380",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.374214",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.386600",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.391028",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.408887",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.423180",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.425313",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.427339",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.429296",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.432139",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-19T12:39:54.435470",
+    "source": "urlscan.io-.pages.dev"
   }
 ]
