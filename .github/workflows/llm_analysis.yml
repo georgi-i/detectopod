@@ -6,8 +6,6 @@ on:
     types:
       - completed
   schedule:
-    # Fallback: run twice daily in case detection found nothing new
-    - cron: '0 2 * * *'   # 2 AM UTC
     - cron: '0 14 * * *'  # 2 PM UTC
   workflow_dispatch:  # Allow manual trigger
 
