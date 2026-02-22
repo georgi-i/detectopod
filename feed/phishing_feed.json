@@ -1129,5 +1129,125 @@
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy.bg-i1.cfd",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.071201",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-smog.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.073424",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "blog.speedy.site",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.075874",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.site",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.082917",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.094872",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.099840",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-glass.cfd",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.123104",
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "speedy-web.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.136459",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-youtube-grabber.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.138985",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-removals.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.142798",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-coupons-com-006765c8.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.145234",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-coupons-e0ecae84.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.147441",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-transs.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.150560",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-test-project.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.152989",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-math-calculator.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.155299",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-assignment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.157586",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-medical-services.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.162306",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-marketing.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.165681",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-cash-home-offers.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.169747",
+    "source": "urlscan.io-.pages.dev"
+  },
+  {
+    "domain": "speedy-nanie.web.app",
+    "score": 100,
+    "detected_at": "2026-02-22T12:27:51.174075",
+    "source": "urlscan.io-.web.app"
   }
 ]
