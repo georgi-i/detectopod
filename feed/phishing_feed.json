@@ -1144,21 +1144,29 @@
     }
   },
   {
-    "domain": "speedy-tech-fix.click",
-    "score": 100,
-    "detected_at": "2026-02-23T12:39:55.808859",
-    "source": "urlscan.io"
-  },
-  {
     "domain": "analytics.speedy.site",
     "score": 100,
     "detected_at": "2026-02-23T12:39:55.813819",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: analytics.speedy.site\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy.site\" directly mimics Speedy, a major Bulgarian courier service, using a deceptive TLD (.site instead of legitimate .bg)\n- **Suspicious subdomain pattern**: \"analytics\" subdomain is a common phishing tactic to appear technical/legitimate while harvesting credentials\n- **Free hosting infrastructure**: Consistent with low-cost phishing operations targeting specific regional services\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of (1) exact brand name match with a Bulgarian courier target, (2) deceptive TLD mimicking corporate infrastructure, (3) analytics subdomain suggesting credential harvesting, and (4) free hosting creates a clear phishing profile. This is not a generic use of \"speedy\" but a targeted impersonation attempt.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-23T12:40:35.532455",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-test.pages.dev",
     "score": 100,
     "detected_at": "2026-02-23T12:39:55.815985",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-test.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **Test/Development Domain**: Contains \"test\" suffix indicating development or QA environment, not production phishing\n- **Cloudflare Pages Hosting**: While free hosting can be abused, the \"test\" designation suggests legitimate development work\n- **Ambiguous Intent**: \"speedy\" is generic English word; combined with \"test\" more likely references speed testing or development rather than courier impersonation\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: The explicit \"test\" designation strongly indicates a developer testing environment or proof-of-concept project. Phishing campaigns typically avoid obvious test labels in production domains. While the Speedy courier brand exists in Bulgaria, this appears to be a development/testing page rather than an active phishing attempt. Recommend monitoring but not blocking.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-23T12:40:45.600431",
+      "threat_level": "LOW",
+      "decision": "BLOCK"
+    }
   }
 ]
