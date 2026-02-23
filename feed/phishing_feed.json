@@ -1142,5 +1142,23 @@
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-tech-fix.click",
+    "score": 100,
+    "detected_at": "2026-02-23T12:39:55.808859",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "analytics.speedy.site",
+    "score": 100,
+    "detected_at": "2026-02-23T12:39:55.813819",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-test.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-23T12:39:55.815985",
+    "source": "urlscan.io"
   }
 ]
