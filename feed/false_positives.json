@@ -194,5 +194,19 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-test.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-24T12:40:39.829240",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-test.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 25%\n\n## 3. Key Indicators:\n- **Developer/Test Domain**: Contains \"test\" suffix, indicating development or testing environment\n- **Generic Hosting**: pages.dev is Cloudflare Pages - commonly used for legitimate test/staging sites\n- **Ambiguous Context**: \"speedy\" is a common English word; without content analysis, courier connection is speculative\n\n## 4. Decision: **FALSE_POSITIVE**\n\n**Rationale**: The domain follows standard developer naming conventions (project-test.platform.tld). While \"speedy\" matches the Bulgarian courier name, the \"-test\" suffix strongly suggests a legitimate development/QA environment rather than a phishing attempt. Attackers typically avoid obvious test indicators in malicious domains. Without evidence of courier-specific content or deceptive branding, this appears to be a legitimate test project that coincidentally contains a common English word.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-24T12:42:21.132512",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
