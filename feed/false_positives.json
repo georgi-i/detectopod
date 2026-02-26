@@ -208,5 +208,33 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-puppy-75.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-26T12:40:34.095715",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-puppy-75.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **\"speedy-puppy\" combination** suggests pet-related content (likely a personal/hobby page about a puppy), not courier impersonation\n- **Numbered suffix \"-75\"** indicates auto-generated or personal project naming pattern, inconsistent with targeted phishing campaigns\n- **No courier-specific keywords** beyond the generic adjective \"speedy\" (which has legitimate non-courier uses)\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale:** The domain name clearly suggests a personal page about a pet (puppy). While \"speedy\" is part of a Bulgarian courier brand name, the context \"speedy-puppy\" is a common English phrase describing a fast dog, not an attempt to impersonate Speedy courier services. Legitimate phishing attempts would use more direct brand mimicry (e.g., \"speedy-bg\", \"speedy-delivery\", \"speedy-express\").",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-26T12:41:20.678597",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "kyr-speedy-net-worth.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-26T12:40:34.102027",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: kyr-speedy-net-worth.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **\"net-worth\" context**: Domain clearly indicates a celebrity/personality net worth information page (likely about \"Kyr Speedy\", a known gaming YouTuber)\n- **Entertainment/informational purpose**: Pattern matches celebrity net worth databases, not courier service impersonation\n- **No courier service indicators**: Lacks typical phishing elements like tracking, delivery, package, or authentication prompts\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: This appears to be a fan page or information site about \"Kyr Speedy\" (a gaming content creator), focusing on net worth information. The \"speedy\" reference is part of the personality's username, not the Bulgarian courier company. The domain structure and \"net-worth\" keyword clearly indicate entertainment/informational content rather than courier service phishing.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-26T12:41:39.945881",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
