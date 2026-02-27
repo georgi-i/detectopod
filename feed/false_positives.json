@@ -236,5 +236,33 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-morman-birthday.pages.dev",
+    "score": 100,
+    "detected_at": "2026-02-27T12:35:53.918129",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-morman-birthday.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Birthday context**: The domain contains \"birthday\" suggesting personal/celebration content, not courier services\n- **Nonsensical combination**: \"speedy-morman-birthday\" appears to be a random or personal phrase without courier service context\n- **No courier impersonation pattern**: Lacks typical phishing elements like tracking numbers, delivery notifications, or payment requests that would indicate courier impersonation\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: While \"speedy\" matches the Bulgarian courier \"Speedy\" name, the full domain context (\"morman-birthday\") clearly indicates this is likely a personal birthday-related page. The combination is too random and contextually unrelated to courier services to represent a credible phishing attempt. This appears to be coincidental keyword matching rather than intentional impersonation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-27T12:36:20.858013",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "www.speedy-mind-allianh0fe.rollout.site",
+    "score": 100,
+    "detected_at": "2026-02-27T12:35:53.938242",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: www.speedy-mind-allianh0fe.rollout.site\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 25%\n\n**3. Key Indicators:**\n- \"speedy-mind\" suggests cognitive/mental performance context, not courier services\n- Random suffix \"allianh0fe\" indicates auto-generated subdomain on free platform (common for personal projects/tests)\n- No courier-specific terminology (tracking, delivery, parcel, express shipping)\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** While \"speedy\" appears in the domain, the full context \"speedy-mind\" clearly relates to mental/cognitive services (productivity, brain training, or similar) rather than courier impersonation. The domain structure is typical of a personal project or test deployment on a free hosting platform. No evidence of courier service targeting.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-02-27T12:37:11.957045",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
