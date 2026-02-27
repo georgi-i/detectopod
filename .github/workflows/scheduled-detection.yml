@@ -2,7 +2,7 @@ name: Scheduled Detection
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # noon UTC    (2h before 2 PM analysis)
+    - cron: '0 12 * * 1'  # Every Monday at noon UTC
   # Allow manual trigger for testing
   workflow_dispatch:
   
