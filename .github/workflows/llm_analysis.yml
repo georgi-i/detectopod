@@ -1,4 +1,4 @@
-name: Daily LLM Analysis
+name: Weekly LLM Analysis
 
 on:
   workflow_run:
@@ -6,7 +6,7 @@ on:
     types:
       - completed
   schedule:
-    - cron: '0 14 * * *'  # 2 PM UTC
+    - cron: '0 14 * * 1'  # Every Monday at 2 PM UTC (2h after detection)
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
