@@ -1147,24 +1147,26 @@
     "domain": "speedy-transporta.pages.dev",
     "score": 100,
     "detected_at": "2026-03-02T12:34:45.517377",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-puppy-75.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-02T12:34:45.527832",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct impersonation of \"Speedy\" (major Bulgarian courier) with transport-related term (\"transporta\" = Bulgarian for \"transport\")\n- Hosted on free Cloudflare Pages platform - common for disposable phishing sites\n- Bulgarian language element combined with targeted courier brand strongly suggests localized phishing campaign\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier impersonation attempt. The domain combines the exact brand name \"speedy\" with the Bulgarian word \"transporta,\" directly mimicking the legitimate Speedy courier service. Unlike generic uses of \"speedy,\" this specifically targets Bulgarian users with transport/delivery context. The free hosting amplifies suspicion for a throwaway phishing page.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-02T12:35:08.607020",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-info.site",
     "score": 100,
     "detected_at": "2026-03-02T12:34:45.530172",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy.startupbuilder.club",
-    "score": 100,
-    "detected_at": "2026-03-02T12:34:45.534305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-info.site\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct brand impersonation: \"speedy\" matches Bulgarian courier service Speedy exactly, combined with generic \"-info\" suffix commonly used in phishing\n- Hosted on free/serverless platform - typical phishing infrastructure to avoid costs and enable quick abandonment\n- Domain structure follows classic phishing pattern: [brand]-[generic-term].[suspicious-tld] designed to harvest credentials or payment info\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is not a false positive. While \"speedy\" is a common English word, the combination of:\n- Exact match to a major Bulgarian courier brand\n- Generic info-gathering suffix\n- Free hosting infrastructure\n- .site TLD (popular for phishing)\n- Rule-based system specifically flagging Bulgarian courier targeting\n\n...indicates deliberate brand impersonation rather than coincidental use of a common adjective. No legitimate business indicators present.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-02T12:35:29.803842",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]
