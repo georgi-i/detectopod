@@ -278,5 +278,19 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "calvin-speedy-wilburn-net-worth.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-09T12:37:28.618972",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: calvin-speedy-wilburn-net-worth.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Domain structure clearly indicates a celebrity net worth information page (Calvin \"Speedy\" Wilburn is a known personality)\n- \"net-worth\" suffix is characteristic of biographical/entertainment content, not courier services\n- No courier-specific terminology beyond the common adjective \"speedy\" used as a nickname\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This is a celebrity/entertainment information page about someone nicknamed \"Speedy,\" not an attempt to impersonate Speedy courier service. The full context (calvin-[nickname]-wilburn-net-worth) makes the legitimate purpose clear.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-09T12:38:37.261746",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
