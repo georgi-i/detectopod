@@ -1173,12 +1173,26 @@
     "domain": "speedy-fast-shop.xyz",
     "score": 100,
     "detected_at": "2026-03-16T12:46:01.198850",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-fast-shop.xyz\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly references Speedy, a major Bulgarian courier service, combined with delivery-suggestive terms (\"fast\")\n- **Suspicious TLD + hosting**: .xyz domain on free/serverless platform - common phishing infrastructure\n- **Deceptive naming pattern**: \"speedy-fast-shop\" mimics courier service branding while adding \"shop\" to appear as a legitimate delivery/shopping portal\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a false positive. The domain specifically combines \"speedy\" (Bulgarian courier brand) with \"fast\" (delivery context) and \"shop\" (e-commerce/delivery portal implication). This naming pattern is consistent with phishing campaigns that impersonate courier services to steal credentials or payment information. Unlike generic use of \"speedy\" as an adjective, this combination directly targets courier service users.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-16T12:46:27.201765",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns3.pages.dev",
     "score": 100,
     "detected_at": "2026-03-16T12:46:01.204359",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-earns3.pages.dev\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- **Brand + Financial incentive pattern**: \"speedy-earns\" combines the Speedy courier brand with \"earns,\" a common phishing lure suggesting monetary rewards/cashback schemes\n- **Free hosting on pages.dev**: Cloudflare Pages used for zero-cost deployment, typical of disposable phishing infrastructure\n- **Numbered variant (earns3)**: Sequential numbering suggests multiple campaign iterations, indicating organized phishing operation rather than legitimate business\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is not a false positive. While \"speedy\" can be a generic word, the combination with \"earns\" specifically targets users with financial incentives\u2014a classic phishing tactic for courier scams (fake delivery fees, reward claims, etc.). The numbered suffix and free hosting reinforce malicious intent rather than legitimate business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-16T12:46:37.364362",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]
