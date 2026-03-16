@@ -1168,5 +1168,17 @@
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-fast-shop.xyz",
+    "score": 100,
+    "detected_at": "2026-03-16T12:46:01.198850",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy-earns3.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-16T12:46:01.204359",
+    "source": "urlscan.io"
   }
 ]
