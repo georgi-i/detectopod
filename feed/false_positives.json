@@ -292,5 +292,75 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-bus-company-dashboard.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-23T12:42:09.702696",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-bus-company-dashboard.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **\"bus-company-dashboard\"** clearly indicates a bus transportation business, not a courier/parcel delivery service\n- **Legitimate business context**: Bus companies commonly use \"speedy\" as a brand descriptor (e.g., Speedy Bus, Express Bus)\n- **Dashboard terminology**: Suggests internal business tool for a bus company, not customer-facing courier phishing\n\n## 4. Decision: **FALSE_POSITIVE**\n\n**Rationale**: While \"speedy\" triggered the rule-based system due to the Bulgarian courier \"Speedy,\" the full domain context (\"bus-company-dashboard\") clearly indicates a bus transportation service dashboard, which is an entirely different business vertical from parcel courier services. This is not attempting to impersonate Econt, Speedy courier, or BulgariaPost.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-23T12:43:20.612002",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-tech-support.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-23T12:42:09.704695",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-tech-support.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Tech support context**: Domain explicitly identifies as \"tech-support\" service, not courier/delivery\n- **Generic term usage**: \"Speedy\" is a common English adjective for fast service, appropriate for tech support branding\n- **Category mismatch**: No courier-related keywords (tracking, delivery, parcel, express shipping) present\n\n## 4. Decision: **FALSE_POSITIVE**\n\n**Rationale**: This domain clearly indicates a technology support service business. While it uses \"speedy\" (which happens to match a Bulgarian courier name), the full context \"speedy-tech-support\" unambiguously signals IT/technical assistance services, not package delivery. The rule-based system likely triggered on the keyword alone without semantic analysis. No evidence of courier service impersonation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-23T12:43:30.453838",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-wow.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-23T12:42:09.709139",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-wow.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **\"wow\" suffix suggests gaming/entertainment context** - \"WoW\" commonly refers to World of Warcraft or general excitement/entertainment content, not courier services\n- **Free hosting on pages.dev** - While used by phishers, also heavily used for legitimate personal projects and gaming content\n- **Weak courier connection** - \"speedy\" alone is a generic adjective; no clear courier-specific terminology (tracking, delivery, parcel, etc.)\n\n## 4. Decision: **FALSE_POSITIVE**\n\n**Rationale:** The combination of \"speedy\" + \"wow\" strongly suggests gaming or entertainment content rather than courier impersonation. The \"wow\" element is a clear indicator of non-courier purpose. While the domain uses free hosting and contains \"speedy,\" the overall context points to legitimate personal/gaming use rather than a targeted phishing attempt against Bulgarian courier services.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-23T12:43:51.822827",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-potato-salad-with-olives-green-onions.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-23T12:42:09.711472",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-potato-salad-with-olives-green-onions.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain name describes a food recipe (potato salad with specific ingredients), not courier services\n- Absurdly long, descriptive culinary name inconsistent with phishing patterns that typically mimic brand names closely\n- \"Speedy\" used in food context (quick recipe) rather than courier brand impersonation\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This appears to be a personal recipe page or food blog hosted on Cloudflare Pages. While \"speedy\" triggered the rule-based system, the full context clearly indicates a cooking/recipe website. Phishing domains targeting Speedy courier would use patterns like \"speedy-bg.pages.dev\" or \"speedy-delivery-track.pages.dev\", not elaborate food descriptions.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-23T12:44:01.083339",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-deployment.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-23T12:42:09.713684",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-deployment.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **Developer/deployment context**: \"deployment\" is a technical term commonly used in software development and CI/CD pipelines, not courier services\n- **Generic tech terminology**: The combination \"speedy-deployment\" refers to fast software deployment, a standard DevOps concept\n- **Cloudflare Pages hosting**: While free, `.pages.dev` is primarily used for legitimate web development projects and static site hosting\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: This appears to be a developer/test environment. \"Speedy deployment\" is standard software engineering terminology referring to rapid code deployment, not the Speedy courier service. The domain lacks courier-specific indicators (tracking, delivery, parcel, etc.) and follows typical naming patterns for development projects on Cloudflare Pages.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-23T12:44:10.376341",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
