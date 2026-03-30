@@ -1173,228 +1173,260 @@
     "domain": "my-speedy-website.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.154154",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.175391",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.180329",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "speedy-cash-home-offers.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.213922",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: my-speedy-website.pages.dev\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **85%**\n\n## 3. Key Indicators:\n- **Direct brand reference**: \"speedy\" directly matches Speedy courier service, a major Bulgarian logistics company explicitly listed as a target\n- **Generic placeholder naming**: \"my-speedy-website\" follows classic phishing patterns with possessive prefix and generic suffix, suggesting impersonation rather than legitimate business use\n- **Free hosting platform**: Cloudflare Pages (pages.dev) commonly abused for phishing campaigns due to zero cost and rapid deployment\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: While \"speedy\" is a common English word, the combination of (1) exact match to a targeted Bulgarian courier brand, (2) suspicious generic naming structure typical of phishing sites, and (3) free hosting infrastructure creates a strong phishing profile. No clear indicators of legitimate alternative business purpose are present. The domain structure suggests impersonation intent rather than coincidental word usage.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:54:36.228429",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-solve.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.216557",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-bookkeeper-hub.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.219254",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-solve.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - combined with courier-focused detection context makes this highly suspicious\n- **Action-oriented subdomain**: \"solve\" creates urgency pattern typical of phishing (e.g., \"solve delivery issue\")\n- **Free hosting abuse**: pages.dev platform commonly exploited for phishing campaigns with quick deployment/teardown\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of (1) explicit targeting context of Bulgarian courier services, (2) action-verb pairing suggesting problem resolution, and (3) free hosting platform creates a strong phishing profile. This does not fit legitimate alternative use cases (not tech support, gaming, personal pages, etc.). The domain structure mirrors typical courier phishing patterns designed to trick Bulgarian users into \"solving\" fake delivery problems.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:55:14.072784",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.222482",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-tech-support.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.224566",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" exactly matches Speedy, one of Bulgaria's largest courier services explicitly listed as a target\n- **Suspicious hosting**: Uses free Cloudflare Pages platform (pages.dev) - common for phishing campaigns, not legitimate courier operations\n- **No legitimate alternative context**: Unlike generic uses of \"speedy,\" this domain provides no clear indication of unrelated business purpose\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of exact brand match with a major Bulgarian courier service + free hosting platform + lack of disambiguating context creates a textbook phishing setup. Legitimate Speedy courier would use their official domain (speedy.bg), not a free hosting subdomain.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:55:34.250003",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-bus.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.226959",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-bus.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - this is not generic usage of the word\n- **Suspicious context**: Combined with \"-bus\" (likely mimicking \"business\" or delivery tracking terminology) on free hosting platform\n- **Free hosting abuse**: pages.dev commonly used for phishing campaigns due to zero cost and easy deployment\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, in the context of Bulgarian courier targeting, combined with a suspicious suffix and free hosting, this strongly indicates Speedy brand impersonation for phishing purposes. The domain structure follows typical phishing patterns (brand-keyword.free-host) rather than legitimate business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:55:52.123356",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-queue.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.230039",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-bus-company-dashboard.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.232273",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-queue.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company\n- **Courier-specific terminology**: \"queue\" is commonly used in delivery/package tracking contexts (e.g., \"your package is in queue\")\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) frequently exploited for phishing campaigns with disposable infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: The combination of \"speedy\" + \"queue\" strongly suggests courier service impersonation rather than generic use of the word \"speedy.\" The term \"queue\" has specific relevance to package tracking/delivery status, making this a targeted phishing attempt against Speedy courier customers. No legitimate alternative business purpose is evident from the domain name.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:56:02.596150",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transporta.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.234539",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-wow.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.236759",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-potato-salad-with-olives-green-onions.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.239089",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-deployment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.241307",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-assignment.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.243596",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct impersonation of \"Speedy\" (major Bulgarian courier) with transport-related term (\"transporta\" - Bulgarian for \"transport\")\n- Hosted on free Cloudflare Pages platform - common for disposable phishing sites\n- Domain structure follows classic courier phishing pattern: [brand]-[logistics-term].[free-host]\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier brand impersonation attempt. \"Speedy-transporta\" specifically targets the Bulgarian courier service Speedy by combining the exact brand name with a Bulgarian transport keyword. This is not generic use of the word \"speedy\" - it's deliberate brand abuse in the courier/logistics context on a free hosting platform.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:56:21.968986",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-gift-management.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.245999",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-morman-birthday.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.248353",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-gift-management.pages.dev\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Brand impersonation pattern**: \"speedy\" directly references Speedy, a major Bulgarian courier service, combined with \"gift-management\" - a common phishing lure suggesting package/delivery management\n- **Social engineering construct**: The \"gift-management\" component is a classic phishing tactic to entice users into believing they have a pending delivery or gift requiring action\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) is frequently exploited for phishing campaigns due to zero cost and rapid deployment\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is not a false positive. The domain specifically combines a Bulgarian courier brand name with a delivery-themed management interface, hosted on free infrastructure. Unlike generic uses of \"speedy\" (fast service, quick delivery for unrelated businesses), this directly mimics courier service functionality with no legitimate business context evident. The construction follows established phishing patterns targeting courier customers.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:57:11.653281",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-earns3.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.250773",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "kyr-speedy-net-worth.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.253336",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-removals.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.256067",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-puppy-75.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.258448",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "calvin-speedy-wilburn-net-worth.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.261090",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-earns3.pages.dev\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- **Brand + Financial lure combination**: \"speedy-earns\" combines the Speedy courier brand with \"earns\" - a common phishing tactic promising money/rewards to lure victims\n- **Free hosting platform abuse**: Uses pages.dev (Cloudflare Pages), frequently exploited for disposable phishing sites targeting Bulgarian users\n- **Numbered variant pattern**: The \"3\" suffix suggests multiple campaign iterations, typical of phishing operations testing different landing pages\n\n**4. Decision:** BLOCK\n\n**Rationale:** While \"speedy\" is a common word, the specific construction \"speedy-earns\" with a numerical suffix on free hosting strongly indicates a phishing campaign impersonating Speedy courier service with a fake earnings/rewards scheme. This does not match any legitimate business category from the false positive list - it's specifically crafted to exploit the courier brand with financial incentives.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:57:33.646747",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "telkom-speedy.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.263447",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-math-calculator.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.266089",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-medical-services.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.268818",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-youtube-grabber.pages.dev",
-    "score": 100,
-    "detected_at": "2026-03-30T12:54:07.271700",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: telkom-speedy.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation combo**: \"telkom\" (Indonesian telecom) + \"speedy\" (Bulgarian courier) creates confusion typical of phishing attempts to appear semi-legitimate\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for disposable phishing sites\n- **No legitimate business case**: No credible reason for Telkom Indonesia to reference Bulgarian courier \"Speedy\" on a free subdomain\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination with \"telkom\" (a known telecom brand) on free infrastructure targeting Bulgarian courier services indicates deliberate brand confusion tactics. This is not a legitimate Telkom service, developer test, or unrelated business\u2014it's a suspicious domain likely designed to exploit brand recognition for phishing.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:58:23.074512",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-bid.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.274026",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-bid.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company\n- **Suspicious context**: Combined with \"bid\" (common in fake delivery/payment scams) on free hosting platform\n- **Targeting pattern**: Aligns with Bulgarian courier phishing campaigns; pages.dev frequently abused for phishing\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of:\n- Exact match to targeted Bulgarian courier brand\n- \"bid\" suffix (typical phishing pattern for fake auctions/payments)\n- Free Cloudflare Pages hosting\n- Rule-based system flagging at maximum score\n\nThis strongly suggests courier service impersonation rather than legitimate unrelated use. The domain lacks clear indicators of alternative legitimate purpose (no business context like \"speedy-glass\" or \"speedy-loans\").",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:58:59.076805",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-c5t.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.276851",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-c5t.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" matches Bulgarian courier service \"Speedy\" exactly, combined with suspicious alphanumeric suffix \"c5t\" typical of phishing campaigns\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for disposable phishing sites targeting delivery services\n- **No legitimate alternative context**: Unlike generic uses of \"speedy,\" the domain structure (brand name + random characters) follows courier phishing patterns rather than legitimate business/personal use\n\n## 4. Decision: BLOCK\n\n**Rationale**: This domain specifically mimics the Speedy courier brand with a randomized suffix on free infrastructure\u2014a hallmark of phishing operations. No indicators suggest legitimate unrelated business use. The pattern matches known courier scam tactics targeting Bulgarian users.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:09.087255",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-8pp.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.279758",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-8pp.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - this is not generic usage of the English word\n- **Suspicious suffix pattern**: \"-8pp\" appears to be an obfuscation technique to create a variant domain mimicking the legitimate brand\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for phishing campaigns due to zero cost and quick deployment\n\n## 4. Decision: BLOCK\n\n**Rationale**: This domain specifically targets \"Speedy\" brand recognition in a Bulgarian courier phishing context. The random alphanumeric suffix (\"-8pp\") combined with the exact brand name on free infrastructure is a classic phishing pattern, not a coincidental use of the common English word \"speedy\" for unrelated purposes.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:19.455662",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-1sn.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.282371",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-1sn.pages.dev\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **85%**\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company, combined with suspicious alphanumeric suffix \"-1sn\" (common obfuscation pattern)\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) is frequently exploited for phishing campaigns due to zero cost and easy deployment\n- **No legitimate business context**: Unlike generic uses of \"speedy,\" this domain structure (brand + random suffix + free host) follows classic courier phishing patterns with no alternative explanation\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This domain specifically mimics the Speedy brand name with a typosquatting/obfuscation suffix on free infrastructure. No indicators suggest legitimate unrelated business use. The pattern is consistent with courier service phishing campaigns targeting Bulgarian users for credential theft or payment fraud.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:30.202552",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-test.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.286795",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-test.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 75%\n\n## 3. Key Indicators:\n- **Developer/Test Domain**: Contains \"test\" suffix, indicating development or testing environment\n- **Generic Hosting**: pages.dev is Cloudflare Pages - commonly used for legitimate test deployments\n- **Ambiguous Intent**: While \"speedy\" matches courier name, combined with \"-test\" suggests non-malicious testing/development use\n\n## 4. Decision: **FALSE_POSITIVE**\n\n**Rationale**: The \"-test\" suffix is a strong indicator this is a developer testing environment rather than an active phishing attempt. Legitimate developers often create test domains that may coincidentally contain brand-like terms. Without additional evidence of malicious content (fake login forms, credential harvesting), this appears to be a development/QA domain that triggered keyword matching on \"speedy\" alone.\n\n**Recommendation**: Monitor but do not block. If active phishing content is discovered, escalate to BLOCK.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:39.847715",
+      "threat_level": "LOW",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-smog.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.289975",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-smog.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - this is not generic use of the word\n- **Suspicious modifier**: \"smog\" appended to brand name is a common phishing tactic to create urgency/concern while maintaining brand recognition\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for phishing campaigns with quick deployment/teardown\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy\" (e.g., speedy-glass, speedy-loans), this domain specifically targets the Bulgarian courier context with no legitimate business purpose evident. The \"smog\" suffix appears designed to create alarm (environmental/delivery issues) while leveraging the Speedy brand name. No indicators of legitimate unrelated business.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:49.474865",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-web.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.292843",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-web.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly references Speedy, a major Bulgarian courier service, combined with \"-web\" (common phishing pattern to mimic official web portals)\n- **Free hosting abuse**: Uses Cloudflare Pages (pages.dev), a free platform commonly exploited for phishing campaigns\n- **Targeted geography**: Specifically flagged in context of Bulgarian courier phishing campaigns, where Speedy is a primary target\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy\" (e.g., \"speedy-glass\" or \"speedy-loans\"), the combination \"speedy-web\" strongly suggests an attempt to mimic Speedy courier's official web portal. The legitimate Speedy courier service uses speedy.bg, not free hosting platforms. No indicators of legitimate alternative business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:59:58.928191",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-coupons-com-006765c8.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.296919",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-coupons-com-006765c8.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation structure**: Domain combines \"speedy\" (major Bulgarian courier) with \"coupons\" in a subdomain format mimicking a legitimate URL (speedy-coupons-com)\n- **Deceptive TLD manipulation**: Uses \".pages.dev\" to disguise what appears to be \"speedy-coupons.com\", a classic phishing technique\n- **Free hosting + random hash**: Cloudflare Pages with random identifier (006765c8) indicates temporary/disposable infrastructure typical of phishing campaigns\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"coupons\" could indicate a legitimate discount platform, the specific construction \"speedy-coupons-com\" followed by a hash on free hosting is characteristic of courier service phishing. The domain structure deliberately mimics a legitimate URL format to deceive users into believing they're visiting an official Speedy courier promotion page. This pattern is commonly used in smishing/phishing campaigns targeting parcel delivery customers.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T13:00:09.097541",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-coupons-e0ecae84.pages.dev",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.299311",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-coupons-e0ecae84.pages.dev\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- **Brand + incentive combination**: \"speedy-coupons\" directly combines the Speedy courier brand name with a financial lure (coupons/discounts), a classic phishing pattern\n- **Free hosting platform**: Uses Cloudflare Pages (pages.dev) with random hash suffix (e0ecae84), typical of disposable phishing infrastructure\n- **Targeted context**: Specifically flagged in Bulgarian courier context where Speedy is a major legitimate service, making impersonation highly plausible\n\n**4. Decision:** BLOCK\n\n**Rationale:** While \"speedy\" is a common word, the specific combination \"speedy-coupons\" in the Bulgarian courier context strongly suggests impersonation of Speedy courier service offering fake promotional coupons. The random hash suffix and free hosting reinforce malicious intent rather than legitimate coupon platform use. This does not fit the false positive categories (not a generic coupon platform, not clearly unrelated business).",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T13:00:19.026859",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt-bg-8975d-50akel.web.app",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.301808",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: econt-bg-8975d-50akel.web.app\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"econt-bg\" explicitly mimics Econt Express, a major Bulgarian courier service, with \"bg\" (Bulgaria country code) reinforcing the targeting\n- **Suspicious structure**: Random alphanumeric string \"8975d-50akel\" is characteristic of phishing campaigns creating disposable domains\n- **Free hosting abuse**: Firebase web.app platform commonly exploited for phishing due to free SSL certificates and Google's trusted infrastructure\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This domain has no legitimate business purpose. The combination of exact brand name (\"econt\"), country targeting (\"bg\"), random identifier, and free hosting platform is a textbook phishing setup targeting Bulgarian courier service customers for credential theft or payment fraud.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T13:00:28.140644",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-nanie.web.app",
     "score": 100,
     "detected_at": "2026-03-30T12:54:07.306161",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-nanie.web.app\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company, combined with \"nanie\" (Bulgarian: \"\u043d\u0430\u043d\u0438e\" = collection/pickup)\n- **Targeted Bulgarian terminology**: \"nanie\" is specifically used in Bulgarian courier context for package collection, indicating deliberate targeting of Bulgarian Speedy customers\n- **Free hosting abuse**: web.app (Firebase) commonly used for disposable phishing infrastructure\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is not a generic use of the English word \"speedy.\" The combination of \"speedy\" + Bulgarian courier-specific term \"nanie\" creates a domain clearly designed to impersonate Speedy's package collection service. The linguistic targeting and free hosting platform align with typical courier phishing campaigns in Bulgaria.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T13:00:37.843114",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]

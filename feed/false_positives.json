@@ -362,5 +362,19 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-bookkeeper-hub.pages.dev",
+    "score": 100,
+    "detected_at": "2026-03-30T12:54:07.219254",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-bookkeeper-hub.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Bookkeeping business context**: The domain clearly indicates a bookkeeping/accounting service (\"bookkeeper-hub\"), which is an unrelated legitimate business category\n- **Generic \"speedy\" usage**: \"Speedy\" here functions as a common adjective describing fast bookkeeping services, not courier brand impersonation\n- **No courier-specific elements**: Lacks typical phishing indicators like \"delivery\", \"parcel\", \"tracking\", \"express\", or payment urgency language\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: This appears to be a legitimate bookkeeping/accounting service platform using \"speedy\" as a descriptive adjective for their service speed. The domain structure suggests a professional hub for bookkeepers rather than an attempt to impersonate Speedy courier service. While hosted on a free platform (Pages.dev), the clear business context overrides this concern.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-03-30T12:55:24.215419",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
