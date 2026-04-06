@@ -376,5 +376,33 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-mind-allianh0fe.rollout.site",
+    "score": 100,
+    "detected_at": "2026-04-06T12:46:07.873588",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-mind-allianh0fe.rollout.site\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 25%\n\n**3. Key Indicators:**\n- \"speedy-mind\" suggests cognitive/mental performance context, not courier services\n- \"allianh0fe\" appears to be a random/personal identifier, not courier-related terminology\n- Hosted on rollout.site (serverless platform) - common for personal projects, A/B testing, or legitimate small deployments\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** The domain combines \"speedy\" with \"mind,\" which strongly indicates a mental performance, productivity, or educational context rather than courier impersonation. The word \"speedy\" as a common English adjective does not constitute phishing evidence when paired with unrelated terms. The random suffix \"allianh0fe\" further suggests a personal or test deployment rather than a targeted phishing campaign mimicking Speedy courier service.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-06T12:47:10.310502",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-claxton-net-worth.pages.dev",
+    "score": 100,
+    "detected_at": "2026-04-06T12:46:07.935384",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-claxton-net-worth.pages.dev\n\n## 1. Threat Level: LOW\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Celebrity net worth content**: \"claxton-net-worth\" clearly indicates a page about someone's (likely athlete/celebrity named Claxton) financial information\n- **Entertainment/informational purpose**: This is a typical celebrity gossip/information page format, not courier-related\n- **Generic adjective usage**: \"speedy\" here is used as a common English adjective (likely describing Claxton's playing style or nickname), not referencing the Bulgarian courier service\n\n## 4. Decision: FALSE_POSITIVE\n\n**Rationale**: This domain is clearly a celebrity net worth information page about someone named Claxton (possibly NBA player Nic Claxton). The presence of \"speedy\" is coincidental and unrelated to courier impersonation. No courier service indicators present.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-06T12:48:09.509375",
+      "threat_level": "LOW",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
