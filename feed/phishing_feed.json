@@ -1027,19 +1027,6 @@
     }
   },
   {
-    "domain": "speedy-couponscom.pages.dev",
-    "score": 100,
-    "detected_at": "2026-01-31T21:20:29.311262",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Subdomain spoofing: mimics Speedy + fake coupon offer\n   - Free serverless platform (pages.dev)\n   - Targeted at Bulgarian courier services\n4. Decision: BLOCK",
-      "model": "openrouter/free",
-      "timestamp": "2026-02-06T04:22:06.364380",
-      "threat_level": "HIGH",
-      "decision": "BLOCK"
-    }
-  },
-  {
     "domain": "speedy.bg-pki.cfd",
     "score": 100,
     "detected_at": "2026-02-02T17:37:22.050629",
