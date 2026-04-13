@@ -404,5 +404,19 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-video.pages.dev",
+    "score": 100,
+    "detected_at": "2026-04-13T13:01:09.502212",
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-video.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 25%\n\n**3. Key Indicators:**\n- Domain combines \"speedy\" with \"video\" - suggests video streaming/sharing service, not courier impersonation\n- The \"-video\" suffix clearly indicates media/entertainment purpose, inconsistent with courier phishing patterns\n- While hosted on free platform (pages.dev), the naming convention doesn't mimic courier service branding (would expect \"speedy-bg\", \"speedy-delivery\", \"speedy-track\", etc.)\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** This appears to be a video-related service/project. Courier phishing typically uses terms like \"delivery\", \"track\", \"package\", \"courier\" combined with brand names. The word \"speedy\" as a generic adjective combined with \"video\" strongly suggests legitimate video content/streaming rather than an attempt to impersonate Speedy courier service.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-13T13:01:39.741471",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
