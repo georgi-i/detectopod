@@ -1181,5 +1181,11 @@
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-srvc.com",
+    "score": 100,
+    "detected_at": "2026-04-19T05:37:45.524305",
+    "source": "urlscan.io"
   }
 ]
