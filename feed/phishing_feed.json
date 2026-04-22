@@ -1194,5 +1194,227 @@
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy-bgr.com",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-a.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-b.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-bc.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-be.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-bg.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-bu.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-bz.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-g.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-gi.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-gl.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-ia.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-ic.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-ie.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-in.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-iq.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-it.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-iz.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-k.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-l.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-l.icu",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-l.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-lao.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-na.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-o.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-pa.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-pg.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-pn.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-pz.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-rr.cfd",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-track.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-x.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-z.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bg-z.uno",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bu-bd.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedy.bu-be.qpon",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "speedyp.com",
+    "score": 100,
+    "detected_at": "2026-04-22T07:37:45.524305",
+    "source": "urlscan.io"
   }
 ]
