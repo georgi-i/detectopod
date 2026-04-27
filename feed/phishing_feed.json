@@ -1199,396 +1199,715 @@
     "domain": "speedy-bgr.com",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-bgr.com\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" + \"bgr\" (Bulgaria country code) specifically targets Speedy courier service operating in Bulgaria\n- **Suspicious TLD combination**: Uses \".com\" with country code in subdomain (\"bgr\") - legitimate Speedy Bulgaria uses speedy.bg\n- **Free/serverless hosting**: Inconsistent with legitimate courier infrastructure requirements\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear courier brand impersonation attempt. The combination of \"speedy\" (major Bulgarian courier brand) with \"bgr\" (Bulgaria abbreviation) and the deviation from the legitimate domain (speedy.bg) indicates targeted phishing. Unlike generic uses of \"speedy,\" this domain specifically mimics the Bulgarian courier service's naming convention.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:17:47.170510",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-a.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-a.cfd\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria website) using subdomain structure to deceive users\n- **Suspicious TLD chain**: Uses \".bg-a.cfd\" to create visual similarity to Bulgarian \".bg\" TLD while hosted on cheap/disposable \".cfd\" domain\n- **Free hosting + high-value target**: Combination of free platform and courier brand impersonation is classic phishing pattern for credential/payment theft\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is textbook typosquatting/subdomain phishing. The domain structure \"speedy.bg-[anything]\" is designed to exploit user trust in the legitimate Speedy Bulgaria brand. No legitimate business would structure a domain this way. The \".cfd\" TLD is commonly abused for phishing campaigns.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:17:58.049978",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-b.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-b.cfd\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) with deceptive suffix \"-b.cfd\"\n- **Suspicious TLD chain**: Uses \".cfd\" (commonly abused free TLD) combined with country code \"bg\" to appear legitimate\n- **Free hosting platform**: Consistent with phishing infrastructure - low cost, disposable setup\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear typosquatting/brand impersonation attempt. The domain structure \"speedy.bg-b.cfd\" is designed to deceive users into believing they're accessing the legitimate Speedy Bulgaria courier service (speedy.bg). The hyphen creates visual confusion, making \"bg-b\" appear as a subdomain or regional variant. No legitimate business reason exists for this domain pattern.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:18:07.808871",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-bc.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-bc.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Typosquatting structure**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) as subdomain prefix with suspicious TLD combination \"bg-bc.qpon\" - classic impersonation pattern\n- **Geographic targeting**: \"bg\" (Bulgaria country code) deliberately embedded to appear authentic to Bulgarian users expecting speedy.bg\n- **Hosting anomaly**: Free/serverless platform inconsistent with legitimate courier operations requiring robust infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately mimics \"speedy.bg\" (legitimate Speedy courier in Bulgaria) through subdomain manipulation. Unlike generic uses of \"speedy,\" this specifically targets the Bulgarian market with country code references and courier-specific structure. No indicators of legitimate alternative business purpose.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:18:21.001367",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-be.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-be.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain) as subdomain prefix, creating visual deception\n- **Geographic targeting**: \".bg-be\" mimics Bulgarian country code (.bg) while adding confusion with Belgium reference\n- **Suspicious TLD**: \".qpon\" (coupon-related) combined with courier branding suggests fake delivery/payment scam\n- **Free hosting**: Consistent with phishing infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear typosquatting/subdomain impersonation attack against Speedy Bulgaria (speedy.bg). The structure deliberately mimics the legitimate domain to deceive Bulgarian users expecting courier notifications. The \"qpon\" TLD suggests a fake coupon/payment collection scheme common in delivery phishing.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:18:31.555400",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-bg.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-bg.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier website in Bulgaria) with added \"bg-bg\" subdomain pattern\n- **Suspicious TLD combination**: Uses \".qpon\" TLD (coupon-related) combined with Bulgarian country code pattern to create false legitimacy\n- **Free hosting infrastructure**: Consistent with phishing operation setup to minimize costs and enable quick abandonment\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain structure \"speedy.bg-bg.qpon\" is designed to deceive Bulgarian users into believing they're accessing the legitimate Speedy courier service (speedy.bg). The \"bg-bg\" pattern mimics language/region subdomain conventions, while the .qpon TLD could be used for fake delivery fee \"coupons\" or payment scams. This is not a generic use of the word \"speedy\" but a targeted brand impersonation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:18:42.298984",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-bu.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-bu.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) with typosquatting pattern \"bg-bu\"\n- **Deceptive TLD structure**: Uses \".qpon\" TLD with \"bg-bu\" subdomain structure to create visual confusion with the authentic Bulgarian domain\n- **Free hosting + courier targeting**: Combination of serverless platform hosting with precise courier brand mimicry indicates malicious intent, not legitimate business\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear typosquatting attack against Speedy Bulgaria's official domain (speedy.bg). The \"bg-bu\" insertion is a deliberate obfuscation technique targeting Bulgarian users. Unlike generic uses of \"speedy,\" this domain structure specifically impersonates the courier brand's national domain format. No legitimate business would structure a domain this way unless attempting to deceive users into believing it's the official Speedy courier service.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:18:54.647321",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-bz.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-bz.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting pattern**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) followed by suspicious TLD extension \"-bz.qpon\" to mimic the real service\n- **Geographic targeting**: \".bg\" reference directly targets Bulgarian users expecting the legitimate speedy.bg courier service\n- **Free hosting**: Hosted on free/serverless platform consistent with phishing infrastructure - legitimate courier services use professional hosting\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately incorporates \"speedy.bg\" (the actual Bulgarian courier company domain) with an obfuscated extension to deceive users. Unlike generic uses of \"speedy,\" this specifically mimics the legitimate Bulgarian courier brand structure. No indicators of legitimate alternative business purpose.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:04.696479",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-g.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS REPORT**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Bulgarian courier Speedy AD) using typosquatting technique with added \"-g\" subdomain\n- **Suspicious TLD chain**: Uses \".bg-g.cfd\" structure where \".cfd\" is a high-risk TLD commonly abused for phishing, creating false association with Bulgarian \".bg\" ccTLD\n- **Free hosting on flagged infrastructure**: Hosted on free/serverless platform typical of disposable phishing campaigns\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier service impersonation attack. The domain structure \"speedy.bg-g.cfd\" is designed to deceive Bulgarian users into believing they're accessing the legitimate Speedy courier website (speedy.bg). The use of \".cfd\" TLD combined with brand-specific naming and free hosting infrastructure indicates malicious intent. No legitimate business context is evident.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:15.617037",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-gi.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-gi.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) using typosquatting technique with additional suffix \"-gi.qpon\"\n- **Geographic targeting**: \".bg\" substring specifically targets Bulgarian users expecting the legitimate Speedy Bulgaria service\n- **Suspicious TLD structure**: \".qpon\" combined with courier brand and country code is characteristic of phishing infrastructure, not legitimate business use\n\n## 4. Decision: **BLOCK**\n\n---\n\n**Rationale**: This is clear courier service impersonation. The domain structure \"speedy.bg-gi.qpon\" is designed to deceive users into believing they're accessing the legitimate Speedy Bulgaria website (speedy.bg). The \"qpon\" element suggests coupon/delivery notification phishing. No legitimate business context applies here - this is targeted brand abuse of a known Bulgarian courier service.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:26.476746",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-gl.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-gl.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) using subdomain structure \"speedy.bg-gl.qpon\"\n- **Typosquatting technique**: Uses \".bg-gl\" to create visual similarity to the authentic \".bg\" TLD while redirecting to suspicious \".qpon\" domain\n- **Free hosting + courier targeting**: Combination of serverless platform and precise courier brand mimicry is classic phishing infrastructure\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is not a generic use of the word \"speedy\" - it's a deliberate construction mimicking the exact format of Bulgaria's Speedy courier service domain (speedy.bg). The subdomain structure is designed to deceive users into believing they're on the legitimate courier site. No legitimate business reason exists for this domain pattern.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:36.810504",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-ia.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-ia.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly uses \"speedy.bg\" (legitimate Speedy courier domain is speedy.bg), with suspicious suffix \"-ia.qpon\" attempting to appear as subdomain structure\n- **Typosquatting pattern**: Uses legitimate TLD \".bg\" as part of subdomain to deceive users into believing it's the official Bulgarian Speedy courier site\n- **Suspicious TLD + hosting**: \".qpon\" (coupon-related TLD) combined with free/serverless hosting is inconsistent with legitimate courier operations and typical of phishing infrastructure\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain structure deliberately mimics \"speedy.bg\" (Bulgaria's major courier service) while redirecting to a different TLD. The \".qpon\" extension combined with free hosting strongly suggests a phishing campaign targeting Speedy customers, likely for credential theft or fake delivery scams. No legitimate business use case justifies this domain pattern.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:47.959556",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-ic.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-ic.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (exact match of legitimate Bulgarian courier Speedy's domain) as subdomain prefix\n- **Deceptive TLD structure**: \"bg-ic.qpon\" mimics Bulgarian country code (.bg) while using suspicious alternative TLD to deceive users\n- **Hosted on free/serverless platform**: Consistent with low-cost phishing infrastructure avoiding attribution\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately mimics \"speedy.bg\" (the legitimate Speedy courier website) through subdomain manipulation. The \"bg-ic\" component is designed to appear as a Bulgarian domain variant. Unlike generic uses of \"speedy,\" this specifically targets the Bulgarian courier brand with geographic indicators. No legitimate business reason exists for this domain structure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:19:58.092568",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-ie.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-ie.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (exact match of legitimate Bulgarian courier Speedy's domain) as subdomain prefix\n- **Deceptive TLD structure**: \"bg-ie.qpon\" mimics country code pattern (.bg for Bulgaria) while obscuring true domain ownership\n- **Hosting on free platform**: Consistent with phishing infrastructure - low cost, disposable setup\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately incorporates \"speedy.bg\" (the legitimate Speedy Bulgaria domain) in a typosquatting pattern. The \".bg-ie\" component falsely suggests Bulgarian/Irish geographic legitimacy. Unlike generic uses of \"speedy,\" this specifically targets the Speedy brand with Bulgarian context. No legitimate business reason exists for this domain structure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:20:09.374319",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-in.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-in.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (exact match of legitimate Bulgarian courier Speedy's domain) as subdomain prefix\n- **Deceptive TLD structure**: \"bg-in\" mimics Bulgarian country code (.bg) to appear official while using suspicious .qpon TLD\n- **Free hosting + courier targeting**: Combination of serverless platform with precise courier brand mimicry indicates phishing infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a generic use of the word \"speedy\" - it specifically replicates \"speedy.bg\" (the actual Speedy courier domain) with geographic indicators (\"bg-in\") designed to deceive Bulgarian users. The .qpon TLD (associated with coupon/promotional scams) combined with free hosting creates a classic phishing pattern targeting courier service customers for credential theft or payment fraud.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:20:20.068923",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-iq.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-iq.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting structure**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) as subdomain prefix on unrelated TLD (.qpon), classic impersonation technique\n- **Bulgarian courier targeting**: \"bg\" (Bulgaria country code) + \"speedy\" directly references Speedy courier service, one of the three named targets\n- **Suspicious TLD combination**: The .qpon TLD combined with \"bg-iq\" creates artificial legitimacy while hosting on free/serverless platform\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is not a generic use of \"speedy\" - the domain deliberately combines \"speedy.bg\" (the actual Speedy courier domain) with a deceptive structure. No legitimate business would create a subdomain mimicking a major courier's exact domain name on an unrelated TLD. The free hosting amplifies risk. This matches classic courier phishing patterns targeting Bulgarian users.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:20:31.053238",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-it.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-it.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy.bg\" mimics the legitimate Bulgarian courier Speedy's domain (speedy.bg), with \"bg\" (Bulgaria's country code) deliberately positioned to appear authentic\n- **Suspicious TLD chain**: \".bg-it.qpon\" structure designed to obscure the actual TLD and create false legitimacy through the \".bg\" component\n- **Free hosting + courier targeting**: Combination of serverless platform with specific courier brand impersonation is a classic phishing pattern\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is not a generic use of the word \"speedy\" - the domain explicitly constructs \"speedy.bg\" (matching the legitimate courier's exact domain) before the actual TLD. The \".bg-it\" pattern is a deliberate typosquatting/brand abuse technique. No legitimate business reason exists for this structure on a free platform.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:20:42.196015",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-iz.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-iz.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly uses \"speedy.bg\" (legitimate Speedy courier domain is speedy.bg), followed by suspicious suffix \"-iz.qpon\"\n- **Typosquatting pattern**: Uses subdomain structure to mimic official domain while adding deceptive elements (bg-iz.qpon)\n- **Suspicious TLD/structure**: \".qpon\" combined with \"bg-iz\" creates appearance of Bulgarian localization to deceive targets\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately mimics the legitimate Bulgarian Speedy courier service (speedy.bg) using a deceptive subdomain structure. The \"bg\" reference reinforces Bulgarian targeting, and \"qpon\" (coupon) suggests a delivery/package scam lure. No legitimate business reason exists for this domain structure. The free hosting platform further supports malicious intent.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:20:53.096867",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-k.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct impersonation of \"Speedy\" Bulgarian courier brand using \"speedy.bg-k.cfd\" (bg = Bulgaria TLD reference)\n- Suspicious domain structure combining legitimate brand with unrelated TLD (.cfd) via subdomain manipulation\n- Hosted on free/serverless platform typical of phishing infrastructure\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear brand impersonation attempt. The domain explicitly references \"speedy.bg\" (legitimate Speedy courier domain in Bulgaria) but redirects to an unrelated .cfd domain. The \"bg-k\" pattern is a common phishing technique to create visual similarity to the authentic \"speedy.bg\" domain. No indicators of legitimate alternative business use - this specifically targets the Bulgarian courier service.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:03.003479",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-l.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-l.cfd\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain contains \"speedy.bg\" - exact match of legitimate Bulgarian courier Speedy's domain (speedy.bg), with added \"-l.cfd\" suffix\n- **Typosquatting pattern**: Uses hyphen insertion technique to mimic official domain while redirecting to suspicious TLD (.cfd)\n- **Suspicious TLD + hosting**: .cfd domains are commonly abused for phishing; combined with free/serverless hosting indicates malicious infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is clear courier service impersonation. The domain deliberately mimics \"speedy.bg\" (legitimate Bulgarian courier) using a classic typosquatting technique. No legitimate business would use \"speedy.bg-l.cfd\" - this is designed to deceive Bulgarian users expecting the real Speedy courier service. The .cfd TLD and free hosting further confirm malicious intent.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:17.274987",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-l.icu",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-l.icu\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria) using typosquatting technique with added \"-l\" separator\n- **Suspicious TLD chain**: Uses \".bg-l.icu\" to create visual deception - \"bg\" references Bulgaria, \".icu\" is commonly abused for phishing\n- **Free hosting + high-value target**: Combination of free/serverless platform with courier brand impersonation indicates malicious intent, not legitimate business\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain structure specifically targets Speedy Bulgaria (speedy.bg) users through typosquatting. No legitimate business would use this naming pattern. The \".icu\" TLD combined with the deceptive structure and free hosting confirms phishing intent.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:27.489718",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-l.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-l.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting pattern**: Uses \"speedy.bg-l\" structure mimicking legitimate Speedy courier domain \"speedy.bg\" (Bulgarian TLD) with added \"-l\" character\n- **Suspicious TLD combination**: \".qpon\" TLD combined with \".bg-l\" subdomain structure designed to deceive Bulgarian users expecting \".bg\" domain\n- **Free hosting platform**: Consistent with low-cost phishing infrastructure; legitimate courier services use professional hosting\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt targeting Speedy Bulgaria. The domain deliberately mimics the legitimate \"speedy.bg\" format while using deceptive character insertion (\"-l\") and an unrelated TLD. No indicators of legitimate alternative business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:37.562140",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-lao.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-lao.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain) as subdomain prefix, deliberately mimicking the official Bulgarian courier service\n- **Suspicious TLD structure**: \".bg-lao.qpon\" appears designed to deceive users into thinking they're on the Bulgarian (.bg) domain\n- **Free/serverless hosting**: Inconsistent with legitimate courier infrastructure, typical of phishing operations\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is not a generic use of the word \"speedy\" - it specifically replicates \"speedy.bg\" (the actual Speedy courier domain) as a subdomain. The \".bg-lao\" component is a clear attempt to exploit user trust in the .bg ccTLD. No legitimate business reason exists for this domain structure. This is textbook typosquatting/subdomain abuse targeting Bulgarian courier customers.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:48.361129",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-na.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-na.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain) as subdomain prefix, creating visual deception\n- **Suspicious TLD structure**: \".bg-na.qpon\" mimics Bulgarian ccTLD (.bg) while using obscure/non-standard extension\n- **Free hosting platform**: Consistent with phishing infrastructure to minimize costs and enable rapid deployment\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear typosquatting/subdomain impersonation attack. The domain deliberately mimics \"speedy.bg\" (the legitimate Bulgarian courier service) by placing it before a deceptive TLD. The \"bg-na\" component further reinforces the Bulgarian geographic association. No legitimate business would structure a domain this way. The combination of brand impersonation + deceptive TLD + free hosting is a textbook phishing pattern.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:21:59.319600",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-o.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-o.cfd\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain) as subdomain prefix, clearly mimicking the official Bulgarian courier service\n- **Suspicious TLD chain**: \".bg-o.cfd\" structure designed to deceive users into thinking it's the legitimate .bg (Bulgaria) domain\n- **Free hosting on .cfd**: Disposable TLD commonly abused for phishing campaigns, combined with free/serverless infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is textbook typosquatting/subdomain abuse targeting Speedy Bulgaria (speedy.bg). The domain structure deliberately exploits user trust by placing the legitimate brand name before a deceptive TLD sequence. No legitimate business would structure a domain this way. The \"bg-o\" component is specifically crafted to appear as a Bulgarian domain variant.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:22:12.244153",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pa.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-pa.cfd\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) with appended suspicious TLD chain\n- **Typosquatting pattern**: Uses \"bg-pa.cfd\" extension to deceive users expecting the authentic \".bg\" country code\n- **Free hosting on .cfd TLD**: Known for abuse; combined with courier brand targeting indicates malicious intent\n\n## 4. Decision: **BLOCK**\n\n---\n\n**Rationale**: This is a clear impersonation attempt of Speedy Bulgaria's official domain (speedy.bg). The structure deliberately mimics the legitimate brand with geographic indicators (bg = Bulgaria) followed by a deceptive free TLD. No legitimate business reason exists for this domain pattern. This is textbook courier service phishing targeting Bulgarian users.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:22:23.100395",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pg.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-pg.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting structure**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) as subdomain prefix with suspicious TLD combination \"bg-pg.qpon\" - classic impersonation pattern\n- **Targeted geographic spoofing**: \"bg\" references Bulgaria, directly aligning with Speedy's actual market and domain (speedy.bg)\n- **Free hosting on suspicious infrastructure**: Combined with courier brand mimicry indicates malicious intent, not legitimate business use\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately mimics \"speedy.bg\" (legitimate Speedy courier website) through subdomain manipulation. Unlike generic uses of \"speedy,\" this specifically targets Bulgarian users with geographic indicators and courier brand structure. No legitimate business would structure a domain this way.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:22:33.924718",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pn.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-pn.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting structure**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) as subdomain prefix on suspicious TLD (.qpon), classic impersonation technique\n- **Geographic targeting**: \"bg\" (Bulgaria country code) + \"pn\" pattern mimics courier tracking/parcel notification URLs\n- **Free hosting + max rule score**: Combination of serverless platform with 100/100 detection score indicates malicious infrastructure\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately mimics \"speedy.bg\" (legitimate Speedy courier in Bulgaria) using subdomain manipulation. The \".qpon\" TLD with \"bg-pn\" pattern suggests fake parcel notification infrastructure. No legitimate business reason exists for this structure - it's designed to deceive Bulgarian users expecting Speedy courier communications.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:22:44.713836",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-pz.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS REPORT**\n\n**Domain:** speedy.bg-pz.cfd\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Typosquatting structure**: Uses \"speedy.bg\" (legitimate Bulgarian courier domain) as subdomain prefix on suspicious TLD (.cfd), classic impersonation technique\n- **Country-code manipulation**: \"bg\" (Bulgaria's ccTLD) embedded in subdomain to mimic official Speedy Bulgaria domain (speedy.bg)\n- **High-risk TLD + free hosting**: .cfd domain on free/serverless platform - common phishing infrastructure combination\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier service impersonation attempt. The domain deliberately mimics the legitimate Speedy Bulgaria website (speedy.bg) through subdomain structuring. No indicators of alternative legitimate business purpose. The combination of brand impersonation, geographic targeting, and suspicious hosting infrastructure confirms malicious intent.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:22:55.048964",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-rr.cfd",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-rr.cfd\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain is speedy.bg) followed by suspicious extension \"-rr.cfd\"\n- **Typosquatting pattern**: Appends random characters (\"-rr\") before cheap TLD (.cfd) to mimic official Bulgarian courier subdomain structure\n- **Free hosting + courier context**: .cfd TLD on free platform combined with exact match of major Bulgarian courier brand name\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is clear phishing infrastructure. \"speedy.bg\" is the actual domain of Speedy, Bulgaria's leading courier service. The domain deliberately mimics their official domain with appended characters to deceive users expecting a legitimate Speedy subdomain or tracking page. No legitimate business reason exists for this structure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:05.861855",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-track.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-track.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting structure**: Uses \"speedy.bg-track\" pattern mimicking legitimate Speedy courier domain (speedy.bg) with tracking subdomain\n- **Bulgarian TLD spoofing**: \".bg-track\" deliberately mimics Bulgarian ccTLD (.bg) followed by courier-specific term \"track\"\n- **Suspicious TLD**: .qpon (coupon-related TLD) combined with courier branding is classic phishing infrastructure\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain deliberately constructs \"speedy.bg\" appearance followed by tracking functionality, targeting users expecting package tracking from the legitimate Bulgarian courier Speedy. The .qpon TLD hosting what appears to be a .bg tracking service is a strong phishing indicator. This is NOT a legitimate coupon/deal platform coincidentally using the word \"speedy.\"",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:16.520127",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-x.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-x.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Uses \"speedy.bg\" (legitimate Speedy courier domain) as subdomain prefix, creating visual deception\n- **Suspicious TLD chain**: \".bg-x.qpon\" structure designed to mimic Bulgarian (.bg) courier service while obscuring true domain\n- **Free hosting**: Consistent with low-cost phishing infrastructure; no legitimate business reason for Speedy to use free hosting\n\n## 4. Decision: **BLOCK**\n\n---\n\n**Rationale**: This is a clear typosquatting/subdomain phishing attempt. The domain deliberately mimics \"speedy.bg\" (the legitimate Bulgarian courier) by placing it before an obfuscated TLD. Unlike generic uses of \"speedy,\" this specifically targets the Bulgarian market (.bg reference) and uses courier brand structure. No legitimate business would structure a domain this way.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:27.325537",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-z.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bg-z.qpon\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Typosquatting pattern**: Uses \"speedy.bg\" (legitimate Bulgarian courier Speedy's domain) as subdomain prefix with suspicious TLD manipulation (\".bg-z.qpon\")\n- **Deceptive structure**: Deliberately mimics the authentic \"speedy.bg\" domain through subdomain positioning to exploit user trust\n- **Free hosting + courier targeting**: Combination of serverless platform with specific impersonation of major Bulgarian courier service indicates malicious intent\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear courier service impersonation attempt. The domain structure specifically targets Speedy Bulgaria (speedy.bg) users through typosquatting. The \".bg-z\" component appears designed to confuse users into believing they're on a Bulgarian (.bg) domain. No legitimate business reason exists for this domain pattern on free hosting.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:37.712382",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-z.uno",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.bg-z.uno\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: Domain explicitly mimics \"speedy.bg\" (legitimate Speedy courier Bulgaria domain) using subdomain technique\n- **Suspicious TLD chain**: Uses \".bg-z.uno\" to create visual deception - \"bg\" references Bulgaria, \".uno\" is a free/low-cost TLD commonly abused\n- **Free hosting + courier target**: Combination of free platform with precise courier brand targeting is classic phishing pattern\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is textbook typosquatting/subdomain phishing. The domain structure \"speedy.bg-z.uno\" is designed to deceive users into believing they're on the legitimate \"speedy.bg\" courier site. No legitimate business would structure a domain this way. The \"bg\" reference combined with \"speedy\" and free hosting leaves no reasonable alternative explanation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:48.605644",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bu-bd.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bu-bd.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" exactly matches Speedy, a major Bulgarian courier service, combined with suspicious TLD structure (.bu-bd.qpon suggests Bulgaria targeting)\n- **Deceptive domain construction**: The .bu-bd pattern mimics country code appearance (Bulgaria = BG/BU) on an obscure TLD, classic phishing technique\n- **Free hosting + perfect rule score**: Combination of zero-cost infrastructure with maximum risk score indicates malicious setup, not legitimate business\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a generic use of the word \"speedy\" - the domain specifically combines the Speedy brand name with Bulgaria-targeting elements (.bu-bd) and an unusual TLD. No legitimate business context is evident. The construction is consistent with courier phishing campaigns targeting Bulgarian users.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:23:59.578446",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bu-be.qpon",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.bu-be.qpon\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service exactly, combined with suspicious TLD structure (.bu-be.qpon suggests Bulgarian targeting with \"bu\" prefix)\n- **Deceptive domain construction**: The .bu-be.qpon pattern appears designed to confuse users expecting a .bg (Bulgaria) or .com domain\n- **Free hosting + courier keyword**: Legitimate courier services don't use free/serverless platforms for customer-facing domains\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a generic use of \"speedy\" as an adjective. The combination of the exact Speedy brand name, Bulgarian-targeting domain structure (.bu-be), and free hosting creates a clear courier service impersonation pattern. No indicators of legitimate alternative business use are present.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:24:09.798734",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedyp.com",
     "score": 100,
     "detected_at": "2026-04-22T07:37:45.524305",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedyp.com\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Direct typosquatting of \"Speedy\" (major Bulgarian courier) with minimal character addition (\"p\")\n- No clear alternative business purpose evident from domain name alone\n- Hosted on free/serverless platform (common phishing infrastructure)\n\n**4. Decision:** BLOCK\n\n**Rationale:** \nUnlike generic uses of \"speedy\" (e.g., speedyloans, speedyglass), \"speedyp.com\" has no discernible legitimate business context. The single-character append is a classic typosquatting technique targeting the Bulgarian courier brand \"Speedy.\" Combined with free hosting and 100/100 rule-based score, this strongly indicates a phishing attempt rather than coincidental naming.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:24:19.255030",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.ecnyr89wycr87oy28740xny4489y79ny424648.quite-speedy.site",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.569155",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis\n\n**Domain:** www.ecnyr89wycr87oy28740xny4489y79ny424648.quite-speedy.site\n\n## Analysis\n\n1. **Threat Level:** HIGH\n\n2. **Confidence:** 95%\n\n3. **Key Indicators:**\n   - Extremely long random alphanumeric subdomain (ecnyr89wycr87oy28740xny4489y79ny424648) - classic phishing obfuscation technique\n   - Domain combines \"quite-speedy\" which directly references Speedy, a major Bulgarian courier service\n   - Hosted on free/serverless platform with suspicious infrastructure typical of phishing campaigns\n   - No legitimate business purpose evident; pattern matches courier service impersonation\n\n4. **Decision:** BLOCK\n\n## Rationale\nThis is a clear phishing attempt targeting Speedy courier service. The combination of a randomized subdomain string with \"speedy\" in the main domain, hosted on free infrastructure, indicates malicious intent. The subdomain obfuscation is designed to evade detection while the domain name exploits brand recognition. No legitimate courier or unrelated business would use this structure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:24:29.015130",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.click",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.572560",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "calvin-speedy-wilburn-net-worth.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.577746",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-vegan-burrito.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.580656",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy.click\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" exactly matches Speedy, one of Bulgaria's largest courier services explicitly listed as a target\n- **Suspicious TLD**: .click domain combined with courier brand name is a classic phishing pattern for fake delivery notifications\n- **Free hosting**: Serverless/free platform hosting inconsistent with legitimate courier operations requiring robust infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common English word, the context is critical. Combined with (1) targeting Bulgarian courier services where Speedy is a major brand, (2) a .click TLD commonly used in phishing campaigns, and (3) free hosting, this represents a clear impersonation attempt. Legitimate Speedy courier service uses speedy.bg, not speedy.click.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:24:38.686312",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "quite-speedy.site",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.589209",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "speedy-test.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.594659",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: quite-speedy.site\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" directly references Speedy, one of Bulgaria's largest courier services, combined with a suspicious modifier \"quite-\"\n- **Typosquatting pattern**: The \"quite-speedy\" construction mimics common phishing tactics to appear legitimate while creating distance from the real brand\n- **Free hosting + perfect rule score**: Combination of serverless platform hosting with maximum risk score indicates malicious infrastructure setup\n\n## 4. Decision: BLOCK\n\n**Rationale**: This domain specifically targets the Bulgarian courier \"Speedy\" brand. Unlike generic uses of \"speedy\" (fast service, quick delivery for unrelated businesses), the domain structure \"quite-speedy.site\" is a classic phishing pattern designed to exploit brand recognition. No legitimate business indicators present - only courier brand exploitation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:25:13.068957",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-web.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.599100",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "ww38.speedy-tower-battles.visioniq.cfd",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.613928",
-    "source": "urlscan.io-.cfd"
-  },
-  {
-    "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.619409",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-web.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly references Speedy, one of Bulgaria's largest courier services explicitly mentioned as a target\n- **Suspicious hosting**: Uses Cloudflare Pages free hosting (pages.dev), common for disposable phishing sites\n- **Courier-specific naming pattern**: \"speedy-web\" mimics official courier web portal naming conventions, not generic use of the word \"speedy\"\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy\" (e.g., \"speedy-glass\" or \"speedy-loans\"), this domain specifically patterns itself as a web portal for the Speedy brand. Combined with free hosting and the Bulgarian courier targeting context, this is almost certainly a phishing attempt to steal credentials or payment information from Speedy customers expecting package tracking or delivery services.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:25:33.751495",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-coupons-e0ecae84.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.648949",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-coupons-e0ecae84.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation pattern**: \"speedy\" directly matches Speedy courier service (major Bulgarian logistics company), combined with \"coupons\" creates a classic phishing lure promising discounts/rewards\n- **Suspicious infrastructure**: Random hexadecimal subdomain (e0ecae84) on free Cloudflare Pages hosting - typical of disposable phishing campaigns\n- **Social engineering hook**: \"coupons\" element designed to entice victims with fake promotional offers, common courier phishing tactic\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of \"speedy-coupons\" specifically targeting a Bulgarian context (where Speedy is a well-known courier brand) with randomized hosting strongly indicates courier impersonation phishing rather than a legitimate coupon platform. The hexadecimal subdomain suggests automated/bulk phishing infrastructure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:26:04.886975",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-coupons-com-006765c8.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.651503",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-test-project.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.654450",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-morman-birthday.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.659832",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-coupons-com-006765c8.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation structure**: Domain mimics URL pattern \"speedy-coupons.com\" using hyphens to disguise the actual domain (.pages.dev), a classic phishing technique\n- **Suspicious hosting**: Uses Cloudflare Pages free hosting with random hex identifier (006765c8), typical of disposable phishing infrastructure\n- **Coupon lure**: Combines courier brand \"Speedy\" with \"coupons\" - a common social engineering tactic to entice victims with fake discounts/delivery offers\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the specific construction \"speedy-coupons-com\" followed by a hex string on free hosting strongly suggests an attempt to impersonate speedy.com (legitimate Bulgarian courier). The domain structure is designed to deceive users into believing they're visiting a legitimate Speedy courier promotional page. This is not a generic coupon platform but a targeted impersonation attempt.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:26:15.838381",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-trrans.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.662428",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-youtube-grabber.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.665002",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-trrans.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company\n- **Typosquatting pattern**: Triple 'r' in \"trrans\" is a deliberate obfuscation technique to evade detection while mimicking \"trans\" (common in courier/transport domains)\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for disposable phishing campaigns targeting delivery scams\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a generic use of \"speedy\" as an adjective. The combination of \"speedy-trrans\" specifically mimics courier/transport terminology with intentional character manipulation. No legitimate business would use this typosquatting pattern. The domain structure strongly indicates a phishing attempt targeting Speedy courier customers in Bulgaria.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:26:47.253684",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-video.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.668037",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-video.pages.dev\n\n**1. Threat Level:** MEDIUM\n\n**2. Confidence:** 65%\n\n**3. Key Indicators:**\n- Domain combines \"speedy\" (major Bulgarian courier brand) with \"video\" on free hosting platform - common phishing pattern using video lures\n- Hosted on Cloudflare Pages (pages.dev) - frequently abused for phishing campaigns due to free, anonymous deployment\n- No clear legitimate business context; \"speedy-video\" lacks obvious non-courier purpose unlike entertainment/business examples\n\n**4. Decision:** INVESTIGATE\n\n**Rationale:** While \"speedy\" + \"video\" could theoretically be video content unrelated to Speedy courier, the combination on free hosting with no clear alternative purpose warrants investigation. Not confident enough for immediate BLOCK (could be legitimate video content), but suspicious enough to require verification before marking as false positive. Recommend checking for courier-themed phishing content (fake delivery notifications, package tracking scams).",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:27:07.386782",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transporta.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.671306",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS REPORT**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct impersonation of \"Speedy\" (major Bulgarian courier) with transport-related term (\"transporta\" = Bulgarian for \"transport\")\n- Hosted on free Cloudflare Pages platform (speedy-transporta.pages.dev) - common phishing infrastructure\n- No legitimate business context; specifically targets Bulgarian courier service with Bulgarian language element\n\n**4. Decision:** BLOCK\n\n**Rationale:**\nThis is a clear courier service impersonation attempt. The combination of \"speedy\" + \"transporta\" (Bulgarian word) + targeting Bulgarian courier services indicates deliberate phishing. Unlike generic uses of \"speedy,\" this domain specifically mimics Speedy Express courier branding with transport terminology. Legitimate Speedy operations would use official domains, not free hosting platforms.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:27:17.500405",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transport.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.674353",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-transport.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" + \"transport\" specifically targets Speedy, a major Bulgarian courier/logistics company\n- **Free hosting abuse**: pages.dev (Cloudflare Pages) commonly exploited for phishing campaigns with easy deployment and takedown evasion\n- **Transport context reinforcement**: The combination of courier brand name with logistics terminology (\"transport\") is a classic phishing pattern, not a coincidental use of common words\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy,\" this domain deliberately combines the Speedy brand with transport/logistics context on free infrastructure. This is a textbook courier service impersonation attempt targeting Bulgarian users. No legitimate business reason exists for this specific combination on serverless hosting.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:27:28.263870",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-fix.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.677036",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-wow.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.680211",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-fix.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly matches Speedy courier service, a major Bulgarian logistics company - combined with \"fix\" suggests fake delivery problem resolution\n- **Suspicious hosting**: Uses Cloudflare Pages free hosting (pages.dev), common for disposable phishing sites targeting courier scams\n- **Typical phishing pattern**: \"fix\" suffix implies urgent delivery issue requiring user action - classic courier phishing social engineering tactic\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy\" (fast service, gaming), \"speedy-fix\" specifically patterns courier phishing campaigns that claim delivery problems requiring immediate resolution. The combination of brand name + action verb (\"fix\") on free hosting strongly indicates phishing infrastructure rather than legitimate business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:27:38.807622",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transek-aio.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.683140",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "**ANALYSIS: speedy-transek-aio.pages.dev**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Domain directly references \"speedy\" (major Bulgarian courier brand) combined with \"transek\" (transport/logistics terminology)\n- Hosted on free Cloudflare Pages platform - common for disposable phishing infrastructure\n- Pattern \"speedy-[transport-term]-aio\" suggests impersonation attempt with \"all-in-one\" service claim\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier service impersonation attempt. The combination of \"speedy\" + \"transek\" (\u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442/transport) specifically targets the Bulgarian logistics sector. The \"aio\" (all-in-one) suffix is a common phishing tactic to appear comprehensive. No legitimate alternative business purpose is evident from the domain structure.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:27:58.691063",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-transe.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.685686",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "**PHISHING ANALYSIS**\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct impersonation of \"Speedy\" Bulgarian courier service with typosquatting (\"transe\" likely targeting \"trans\" or \"transfer\")\n- Hosted on free Pages.dev platform commonly abused for phishing campaigns\n- No legitimate business context - \"speedy-transe\" has no clear alternative purpose beyond courier brand exploitation\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier service impersonation attempt. While \"speedy\" is a common word, the combination with \"transe\" (courier-related terminology) specifically targets the Bulgarian Speedy courier brand. The free hosting amplifies suspicion. No indicators of legitimate alternative business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:28:08.509831",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-bus-no-cache.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.688330",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-bus-company-dashboard.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.691025",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-bus-no-cache.pages.dev\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **85%**\n\n## 3. Key Indicators:\n- **Direct brand reference**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - combined with technical terms suggests impersonation attempt\n- **Suspicious technical naming**: \"bus-no-cache\" uses infrastructure terminology typical of phishing pages designed to evade detection/caching\n- **Free hosting abuse**: Cloudflare Pages (.pages.dev) commonly exploited for disposable phishing campaigns targeting courier delivery scams\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: While \"speedy\" is a common word, the combination with \"bus\" (message bus/service bus - technical infrastructure term) and \"no-cache\" (cache-busting technique) on free hosting strongly suggests a technical setup for phishing infrastructure rather than legitimate business use. The domain structure mimics backend service naming conventions used to make phishing pages appear legitimate to victims expecting courier tracking systems. No clear alternative legitimate purpose is evident.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:28:19.849069",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-bus.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.693753",
-    "source": "urlscan.io-.pages.dev"
-  },
-  {
-    "domain": "speedy-claxton-net-worth.pages.dev",
-    "score": 100,
-    "detected_at": "2026-04-27T13:17:12.696299",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-bus.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand reference**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company, combined with transportation-related term \"bus\"\n- **Free hosting abuse**: Uses Cloudflare Pages (pages.dev), commonly exploited for phishing campaigns with zero cost and quick deployment\n- **Suspicious context**: \"speedy-bus\" could impersonate Speedy's delivery tracking or logistics services, a common phishing vector for courier scams\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: While \"speedy\" is a common word, the combination with \"bus\" (transportation/delivery context) on free hosting specifically flagged by a Bulgarian courier detection system creates a credible impersonation threat. This is not clearly an unrelated business category. The domain structure fits typical courier phishing patterns targeting Bulgarian users expecting Speedy-related services.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:28:46.722248",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-bookings.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.698959",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-bookings.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly references Speedy, a major Bulgarian courier service, combined with \"bookings\" (a courier-relevant term for scheduling deliveries/pickups)\n- **Free hosting platform abuse**: Uses Cloudflare Pages (pages.dev), commonly exploited for phishing campaigns due to zero cost and easy deployment\n- **Targeted context**: Domain structure matches typical courier phishing patterns (brand-name + service-action) specifically relevant to the Bulgarian courier sector\n\n## 4. Decision: BLOCK\n\n**Rationale**: Unlike generic uses of \"speedy\" (fast service, quick bookings for unrelated businesses), this domain specifically combines the Speedy brand name with courier-relevant terminology (\"bookings\" for delivery scheduling). The context of targeting Bulgarian courier services, combined with free hosting infrastructure, strongly indicates brand impersonation rather than coincidental word usage. No legitimate indicators suggest this is an unrelated business category.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:29:07.920687",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-solve.pages.dev",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.701993",
-    "source": "urlscan.io-.pages.dev"
+    "source": "urlscan.io-.pages.dev",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy-solve.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Direct brand targeting**: \"speedy\" matches Speedy courier service, a major Bulgarian logistics company - combined with courier-focused context makes this highly suspicious\n- **Action-oriented subdomain**: \"solve\" creates urgency pattern typical of phishing (e.g., \"solve delivery issue\", \"solve payment problem\")\n- **Free hosting abuse**: pages.dev is commonly exploited for phishing campaigns due to zero cost and easy deployment\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common word, the combination of:\n- Exact match to a targeted Bulgarian courier brand\n- Problem-solving language pattern (social engineering tactic)\n- Free serverless hosting\n- Rule-based system specifically flagging courier impersonation\n\n...creates a strong phishing profile. This is not a generic use of \"speedy\" (like \"speedy-glass\" or \"speedy-loans\") but appears designed to exploit the Speedy brand with urgency manipulation.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:29:18.571495",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-nanie.web.app",
     "score": 100,
     "detected_at": "2026-04-27T13:17:12.706784",
-    "source": "urlscan.io-.web.app"
+    "source": "urlscan.io-.web.app",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-nanie.web.app\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Direct use of \"speedy\" (major Bulgarian courier brand) combined with \"nanie\" (Bulgarian for \"collection/pickup\")\n- Hosted on free Firebase platform (web.app) - common for disposable phishing sites\n- Domain structure mimics courier service notification pattern (brand + action term)\n\n**4. Decision:** BLOCK\n\n**Rationale:**\n\"Nanie\" (\u043d\u0430\u043d\u0438e) is a Bulgarian word specifically meaning \"collection\" or \"pickup\" - a core courier service function. This is not coincidental use of the English word \"speedy\" but a targeted Bulgarian-language phishing attempt combining the Speedy brand with a delivery-related term. The free hosting reinforces malicious intent rather than legitimate business use.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:29:28.090791",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]

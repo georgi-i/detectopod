@@ -418,5 +418,19 @@
       "decision": "FALSE_POSITIVE"
     },
     "flagged_false_positive": true
+  },
+  {
+    "domain": "speedy-vegan-burrito.pages.dev",
+    "score": 100,
+    "detected_at": "2026-04-27T13:17:12.580656",
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy-vegan-burrito.pages.dev\n\n**1. Threat Level:** LOW\n\n**2. Confidence:** 85%\n\n**3. Key Indicators:**\n- Domain clearly references food service (\"vegan-burrito\"), not courier/delivery services\n- \"Speedy\" used in food context (fast food/quick service), not courier impersonation\n- Combination of words indicates restaurant/food business, not phishing attempt\n\n**4. Decision:** FALSE_POSITIVE\n\n**Rationale:** While the rule flagged \"speedy,\" the full domain context (\"speedy-vegan-burrito\") unambiguously indicates a food-related business (likely a vegan restaurant or food delivery service for their own products). This is not an attempt to impersonate Speedy courier service. The term \"speedy\" is a common adjective in food service marketing for quick preparation/delivery of meals.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-04-27T13:24:57.169783",
+      "threat_level": "UNKNOWN",
+      "decision": "FALSE_POSITIVE"
+    },
+    "flagged_false_positive": true
   }
 ]
