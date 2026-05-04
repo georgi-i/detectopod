@@ -1680,30 +1680,65 @@
     "domain": "speedy-ar.top",
     "score": 100,
     "detected_at": "2026-05-04T13:21:14.801062",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-ar.top\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" matches Bulgarian courier service Speedy exactly, combined with suspicious TLD (.top)\n- **Suspicious suffix pattern**: \"-ar\" suffix is a common phishing technique to create urgency/localization variants (e.g., \"ar\" could suggest Arabic/Argentina targeting or arbitrary obfuscation)\n- **Free hosting + perfect rule score**: Combination of serverless/free platform with 100/100 detection score indicates typical phishing infrastructure\n\n## 4. Decision: BLOCK\n\n**Rationale**: This domain specifically targets the Speedy brand name with no legitimate business context evident. Unlike generic uses of \"speedy\" (e.g., \"speedyloans\", \"speedyglass\"), this follows the exact courier brand format with a geographic/variant suffix, which is a classic phishing pattern for courier scams.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-05-04T13:21:49.957559",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy-couponscom.pages.dev",
     "score": 100,
     "detected_at": "2026-05-04T13:21:14.811580",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Analysis: speedy-couponscom.pages.dev\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 85%\n\n## 3. Key Indicators:\n- **Brand impersonation structure**: Domain combines \"speedy\" (major Bulgarian courier brand) with \"coupons\" in a compound format mimicking official domain patterns (speedy-couponscom suggests \"speedy-coupons.com\")\n- **Free hosting abuse**: Uses Cloudflare Pages (pages.dev) - common for disposable phishing infrastructure targeting courier delivery scams\n- **Typosquatting technique**: The \".com\" embedded in subdomain (couponscom) is a deliberate obfuscation tactic to appear legitimate while avoiding actual domain registration\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"coupons\" could indicate a deals platform, the specific combination of \"speedy\" + courier-themed lure + free hosting + domain structure designed to mimic \"speedy-coupons.com\" strongly suggests targeted phishing against Speedy Express customers. This follows known patterns of fake delivery/coupon scams in Bulgaria.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-05-04T13:22:01.252499",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.ir-speedy.online",
     "score": 100,
     "detected_at": "2026-05-04T13:21:14.817114",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: www.ir-speedy.online\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" directly references Speedy, one of Bulgaria's largest courier services, combined with a suspicious prefix \"ir-\"\n- **Suspicious TLD and structure**: Uses .online TLD (common in phishing) with a prefix pattern (\"ir-\") designed to appear official while evading detection\n- **Free hosting + perfect rule score**: Hosted on free/serverless platform with maximum risk score (100/100), indicating no legitimate business investment\n\n## 4. Decision: BLOCK\n\n**Rationale**: This is not a generic use of the word \"speedy\" - the domain specifically targets the Bulgarian courier market context. The \"ir-speedy\" pattern mimics official subdomain structures (like \"track-speedy\" or \"bg-speedy\") that legitimate courier services might use. No legitimate business reason exists for this combination targeting Bulgarian users on free hosting.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-05-04T13:22:12.455370",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.site",
     "score": 100,
     "detected_at": "2026-05-04T13:21:14.820086",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: speedy.site\n\n## 1. Threat Level: HIGH\n\n## 2. Confidence: 95%\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"speedy\" exactly matches Speedy, a major Bulgarian courier service, combined with a generic TLD (.site)\n- **Suspicious hosting**: Free/serverless platform typical of phishing infrastructure\n- **Perfect rule score**: 100/100 indicates strong pattern match with known courier phishing tactics\n\n## 4. Decision: BLOCK\n\n**Rationale**: While \"speedy\" is a common English word, the context is critical. This domain directly targets Bulgarian courier services where \"Speedy\" is a prominent brand name. The combination of exact brand match + generic TLD + free hosting + maximum rule score creates a textbook phishing profile. No legitimate indicators suggest alternative business purpose.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-05-04T13:22:21.425017",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt-bg.xyz",
     "score": 100,
     "detected_at": "2026-05-04T13:21:14.823157",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "# Phishing Analysis: econt-bg.xyz\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Direct brand impersonation**: \"econt\" is the exact name of Econt Express, a major Bulgarian courier service\n- **Geographic targeting**: \"-bg\" suffix explicitly targets Bulgaria (country code), matching Econt's market\n- **Suspicious TLD**: .xyz domain combined with courier brand name is a classic phishing pattern; legitimate Econt uses econt.com\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear-cut courier impersonation attempt. Unlike generic words like \"speedy,\" \"Econt\" is a specific Bulgarian courier brand with no alternative common meaning. The domain structure (brand + country code + suspicious TLD) is textbook phishing targeting Bulgarian customers expecting courier notifications.",
+      "model": "anthropic/claude-sonnet-4-5",
+      "timestamp": "2026-05-04T13:22:31.828212",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   }
 ]
