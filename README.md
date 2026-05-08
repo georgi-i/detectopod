@@ -1,23 +1,24 @@
 # Detectopod 🔍
 
-**Automated phishing domain detection targeting Bulgarian courier services**
+**Automated phishing domain detection targeting Bulgarian courier services and government e-portals**
 
-Detectopod is an automated threat intelligence system that monitors the web for phishing domains impersonating Bulgarian courier and logistics companies like Econt, Speedy, and BulgariaPost. The system runs continuously via GitHub Actions and maintains a public threat feed.
+Detectopod is an automated threat intelligence system that monitors the web for phishing domains impersonating Bulgarian courier and logistics companies (Econt, Speedy, BulgariaPost) **and** the Bulgarian Ministry of Interior e-services portal (`e-uslugi.mvr.bg`). The system runs continuously via GitHub Actions and maintains a public threat feed.
 
 ## 🎯 What It Does
 
 Detectopod identifies phishing domains that:
 - Impersonate Bulgarian courier brands (Econt, Speedy, BulgariaPost, etc.)
-- Use suspicious TLDs (`.cfd`, `.tk`, `.ml`, `.ga`, etc.)
+- Impersonate Bulgarian government e-services — specifically the MVR portal (`e-uslugi.mvr.bg`)
+- Use suspicious TLDs (`.cfd`, `.tk`, `.sbs`, `.cam`, `.shop`, `.autos`, `.life`, `.one`, etc.)
 - Deploy on free hosting platforms (Cloudflare Pages, Firebase, Heroku, Netlify, Vercel)
-- Exhibit classic phishing patterns (e.g., `speedy.bg-pk.cfd`, `econt-paydelivery.cfd`)
+- Exhibit classic phishing patterns (e.g., `speedy.bg-pk.cfd`, `mvrbg.sbs`, `e-uslugicye.top`)
 
 ## 🚀 Features
 
 - **Multi-Source Detection**: Queries URLScan.io, Google CT logs, and Cloudflare CT logs
-- **Automated Scanning**: Runs hourly via GitHub Actions
+- **Automated Scanning**: Runs weekly via GitHub Actions
 - **Smart Scoring**: ML-enhanced scoring system (0-100) based on domain patterns
-- **LLM Analysis**: Daily AI-powered review using Llama 3.3 70B to reduce false positives
+- **LLM Analysis**: AI-powered review using Claude Sonnet 4.5 to reduce false positives
 - **Public Threat Feed**: JSON feed of detected domains updated in real-time
 - **Zero Infrastructure**: Fully serverless using GitHub Actions
 
@@ -55,15 +56,14 @@ Detection Rate: 5.3%
                                     ▼
                            ┌──────────────────┐
                            │ LLM Analyzer     │
-                           │ (Llama 3.3 70B)  │
-                           | (Claude S. 4.5)  |
+                           │ (Claude S. 4.5)  │
                            └──────────────────┘
                                     │
                                     ▼
-                           ┌────────────────── ┐
+                           ┌───────────────────┐
                            │  Threat Feed      │
                            │ phishing_feed.json│
-                           └────────────────── ┘
+                           └───────────────────┘
 ```
 
 ## 🔧 Installation
@@ -141,6 +141,12 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.161773",
     "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "mvrbg.sbs",
+    "score": 100,
+    "detected_at": "2026-05-08T12:00:00.000000",
+    "source": "urlscan.io-.sbs"
   }
 ]
 ```
@@ -148,52 +154,79 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
 ## 🤖 GitHub Actions Workflows
 
 ### Scheduled Detection (`scheduled-detection.yml`)
-- **Frequency**: Every hour
+- **Frequency**: Every Monday at noon UTC
 - **Sources**: URLScan.io + Google CT + Cloudflare CT
 - **Timeout**: 20 minutes
 - **Auto-commit**: Updates feed automatically
 
 ### LLM Analysis (`llm_analysis.yml`)
-- **Frequency**: Daily at 2 AM UTC
-- **Model**: Llama 3.3 70B via OpenRouter
+- **Frequency**: Every Monday at 2 PM UTC (2h after detection)
+- **Model**: Claude Sonnet 4.5 via OpenRouter
 - **Purpose**: Validate detections and remove false positives
-- **Max domains**: 50 per run
+- **Max domains**: 1000 per run (BYOK, no artificial cap)
 
 ## 🎯 Detection Logic
 
 ### Scoring System (0-100)
 
+#### Courier Brands (Econt, Speedy, BulgariaPost…)
+
 | Factor | Weight | Example |
 |--------|--------|---------|
-| Bulgarian courier brand presence | +35 | `speedy`, `econt`, `bgpost` |
+| Bulgarian courier brand present | +35 | `speedy`, `econt`, `bgpost` |
 | Geographic indicator | +15 | `.bg`, `bulgaria`, `bg-` |
-| Suspicious TLD | +30 | `.cfd`, `.tk`, `.ml` |
+| Suspicious TLD | +30 | `.cfd`, `.tk`, `.sbs` |
 | Free hosting platform | +25 | `.pages.dev`, `.web.app` |
-| Brand + Geo + Suspicious TLD | +45 | `speedy.bg-pk.cfd` |
-| Brand + Free hosting | +40 | `speedy-37a.pages.dev` |
+| Brand + geo + suspicious TLD | +45 | `speedy.bg-pk.cfd` |
+| Brand + suspicious TLD | +25 | `econt-paydelivery.cfd` |
+| Brand + free hosting | +40 | `speedy-37a.pages.dev` |
+| Brand + geo + free hosting | +30 | `econt-bg-xxx.web.app` |
 | Multiple hyphens (with brand) | +8 each | `speedy-trans-bg` |
 | Random alphanumeric patterns | +12 | `g63829`, `37a` |
 | Phishing keywords | +15 | `payment`, `verify`, `secure` |
+
+#### Government Brands (MVR / e-uslugi.mvr.bg)
+
+| Factor | Weight | Example |
+|--------|--------|---------|
+| MVR / mvrbg / e-uslugi present | +40 | `mvr`, `mvrbg`, `e-uslugi` |
+| Geographic indicator | +15 | `bggov`, `govbg`, `bg-` |
+| Suspicious TLD | +30 | `.sbs`, `.cam`, `.autos`, `.shop` |
+| Brand + geo + suspicious TLD | +45 | `mvr.bggov.cam` |
+| Brand + suspicious TLD | +25 | `mvrbg.sbs` |
+| Brand + free hosting | +40 | `mvr-bg.pages.dev` |
 
 **Threshold**: Domains scoring ≥80 are added to the feed.
 
 ### Monitored Platforms
 
 **Suspicious TLDs:**
-`.cfd`, `.tk`, `.ml`, `.ga`, `.gq`, `.cf`, `.top`, `.xyz`, `.club`, `.online`, `.site`, `.space`, `.click`, `.link`, `.live`, `.icu`
+`.cfd`, `.tk`, `.ml`, `.ga`, `.gq`, `.cf`, `.top`, `.xyz`, `.club`, `.online`,
+`.site`, `.space`, `.click`, `.link`, `.live`, `.icu`, `.sbs`, `.cam`, `.shop`,
+`.one`, `.autos`, `.life`, `.qpon`, `.uno`
 
 **Free Hosting:**
-Firebase (`.web.app`, `.firebaseapp.com`), Cloudflare Pages (`.pages.dev`), Heroku (`.herokuapp.com`), Netlify (`.netlify.app`), Vercel (`.vercel.app`), Render, GitHub Pages, and more.
+Firebase (`.web.app`, `.firebaseapp.com`), Cloudflare Pages (`.pages.dev`),
+Heroku (`.herokuapp.com`), Netlify (`.netlify.app`), Vercel (`.vercel.app`),
+Render, GitHub Pages, and more.
 
 ## 🎛️ Configuration
 
 ### Target Keywords
 
-**Primary (Bulgarian couriers):**
-`econt`, `speedy`, `bulgariapost`, `bgpost`, `samedaybg`, `boxnowbg`, `cityexpressbg`, `expressonebg`, `dhl`
+**Courier brands:**
+`econt`, `speedy`, `bulgariapost`, `bgpost`, `samedaybg`, `boxnowbg`,
+`cityexpressbg`, `expressonebg`, `dhl`
+
+**Government brands (MVR):**
+`mvr`, `mvrbg`, `e-uslugi`, `euslugi`
 
 **Secondary (generic logistics):**
-`tracking`, `delivery`, `shipment`, `parcel`, `payment`, `tax`, `fee`, `customer-center`
+`tracking`, `delivery`, `shipment`, `parcel`, `payment`, `tax`, `fee`,
+`customer-center`
+
+### Geographic Indicators
+`.bg`, `bulgaria`, `bg-`, `-bg`, `bggov`, `govbg`, `gov-bg`, `bg-gov`
 
 ### Thresholds
 
@@ -204,9 +237,9 @@ SCORE_THRESHOLD = 80  # Minimum score for feed inclusion
 ## 📈 Performance
 
 Recent scan statistics:
-- **Domains scanned**: ~1,800 per hour
+- **Domains scanned**: ~1,800 per run
 - **Processing time**: ~18 seconds
-- **Detection rate**: ~5% (96 phishing domains found)
+- **Detection rate**: ~5%
 - **False positive rate**: <10% (with LLM validation)
 
 ## 🔐 Security Considerations
@@ -221,24 +254,9 @@ Recent scan statistics:
 Contributions welcome! Areas for improvement:
 
 1. **New detection patterns**: Suggest additional phishing indicators
-2. **Expanded coverage**: Add more courier brands or regions
+2. **Expanded coverage**: Add more brands or government services
 3. **Performance optimization**: Improve scanning efficiency
 4. **False positive reduction**: Enhance scoring algorithms
-
-### Development Setup
-
-```bash
-# Fork and clone
-git clone https://github.com/yourusername/detectopod.git
-
-# Create feature branch
-git checkout -b feature/new-detection-pattern
-
-# Make changes and test
-python detection/detectopod.py --sources urlscan
-
-# Submit PR
-```
 
 ## 📜 License
 
@@ -262,4 +280,4 @@ This tool is for educational and defensive security purposes only. The threat fe
 
 ---
 
-**Status**: 🟢 Active | **Last Updated**: 2026-01-29 | **Version**: 1.0
+**Status**: 🟢 Active | **Last Updated**: 2026-05-08 | **Version**: 1.1
