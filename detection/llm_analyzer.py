@@ -26,24 +26,43 @@ class OpenRouterAnalyzer:
             print(f"⚠️  Daily limit reached ({self.max_requests} requests)")
             return None
 
-        prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian courier services (Econt, Speedy, BulgariaPost).
+        prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian online services.
 
 Domain: {domain}
 Rule-based Score: {score}/100
 Keywords: {', '.join(keywords_found) if keywords_found else 'None'}
-Hosting: Free/serverless platform
-Target: Bulgarian courier services (Econt, Speedy, BulgariaPost)
+Hosting: Free/serverless platform or suspicious TLD
+Targets monitored:
+  - Bulgarian courier services: Econt, Speedy, BulgariaPost
+  - Bulgarian Ministry of Interior (MVR) e-services portal: e-uslugi.mvr.bg
+
+MVR PHISHING CONTEXT:
+The legitimate Bulgarian Ministry of Interior e-services site is e-uslugi.mvr.bg.
+Phishing campaigns impersonate it using domains like:
+  mvrbg.sbs, mvr-bg.shop, e-uslugicye.top, gav.mvrbg.cam,
+  mvr.bggov.cam, mvr.govbg.one, mvr-bg.autos, mvrbg.life
+Key patterns: mvr + bg concatenated (mvrbg), e-uslugi with random suffix,
+govbg / bggov combinations, suspicious TLDs (.sbs, .cam, .shop, .autos, .life, .one).
+If a domain combines "mvr" or "e-uslugi" with Bulgarian geographic indicators and
+a suspicious TLD/free hosting, it is almost certainly a government phishing site.
 
 IMPORTANT - False Positive Check:
-Before assuming phishing, consider whether the domain name clearly indicates a legitimate non-courier business or personal use. Examples that should be marked FALSE_POSITIVE:
-- Clearly unrelated businesses: medical, legal, tech support, bookkeeping, real estate, loans, marketing, removals, glass, car services
-- Personal or entertainment pages: birthdays, pets, gaming (e.g. "tower-battles", "wow"), celebrity net worth pages
+Before assuming phishing, consider whether the domain clearly indicates a legitimate
+non-courier, non-government business. Examples that should be marked FALSE_POSITIVE:
+- Clearly unrelated businesses: medical, legal, tech support, bookkeeping, real estate,
+  loans, marketing, removals, glass, car services
+- Personal or entertainment pages: birthdays, pets, gaming (e.g. "tower-battles"),
+  celebrity net worth pages
 - Educational or productivity tools: calculators, assignment helpers, exam prep PDFs
-- Developer/test pages: domains containing "test", "test-project", "qa", "backoffice", or generic placeholders
+- Developer/test pages: domains containing "test", "test-project", "qa",
+  "backoffice", or generic placeholders
 - Router/IoT hostnames (e.g. keenetic.link subdomains)
 - CRM or analytics platforms (e.g. customerjourney.live)
-- Booking, coupon, or e-commerce platforms clearly unrelated to courier impersonation
-The word "speedy" is a common English adjective - its presence alone does not confirm courier phishing.
+- Booking, coupon, or e-commerce platforms clearly unrelated to courier/government
+  impersonation
+NOTE: The word "speedy" is a common English adjective — its presence alone does NOT
+confirm courier phishing. "MVR" in a clearly non-Bulgarian or non-government context
+(e.g. a car valuation site) may also be a false positive.
 
 Provide structured analysis:
 1. Threat Level: HIGH/MEDIUM/LOW
@@ -51,7 +70,8 @@ Provide structured analysis:
 3. Key Indicators: List 2-3 specific reasons for your decision
 4. Decision: BLOCK/INVESTIGATE/FALSE_POSITIVE
 
-Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearly belongs to an unrelated legitimate category."""
+Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearly
+belongs to an unrelated legitimate category."""
 
         try:
             response = requests.post(
@@ -78,7 +98,7 @@ Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearl
                 analysis = result['choices'][0]['message']['content']
                 self.requests_made += 1
 
-                # Add 3-second delay to respect rate limits (20/minute)
+                # 3-second delay to respect rate limits (20/minute)
                 time.sleep(3)
 
                 return {
@@ -129,13 +149,11 @@ def main():
                         help='Strip existing llm_analysis and re-evaluate all entries (backfill mode)')
     args = parser.parse_args()
 
-    # Get API key from environment
     api_key = os.environ.get('OPENROUTER_API_KEY')
     if not api_key:
         print("❌ Error: OPENROUTER_API_KEY environment variable not set")
         sys.exit(1)
 
-    # Load feed
     if not os.path.exists(args.feed_file):
         print(f"❌ Feed file not found: {args.feed_file}")
         sys.exit(1)
@@ -143,7 +161,6 @@ def main():
     with open(args.feed_file, 'r') as f:
         feed = json.load(f)
 
-    # In reanalyze mode, strip existing analysis so all entries are re-evaluated
     if args.reanalyze:
         stripped = sum(1 for e in feed if 'llm_analysis' in e)
         for entry in feed:
@@ -151,20 +168,16 @@ def main():
             entry.pop('flagged_false_positive', None)
         print(f"🔄 Reanalyze mode: stripped existing analysis from {stripped} entries")
 
-    # Filter domains to analyze
     cutoff_date = datetime.now() - timedelta(days=args.days)
     to_analyze = []
 
     for entry in feed:
-        # Skip if already analyzed
         if 'llm_analysis' in entry:
             continue
 
-        # Check score threshold
         if entry.get('score', 0) < args.min_score:
             continue
 
-        # Check date (if available)
         entry_date_str = entry.get('discovered_date') or entry.get('first_seen')
         if entry_date_str:
             try:
@@ -176,7 +189,6 @@ def main():
 
         to_analyze.append(entry)
 
-    # Limit to max_analyze
     to_analyze = sorted(to_analyze, key=lambda x: x.get('score', 0), reverse=True)[:args.max_analyze]
 
     if not to_analyze:
@@ -185,12 +197,11 @@ def main():
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
     print(f"   Model: Claude Sonnet 4.5 (via OpenRouter BYOK)")
+    print(f"   Targets: Bulgarian couriers + MVR e-services")
     print(f"   Limit: {args.max_analyze} domains\n")
 
-    # Initialize analyzer
     analyzer = OpenRouterAnalyzer(api_key)
 
-    # Analyze domains
     stats = {
         'analyzed_count': 0,
         'high_confidence': 0,
@@ -212,7 +223,6 @@ def main():
             entry['llm_analysis'] = result
             stats['analyzed_count'] += 1
 
-            # Update stats
             if result['threat_level'] == 'HIGH':
                 stats['high_confidence'] += 1
                 print(f"   ✓ HIGH threat confirmed")
@@ -229,7 +239,6 @@ def main():
             stats['errors'] += 1
             print(f"   ❌ Analysis failed")
 
-    # Separate false positives from the clean feed
     false_positive_domains = [
         entry for entry in feed
         if entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
@@ -243,11 +252,9 @@ def main():
         )
     ]
 
-    # Save cleaned feed (false positives removed)
     with open(args.feed_file, 'w') as f:
         json.dump(clean_feed, f, indent=2)
 
-    # Save false positives to a separate audit file for review
     fp_file = os.path.join(os.path.dirname(args.feed_file), 'false_positives.json')
     existing_fps = []
     if os.path.exists(fp_file):
@@ -274,7 +281,6 @@ def main():
     with open(stats_file, 'w') as f:
         json.dump(stats, f, indent=2)
 
-    # Print summary
     print(f"\n{'='*60}")
     print(f"✓ Analysis Complete")
     print(f"{'='*60}")
