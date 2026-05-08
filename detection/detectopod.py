@@ -30,6 +30,11 @@ COURIER_KEYWORDS = [
     'cityexpressbg',
     'expressonebg',
     'dhl',           # DHL Bulgaria
+    # Bulgarian government e-services
+    'mvr',           # Ministry of Interior (MVR - Министерство на вътрешните работи)
+    'mvrbg',         # MVR Bulgaria combined form (e.g. mvrbg.sbs)
+    'e-uslugi',      # E-services portal (e-uslugi.mvr.bg)
+    'euslugi',       # Without-hyphen variant
 ]
 
 # SECONDARY: Generic logistics/delivery terms (lower priority)
@@ -63,8 +68,17 @@ BULGARIAN_COURIER_BRANDS = [
     'expressonebg'
 ]
 
+# Bulgarian government brands (for impersonation detection)
+# Legitimate site: e-uslugi.mvr.bg
+BULGARIAN_GOVT_BRANDS = [
+    'mvr',        # Ministry of Interior — appears as subdomain/prefix (mvr.bggov.cam, mvr-bg.shop)
+    'mvrbg',      # Concatenated form (mvrbg.sbs, gav.mvrbg.cam, mvrbg.life)
+    'e-uslugi',   # E-services portal — may appear with random suffix (e-uslugicye.top)
+    'euslugi',    # Without-hyphen variant
+]
+
 # Geographic indicators that suggest impersonation
-GEO_INDICATORS = ['.bg', 'bulgaria', 'bg-', '-bg']
+GEO_INDICATORS = ['.bg', 'bulgaria', 'bg-', '-bg', 'bggov', 'govbg', 'gov-bg', 'bg-gov']
 
 # Suspicious/Free TLDs commonly used in phishing
 SUSPICIOUS_TLDS = (
@@ -83,7 +97,15 @@ SUSPICIOUS_TLDS = (
     '.click',    # Red flag for phishing 
     '.link',     # Red flag 
     '.live',     # Commonly abused 
-    '.icu',      # Cheap 
+    '.icu',      # Cheap
+    '.sbs',      # Commonly abused for phishing
+    '.cam',      # Cheap, commonly abused
+    '.shop',     # Cheap, commonly abused
+    '.one',      # Cheap, commonly abused
+    '.autos',    # Used in government impersonation campaigns
+    '.life',     # Cheap, commonly abused
+    '.qpon',     # Coupon-related, abused for delivery scams
+    '.uno',      # Cheap, commonly abused
 )
 
 # Free/serverless hosting platforms
@@ -202,9 +224,9 @@ def add_to_feed(domain, score, source='urlscan'):
 
 def calculate_score(domain):
     """
-    Calculate suspicion score for a domain (0-100)
-    Enhanced to detect brand impersonation patterns like speedy.bg-pk.cfd
-    and courier brands on free hosting like speedy-37a.pages.dev
+    Calculate suspicion score for a domain (0-100).
+    Detects courier brand impersonation (Econt, Speedy, BulgariaPost)
+    AND government service impersonation (MVR e-uslugi portal).
     """
     score = 0
     domain_lower = domain.lower()
@@ -226,6 +248,15 @@ def calculate_score(domain):
             score += 35  # Increased base score for brand presence
             break
 
+    # Check for Bulgarian government brand (MVR / e-uslugi)
+    # Use substring match — these appear concatenated (mvrbg, e-uslugicye)
+    if not has_brand:
+        for brand in BULGARIAN_GOVT_BRANDS:
+            if brand in domain_lower:
+                has_brand = True
+                score += 40  # Slightly higher: MVR impersonation is unambiguous
+                break
+
     # Check for geographic indicators
     for geo in GEO_INDICATORS:
         if geo in domain_lower:
@@ -244,11 +275,11 @@ def calculate_score(domain):
     for suffix in FREE_HOSTING_SUFFIXES:
         if domain_lower.endswith(suffix):
             has_free_hosting = True
-            score += 25  # Free hosting is suspicious for courier brands
+            score += 25  # Free hosting is suspicious for courier/gov brands
             break
 
     # --- CRITICAL COMBINATIONS ---
-    # Brand + geo + suspicious TLD = classic phishing (e.g., econt.bg-g63829.cfd)
+    # Brand + geo + suspicious TLD = classic phishing (e.g., econt.bg-g63829.cfd, mvrbg.sbs)
     if has_brand and has_geo and has_suspicious_tld:
         score += 45  # Maximum boost for this combo
 
@@ -256,8 +287,7 @@ def calculate_score(domain):
     if has_brand and has_suspicious_tld:
         score += 25
 
-    # Brand + free hosting = HIGHLY SUSPICIOUS (e.g., speedy-37a.pages.dev)
-    # Legitimate courier companies don't use free hosting platforms
+    # Brand + free hosting = HIGHLY SUSPICIOUS
     if has_brand and has_free_hosting:
         score += 40  # Major boost - this is a key phishing indicator
 
@@ -270,8 +300,8 @@ def calculate_score(domain):
     for keyword in KEYWORDS:
         if keyword in domain_lower:
             keywords_found.append(keyword)
-            # Higher weight for courier brands
-            if keyword in BULGARIAN_COURIER_BRANDS:
+            # Higher weight for primary brands
+            if keyword in BULGARIAN_COURIER_BRANDS or keyword in BULGARIAN_GOVT_BRANDS:
                 score += 10
             else:
                 score += 5
@@ -281,7 +311,7 @@ def calculate_score(domain):
     hyphen_count = domain_lower.count('-')
     if hyphen_count >= 1:
         if has_brand:
-            # Courier brand with hyphens is very suspicious
+            # Brand with hyphens is very suspicious
             score += hyphen_count * 8
         else:
             score += hyphen_count * 3
@@ -295,7 +325,6 @@ def calculate_score(domain):
             score += 8
 
     # Random-looking strings (e.g., g63829, 37a, e37)
-    # Check for patterns like: letter + digits or digits + letter
     domain_name = domain_lower.split('.')[0]  # Get subdomain/domain part
     if re.search(r'[a-z]\d{2,}|\d{2,}[a-z]', domain_name):
         score += 12  # Random-looking identifier
@@ -313,7 +342,6 @@ def calculate_score(domain):
         score += 15
 
     # --- LENGTH ANALYSIS ---
-    # Very long domains are suspicious
     domain_parts = domain_lower.split('.')
     if len(domain_parts[0]) > 20:  # Long subdomain/domain name
         score += 12
@@ -350,31 +378,55 @@ def is_infrastructure_domain(domain):
         if any(svc in domain_lower for svc in aws_internal):
             return True
     
-    # Random/generic Cloudflare Pages projects (no courier keywords)
+    # Random/generic Cloudflare Pages projects (no brand keywords)
     if '.pages.dev' in domain_lower:
-        has_courier, _ = contains_courier_keyword(domain_lower)
-        if not has_courier:
+        has_brand, _ = contains_brand_keyword(domain_lower)
+        if not has_brand:
             return True
     
     return False
 
 
+def contains_brand_keyword(domain):
+    """
+    Alias for contains_courier_keyword — checks all monitored brands
+    including government services. Used internally.
+    """
+    return contains_courier_keyword(domain)
+
+
 def contains_courier_keyword(domain):
     """
-    Check if domain contains any courier/logistics company keyword
-    Uses word boundaries to avoid partial matches (e.g., "cnt" in "content")
+    Check if domain contains any monitored brand keyword.
+    Covers courier brands AND government service brands (MVR).
+
+    Courier brands use word-boundary matching to avoid partial matches
+    (e.g., "cnt" in "content").
+
+    Government brands (mvr, mvrbg, e-uslugi) use substring matching
+    because they appear concatenated in domains (e.g., mvrbg.sbs,
+    e-uslugicye.top).
+
     Returns (has_keyword, matched_keywords)
     """
     domain_lower = domain.lower()
     matched = []
     
+    # --- Courier brands: word-boundary match ---
     for keyword in COURIER_KEYWORDS:
-        # Use word boundary matching to avoid partial matches
-        # \b ensures we match whole words only
+        # Skip government brands here; handled below
+        if keyword in BULGARIAN_GOVT_BRANDS:
+            continue
         pattern = r'\b' + re.escape(keyword) + r'\b'
         if re.search(pattern, domain_lower):
             matched.append(keyword)
     
+    # --- Government brands: substring match (no word boundary) ---
+    # MVR domains are often concatenated: mvrbg.sbs, e-uslugicye.top
+    for brand in BULGARIAN_GOVT_BRANDS:
+        if brand in domain_lower and brand not in matched:
+            matched.append(brand)
+
     # Special handling for DHL + Bulgaria combination
     if 'dhl' in domain_lower:
         if 'bulgaria' in domain_lower or '.bg' in domain_lower or 'bg-' in domain_lower:
@@ -401,12 +453,9 @@ def save_run_stats(domains_scanned, phishing_found, elapsed_time):
     }
     
     try:
-        # Ensure directory exists
         os.makedirs(stats_dir, exist_ok=True)
-        
         with open(stats_file, 'w') as f:
             json.dump(stats, f, indent=2)
-        
         logging.info(f"✓ Run stats saved to {stats_file}")
         logging.info(f"  Domains scanned: {domains_scanned}, Phishing found: {phishing_found}")
     except Exception as e:
@@ -418,16 +467,7 @@ def save_run_stats(domains_scanned, phishing_found, elapsed_time):
 
 def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
     """
-    Query urlscan.io API for domains matching courier keywords
-    
-    Args:
-        keywords: List of keywords to search for
-        max_results: Maximum number of results to retrieve
-        retry_count: Current retry attempt
-        max_retries: Maximum number of retries
-        
-    Returns:
-        List of domain dictionaries with domain info
+    Query urlscan.io API for domains matching courier/government keywords
     """
     try:
         headers = {
@@ -435,31 +475,23 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
             "Content-Type": "application/json"
         }
         
-        # Build search query for urlscan.io
-        # We'll do multiple queries to be comprehensive
-        
-        # Strategy 1: Direct domain keyword search
         domain_queries = []
         for keyword in keywords:
-            # Search for keyword anywhere in the domain
             domain_queries.append(f'domain:*{keyword}*')
         
-        # Strategy 2: Page domain search (more specific)
         page_queries = []
         for keyword in keywords:
             page_queries.append(f'page.domain:*{keyword}*')
         
-        # Combine both strategies
         all_queries = domain_queries + page_queries
         search_query = ' OR '.join(all_queries)
         
-        logging.info(f"Querying urlscan.io for courier keywords...")
+        logging.info(f"Querying urlscan.io for brand keywords...")
         logging.debug(f"Query: {search_query[:300]}...")
         
-        # API parameters
         params = {
             'q': search_query,
-            'size': min(max_results, 10000),  # API limit is 10000
+            'size': min(max_results, 10000),
         }
         
         url = "https://urlscan.io/api/v1/search/"
@@ -472,21 +504,16 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
             
             logging.info(f"Found {len(results)} results (total available: {total})")
             
-            # Extract unique domains from results
             domains = []
             seen_domains = set()
             
             for result in results:
-                # Extract domain from various fields
                 domain = None
                 
-                # Try page.domain first (most reliable)
                 if 'page' in result and 'domain' in result['page']:
                     domain = result['page']['domain']
-                # Fallback to task.domain
                 elif 'task' in result and 'domain' in result['task']:
                     domain = result['task']['domain']
-                # Last resort: parse from URL
                 elif 'page' in result and 'url' in result['page']:
                     try:
                         from urllib.parse import urlparse
@@ -507,12 +534,16 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
             
             logging.info(f"Extracted {len(domains)} unique domains")
             
-            # If we have space for more results, do targeted searches for suspicious TLDs
-            if len(domains) < max_results * 0.8:  # If we got less than 80% of max
+            # Targeted TLD searches — covers both courier and government phishing TLDs
+            if len(domains) < max_results * 0.8:
                 logging.info("Performing targeted searches for suspicious TLDs...")
                 
-                # Search for courier brands on specific suspicious TLDs
-                for tld in ['.cfd', '.tk', '.pages.dev', '.web.app', '.ml', '.ga']:
+                tlds_to_search = [
+                    '.cfd', '.tk', '.pages.dev', '.web.app', '.ml', '.ga',
+                    '.sbs', '.cam', '.shop', '.one', '.autos', '.life',
+                    '.qpon', '.uno',
+                ]
+                for tld in tlds_to_search:
                     tld_query = ' OR '.join([f'domain:*{kw}*{tld}' for kw in keywords])
                     
                     tld_params = {
@@ -547,7 +578,6 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
                             
                             logging.debug(f"  Found {len(tld_results)} on {tld}")
                         
-                        # Small delay to avoid rate limiting
                         time.sleep(0.5)
                         
                     except Exception as e:
@@ -558,7 +588,6 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
             return domains
             
         elif response.status_code == 429:
-            # Rate limited
             if retry_count < max_retries:
                 wait_time = (retry_count + 1) * 10
                 logging.warning(f"Rate limited by urlscan.io, retrying in {wait_time}s")
@@ -593,11 +622,7 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
 
 def query_urlscan_recent(days=7, max_results=1000):
     """
-    Query urlscan.io for recent submissions containing courier keywords
-    
-    Args:
-        days: Number of days to look back
-        max_results: Maximum results to return
+    Query urlscan.io for recent submissions containing brand keywords
     """
     try:
         headers = {
@@ -605,16 +630,11 @@ def query_urlscan_recent(days=7, max_results=1000):
             "Content-Type": "application/json"
         }
         
-        # Calculate date range
         end_date = datetime.datetime.now()
         start_date = end_date - datetime.timedelta(days=days)
         
-        # Build query for recent scans with courier keywords
         keyword_query = ' OR '.join([f'page.domain:*{k}*' for k in COURIER_KEYWORDS])
-        
-        # Add time filter
         date_filter = f'date:>{start_date.strftime("%Y-%m-%d")}'
-        
         full_query = f'({keyword_query}) AND {date_filter}'
         
         logging.info(f"Querying urlscan.io for last {days} days")
@@ -633,7 +653,6 @@ def query_urlscan_recent(days=7, max_results=1000):
             
             logging.info(f"Found {len(results)} recent submissions")
             
-            # Process results same as query_urlscan
             domains = []
             seen_domains = set()
             
@@ -675,7 +694,6 @@ except ImportError:
     logging.warning("cryptography module not available. Install with: pip install cryptography")
 
 
-# CT Log URLs for direct polling
 CT_LOG_SOURCES = {
     'google_argon2025h2': {
         'url': 'https://ct.googleapis.com/logs/us1/argon2025h2',
@@ -719,14 +737,12 @@ def extract_domains_from_cert(cert_data):
         cert = x509.load_pem_x509_certificate(cert_data, default_backend())
         domains = []
 
-        # Get Common Name
         try:
             cn = cert.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)[0].value
             domains.append(cn)
         except:
             pass
 
-        # Get Subject Alternative Names
         try:
             san_ext = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)
             for san in san_ext.value:
@@ -746,7 +762,6 @@ def query_ct_log_direct(log_url, max_entries=500):
     try:
         import base64
         
-        # Get the current tree size
         sth_url = f"{log_url}/ct/v1/get-sth"
         response = requests.get(sth_url, timeout=10)
 
@@ -759,7 +774,6 @@ def query_ct_log_direct(log_url, max_entries=500):
         if tree_size == 0:
             return []
 
-        # Get recent entries (last max_entries)
         start = max(0, tree_size - max_entries)
         end = min(start + max_entries - 1, tree_size - 1)
 
@@ -775,21 +789,16 @@ def query_ct_log_direct(log_url, max_entries=500):
 
         for entry in entries_data:
             try:
-                # Decode the extra_data which contains the certificate chain
                 extra_data = base64.b64decode(entry['extra_data'])
 
-                # Parse the certificate
                 if len(extra_data) > 3:
-                    # Read certificate length (3 bytes, big-endian)
                     cert_len = int.from_bytes(extra_data[0:3], 'big')
                     cert_data = extra_data[3:3+cert_len]
 
-                    # Convert DER to PEM
                     pem_cert = b'-----BEGIN CERTIFICATE-----\n'
                     pem_cert += base64.b64encode(cert_data)
                     pem_cert += b'\n-----END CERTIFICATE-----\n'
 
-                    # Extract domains
                     domains = extract_domains_from_cert(pem_cert)
 
                     for domain in domains:
@@ -817,11 +826,8 @@ def query_ct_log_direct(log_url, max_entries=500):
 
 def scan_domains(duration=None, sources=['urlscan']):
     """
-    Main scanning function using configured sources
-    
-    Args:
-        duration: Maximum duration in seconds (None for unlimited)
-        sources: List of sources to use ['urlscan', 'google', 'cloudflare']
+    Main scanning function using configured sources.
+    Monitors both courier brands and government service brands (MVR).
     """
     start_time = datetime.datetime.now()
     processed_domains = set()
@@ -830,8 +836,8 @@ def scan_domains(duration=None, sources=['urlscan']):
     logging.info("Starting phishing domain scanner...")
     logging.info(f"Using sources: {', '.join(sources)}")
     logging.info(f"Score threshold: {SCORE_THRESHOLD}")
+    logging.info(f"Monitoring: courier brands + MVR government services")
 
-    # Collect domains from all sources
     all_domains = []
 
     # URLScan.io - PRIMARY SOURCE
@@ -840,13 +846,11 @@ def scan_domains(duration=None, sources=['urlscan']):
         logging.info("Querying URLScan.io...")
         logging.info("=" * 60)
         
-        # Query with courier keywords
         urlscan_domains = query_urlscan(COURIER_KEYWORDS, max_results=1000)
         all_domains.extend(urlscan_domains)
         
         logging.info(f"URLScan.io returned {len(urlscan_domains)} domains")
         
-        # Also query recent submissions (last 7 days)
         recent_domains = query_urlscan_recent(days=7, max_results=500)
         all_domains.extend(recent_domains)
         
@@ -856,7 +860,6 @@ def scan_domains(duration=None, sources=['urlscan']):
     if 'google' in sources:
         if not CRYPTOGRAPHY_AVAILABLE:
             logging.error("Cannot use Google CT logs: cryptography module not installed")
-            logging.error("Install with: pip install cryptography")
         else:
             logging.info("=" * 60)
             logging.info("Querying Google CT Logs...")
@@ -864,7 +867,6 @@ def scan_domains(duration=None, sources=['urlscan']):
             
             for log_key, log_info in CT_LOG_SOURCES.items():
                 if log_key.startswith('google_') and log_info.get('type') == 'ct_log':
-                    # Check timeout
                     if duration:
                         elapsed = (datetime.datetime.now() - start_time).total_seconds()
                         if elapsed > duration:
@@ -873,7 +875,6 @@ def scan_domains(duration=None, sources=['urlscan']):
                     
                     ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
                     
-                    # Convert format
                     for item in ct_domains:
                         all_domains.append({
                             'domain': item['domain'],
@@ -884,7 +885,6 @@ def scan_domains(duration=None, sources=['urlscan']):
     if 'cloudflare' in sources:
         if not CRYPTOGRAPHY_AVAILABLE:
             logging.error("Cannot use Cloudflare CT logs: cryptography module not installed")
-            logging.error("Install with: pip install cryptography")
         else:
             logging.info("=" * 60)
             logging.info("Querying Cloudflare CT Logs...")
@@ -892,7 +892,6 @@ def scan_domains(duration=None, sources=['urlscan']):
             
             for log_key, log_info in CT_LOG_SOURCES.items():
                 if log_key.startswith('cloudflare_') and log_info.get('type') == 'ct_log':
-                    # Check timeout
                     if duration:
                         elapsed = (datetime.datetime.now() - start_time).total_seconds()
                         if elapsed > duration:
@@ -901,7 +900,6 @@ def scan_domains(duration=None, sources=['urlscan']):
                     
                     ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
                     
-                    # Convert format
                     for item in ct_domains:
                         all_domains.append({
                             'domain': item['domain'],
@@ -914,7 +912,6 @@ def scan_domains(duration=None, sources=['urlscan']):
     logging.info("=" * 60)
 
     for item in all_domains:
-        # Check timeout
         if duration:
             elapsed = (datetime.datetime.now() - start_time).total_seconds()
             if elapsed > duration:
@@ -924,7 +921,6 @@ def scan_domains(duration=None, sources=['urlscan']):
         domain = item.get('domain', '').strip()
         source = item.get('source', 'unknown')
 
-        # Skip empty, wildcards, or duplicates
         if not domain or domain.startswith('*') or domain in processed_domains:
             continue
 
@@ -935,11 +931,11 @@ def scan_domains(duration=None, sources=['urlscan']):
             logging.debug(f"[SKIP] Infrastructure: {domain}")
             continue
 
-        # STEP 2: Require courier keywords (PRIMARY FILTER)
-        has_courier, courier_keywords = contains_courier_keyword(domain)
+        # STEP 2: Require brand keywords (PRIMARY FILTER)
+        has_brand, brand_keywords = contains_courier_keyword(domain)
 
-        if not has_courier:
-            logging.debug(f"[SKIP] No courier keywords: {domain}")
+        if not has_brand:
+            logging.debug(f"[SKIP] No brand keywords: {domain}")
             continue
 
         # STEP 3: Check if on monitored platforms/TLDs
@@ -949,17 +945,16 @@ def scan_domains(duration=None, sources=['urlscan']):
             logging.debug(f"[SKIP] Not on suspicious platform: {domain}")
             continue
 
-        # STEP 4: Calculate score (domain has courier keyword + suspicious platform)
+        # STEP 4: Calculate score
         score = calculate_score(domain)
 
         if score >= SCORE_THRESHOLD:
             findings_count += 1
 
-            # Console notification
             logging.warning(
                 f"🚨 PHISHING DETECTED: {domain} | "
                 f"Score: {score}/100 | "
-                f"Keywords: {', '.join(courier_keywords)} | "
+                f"Keywords: {', '.join(brand_keywords)} | "
                 f"Source: {source}"
             )
 
@@ -968,10 +963,9 @@ def scan_domains(duration=None, sources=['urlscan']):
         else:
             logging.info(
                 f"[LOW SCORE] {domain} (score: {score}) - "
-                f"Keywords: {', '.join(courier_keywords)}"
+                f"Keywords: {', '.join(brand_keywords)}"
             )
 
-    # Save final stats
     elapsed = (datetime.datetime.now() - start_time).total_seconds()
     save_run_stats(len(processed_domains), findings_count, elapsed)
     
@@ -990,7 +984,7 @@ def main():
     global START_TIME, MAX_DURATION
 
     import argparse
-    parser = argparse.ArgumentParser(description='Phishing Domain Detector - URLScan.io Edition')
+    parser = argparse.ArgumentParser(description='Phishing Domain Detector - Courier & Government Edition')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
     parser.add_argument('--sources', nargs='+', 
                        choices=['urlscan', 'google', 'cloudflare'], 
@@ -1002,24 +996,22 @@ def main():
     START_TIME = datetime.datetime.now()
 
     logging.info("=" * 60)
-    logging.info("Phishing Domain Detector - URLScan.io Edition")
+    logging.info("Phishing Domain Detector - Courier & Government Edition")
     logging.info("=" * 60)
     logging.info(f"Sources: {', '.join(args.sources)}")
     logging.info(f"Output: {OUTPUT_FILE}")
+    logging.info(f"Targets: Bulgarian couriers + MVR e-services (e-uslugi.mvr.bg)")
     
     if MAX_DURATION:
         logging.info(f"Max duration: {MAX_DURATION} seconds")
     
     logging.info("=" * 60)
 
-    # Ensure output dir exists
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
-    # Create empty feed if not exists
     if not os.path.exists(OUTPUT_FILE):
         save_feed([])
 
-    # Run scanner
     scan_domains(duration=MAX_DURATION, sources=args.sources)
 
 
