@@ -77,6 +77,15 @@ BULGARIAN_GOVT_BRANDS = [
     'euslugi',    # Without-hyphen variant
 ]
 
+# Brands that are common English words or short acronyms appearing in many
+# unrelated domains. For these, a Bulgarian geo indicator must also be present
+# somewhere in the domain before we treat it as a phishing candidate.
+#   speedy  — common English adjective (speedy.brtv.uno, speedy-glass.cfd)
+#   dhl     — international brand used globally, not specific to Bulgaria
+#   mvr     — 3-letter acronym found inside random strings (fumvrak, shumvrax)
+# Unambiguous brands (econt, bgpost, mvrbg, e-uslugi …) do NOT need this check.
+AMBIGUOUS_BRANDS = frozenset({'speedy', 'dhl', 'mvr'})
+
 # Geographic indicators that suggest impersonation
 GEO_INDICATORS = ['.bg', 'bulgaria', 'bg-', '-bg', 'bggov', 'govbg', 'gov-bg', 'bg-gov']
 
