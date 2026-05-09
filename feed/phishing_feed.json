@@ -2081,5 +2081,42 @@
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.713584",
     "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "www.gav.mvrbg.cam",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.723584",
+    "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "bgpost-bga.life",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.733584",
+    "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "speedy.bg-iw.qpon",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.743584",
+    "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "speedy.bg-ip.qpon",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.753584",
+    "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "speedy.bg-po.qpon",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.763584",
+    "source": "urlscan.io-.qpon"
+  },
+  {
+    "domain": "www.mvr-bg.cfd",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.773584",
+    "source": "urlscan.io-.qpon"
   }
+  
 ]
