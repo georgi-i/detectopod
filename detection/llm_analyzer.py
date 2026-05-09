@@ -15,11 +15,7 @@ from datetime import datetime, timedelta
 # Free models to try in order when the primary openrouter/free router fails.
 # All end with :free — no credits consumed. Ordered by quality for this task.
 FREE_MODEL_FALLBACKS = [
-    "meta-llama/llama-3.3-70b-instruct:free",
-    "deepseek/deepseek-v3:free",
-    "deepseek/deepseek-r1:free",
-    "qwen/qwen3-14b:free",
-    "mistralai/mistral-small-3.1:free",
+    "meta-llama/llama-3.3-70b-instruct:free"
 ]
 
 
