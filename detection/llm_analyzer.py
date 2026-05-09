@@ -12,18 +12,32 @@ import argparse
 import requests
 from datetime import datetime, timedelta
 
+# Free models to try in order when the primary openrouter/free router fails.
+# All end with :free — no credits consumed. Ordered by quality for this task.
+FREE_MODEL_FALLBACKS = [
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "deepseek/deepseek-v3:free",
+    "deepseek/deepseek-r1:free",
+    "qwen/qwen3-14b:free",
+    "mistralai/mistral-small-3.1:free",
+]
+
+
 class OpenRouterAnalyzer:
-    def __init__(self, api_key, model="anthropic/claude-sonnet-4-5"):
+    def __init__(self, api_key, model="openrouter/free"):
         self.api_key = api_key
-        self.model = model
+        self.model = model          # primary — auto-routes to best available free model
+        self.fallbacks = FREE_MODEL_FALLBACKS
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.requests_made = 0
-        self.max_requests = 1000  # BYOK — no artificial daily cap
+        # Free tier: ~200 req/day without credits, ~1000/day after $10 deposit.
+        # Keep at 200 so we never silently exhaust credits on a paid account.
+        self.max_requests = 200
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
-        """Analyze a domain using LLM"""
+        """Analyze a domain using LLM, falling back through free models on error."""
         if self.requests_made >= self.max_requests:
-            print(f"⚠️  Daily limit reached ({self.max_requests} requests)")
+            print(f"⚠️  Daily free-tier limit reached ({self.max_requests} requests)")
             return None
 
         prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian online services.
@@ -73,48 +87,63 @@ Provide structured analysis:
 Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearly
 belongs to an unrelated legitimate category."""
 
-        try:
-            response = requests.post(
-                self.base_url,
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "HTTP-Referer": "https://github.com/detectopod",
-                    "X-Title": "Phishing Detector"
-                },
-                json={
-                    "model": self.model,
-                    "messages": [
-                        {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    "temperature": 0.3,
-                    "max_tokens": 300
-                },
-                timeout=30
-            )
+        models_to_try = [self.model] + self.fallbacks
 
-            if response.status_code == 200:
-                result = response.json()
-                analysis = result['choices'][0]['message']['content']
-                self.requests_made += 1
+        for attempt, model_id in enumerate(models_to_try):
+            try:
+                response = requests.post(
+                    self.base_url,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "HTTP-Referer": "https://github.com/detectopod",
+                        "X-Title": "Phishing Detector"
+                    },
+                    json={
+                        "model": model_id,
+                        "messages": [
+                            {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
+                            {"role": "user", "content": prompt}
+                        ],
+                        "temperature": 0.3,
+                        "max_tokens": 300
+                    },
+                    timeout=30
+                )
 
-                # 3-second delay to respect rate limits (20/minute)
-                time.sleep(3)
+                if response.status_code == 200:
+                    result = response.json()
+                    analysis = result['choices'][0]['message']['content']
+                    self.requests_made += 1
 
-                return {
-                    'analysis': analysis,
-                    'model': self.model,
-                    'timestamp': datetime.utcnow().isoformat(),
-                    'threat_level': self._extract_threat_level(analysis),
-                    'decision': self._extract_decision(analysis)
-                }
-            else:
-                print(f"❌ API error {response.status_code}: {response.text}")
-                return None
+                    if attempt > 0:
+                        print(f"   ↳ used fallback: {model_id}")
 
-        except Exception as e:
-            print(f"❌ Error analyzing {domain}: {e}")
-            return None
+                    # Respect free-tier rate limit (20 req/min)
+                    time.sleep(3)
+
+                    return {
+                        'analysis': analysis,
+                        'model': model_id,
+                        'timestamp': datetime.utcnow().isoformat(),
+                        'threat_level': self._extract_threat_level(analysis),
+                        'decision': self._extract_decision(analysis)
+                    }
+
+                elif response.status_code == 429:
+                    print(f"   ⚠️  Rate limited on {model_id}, trying next free model...")
+                    time.sleep(5)
+                    continue
+
+                else:
+                    print(f"   ⚠️  {model_id} returned {response.status_code}, trying next...")
+                    continue
+
+            except Exception as e:
+                print(f"   ⚠️  {model_id} error: {e}, trying next...")
+                continue
+
+        print(f"❌ All free models exhausted for {domain}")
+        return None
 
     def _extract_threat_level(self, analysis):
         """Extract threat level from analysis text"""
@@ -142,7 +171,7 @@ belongs to an unrelated legitimate category."""
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
-    parser.add_argument('--max-analyze', type=int, default=1000, help='Maximum domains to analyze')
+    parser.add_argument('--max-analyze', type=int, default=200, help='Maximum domains to analyze (free tier: 200/day)')
     parser.add_argument('--min-score', type=int, default=75, help='Minimum score to analyze')
     parser.add_argument('--feed-file', default='feed/phishing_feed.json', help='Feed file path')
     parser.add_argument('--reanalyze', action='store_true',
@@ -196,9 +225,10 @@ def main():
         return
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
-    print(f"   Model: Claude Sonnet 4.5 (via OpenRouter BYOK)")
+    print(f"   Primary: openrouter/free (auto-selects best available free model)")
+    print(f"   Fallbacks: {', '.join(FREE_MODEL_FALLBACKS)}")
     print(f"   Targets: Bulgarian couriers + MVR e-services")
-    print(f"   Limit: {args.max_analyze} domains\n")
+    print(f"   Daily limit: 200 requests (free tier)\n")
 
     analyzer = OpenRouterAnalyzer(api_key)
 
