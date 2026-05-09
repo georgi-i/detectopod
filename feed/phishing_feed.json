@@ -1693,19 +1693,40 @@
     "domain": "e-uslugimvrbga.top",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.634196",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**1. Threat Level:** HIGH\n\n**2. Confidence:** 98%\n\n**3. Key Indicators:**\n- **\"e-us",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T16:42:25.310474",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "e-uslugicye.top",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.637171",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: e-uslugicye.top\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 98%\n\n**3. Key Indicators:**\n- **Target impersonation:** Domain incorporates \"e-uslugi\" \u2014 the exact name of the legitimate Bulgarian MVR e-services portal (e-uslugi.mvr.bg)\n- **Pattern match:** Follows the documented phishing pattern of \"e-uslugi + random suffix\" (cye), identical to other confirmed phishing domains in this campaign\n- **Suspicious TLD:** Uses `.top` TLD, consistent with other flagged MVR phishing domains (.sbs, .cam, .shop, .autos, .life, .one)\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a textbook MVR government phishing domain. The combination of the exact government service name (\"e-uslugi\") with a random suffix on a suspicious TLD is the definitive pattern for this campaign. No legitimate business would use this exact naming convention. The \"cye\" suffix appears randomly generated to evade exact string matching while maintaining visual similarity to the legitimate domain.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:10:41.411822",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.govmk.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.639788",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: mvr.govmk.one\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **\"mvr\" prefix**: Directly impersonates the Bulgarian Ministry of Interior (\u041c\u0438\u043d\u0438\u0441\u0442\u0435\u0440\u0441\u0442\u0432\u043e \u043d\u0430 \u0432\u044a\u0442\u0440\u0435\u0448\u043d\u0438\u0442\u0435 \u0440\u0430\u0431\u043e\u0442\u0438) \u2014 the exact entity targeted by this rule\n- **\"govmk\" root**: Combines \"gov\" (government) with \"mk\" (Macedonia country code), mimicking a government domain structure\n- **\".one\" TLD**: Explicitly listed among suspicious TLDs in the phishing pattern (.one, .sbs, .cam, .shop, .autos, .life)\n\n**4. Decision:** BLOCK\n\n**Rationale:** This domain matches the exact phishing pattern described: \"mvr\" combined with a government-like string and a suspicious TLD. The \"govmk\" construct appears designed to mimic a government domain (possibly leveraging North Macedonia's \".mk\" TLD to create confusion). Unlike legitimate businesses that might incidentally use \"mvr\" (e.g., motor vehicle records), this domain's structure is clearly attempting to impersonate Bulgarian government e-services. No false positive indicators present.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:11:07.814585",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.mvrbg.sbs",
@@ -1723,37 +1744,66 @@
     "domain": "mvr-bg.top",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.655312",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: mvr-bg.top\n\n| Field | Value |\n|-------|-------|\n| **Threat Level** | HIGH |\n| **Confidence** | 100% |\n| **Decision** | BLOCK |\n\n### Key Indicators\n\n1. **Direct MVR impersonation**: The string \"mvr-bg\" unambiguously targets the Bulgarian Ministry of Interior (\u041c\u0412\u0420). This is not a common English abbreviation\u2014it exists almost exclusively in Bulgarian government context.\n\n2. **Matches known phishing pattern**: This domain follows the exact template identified in your rule base: `mvr` + `bg` + suspicious TLD. Compare against flagged domains: mvr-bg.shop, mvr-bg.autos, mvrbg.life.\n\n3. **Suspicious TLD**: `.top` is a budget TLD frequently used in phishing campaigns. No legitimate Bulgarian government service would use `.top`\u2014official portals use `.bg` TLDs.\n\n### False Positive Assessment\n\n- **NOT** a legitimate business (no medical, legal, tech, real estate markers)\n- **NOT** personal/entertainment\n- **NOT** developer/test infrastructure\n- **NOT** IoT/router hosts\n- **NOT** unrelated e-commerce\n\n### Conclusion\n\nThis is a textbook government phishing domain. The combination of \"mvr-bg\" with a `.top` TLD has zero legitimate use cases. The domain exists solely to harvest credentials from Bulgarian citizens seeking e-government services. **BLOCK immediately.**",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:12:09.296500",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.mvr-bg.shop",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.661552",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "## Analysis: www.mvr-bg.shop\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 98%\n\n**3. Key Indicators:**\n- **Exact pattern match:** Combines \"mvr\" (Bulgarian Ministry of Interior) with \"-bg\" (Bulgarian indicator) \u2014 explicitly listed in phishing patterns\n- **Suspicious TLD:** `.shop` is explicitly enumerated as a high-risk TLD in the threat context\n- **Impersonation intent:** The combination is designed to mimic legitimate `e-uslugi.mvr.bg` \u2014 no legitimate Bulgarian business would use this exact \"mvr-bg\" formulation\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a textbook example of the described phishing campaign. The domain uses the exact \"mvr + bg\" concatenation pattern with a suspicious TLD (.shop), directly targeting the Bulgarian Ministry of Interior e-services. Unlike false positives (unrelated businesses, personal pages, dev/test domains), this domain's sole purpose appears to be government impersonation. The .shop TLD adds no legitimate business credibility \u2014 there is no apparent connection to actual retail or commerce that would justify this naming convention.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:12:44.469749",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr-gov-mk.icu",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.670572",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "www.gav.mvrbg.cam",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:28.680028",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**1. Threat Level:** HIGH  \n**2. Confidence:** 96%  \n\n**3. Key Indicators**  \n- Contains \u201cmvr\u201d and \u201cgov\u201d \u2013 direct impersonation of the Bulgarian Ministry of Interior (MVR) e\u2011services.  \n- Uses the suspicious generic TLD **.icu** and appears to be hosted on a free/serverless platform, a common tactic for phishing sites.  \n- No legitimate business context (e.g., courier, medical, legal) is evident; the domain\u2019s structure mirrors known MVR\u2011phishing patterns (e\u2011uslugi + random suffix, gov\u2011bg combos).\n\n**4. Decision:** BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:12:49.291315",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "e-uslugio.top",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.684155",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "**1. Threat Level:** HIGH  \n**2. Confidence:** 90%  \n**3. Key Indicators**  \n- Domain mimics the legitimate portal **e\u2011uslugi.mvr.bg** (e\u2011uslug**io** vs. e\u2011uslugi).  \n- Uses a **suspicious TLD (.top)** commonly seen in phishing kits and free/serverless hosting.  \n- Matches known pattern: \u201ce\u2011uslugi\u201d + random suffix + low\u2011reputation TLD, a hallmark of Bulgarian MVR phishing campaigns.  \n\n**4. Decision:** BLOCK (or route to quarantine for further investigation).",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:13:03.725912",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.mvr.bggov.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.686876",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH  \n2. **Confidence**: 95%  \n3. **Key Indicators",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:13:11.610383",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.mvr.govbg.one",
@@ -1771,7 +1821,14 @@
     "domain": "e-uslugimad.top",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.698133",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 95%\n3. Key Indicators:\n   - Domain mimics legitimate MVR e-services structure with \"e-uslugi\" prefix and uses a suspicious TLD (.top).\n   - Matches known phishing pattern of combining \"mvr\" with a suspicious TLD.\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:13:44.713540",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrbg.life",
@@ -1801,7 +1858,14 @@
     "domain": "mvrgovmk.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.237389",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 95%  \n3. Key Indicators:  \n   - Domain combines \u201cmvr\u201d (Ministry of Interior) with \u201cgov\u201d and a suspicious free\u2011hosting TLD (.cam)  \n   - No legitimate business or service context; does not match",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:14:48.767927",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.new-bgpost.cam",
@@ -1813,25 +1877,53 @@
     "domain": "new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.273738",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n\n2. **Confidence:** 95%\n\n3. **Key Indicators:**\n   - **Direct impersonation:** \"bgpost\" clearly targets BulgariaPost (\u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u043f\u043e\u0449\u0438) - the legitimate Bulgarian national postal service\n   - **Suspicious TLD:** `.cam` is commonly used in phishing campaigns (also listed in the rule's suspicious TLDs)\n   - **Pattern match:** \"new-[service]\" is a classic phishing pattern creating fake \"new\" versions of legitimate services\n\n4. **Decision:** BLOCK\n\n**Rationale:** This is a clear phishing domain impersonating BulgariaPost. Unlike generic keywords like \"speedy\" (common English adjective), \"bgpost\" is a specific reference to the Bulgarian national postal service. The `.cam` TLD combined with the \"new-\" prefix and Bulgarian service impersonation creates a high-confidence phishing indicator. No false positive factors apply\u2014this is not a unrelated business, personal page, or developer test domain.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:15:38.397047",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.gov-mk.shop",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.285186",
-    "source": "urlscan.io-.shop"
+    "source": "urlscan.io-.shop",
+    "llm_analysis": {
+      "analysis": "**Analysis: mvr.gov-mk.shop**\n\n| Category | Assessment |\n|----------|-------------|\n| **Threat Level** | HIGH |\n| **Confidence** | 95% |\n| **Decision** | BLOCK |\n\n**Key Indicators:**\n\n1. **MVR + Gov impersonation**: Combines \"mvr\" (Bulgarian Ministry of Interior) with \"gov\" (government) \u2014 the exact credential pair used in known phishing patterns (mvr.govbg.one, mvr.bggov.cam)\n\n2. **Suspicious TLD**: \".shop\" is explicitly listed in the threat model as a TLD associated with MVR phishing campaigns\n\n3. **Typosquatting element**: The \"-mk\" segment appears designed to mimic a government domain structure while leveraging the .mk (North Macedonia) ccTLD to appear legitimate or evade simple filters\n\n**Rationale:** This domain hits multiple known threat patterns simultaneously: MVR abbreviation + \"gov\" keyword + suspicious TLD + Bulgarian government targeting. No false positive indicators present \u2014 not a legitimate business, personal page, educational tool, or unrelated platform.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:16:06.332238",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr-gov-mk.shop",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.288754",
-    "source": "urlscan.io-.shop"
+    "source": "urlscan.io-.shop",
+    "llm_analysis": {
+      "analysis": "**1. Threat Level:** HIGH  \n\n**2. Confidence:** 96%  \n\n**3. Key Indicators:**  \n- Domain name combines \u201cmvr\u201d (Ministry of Interior) with \u201cgov\u201d and a country code \u201cmk\u201d, mimicking a government e\u2011services URL.  \n- Uses a suspicious free/serverless TLD \u201c.shop\u201d (common in phishing kits) and no legitimate business keywords.  \n- No clear association with a legitimate courier or commercial service; the pattern",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:16:13.579333",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy.bg-m34289.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.436721",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 90%\n3. Key Indicators:\n   - The domain combines \"mvr\" with a suspicious TLD (.one), which is a common pattern in government phishing campaigns targeting Bulgarian services.\n   - The domain does not match any legitimate Bulgarian courier service or government e-services portal, and the presence of \"speedy\" does not mitigate the risk associated with the suspicious TLD and \"mvr\" concatenation.\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:16:18.895533",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-m24169.one",
@@ -1855,7 +1947,14 @@
     "domain": "econt.bg-m34289.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.483829",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "## Analysis: econt.bg-m34289.one\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 98%\n\n**3. Key Indicators:**\n- **Brand impersonation**: Directly uses \"econt\" (legitimate Bulgarian courier brand) + \"bg\" (country indicator)\n- **Suspicious TLD**: `.one` is a non-standard TLD frequently used in phishing campaigns (matches the MVR pattern list which includes `.one` as suspicious)\n- **Randomized subdomain pattern**: The `m34289` suffix mimics credential harvesting pages that use random strings to evade blocklists while maintaining brand appearance\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a textbook courier phishing domain. Unlike generic keywords, \"econt\" here is combined with:\n- Bulgarian country indicator (\"bg\")\n- Suspicious TLD (.one)\n- Random alphanumeric string (common evasion tactic)\n\nThis is **not a false positive** because it directly impersonates a monitored Bulgarian courier service using the exact pattern (brand + bg + random suffix + suspicious TLD) that the rule targets. The MVR context confirms `.one` is a known phishing TLD in this campaign cluster.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:17:28.030144",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-l2342.one",
@@ -1867,7 +1966,14 @@
     "domain": "econt-bg.in95826.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.570443",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "**Threat Level:** HIGH  \n**Confidence:**",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:17:53.187153",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "econt-bg.inkl63179.life",
@@ -1879,12 +1985,6 @@
     "domain": "speedy-bg.inkl63179.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.579004",
-    "source": "urlscan.io-.life"
-  },
-  {
-    "domain": "bgpost-bga.life",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:29.598217",
     "source": "urlscan.io-.life"
   },
   {
@@ -1906,34 +2006,56 @@
     "source": "urlscan.io-.qpon"
   },
   {
-    "domain": "speedy.bg-iw.qpon",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:29.637731",
-    "source": "urlscan.io-.qpon"
-  },
-  {
     "domain": "speedy.bg-g.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.642036",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "## Analysis: speedy.bg-g.qpon\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 90%\n\n**3. Key Indicators:**\n- **Brand impersonation**: \"speedy\" directly references the Bulgarian courier service Speedy (speedy.bg is the legitimate site)\n- **Country obfuscation**: \"bg-g\" combines Bulgaria indicator with a hyphenated suffix, mimicking legitimate government/courier domain patterns\n- **Unusual TLD usage**: \".qpon\" (coupon TLD) is atypical for Bulgarian logistics services and serves to obscure the domain\n\n**4. Decision:** BLOCK\n\n**Rationale:**\nThis follows a classic subdomain-based impersonation pattern. Attackers use a legitimate-looking subdomain (\"speedy\") paired with an obscure TLD to mimic official courier domains. The \"bg-g\" structure mirrors the government phishing patterns noted (concatenating \"bg\" with other indicators). Unlike false positives (unrelated businesses, personal sites, developer pages), this domain has no legitimate business purpose other than impersonation.\n\nThe domain does NOT qualify as a false positive because:\n- It's not an unrelated business (medical, legal, etc.)\n- It's not personal/entertainment\n- It's not educational or developer-related\n- It directly targets a monitored Bulgarian courier service using brand name + country indicator",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:20:01.117546",
+      "threat_level": "UNKNOWN",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-yi.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.648336",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "**1. Threat Level:** HIGH  \n**2. Confidence:** 90\u202f%  \n**3. Key Indicators**  \n- Domain mimics the legitimate courier \u201cspeedy.bg\u201d (targeted service) but adds a hyphenated sub\u2011domain and uses the obscure TLD **.qpon**, a pattern typical of free/serverless phishing hosts.  \n- The structure \u201cspeedy.bg\u2011yi.qpon\u201d combines a known Bulgarian brand with a random suffix, a common tactic to evade exact\u2011match filters while still appearing trustworthy to users.  \n- No legitimate business or public service uses a \u201c\u2011yi.qpon\u201d suffix; the TLD is not recognized for reputable Bulgarian entities, indicating a likely malicious hosting environment.\n\n**4. Decision:** BLOCK (or route to quarantine for further investigation).",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:20:25.873242",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-ti.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.653643",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "We need to analyze domain: speedy.bg-ti.qpon\n\nRule-based score 100/100. No keywords. Hosting: free/serverless platform or suspicious TLD. TLD .qpon is suspicious (coupon). Domain includes \"speedy.bg-ti\". The pattern: \"speedy\" is a courier service name (Speedy). The domain includes \"speedy.bg-ti.qpon\". It's like speedy.bg-ti.qpon. The legitimate Speedy courier site is speedy.bg (Bulgarian courier). This domain tries to mimic speedy.bg with extra .bg-ti? Actually it's speedy.bg-ti.qpon: subdomain speedy.bg-ti under .qpon TLD. So it's using speedy.bg as part of subdomain? The domain is speedy.bg-ti.qpon. The second-level domain is bg-ti? Actually .qpon is TLD, then domain is speedy.bg-ti? Wait: The format: speedy.bg-ti.qpon. So TLD .qpon, second-level domain is bg-ti? Actually domain labels: speedy (subdomain), bg-ti (second-level?), .qpon TLD. So the domain is speedy.bg-ti.qpon. It includes \"speedy\" and \"bg\". The pattern for courier phishing: they might use speedy + something + suspicious T",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:20:39.417843",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "speedy.bg-il.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.658909",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 90%\n3. Key Indicators:\n   - Domain combines \"speedy\" (associated with courier services) and \"bg\" (Bulgarian indicator) with a suspicious TLD (.qpon).\n   - No apparent keywords or patterns specific to legitimate Bulgarian courier services.\n4. Decision: BLOCK",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:20:44.920924",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-yh.qpon",
@@ -1942,22 +2064,17 @@
     "source": "urlscan.io-.qpon"
   },
   {
-    "domain": "speedy.bg-ip.qpon",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:29.670403",
-    "source": "urlscan.io-.qpon"
-  },
-  {
-    "domain": "speedy.bg-po.qpon",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:29.675723",
-    "source": "urlscan.io-.qpon"
-  },
-  {
     "domain": "speedy.bg-pot.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.680117",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 90%\n3. Key Indicators:\n   - The domain \"speedy.bg-pot.qpon\" uses a suspicious TLD (.qpon), which is not commonly associated with legitimate Bulgarian services.\n   - The domain structure mimics the pattern of known phishing domains that combine elements of the legitimate MVR e-services site with a suspicious TLD.\n4. Decision: BLOCK\n\nThe domain appears to be designed to impersonate legitimate Bulgarian courier services or government e-services, using a suspicious TLD and a structure similar to known phishing domains. Given the high confidence level and the presence of key indicators, it is recommended to block the domain to prevent potential phishing attacks.",
+      "model": "openrouter/free",
+      "timestamp": "2026-05-09T17:21:26.093211",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.bgpost.qpon",
