@@ -2122,7 +2122,19 @@
     "domain": "www.mvr-bg.cfd",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.cfd"
+  },
+  {
+    "domain": "mvrbg.ink",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.773584",
+    "source": "urlscan.io-.ink"
+  },
+  {
+    "domain": "mvrbg.cyou",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.773584",
+    "source": "urlscan.io-.cyou"
   }
-  
+
 ]
