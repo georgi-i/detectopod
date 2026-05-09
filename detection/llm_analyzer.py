@@ -12,22 +12,20 @@ import argparse
 import requests
 from datetime import datetime, timedelta
 
-# Free models to try in order when the primary openrouter/free router fails.
-# All end with :free — no credits consumed. Ordered by quality for this task.
-FREE_MODEL_FALLBACKS = [
-    "meta-llama/llama-3.3-70b-instruct:free"
-]
+# Single model — Llama 3.3 70B is the only free model that reliably avoids
+# false-positive errors on Bulgarian courier/government phishing patterns.
+# Other free models (DeepSeek, Qwen, Mistral) incorrectly flagged confirmed
+# phishing domains like speedy.bg-*.qpon, mvrbg.cam, bgpost-*.life as safe.
+MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
 
 class OpenRouterAnalyzer:
-    def __init__(self, api_key, model="openrouter/free"):
+    def __init__(self, api_key, model=MODEL):
         self.api_key = api_key
-        self.model = model          # primary — auto-routes to best available free model
-        self.fallbacks = FREE_MODEL_FALLBACKS
+        self.model = model
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.requests_made = 0
         # Free tier: ~200 req/day without credits, ~1000/day after $10 deposit.
-        # Keep at 200 so we never silently exhaust credits on a paid account.
         self.max_requests = 200
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
@@ -46,33 +44,40 @@ Targets monitored:
   - Bulgarian courier services: Econt, Speedy, BulgariaPost
   - Bulgarian Ministry of Interior (MVR) e-services portal: e-uslugi.mvr.bg
 
-MVR PHISHING CONTEXT:
-The legitimate Bulgarian Ministry of Interior e-services site is e-uslugi.mvr.bg.
-Phishing campaigns impersonate it using domains like:
-  mvrbg.sbs, mvr-bg.shop, e-uslugicye.top, gav.mvrbg.cam,
-  mvr.bggov.cam, mvr.govbg.one, mvr-bg.autos, mvrbg.life
-Key patterns: mvr + bg concatenated (mvrbg), e-uslugi with random suffix,
-govbg / bggov combinations, suspicious TLDs (.sbs, .cam, .shop, .autos, .life, .one).
-If a domain combines "mvr" or "e-uslugi" with Bulgarian geographic indicators and
-a suspicious TLD/free hosting, it is almost certainly a government phishing site.
+=== CONFIRMED PHISHING PATTERNS — ALWAYS BLOCK ===
+These domain structures are unambiguous phishing. If the domain matches, BLOCK immediately
+without considering false positive scenarios:
 
-IMPORTANT - False Positive Check:
-Before assuming phishing, consider whether the domain clearly indicates a legitimate
-non-courier, non-government business. Examples that should be marked FALSE_POSITIVE:
-- Clearly unrelated businesses: medical, legal, tech support, bookkeeping, real estate,
-  loans, marketing, removals, glass, car services
-- Personal or entertainment pages: birthdays, pets, gaming (e.g. "tower-battles"),
-  celebrity net worth pages
-- Educational or productivity tools: calculators, assignment helpers, exam prep PDFs
-- Developer/test pages: domains containing "test", "test-project", "qa",
-  "backoffice", or generic placeholders
-- Router/IoT hostnames (e.g. keenetic.link subdomains)
-- CRM or analytics platforms (e.g. customerjourney.live)
-- Booking, coupon, or e-commerce platforms clearly unrelated to courier/government
-  impersonation
-NOTE: The word "speedy" is a common English adjective — its presence alone does NOT
-confirm courier phishing. "MVR" in a clearly non-Bulgarian or non-government context
-(e.g. a car valuation site) may also be a false positive.
+1. speedy.bg-<anything>.<tld>  e.g. speedy.bg-iw.qpon, speedy.bg-po.qpon, speedy.bg-pk.cfd
+   → Impersonates speedy.bg (Bulgaria's Speedy courier) via subdomain abuse. No legitimate
+     business structures a domain this way.
+
+2. mvrbg.<tld> or mvr-bg.<tld>  e.g. mvrbg.cam, mvr-bg.cfd, mvrbg.life
+   → "mvrbg" is a concatenation of the Bulgarian Ministry of Interior acronym (MVR) and
+     country code (BG). No legitimate entity outside Bulgaria's government uses this string.
+
+3. <brand>.<geo>-<anything>.<tld>  e.g. econt.bg-g63829.cfd, speedy.bg-packv.cfd
+   → Brand + Bulgarian geo indicator + suspicious TLD = courier phishing.
+
+4. bgpost-<anything>.<tld>  e.g. bgpost-bga.life
+   → BulgariaPost brand on a suspicious TLD. BulgariaPost only operates from bgpost.bg.
+
+5. gav.mvrbg.<tld>  e.g. gav.mvrbg.cam
+   → "gav" (Bulgarian: "гав") + mvrbg = MVR government phishing subdomain.
+
+6. e-uslugi<anything>.<tld>  e.g. e-uslugicye.top, e-uslugiaca.top
+   → The legitimate portal is e-uslugi.mvr.bg only. Any other domain with this prefix is
+     phishing.
+
+=== FALSE POSITIVE CHECK — only apply when NO confirmed pattern above matches ===
+Only consider a domain a false positive if it CLEARLY indicates an unrelated legitimate
+business with no plausible courier or government impersonation angle:
+- Unrelated businesses where "speedy" is a generic adjective: speedy-glass, speedy-loans,
+  speedy-removals, speedy-medical, speedy-marketing, speedy-bookkeeper
+- Personal/entertainment pages: birthdays, pets, gaming, celebrity net worth
+- Developer/test pages: domains containing "test", "test-project", "qa", "backoffice"
+- Productivity tools: calculators, assignment helpers
+- Router/IoT hostnames
 
 Provide structured analysis:
 1. Threat Level: HIGH/MEDIUM/LOW
@@ -80,66 +85,50 @@ Provide structured analysis:
 3. Key Indicators: List 2-3 specific reasons for your decision
 4. Decision: BLOCK/INVESTIGATE/FALSE_POSITIVE
 
-Be concise and accurate. Prefer FALSE_POSITIVE over BLOCK when the domain clearly
-belongs to an unrelated legitimate category."""
+Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose BLOCK."""
 
-        models_to_try = [self.model] + self.fallbacks
+        try:
+            response = requests.post(
+                self.base_url,
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "HTTP-Referer": "https://github.com/detectopod",
+                    "X-Title": "Phishing Detector"
+                },
+                json={
+                    "model": self.model,
+                    "messages": [
+                        {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    "temperature": 0.3,
+                    "max_tokens": 300
+                },
+                timeout=30
+            )
 
-        for attempt, model_id in enumerate(models_to_try):
-            try:
-                response = requests.post(
-                    self.base_url,
-                    headers={
-                        "Authorization": f"Bearer {self.api_key}",
-                        "HTTP-Referer": "https://github.com/detectopod",
-                        "X-Title": "Phishing Detector"
-                    },
-                    json={
-                        "model": model_id,
-                        "messages": [
-                            {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
-                            {"role": "user", "content": prompt}
-                        ],
-                        "temperature": 0.3,
-                        "max_tokens": 300
-                    },
-                    timeout=30
-                )
+            if response.status_code == 200:
+                result = response.json()
+                analysis = result['choices'][0]['message']['content']
+                self.requests_made += 1
 
-                if response.status_code == 200:
-                    result = response.json()
-                    analysis = result['choices'][0]['message']['content']
-                    self.requests_made += 1
+                # Respect free-tier rate limit (20 req/min)
+                time.sleep(3)
 
-                    if attempt > 0:
-                        print(f"   ↳ used fallback: {model_id}")
+                return {
+                    'analysis': analysis,
+                    'model': self.model,
+                    'timestamp': datetime.utcnow().isoformat(),
+                    'threat_level': self._extract_threat_level(analysis),
+                    'decision': self._extract_decision(analysis)
+                }
+            else:
+                print(f"❌ API error {response.status_code}: {response.text}")
+                return None
 
-                    # Respect free-tier rate limit (20 req/min)
-                    time.sleep(3)
-
-                    return {
-                        'analysis': analysis,
-                        'model': model_id,
-                        'timestamp': datetime.utcnow().isoformat(),
-                        'threat_level': self._extract_threat_level(analysis),
-                        'decision': self._extract_decision(analysis)
-                    }
-
-                elif response.status_code == 429:
-                    print(f"   ⚠️  Rate limited on {model_id}, trying next free model...")
-                    time.sleep(5)
-                    continue
-
-                else:
-                    print(f"   ⚠️  {model_id} returned {response.status_code}, trying next...")
-                    continue
-
-            except Exception as e:
-                print(f"   ⚠️  {model_id} error: {e}, trying next...")
-                continue
-
-        print(f"❌ All free models exhausted for {domain}")
-        return None
+        except Exception as e:
+            print(f"❌ Error analyzing {domain}: {e}")
+            return None
 
     def _extract_threat_level(self, analysis):
         """Extract threat level from analysis text"""
@@ -221,8 +210,7 @@ def main():
         return
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
-    print(f"   Primary: openrouter/free (auto-selects best available free model)")
-    print(f"   Fallbacks: {', '.join(FREE_MODEL_FALLBACKS)}")
+    print(f"   Model: {MODEL}")
     print(f"   Targets: Bulgarian couriers + MVR e-services")
     print(f"   Daily limit: 200 requests (free tier)\n")
 
