@@ -2135,6 +2135,12 @@
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
     "source": "urlscan.io-.cyou"
+  },
+  {
+    "domain": "mvr.govbg.work",
+    "score": 100,
+    "detected_at": "2026-05-08T11:09:29.773584",
+    "source": "urlscan.io-.work"
   }
 
 ]
