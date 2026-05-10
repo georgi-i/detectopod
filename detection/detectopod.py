@@ -33,6 +33,8 @@ COURIER_KEYWORDS = [
     # Bulgarian government e-services
     'mvr',           # Ministry of Interior (MVR - Министерство на вътрешните работи)
     'mvrbg',         # MVR Bulgaria combined form (e.g. mvrbg.sbs)
+    'mvr-bg',        # MVR Bulgaria hyphenated form (e.g. mvr-bg.cfd, mvr-bg.top, mvr-bg.ink)
+    'mvr-gov',       # MVR government pattern (e.g. mvr-gov-mk.shop, mvr-gov-mk.cyou)
     'e-uslugi',      # E-services portal (e-uslugi.mvr.bg)
     'euslugi',       # Without-hyphen variant
 ]
@@ -72,9 +74,11 @@ BULGARIAN_COURIER_BRANDS = [
 # Legitimate site: e-uslugi.mvr.bg
 BULGARIAN_GOVT_BRANDS = [
     'mvr',        # Ministry of Interior — appears as subdomain/prefix (mvr.bggov.cam, mvr-bg.shop)
-    'mvrbg',      # Concatenated form (mvrbg.sbs, gav.mvrbg.cam, mvrbg.life)
+    'mvrbg',      # Concatenated form (mvrbg.sbs, gav.mvrbg.cam, mvrbg.life, mvrbg.ink)
+    'mvr-bg',     # Hyphenated form (mvr-bg.cfd, mvr-bg.shop, mvr-bg.sbs, mvr-bg.top)
     'e-uslugi',   # E-services portal — may appear with random suffix (e-uslugicye.top)
     'euslugi',    # Without-hyphen variant
+    'mvr-gov',    # Government subdomain pattern (mvr-gov-mk.shop, mvr-gov-mk.icu, mvr-gov-mk.cyou)
 ]
 
 # Brands that are common English words or short acronyms appearing in many
@@ -83,7 +87,8 @@ BULGARIAN_GOVT_BRANDS = [
 #   speedy  — common English adjective (speedy.brtv.uno, speedy-glass.cfd)
 #   dhl     — international brand used globally, not specific to Bulgaria
 #   mvr     — 3-letter acronym found inside random strings (fumvrak, shumvrax)
-# Unambiguous brands (econt, bgpost, mvrbg, e-uslugi …) do NOT need this check.
+# Unambiguous brands (econt, bgpost, mvrbg, mvr-bg, mvr-gov, e-uslugi …)
+# do NOT need this check — they are specific enough on their own.
 AMBIGUOUS_BRANDS = frozenset({'speedy', 'dhl', 'mvr'})
 
 # Geographic indicators that suggest impersonation
@@ -115,8 +120,9 @@ SUSPICIOUS_TLDS = (
     '.life',     # Cheap, commonly abused
     '.qpon',     # Coupon-related, abused for delivery scams
     '.uno',      # Cheap, commonly abused
+    '.ink',      # Cheap, abused for government impersonation (mvrbg.ink)
+    '.cyou',     # Cheap, abused for government impersonation (mvr-gov-mk.cyou)
 )
-
 # Free/serverless hosting platforms
 FREE_HOSTING_SUFFIXES = (
     '.web.app',
@@ -409,39 +415,74 @@ def contains_courier_keyword(domain):
     Check if domain contains any monitored brand keyword.
     Covers courier brands AND government service brands (MVR).
 
-    Courier brands use word-boundary matching to avoid partial matches
-    (e.g., "cnt" in "content").
+    Matching rules
+    ──────────────
+    Unambiguous brands (econt, bgpost, mvrbg, e-uslugi …):
+      Substring match is fine — they are specific enough that a hit is always
+      meaningful (e.g. mvrbg.sbs, e-uslugicye.top).
 
-    Government brands (mvr, mvrbg, e-uslugi) use substring matching
-    because they appear concatenated in domains (e.g., mvrbg.sbs,
-    e-uslugicye.top).
+    Ambiguous brands (speedy, dhl, mvr — see AMBIGUOUS_BRANDS):
+      These are common words / short acronyms that appear legitimately in many
+      unrelated domains.  Two extra requirements apply:
+        1. Label-boundary match: the keyword must sit at a domain-label boundary
+           (preceded/followed by '.', '-', or start/end of string).
+           This prevents 'mvr' matching inside 'fumvrak' or 'shumvrax'.
+        2. Geo-indicator required: at least one Bulgarian geo token (.bg, bg-,
+           -bg, bggov, govbg …) must also appear somewhere in the domain.
+           This prevents 'speedy.brtv.uno' or 'mvr-retreat.life' from matching.
 
     Returns (has_keyword, matched_keywords)
     """
     domain_lower = domain.lower()
+    # Strip leading www. for cleaner matching
+    if domain_lower.startswith('www.'):
+        domain_lower = domain_lower[4:]
+
     matched = []
-    
-    # --- Courier brands: word-boundary match ---
+
+    # Pre-compute whether any Bulgarian geo indicator is present
+    has_geo = any(geo in domain_lower for geo in GEO_INDICATORS)
+
+    # --- Courier brands (word-boundary match) ---
     for keyword in COURIER_KEYWORDS:
-        # Skip government brands here; handled below
+        # Government brands are handled separately below
         if keyword in BULGARIAN_GOVT_BRANDS:
             continue
-        pattern = r'\b' + re.escape(keyword) + r'\b'
+
+        if keyword in AMBIGUOUS_BRANDS:
+            # Require both label-boundary match AND geo indicator
+            if not has_geo:
+                continue
+            pattern = r'(?:^|[.\-])' + re.escape(keyword) + r'(?:[.\-]|$)'
+        else:
+            pattern = r'\b' + re.escape(keyword) + r'\b'
+
         if re.search(pattern, domain_lower):
             matched.append(keyword)
-    
-    # --- Government brands: substring match (no word boundary) ---
-    # MVR domains are often concatenated: mvrbg.sbs, e-uslugicye.top
+
+    # --- Government brands ---
     for brand in BULGARIAN_GOVT_BRANDS:
-        if brand in domain_lower and brand not in matched:
-            matched.append(brand)
+        if brand in matched:
+            continue
+
+        if brand in AMBIGUOUS_BRANDS:
+            # e.g. plain 'mvr': require label-boundary + geo
+            # catches mvr-bg.cfd, mvr.bggov.cam but not fumvrak.life
+            if not has_geo:
+                continue
+            pattern = r'(?:^|[.\-])' + re.escape(brand) + r'(?:[.\-]|$)'
+            if re.search(pattern, domain_lower):
+                matched.append(brand)
+        else:
+            # Unambiguous (mvrbg, e-uslugi, euslugi): plain substring is fine
+            if brand in domain_lower:
+                matched.append(brand)
 
     # Special handling for DHL + Bulgaria combination
-    if 'dhl' in domain_lower:
-        if 'bulgaria' in domain_lower or '.bg' in domain_lower or 'bg-' in domain_lower:
-            if 'dhl-bulgaria' not in matched:
-                matched.append('dhl-bulgaria')
-    
+    if 'dhl' in domain_lower and has_geo:
+        if 'dhl-bulgaria' not in matched:
+            matched.append('dhl-bulgaria')
+
     return len(matched) > 0, matched
 
 
@@ -550,7 +591,7 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
                 tlds_to_search = [
                     '.cfd', '.tk', '.pages.dev', '.web.app', '.ml', '.ga',
                     '.sbs', '.cam', '.shop', '.one', '.autos', '.life',
-                    '.qpon', '.uno',
+                    '.qpon', '.uno', '.ink', '.cyou', '.top', '.icu',
                 ]
                 for tld in tlds_to_search:
                     tld_query = ' OR '.join([f'domain:*{kw}*{tld}' for kw in keywords])
