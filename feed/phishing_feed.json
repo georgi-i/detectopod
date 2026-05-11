@@ -2429,5 +2429,30 @@
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
     "source": "urlscan.io-.icu"
+  },
+  {
+    "domain": "mvrgovbg.lol",
+    "score": 100,
+    "detected_at": "2026-05-11T14:26:10.761198",
+    "source": "urlscan.io-.lol"
+  },
+  {
+    "domain": "mvrx.lat",
+    "score": 100,
+    "detected_at": "2026-05-11T14:26:10.761198",
+    "source": "urlscan.io-.lat"
+  },
+  {
+    "domain": "mvr.qdoz.cam",
+    "score": 100,
+    "detected_at": "2026-05-11T14:26:10.761198",
+    "source": "urlscan.io-.cam"
+  },
+  {
+    "domain": "mvr.niaj.cam",
+    "score": 100,
+    "detected_at": "2026-05-11T14:26:10.761198",
+    "source": "urlscan.io-.cam"
   }
+  
 ]
