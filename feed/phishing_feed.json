@@ -2519,5 +2519,84 @@
     "score": 100,
     "detected_at": "2026-05-12T20:03:10.162398",
     "source": "urlscan.io-.icu"
+  },
+  {
+    "domain": "mvr.chtm.cam",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.cam"
+  },
+  {
+    "domain": "mvr.ftch.cam",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.cam"
+  },
+  {
+    "domain": "mvr.govno.top",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.top"
+  },
+  {
+    "domain": "mvr.lxax.cam",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.cam"
+  },
+  {
+    "domain": "mvrc.lat",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.lat"
+  },
+  {
+    "domain": "mvrch.shop",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.shop"
+  },
+  {
+    "domain": "mvrgovbg.top",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.top"
+  },
+  {
+    "domain": "mvrha.autos",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.autos"
+  },
+  {
+    "domain": "mvrnf.autos",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.autos"
+  },
+  {
+    "domain": "mvrys.top",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.top"
+  },
+  {
+    "domain": "mvr.bggov.one",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.one"
+  },
+  {
+    "domain": "mvr.govbg.cyou",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.cyou"
+  },
+  {
+    "domain": "mvr.govno.top",
+    "score": 100,
+    "detected_at": "2026-05-13T10:03:10.172798",
+    "source": "urlscan.io-.top"
   }
+  
 ]
