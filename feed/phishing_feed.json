@@ -2567,5 +2567,35 @@
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
     "source": "urlscan.io-.cyou"
+  },
+  {
+    "domain": "mvr-govm.click",
+    "score": 100,
+    "detected_at": "2026-05-25T14:33:47.757030",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "mvr-govm.top",
+    "score": 100,
+    "detected_at": "2026-05-25T14:33:47.761449",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "euslugimvr-paynow.sbs",
+    "score": 100,
+    "detected_at": "2026-05-25T14:33:47.767747",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "e-uslugion.life",
+    "score": 100,
+    "detected_at": "2026-05-25T14:33:47.867219",
+    "source": "urlscan.io-.life"
+  },
+  {
+    "domain": "mvr-bg.icu",
+    "score": 100,
+    "detected_at": "2026-05-25T14:33:47.912419",
+    "source": "urlscan.io-.icu"
   }
 ]
