@@ -2597,5 +2597,11 @@
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.912419",
     "source": "urlscan.io-.icu"
+  },
+  {
+    "domain": "mvrbge.top",
+    "score": 100,
+    "detected_at": "2026-06-01T17:15:31.764751",
+    "source": "urlscan.io"
   }
 ]
