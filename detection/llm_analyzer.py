@@ -12,11 +12,11 @@ import argparse
 import requests
 from datetime import datetime, timedelta
 
-# Single model — Llama 3.3 70B is the only free model that reliably avoids
+# Single model — google/gemini-3.5-flash
 # false-positive errors on Bulgarian courier/government phishing patterns.
 # Other free models (DeepSeek, Qwen, Mistral) incorrectly flagged confirmed
 # phishing domains like speedy.bg-*.qpon, mvrbg.cam, bgpost-*.life as safe.
-MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+MODEL = "google/gemini-3.5-flash"
 
 
 class OpenRouterAnalyzer:
@@ -25,8 +25,8 @@ class OpenRouterAnalyzer:
         self.model = model
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
         self.requests_made = 0
-        # Free tier: ~200 req/day without credits, ~1000/day after $10 deposit.
-        self.max_requests = 200
+        # Free tier: ~1370 req/day without credits
+        self.max_requests = 1370
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
         """Analyze a domain using LLM, falling back through free models on error."""
@@ -112,8 +112,8 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                 analysis = result['choices'][0]['message']['content']
                 self.requests_made += 1
 
-                # Respect free-tier rate limit (20 req/min)
-                time.sleep(3)
+                # Respect free-tier rate limit (15 req/min)
+                time.sleep(4)
 
                 return {
                     'analysis': analysis,
