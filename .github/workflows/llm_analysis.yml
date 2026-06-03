@@ -74,7 +74,7 @@ jobs:
       if: always()
       run: |
         echo "### LLM Analysis Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- **Model**: Claude Sonnet 4.5 (via OpenRouter BYOK)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Model**: google/gemini-3.5-flash (via OpenRouter BYOK)" >> $GITHUB_STEP_SUMMARY
         echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
