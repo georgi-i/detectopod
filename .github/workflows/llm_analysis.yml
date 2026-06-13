@@ -36,7 +36,7 @@ jobs:
 
     - name: Run LLM analysis on recent detections
       env:
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
         python detection/llm_analyzer.py --days 1 --max-analyze 1000 --min-score 75
 
@@ -74,7 +74,7 @@ jobs:
       if: always()
       run: |
         echo "### LLM Analysis Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- **Model**: google/gemini-3.5-flash (via OpenRouter BYOK)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Model**: Gemini 3.5 Flash (Google AI Studio direct)" >> $GITHUB_STEP_SUMMARY
         echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
@@ -83,9 +83,11 @@ jobs:
           ANALYZED=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('analyzed_count', 0))" 2>/dev/null || echo "0")
           HIGH_CONF=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('high_confidence', 0))" 2>/dev/null || echo "0")
           FALSE_POS=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('false_positives', 0))" 2>/dev/null || echo "0")
+          ERRORS=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('errors', 0))" 2>/dev/null || echo "0")
 
           echo "**📊 Analysis Results:**" >> $GITHUB_STEP_SUMMARY
           echo "- Domains analyzed: **$ANALYZED**" >> $GITHUB_STEP_SUMMARY
           echo "- High confidence threats: **$HIGH_CONF** 🚨" >> $GITHUB_STEP_SUMMARY
           echo "- False positives removed: **$FALSE_POS** ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Errors: **$ERRORS**" >> $GITHUB_STEP_SUMMARY
         fi
