@@ -218,7 +218,7 @@ def main():
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
     print(f"   Model: {MODEL} (Google AI Studio direct)")
     print(f"   Targets: Bulgarian couriers + MVR e-services")
-    print(f"   Limit: up to {analyzer.max_requests} requests (Google AI Studio quota)\n")
+    print(f"   Limit: up to 1000 requests (Google AI Studio quota)\n")
 
     analyzer = GeminiAnalyzer(api_key)
 
