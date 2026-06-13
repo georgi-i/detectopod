@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 LLM-based phishing domain analyzer
-Analyzes domains from feed using OpenRouter API
+Analyzes domains from feed using Google Gemini API directly
 """
 
 import json
@@ -12,26 +12,33 @@ import argparse
 import requests
 from datetime import datetime, timedelta
 
-# Single model — google/gemini-3.5-flash
-# false-positive errors on Bulgarian courier/government phishing patterns.
-# Other free models (DeepSeek, Qwen, Mistral) incorrectly flagged confirmed
-# phishing domains like speedy.bg-*.qpon, mvrbg.cam, bgpost-*.life as safe.
-MODEL = "google/gemini-3.5-flash"
+# Google Gemini models — called directly via Google AI Studio REST API.
+# No OpenRouter account needed; only your GEMINI_API_KEY is required.
+#
+# gemini-3.5-flash      → near-Pro reasoning, fast              ← default
+# gemini-2.5-flash-lite → ultra-low latency, cheapest              ← budget option
+MODEL = "gemini-3.5-flash"
+# MODEL = "gemini-2.5-flash-lite"
+
+# Google's OpenAI-compatible endpoint — same request/response format,
+# no client library needed.
+GOOGLE_API_BASE = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
 
 
-class OpenRouterAnalyzer:
+class GeminiAnalyzer:
     def __init__(self, api_key, model=MODEL):
         self.api_key = api_key
         self.model = model
-        self.base_url = "https://openrouter.ai/api/v1/chat/completions"
+        self.base_url = GOOGLE_API_BASE
         self.requests_made = 0
-        # Free tier: ~1370 req/day without credits
-        self.max_requests = 1370
+        # Limit is Google AI Studio quota, not a service cap.
+        # 1000 is a safe default; raise freely for paid accounts.
+        self.max_requests = 1000
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
-        """Analyze a domain using LLM, falling back through free models on error."""
+        """Analyze a domain using the Gemini API."""
         if self.requests_made >= self.max_requests:
-            print(f"⚠️  Daily free-tier limit reached ({self.max_requests} requests)")
+            print(f"⚠️  Request limit reached ({self.max_requests}). Raise max_requests if needed.")
             return None
 
         prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian online services.
@@ -92,8 +99,7 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                 self.base_url,
                 headers={
                     "Authorization": f"Bearer {self.api_key}",
-                    "HTTP-Referer": "https://github.com/detectopod",
-                    "X-Title": "Phishing Detector"
+                    "Content-Type": "application/json",
                 },
                 json={
                     "model": self.model,
@@ -102,7 +108,7 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                         {"role": "user", "content": prompt}
                     ],
                     "temperature": 0.3,
-                    "max_tokens": 300
+                    "max_tokens": 300,
                 },
                 timeout=30
             )
@@ -112,8 +118,8 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                 analysis = result['choices'][0]['message']['content']
                 self.requests_made += 1
 
-                # Respect free-tier rate limit (15 req/min)
-                time.sleep(4)
+                # 1s delay avoids burst rate-limit spikes on the direct API
+                time.sleep(1)
 
                 return {
                     'analysis': analysis,
@@ -156,16 +162,16 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
-    parser.add_argument('--max-analyze', type=int, default=200, help='Maximum domains to analyze (free tier: 200/day)')
+    parser.add_argument('--max-analyze', type=int, default=1000, help='Maximum domains to analyze')
     parser.add_argument('--min-score', type=int, default=75, help='Minimum score to analyze')
     parser.add_argument('--feed-file', default='feed/phishing_feed.json', help='Feed file path')
     parser.add_argument('--reanalyze', action='store_true',
                         help='Strip existing llm_analysis and re-evaluate all entries (backfill mode)')
     args = parser.parse_args()
 
-    api_key = os.environ.get('OPENROUTER_API_KEY')
+    api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
-        print("❌ Error: OPENROUTER_API_KEY environment variable not set")
+        print("❌ Error: GEMINI_API_KEY environment variable not set")
         sys.exit(1)
 
     if not os.path.exists(args.feed_file):
@@ -210,11 +216,11 @@ def main():
         return
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
-    print(f"   Model: {MODEL}")
+    print(f"   Model: {MODEL} (Google AI Studio direct)")
     print(f"   Targets: Bulgarian couriers + MVR e-services")
-    print(f"   Daily limit: 200 requests (free tier)\n")
+    print(f"   Limit: up to {analyzer.max_requests} requests (Google AI Studio quota)\n")
 
-    analyzer = OpenRouterAnalyzer(api_key)
+    analyzer = GeminiAnalyzer(api_key)
 
     stats = {
         'analyzed_count': 0,
