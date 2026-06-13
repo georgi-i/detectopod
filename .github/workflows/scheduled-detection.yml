@@ -46,8 +46,9 @@ jobs:
       env:
         URLSCAN_API_KEY: ${{ secrets.URLSCAN_API_KEY }}
       run: |
-        # Use polling mode with ALL sources: urlscan.io, Google CT, and Cloudflare CT
-        python detection/detectopod.py
+        # Explicit --sources flag so all three sources are always active.
+        # Default in detectopod.py is urlscan-only; we override it here.
+        python detection/detectopod.py --sources urlscan google cloudflare
 
     - name: Check for changes
       id: check_changes
@@ -105,16 +106,15 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
 
         # Check if run stats exist
+        # Keys written by save_run_stats(): domains_scanned, phishing_found, elapsed_time
         if [[ -f feed/run_stats.json ]]; then
-          CERTS=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('certs_analyzed', 0))" 2>/dev/null || echo "0")
-          DOMAINS=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('domains_processed', 0))" 2>/dev/null || echo "0")
-          NEW_FINDINGS=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('new_findings', 0))" 2>/dev/null || echo "0")
+          DOMAINS=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('domains_scanned', 0))" 2>/dev/null || echo "0")
+          NEW_FINDINGS=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('phishing_found', 0))" 2>/dev/null || echo "0")
           ELAPSED=$(cat feed/run_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('elapsed_time', 0))" 2>/dev/null || echo "0")
 
           echo "**📊 Analysis Stats:**" >> $GITHUB_STEP_SUMMARY
-          echo "- Certificates analyzed: **$CERTS**" >> $GITHUB_STEP_SUMMARY
-          echo "- Unique domains processed: **$DOMAINS**" >> $GITHUB_STEP_SUMMARY
-          echo "- New suspicious domains found: **$NEW_FINDINGS** 🚨" >> $GITHUB_STEP_SUMMARY
+          echo "- Unique domains scanned: **$DOMAINS**" >> $GITHUB_STEP_SUMMARY
+          echo "- New phishing domains found: **$NEW_FINDINGS** 🚨" >> $GITHUB_STEP_SUMMARY
           echo "- Runtime: **${ELAPSED}s**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
         fi
@@ -137,4 +137,6 @@ jobs:
         fi
 
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**🎯 Target Platforms Monitored:** Firebase, Heroku, Cloudflare Pages, Netlify, Vercel, and more..." >> $GITHUB_STEP_SUMMARY
+        echo "**🎯 Targets:** Bulgarian couriers (Econt, Speedy, BulgariaPost, DHL) + MVR government e-services (e-uslugi.mvr.bg)" >> $GITHUB_STEP_SUMMARY
+        echo "**🌐 Monitored TLDs:** .cfd .tk .sbs .cam .shop .one .autos .life .qpon .uno .ink .cyou .top .icu .ml .ga .xyz and more" >> $GITHUB_STEP_SUMMARY
+        echo "**☁️ Monitored Platforms:** Firebase, Heroku, Cloudflare Pages, Netlify, Vercel, Render, and more" >> $GITHUB_STEP_SUMMARY
