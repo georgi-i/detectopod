@@ -17,7 +17,8 @@ from datetime import datetime, timedelta
 #
 # gemini-3.5-flash      → near-Pro reasoning, fast              ← default
 # gemini-2.5-flash-lite → ultra-low latency, cheapest              ← budget option
-MODEL = "gemini-3.5-flash"
+MODEL          = "gemini-3.5-flash"
+MODEL_FALLBACK = "gemini-2.5-flash-lite"  # used automatically if primary returns 503
 # MODEL = "gemini-2.5-flash-lite"
 
 # Google's OpenAI-compatible endpoint — same request/response format,
@@ -94,47 +95,72 @@ Provide structured analysis:
 
 Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose BLOCK."""
 
-        try:
-            response = requests.post(
-                self.base_url,
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": self.model,
-                    "messages": [
-                        {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
-                        {"role": "user", "content": prompt}
-                    ],
-                    "temperature": 0.3,
-                    "max_tokens": 300,
-                },
-                timeout=30
-            )
+        models_to_try = [self.model]
+        if MODEL_FALLBACK and MODEL_FALLBACK != self.model:
+            models_to_try.append(MODEL_FALLBACK)
 
-            if response.status_code == 200:
-                result = response.json()
-                analysis = result['choices'][0]['message']['content']
-                self.requests_made += 1
+        for model_id in models_to_try:
+            for attempt in range(3):  # up to 3 retries per model
+                try:
+                    response = requests.post(
+                        self.base_url,
+                        headers={
+                            "Authorization": f"Bearer {self.api_key}",
+                            "Content-Type": "application/json",
+                        },
+                        json={
+                            "model": model_id,
+                            "messages": [
+                                {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
+                                {"role": "user", "content": prompt}
+                            ],
+                            "temperature": 0.3,
+                            "max_tokens": 300,
+                        },
+                        timeout=30
+                    )
 
-                # 1s delay avoids burst rate-limit spikes on the direct API
-                time.sleep(1)
+                    if response.status_code == 200:
+                        result = response.json()
+                        analysis = result['choices'][0]['message']['content']
+                        self.requests_made += 1
+                        if model_id != self.model:
+                            print(f"   ↳ used fallback model: {model_id}")
+                        time.sleep(1)
+                        return {
+                            'analysis': analysis,
+                            'model': model_id,
+                            'timestamp': datetime.utcnow().isoformat(),
+                            'threat_level': self._extract_threat_level(analysis),
+                            'decision': self._extract_decision(analysis)
+                        }
 
-                return {
-                    'analysis': analysis,
-                    'model': self.model,
-                    'timestamp': datetime.utcnow().isoformat(),
-                    'threat_level': self._extract_threat_level(analysis),
-                    'decision': self._extract_decision(analysis)
-                }
-            else:
-                print(f"❌ API error {response.status_code}: {response.text}")
-                return None
+                    elif response.status_code == 503:
+                        wait = 10 * (attempt + 1)  # 10s, 20s, 30s
+                        print(f"   ⚠️  {model_id} overloaded (503), retrying in {wait}s... (attempt {attempt+1}/3)")
+                        time.sleep(wait)
+                        continue
 
-        except Exception as e:
-            print(f"❌ Error analyzing {domain}: {e}")
-            return None
+                    elif response.status_code == 429:
+                        wait = 30 * (attempt + 1)
+                        print(f"   ⚠️  {model_id} rate limited (429), retrying in {wait}s...")
+                        time.sleep(wait)
+                        continue
+
+                    else:
+                        print(f"❌ API error {response.status_code}: {response.text}")
+                        break  # non-retryable — try next model
+
+                except requests.exceptions.Timeout:
+                    print(f"   ⚠️  {model_id} timed out (attempt {attempt+1}/3), retrying...")
+                    time.sleep(5)
+                    continue
+                except Exception as e:
+                    print(f"❌ Error analyzing {domain}: {e}")
+                    break
+
+        print(f"❌ All models/retries exhausted for {domain}")
+        return None
 
     def _extract_threat_level(self, analysis):
         """Extract threat level from analysis text"""
