@@ -51,55 +51,7 @@ jobs:
         python detection/detectopod.py --sources urlscan google cloudflare
 
     - name: Update README stats
-      run: |
-        python3 - << 'PYEOF'
-        import json, re, datetime, os
-
-        feed_file  = "feed/phishing_feed.json"
-        stats_file = "feed/run_stats.json"
-        readme     = "README.md"
-
-        # --- gather numbers ---
-        total = 0
-        if os.path.exists(feed_file):
-            with open(feed_file) as f:
-                total = len(json.load(f))
-
-        last_scan   = "N/A"
-        processed   = 0
-        rate_str    = "N/A"
-        if os.path.exists(stats_file):
-            with open(stats_file) as f:
-                s = json.load(f)
-            last_scan  = s.get("last_run", "N/A")
-            processed  = s.get("domains_scanned", 0)
-            found      = s.get("phishing_found", 0)
-            rate_str   = f"{found/processed*100:.1f}%" if processed else "N/A"
-
-        block = f"""<!-- STATS_START -->
-\`\`\`
-Total Domains Detected: {total:,}
-Last Scan: {last_scan}
-Domains Processed: {processed:,}
-Detection Rate: {rate_str}
-\`\`\`
-<!-- STATS_END -->"""
-
-        with open(readme) as f:
-            content = f.read()
-
-        updated = re.sub(
-            r"<!-- STATS_START -->.*?<!-- STATS_END -->",
-            block,
-            content,
-            flags=re.DOTALL
-        )
-
-        with open(readme, "w") as f:
-            f.write(updated)
-
-        print(f"✓ README stats updated — {total} domains, last scan: {last_scan}")
-        PYEOF
+      run: python detection/update_readme.py
 
     - name: Check for changes
       id: check_changes
