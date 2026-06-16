@@ -18,18 +18,20 @@ Detectopod identifies phishing domains that:
 - **Multi-Source Detection**: Queries URLScan.io, Google CT logs, and Cloudflare CT logs
 - **Automated Scanning**: Runs weekly via GitHub Actions
 - **Smart Scoring**: ML-enhanced scoring system (0-100) based on domain patterns
-- **LLM Analysis**: AI-powered review using Claude Sonnet 4.5 to reduce false positives
+- **LLM Analysis**: AI-powered review using Gemini 3.5 Flash to reduce false positives
 - **Public Threat Feed**: JSON feed of detected domains updated in real-time
 - **Zero Infrastructure**: Fully serverless using GitHub Actions
 
 ## 📊 Current Stats
 
+<!-- STATS_START -->
 ```
 Total Domains Detected: 96
 Last Scan: 2026-01-29 18:59:28 UTC
 Domains Processed: 1,817
 Detection Rate: 5.3%
 ```
+<!-- STATS_END -->
 
 ## 🏗️ Architecture
 
