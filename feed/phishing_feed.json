@@ -3357,24 +3357,52 @@
     "domain": "mvr-bgi.cyou",
     "score": 100,
     "detected_at": "2026-06-09T15:22:34.758978",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Matches confirmed phishing pattern #2 (`mvr-bg.<tld>`).\n    *   Uses a suspicious TLD (`.cyou`).\n    *   Impersonates a Bulgarian government entity (MVR).\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-16T12:10:33.786270",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt.order-47237832.cfd",
     "score": 100,
     "detected_at": "2026-06-11T14:48:19.994437",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    - Matches rule #3: `<brand>.<geo>-<anything>.<tld>` pattern (e.g., `econt.bg-g63829.cfd`). The domain `econt.order-47237832.cfd` strongly resembles this structure, with `econt` being a known Bulgarian courier brand and the subdomain structure `order-47237832` appearing as a deceptive element.\n    - Suspicious TLD: `.cfd` is often associated with malicious activity.\n    - Impersonation of Econt: The domain directly uses the brand name \"econt\" in a way that suggests an official, but illegitimate, order-related service.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-16T12:11:54.156843",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econtonlinetake.online",
     "score": 100,
     "detected_at": "2026-06-11T14:48:19.994437",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * TLD: `.online` is a suspicious TLD often used for phishing.\n    * Structure: The domain `econt` + `online` + `take` + `.online` attempts to mimic legitimate service names (like Econt) with common phishing tactics of adding generic words.\n    * Target Alignment: Directly targets users of Bulgarian online services, specifically mentioning \"econt\" which is a known target.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-16T12:13:27.672498",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "euslugimvr-charge.sbs",
     "score": 100,
     "detected_at": "2026-06-13T12:51:06.322052",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    *   Domain structure `euslugimvr-charge.sbs` closely resembles rule #6 (`e-uslugi<anything>.<tld>`) targeting the MVR e-services portal.\n    *   The `.sbs` TLD is often associated with malicious activity.\n    *   The combination of \"euslugi\" (Bulgarian for \"e-services\") and \"mvr\" (Ministry of Interior acronym) strongly suggests impersonation of official Bulgarian government services.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-16T12:15:11.117482",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
