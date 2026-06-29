@@ -3404,5 +3404,23 @@
       "threat_level": "HIGH",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "speedy.bg-yh.cfd",
+    "score": 100,
+    "detected_at": "2026-06-29T16:01:23.659654",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "vinted.econt.top",
+    "score": 100,
+    "detected_at": "2026-06-29T16:01:23.809546",
+    "source": "urlscan.io-.top"
+  },
+  {
+    "domain": "econt.top",
+    "score": 100,
+    "detected_at": "2026-06-29T16:01:23.814518",
+    "source": "urlscan.io-.top"
   }
 ]
