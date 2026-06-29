@@ -3409,18 +3409,39 @@
     "domain": "speedy.bg-yh.cfd",
     "score": 100,
     "detected_at": "2026-06-29T16:01:23.659654",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Matches Confirmed Phishing Pattern #1: `speedy.bg-<anything>.<tld>` (impersonates Speedy courier via subdomain abuse).\n    *   Uses a suspicious TLD (`.cfd`).\n    *   Targets a monitored Bulgarian courier service.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-29T16:03:08.569465",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "vinted.econt.top",
     "score": 100,
     "detected_at": "2026-06-29T16:01:23.809546",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `vinted.econt.top` mimics legitimate Bulgarian courier `econt.bg` by using it as a subdomain.\n    *   The TLD `.top` is often associated with malicious activity and is not used by legitimate Bulgarian courier services.\n    *   The combination of a known brand (`econt`) with a suspicious TLD and a seemingly unrelated prefix (`vinted`) strongly suggests phishing.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-29T16:04:59.438092",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt.top",
     "score": 100,
     "detected_at": "2026-06-29T16:01:23.814518",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain `econt.top` directly impersonates the Bulgarian courier service \"Econt\" (econt.bg).\n    *   The `.top` TLD is frequently used for phishing and is not associated with legitimate Bulgarian courier services.\n    *   The domain structure does not align with any legitimate business practices for Econt.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-06-29T16:06:35.759456",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
