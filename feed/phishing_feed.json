@@ -3448,7 +3448,14 @@
     "domain": "speedy-bg.id2954728.shop",
     "score": 100,
     "detected_at": "2026-07-13T14:47:21.544201",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-07-13T16:29:06.148336",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "new-bgpost.icu",
