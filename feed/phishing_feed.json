@@ -3456,18 +3456,5 @@
       "threat_level": "HIGH",
       "decision": "UNKNOWN"
     }
-  },
-  {
-    "domain": "new-bgpost.icu",
-    "score": 100,
-    "detected_at": "2026-07-13T14:47:21.741771",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Matches confirmed phishing pattern #4: `bgpost-<anything>.<tld>`\n    * Uses a suspicious TLD (`.icu`)\n    * Impersonates BulgariaPost, a monitored target.\n4. Decision: BLOCK",
-      "model": "gemini-2.5-flash-lite",
-      "timestamp": "2026-07-13T14:51:29.986673",
-      "threat_level": "HIGH",
-      "decision": "BLOCK"
-    }
   }
 ]
