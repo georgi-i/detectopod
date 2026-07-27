@@ -3469,18 +3469,5 @@
       "threat_level": "LOW",
       "decision": "UNKNOWN"
     }
-  },
-  {
-    "domain": "www.mvr.govbg.cyou",
-    "score": 100,
-    "detected_at": "2026-07-27T14:48:49.849132",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": ".<tld>` -> No.\n",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-07-27T14:49:29.615461",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
   }
 ]
