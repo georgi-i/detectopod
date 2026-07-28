@@ -3474,7 +3474,14 @@
     "domain": "tollpass.xlyr.cam",
     "score": 100,
     "detected_at": "2026-07-28T18:43:56.799704",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Domain structure `xlyr.cam` is a suspicious TLD and hosting pattern.\n    * The subdomain `tollpass` is often used in phishing to mimic legitimate service payment or tracking pages.\n    * The domain structure strongly resembles patterns 3 and 6, targeting Bulgarian courier services or MVR e-services.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-07-28T18:45:51.328229",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpass.txsu.cam",
@@ -3486,18 +3493,39 @@
     "domain": "tollpass.eknt.cam",
     "score": 100,
     "detected_at": "2026-07-28T18:43:56.835458",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Domain structure `tollpass.eknt.cam` mimics legitimate service domains.\n    * `.cam` TLD is often used for malicious purposes.\n    * The domain likely impersonates a Bulgarian online service, potentially related to e-services or courier services based on the monitored targets.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-07-28T18:49:49.390617",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpass.isxd.cam",
     "score": 100,
     "detected_at": "2026-07-28T18:43:56.840538",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `tollpass.isxd.cam` does not directly match confirmed patterns but the TLD `.cam` and the subdomain `isxd` are highly suspicious.\n    *   The domain `tollpass.isxd.cam` is likely a sophisticated attempt to impersonate a legitimate service, potentially related to toll payments or transit, which could be used to phish users of Bulgarian services like Econt or BulgariaPost by mimicking a payment or tracking portal.\n    *   The use of a free/serverless platform or suspicious TLD is a strong indicator of malicious intent, especially when targeting specific national services.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-07-28T18:51:27.857235",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpass.dvhl.cam",
     "score": 100,
     "detected_at": "2026-07-28T18:43:56.851119",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Matches Confirmed Phishing Pattern 2: \"mvrbg.<tld>\" (mvrbg.cam)\n    * Hosting on a suspicious TLD (.cam) and potentially free/serverless platform.\n    * Targets Bulgarian Ministry of Interior (MVR) e-services.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-07-28T18:53:00.350760",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   }
 ]
