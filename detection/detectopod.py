@@ -37,6 +37,9 @@ COURIER_KEYWORDS = [
     'mvr-gov',       # MVR government pattern (e.g. mvr-gov-mk.shop, mvr-gov-mk.cyou)
     'e-uslugi',      # E-services portal (e-uslugi.mvr.bg)
     'euslugi',       # Without-hyphen variant
+    # Bulgarian toll/vignette payment services
+    'tollpass',      # TollPass (tollpass.bg) - e.g. tollpass.klgf.cam, tollpassapp.top, tollpassss.cc
+    'vinetki',       # Vinetki.bg - sister brand of TollPass (toll vignette service)
 ]
 
 # SECONDARY: Generic logistics/delivery terms (lower priority)
@@ -81,6 +84,14 @@ BULGARIAN_GOVT_BRANDS = [
     'mvr-gov',    # Government subdomain pattern (mvr-gov-mk.shop, mvr-gov-mk.icu, mvr-gov-mk.cyou)
 ]
 
+# Bulgarian toll/vignette payment brands (for impersonation detection)
+# Legitimate sites: tollpass.bg, vinetki.bg (operated by Intelligentni Trafik Sistemi AD)
+BULGARIAN_TOLL_BRANDS = [
+    'tollpass',   # TollPass — appears with random suffix (tollpass.klgf.cam, tollpassapp.top,
+                  # tollpassss.cc, tollpass.dvhl.cam, tollpass.isxd.cam)
+    'vinetki',    # Vinetki.bg — sister brand referenced on the legitimate site's footer
+]
+
 # Brands that are common English words or short acronyms appearing in many
 # unrelated domains. For these, a Bulgarian geo indicator must also be present
 # somewhere in the domain before we treat it as a phishing candidate.
@@ -89,7 +100,7 @@ BULGARIAN_GOVT_BRANDS = [
 #   mvr     — 3-letter acronym found inside random strings (fumvrak, shumvrax)
 # Unambiguous brands (econt, bgpost, mvrbg, mvr-bg, mvr-gov, e-uslugi …)
 # do NOT need this check — they are specific enough on their own.
-AMBIGUOUS_BRANDS = frozenset({'speedy', 'dhl', 'mvr'})
+AMBIGUOUS_BRANDS = frozenset({'speedy', 'dhl', 'mvr', 'vinetki'})
 
 # Geographic indicators that suggest impersonation
 GEO_INDICATORS = ['.bg', 'bulgaria', 'bg-', '-bg', 'bggov', 'govbg', 'gov-bg', 'bg-gov']
@@ -122,6 +133,7 @@ SUSPICIOUS_TLDS = (
     '.uno',      # Cheap, commonly abused
     '.ink',      # Cheap, abused for government impersonation (mvrbg.ink)
     '.cyou',     # Cheap, abused for government impersonation (mvr-gov-mk.cyou)
+    '.cc',       # Cheap, cocos-islands ccTLD abused for brand impersonation (tollpassss.cc)
 )
 # Free/serverless hosting platforms
 FREE_HOSTING_SUFFIXES = (
@@ -272,6 +284,15 @@ def calculate_score(domain):
                 score += 40  # Slightly higher: MVR impersonation is unambiguous
                 break
 
+    # Check for Bulgarian toll/vignette brand (TollPass / Vinetki)
+    # Use substring match — catches concatenated variants (tollpassapp, tollpassss)
+    if not has_brand:
+        for brand in BULGARIAN_TOLL_BRANDS:
+            if brand in domain_lower:
+                has_brand = True
+                score += 40  # Unambiguous brand presence
+                break
+
     # Check for geographic indicators
     for geo in GEO_INDICATORS:
         if geo in domain_lower:
@@ -316,7 +337,7 @@ def calculate_score(domain):
         if keyword in domain_lower:
             keywords_found.append(keyword)
             # Higher weight for primary brands
-            if keyword in BULGARIAN_COURIER_BRANDS or keyword in BULGARIAN_GOVT_BRANDS:
+            if keyword in BULGARIAN_COURIER_BRANDS or keyword in BULGARIAN_GOVT_BRANDS or keyword in BULGARIAN_TOLL_BRANDS:
                 score += 10
             else:
                 score += 5
@@ -445,8 +466,8 @@ def contains_courier_keyword(domain):
 
     # --- Courier brands (word-boundary match) ---
     for keyword in COURIER_KEYWORDS:
-        # Government brands are handled separately below
-        if keyword in BULGARIAN_GOVT_BRANDS:
+        # Government and toll brands are handled separately below
+        if keyword in BULGARIAN_GOVT_BRANDS or keyword in BULGARIAN_TOLL_BRANDS:
             continue
 
         if keyword in AMBIGUOUS_BRANDS:
@@ -475,6 +496,24 @@ def contains_courier_keyword(domain):
                 matched.append(brand)
         else:
             # Unambiguous (mvrbg, e-uslugi, euslugi): plain substring is fine
+            if brand in domain_lower:
+                matched.append(brand)
+
+    # --- Toll/vignette brands (TollPass / Vinetki) ---
+    for brand in BULGARIAN_TOLL_BRANDS:
+        if brand in matched:
+            continue
+
+        if brand in AMBIGUOUS_BRANDS:
+            # e.g. 'vinetki': require label-boundary + geo indicator
+            if not has_geo:
+                continue
+            pattern = r'(?:^|[.\-])' + re.escape(brand) + r'(?:[.\-]|$)'
+            if re.search(pattern, domain_lower):
+                matched.append(brand)
+        else:
+            # Unambiguous (tollpass): plain substring — catches concatenated
+            # variants like tollpassapp.top, tollpassss.cc, tollpass.klgf.cam
             if brand in domain_lower:
                 matched.append(brand)
 

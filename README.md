@@ -1,17 +1,18 @@
 # Detectopod 🔍
 
-**Automated phishing domain detection targeting Bulgarian courier services and government e-portals**
+**Automated phishing domain detection targeting Bulgarian courier services, government e-portals, and toll payment services**
 
-Detectopod is an automated threat intelligence system that monitors the web for phishing domains impersonating Bulgarian courier and logistics companies (Econt, Speedy, BulgariaPost) **and** the Bulgarian Ministry of Interior e-services portal (`e-uslugi.mvr.bg`). The system runs continuously via GitHub Actions and maintains a public threat feed.
+Detectopod is an automated threat intelligence system that monitors the web for phishing domains impersonating Bulgarian courier and logistics companies (Econt, Speedy, BulgariaPost), the Bulgarian Ministry of Interior e-services portal (`e-uslugi.mvr.bg`), **and** the TollPass / Vinetki toll payment services (`tollpass.bg`, `vinetki.bg`). The system runs continuously via GitHub Actions and maintains a public threat feed.
 
 ## 🎯 What It Does
 
 Detectopod identifies phishing domains that:
 - Impersonate Bulgarian courier brands (Econt, Speedy, BulgariaPost, etc.)
 - Impersonate Bulgarian government e-services — specifically the MVR portal (`e-uslugi.mvr.bg`)
-- Use suspicious TLDs (`.cfd`, `.tk`, `.sbs`, `.cam`, `.shop`, `.autos`, `.life`, `.one`, etc.)
+- Impersonate Bulgarian toll/vignette payment services — TollPass (`tollpass.bg`) and Vinetki (`vinetki.bg`)
+- Use suspicious TLDs (`.cfd`, `.tk`, `.sbs`, `.cam`, `.shop`, `.autos`, `.life`, `.one`, `.cc`, etc.)
 - Deploy on free hosting platforms (Cloudflare Pages, Firebase, Heroku, Netlify, Vercel)
-- Exhibit classic phishing patterns (e.g., `speedy.bg-pk.cfd`, `mvrbg.sbs`, `e-uslugicye.top`)
+- Exhibit classic phishing patterns (e.g., `speedy.bg-pk.cfd`, `mvrbg.sbs`, `e-uslugicye.top`, `tollpassapp.top`)
 
 ## 🚀 Features
 
@@ -198,6 +199,17 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
 | Brand + suspicious TLD | +25 | `mvrbg.sbs` |
 | Brand + free hosting | +40 | `mvr-bg.pages.dev` |
 
+#### Toll/Vignette Brands (TollPass / Vinetki)
+
+| Factor | Weight | Example |
+|--------|--------|---------|
+| tollpass / vinetki present | +40 | `tollpass`, `vinetki` |
+| Geographic indicator | +15 | `.bg`, `bulgaria`, `bg-` |
+| Suspicious TLD | +30 | `.cam`, `.top`, `.cc` |
+| Brand + geo + suspicious TLD | +45 | `tollpass.klgf.cam` |
+| Brand + suspicious TLD | +25 | `tollpassapp.top` |
+| Brand + free hosting | +40 | `tollpass-xxx.pages.dev` |
+
 **Threshold**: Domains scoring ≥80 are added to the feed.
 
 ### Monitored Platforms
@@ -205,7 +217,7 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
 **Suspicious TLDs:**
 `.cfd`, `.tk`, `.ml`, `.ga`, `.gq`, `.cf`, `.top`, `.xyz`, `.club`, `.online`,
 `.site`, `.space`, `.click`, `.link`, `.live`, `.icu`, `.sbs`, `.cam`, `.shop`,
-`.one`, `.autos`, `.life`, `.qpon`, `.uno`
+`.one`, `.autos`, `.life`, `.qpon`, `.uno`, `.ink`, `.cyou`, `.cc`
 
 **Free Hosting:**
 Firebase (`.web.app`, `.firebaseapp.com`), Cloudflare Pages (`.pages.dev`),
@@ -222,6 +234,9 @@ Render, GitHub Pages, and more.
 
 **Government brands (MVR):**
 `mvr`, `mvrbg`, `e-uslugi`, `euslugi`
+
+**Toll/vignette brands (TollPass / Vinetki):**
+`tollpass`, `vinetki`
 
 **Secondary (generic logistics):**
 `tracking`, `delivery`, `shipment`, `parcel`, `payment`, `tax`, `fee`,
