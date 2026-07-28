@@ -630,7 +630,7 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
                 tlds_to_search = [
                     '.cfd', '.tk', '.pages.dev', '.web.app', '.ml', '.ga',
                     '.sbs', '.cam', '.shop', '.one', '.autos', '.life',
-                    '.qpon', '.uno', '.ink', '.cyou', '.top', '.icu',
+                    '.qpon', '.uno', '.ink', '.cyou', '.top', '.icu', '.cc',
                 ]
                 for tld in tlds_to_search:
                     tld_query = ' OR '.join([f'domain:*{kw}*{tld}' for kw in keywords])
