@@ -3630,47 +3630,5 @@
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.093650",
     "source": "urlscan.io"
-  },
-  {
-    "domain": "test.tollpass.xyz",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.103962",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "www.ucntbtest.tollpass.xyz",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.108824",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "www.test.tollpass.xyz",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.113726",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "dev.tollpass.xyz",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.118556",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "www.dev.tollpass.xyz",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.123329",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "tollpass.online",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.128472",
-    "source": "urlscan.io"
-  },
-  {
-    "domain": "tollpass.one",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:49.133427",
-    "source": "urlscan.io"
   }
 ]
