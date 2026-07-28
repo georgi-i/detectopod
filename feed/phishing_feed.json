@@ -3534,5 +3534,149 @@
       "threat_level": "HIGH",
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "www.mvr.govbg.cyou",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.941164",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "euslugi-remit.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.954425",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "mvr-gov.eu.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.960417",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "euslugimvr-paynow.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.968357",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "euslugimvr-taksa.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.977407",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "vse-uslugi.online",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:48.982806",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "euslugimvr-platen.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.036022",
+    "source": "urlscan.io-.cc"
+  },
+  {
+    "domain": "euslugimvr-billing.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.045299",
+    "source": "urlscan.io-.cc"
+  },
+  {
+    "domain": "euslugi-system.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.052219",
+    "source": "urlscan.io-.cc"
+  },
+  {
+    "domain": "euslugicharge.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.057159",
+    "source": "urlscan.io-.cc"
+  },
+  {
+    "domain": "tollpass.klgf.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.069683",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpassss.cc",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.074494",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpassapp.top",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.079310",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpasss.sbs",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.084033",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.sbs",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.088796",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpasss.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.093650",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "web-supportpaymentetollpassig.backpackotomot.club",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.099168",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "test.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.103962",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.ucntbtest.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.108824",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.test.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.113726",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "dev.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.118556",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.dev.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.123329",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.online",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.128472",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.one",
+    "score": 100,
+    "detected_at": "2026-07-28T19:45:49.133427",
+    "source": "urlscan.io"
   }
 ]
