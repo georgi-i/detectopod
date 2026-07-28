@@ -3487,7 +3487,14 @@
     "domain": "tollpass.txsu.cam",
     "score": 100,
     "detected_at": "2026-07-28T18:43:56.803919",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Domain structure `tollpass.txsu.cam` mimics legitimate service naming conventions.\n    * TLD `.cam` is often associated with malicious activity and is not a typical TLD for Bulgarian services.\n    * The domain does not directly match any of the confirmed phishing patterns but exhibits characteristics of impersonation through a plausible-sounding service name on a suspicious TLD, likely targeting users expecting a legitimate Bulgarian online service.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-07-28T19:33:37.896501",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpass.eknt.cam",
