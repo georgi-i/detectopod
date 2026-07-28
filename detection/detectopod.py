@@ -934,12 +934,32 @@ def scan_domains(duration=None, sources=['urlscan']):
         logging.info("=" * 60)
         logging.info("Querying URLScan.io...")
         logging.info("=" * 60)
-        
-        urlscan_domains = query_urlscan(COURIER_KEYWORDS, max_results=1000)
-        all_domains.extend(urlscan_domains)
-        
-        logging.info(f"URLScan.io returned {len(urlscan_domains)} domains")
-        
+
+        # Query in smaller category batches instead of one giant combined
+        # OR-query. When all 20+ keywords are combined in a single query,
+        # high-volume brands (econt, speedy) can crowd lower-volume brands
+        # (tollpass, mvr) out of the returned result window even though
+        # urlscan sorts by date descending. Splitting by category gives
+        # each brand group its own dedicated result window, and spacing
+        # the calls out a bit helps avoid rate limiting.
+        keyword_batches = [
+            ("courier", BULGARIAN_COURIER_BRANDS + ['dhl']),
+            ("government", BULGARIAN_GOVT_BRANDS),
+            ("toll/vignette", BULGARIAN_TOLL_BRANDS),
+        ]
+
+        for i, (label, batch_keywords) in enumerate(keyword_batches):
+            logging.info(f"Querying urlscan.io for {label} keywords...")
+            batch_domains = query_urlscan(batch_keywords, max_results=1000)
+            all_domains.extend(batch_domains)
+            logging.info(f"  -> {len(batch_domains)} domains from '{label}' batch")
+
+            # Small delay between batches (skip after the last one)
+            if i < len(keyword_batches) - 1:
+                time.sleep(30)
+
+        logging.info(f"URLScan.io returned {len(all_domains)} domains total across batches")
+
         recent_domains = query_urlscan_recent(days=7, max_results=500)
         all_domains.extend(recent_domains)
         
