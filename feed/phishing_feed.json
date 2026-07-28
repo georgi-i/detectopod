@@ -3469,5 +3469,35 @@
       "threat_level": "LOW",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "tollpass.xlyr.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T18:43:56.799704",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.txsu.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T18:43:56.803919",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.eknt.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T18:43:56.835458",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.isxd.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T18:43:56.840538",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.dvhl.cam",
+    "score": 100,
+    "detected_at": "2026-07-28T18:43:56.851119",
+    "source": "urlscan.io"
   }
 ]
