@@ -3539,19 +3539,40 @@
     "domain": "www.mvr.govbg.cyou",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.941164",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "gav.mvrbg.<tld>` ->",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-02T08:43:40.577102",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugi-remit.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.954425",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-02T08:43:46.003555",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "mvr-gov.eu.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.960417",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `mvr-gov.eu.cc` closely mimics the Bulgarian Ministry of Interior (MVR) by including \"mvr\" and a government-related suffix.\n    *   The use of `.cc` (Country Code Top-Level Domain for Cocos (Keeling) Islands) as a second-level domain, combined with a generic `.eu` TLD, is highly suspicious and indicative of impersonation.\n    *   The rule-based system flagged this domain with a perfect score, indicating a strong match to known phishing patterns targeting Bulgarian services.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-08-02T08:45:53.177135",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "euslugimvr-paynow.cc",
