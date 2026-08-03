@@ -3617,19 +3617,40 @@
     "domain": "euslugimvr-platen.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.036022",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "ld>` -> The domain is `",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T14:55:45.374846",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugimvr-billing.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.045299",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": " `e-uslugi.mvr",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T14:55:56.040434",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugi-system.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.052219",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH\n2. **",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T14:56:10.576898",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugicharge.cc",
