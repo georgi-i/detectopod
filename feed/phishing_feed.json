@@ -3578,19 +3578,40 @@
     "domain": "euslugimvr-paynow.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.968357",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "VR) e-services portal (`e-usl",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T11:21:05.612465",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugimvr-taksa.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.977407",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": " This is a highly specific government impersonation attempt targeting M",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T11:21:21.172147",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "vse-uslugi.online",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.982806",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T11:21:29.333426",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "euslugimvr-platen.cc",
