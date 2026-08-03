@@ -3656,19 +3656,40 @@
     "domain": "euslugicharge.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.057159",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "`.\n        *   Even without the hyphen,",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T16:19:22.498610",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.klgf.cam",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.069683",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "tld>` -> No match.\n    *   Pattern",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T16:19:37.135731",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpassss.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.074494",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": " (Bulgarian Online Services):**\n    *   ",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-03T16:20:00.509514",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpassapp.top",
