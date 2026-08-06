@@ -3695,19 +3695,40 @@
     "domain": "tollpassapp.top",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.079310",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain `tollpassapp.top` utilizes a suspicious TLD (`.top`).\n    *   The domain structure and name (`tollpassapp`) are highly suggestive of impersonating a service related to tolls or vehicle registration, which often involves government or courier services for document delivery or payment.\n    *   While not a direct match to the listed patterns, it strongly aligns with the *spirit* of impersonating Bulgarian online services, particularly those involving official processes or delivery. The use of \"app\" and a generic service name on a suspicious TLD is a common phishing tactic.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-08-06T12:05:37.112505",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpasss.sbs",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.084033",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-06T12:05:51.119104",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.sbs",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.088796",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    - Domain structure `tollpass.sbs` does not directly match any confirmed phishing patterns.\n    - However, `sbs` is a suspicious TLD often associated with malicious activity.\n    - The name \"tollpass\" could be used to impersonate a service related to road tolls or a courier service for package delivery, aligning with the monitored targets (Econt, Speedy, BulgariaPost).\n    - The rule-based system flagged this domain with a perfect score, indicating strong suspicion based on its internal logic, likely due to a combination of TLD and potential naming convention for phishing.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-08-06T12:08:24.902074",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpasss.xyz",
