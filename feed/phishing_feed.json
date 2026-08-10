@@ -3773,19 +3773,40 @@
     "domain": "tollpass.fkvx.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.075026",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "*   The domain is `tollpass",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T14:53:08.993176",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.usnk.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.079891",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "uslugi<anything>.<",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T14:53:11.653715",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.tqcl.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.085602",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T14:53:14.459219",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.vqio.cam",
