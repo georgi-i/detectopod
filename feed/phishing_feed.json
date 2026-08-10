@@ -3734,19 +3734,40 @@
     "domain": "tollpasss.xyz",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.093650",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": " Rule-based score: 100/",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T13:23:37.857248",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "econt.eu.cc",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.317159",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "? No. \"Econt\" is highly",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T13:23:40.837085",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.cjba.cam",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.412847",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level**: HIGH\n2. **",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-10T13:23:44.828522",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "tollpass.fkvx.cam",
