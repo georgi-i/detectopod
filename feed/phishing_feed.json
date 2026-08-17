@@ -3812,19 +3812,40 @@
     "domain": "tollpass.vqio.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.090480",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": ".<tld>` -> No.\n    *",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-17T12:56:42.434183",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "mvr-gov-mk.cam",
     "score": 100,
     "detected_at": "2026-08-10T13:23:10.977464",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "brand>.<geo>-<anything>.<t",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-17T12:56:45.460584",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "fxktmvrbgsblq.top",
     "score": 100,
     "detected_at": "2026-08-17T12:56:21.176700",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2. **",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-17T12:56:48.587978",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "web-supportpaymentetollpassig.backpackotomot.club",
