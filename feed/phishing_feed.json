@@ -3877,19 +3877,40 @@
     "domain": "test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.432614",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. **Threat Level:** HIGH\n2",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-31T19:48:40.659254",
+      "threat_level": "HIGH",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.ucntbtest.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.437864",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "...` - No.\n  2.",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-31T19:49:20.535590",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.443218",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "pass.xyz` based on the provided rules.\n",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-31T19:49:35.630514",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "dev.tollpass.xyz",
