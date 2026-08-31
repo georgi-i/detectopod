@@ -3833,5 +3833,65 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "euslugi-bulgaria.cc",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.319571",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "fxktmvrbgsblq.top",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.330428",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "web-supportpaymentetollpassig.backpackotomot.club",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.427256",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "test.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.432614",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.ucntbtest.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.437864",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.test.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.443218",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "dev.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.448519",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "www.dev.tollpass.xyz",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.453817",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.online",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.459496",
+    "source": "urlscan.io"
+  },
+  {
+    "domain": "tollpass.one",
+    "score": 100,
+    "detected_at": "2026-08-31T19:03:58.465094",
+    "source": "urlscan.io"
   }
 ]
