@@ -3838,19 +3838,40 @@
     "domain": "euslugi-bulgaria.cc",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.319571",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": " in Bulgarian) combined with \"bulgaria\" on a",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-31T19:05:07.967893",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "fxktmvrbgsblq.top",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.330428",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `fxktmvrbgsblq.top` is highly obfuscated and lacks any recognizable branding or keywords.\n    *   The TLD `.top` is frequently used in phishing campaigns.\n    *   The domain's registration on a free/serverless platform or suspicious TLD, combined with the high rule score, strongly suggests malicious intent.\n    *   While not directly matching a specific pattern, its generic and suspicious nature aligns with the *spirit* of the confirmed phishing patterns targeting Bulgarian services, likely an attempt to evade simpler pattern matching.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-08-31T19:06:31.151238",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "web-supportpaymentetollpassig.backpackotomot.club",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.427256",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": " typo of \"passing\" or \"passage\" or \"bg",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-08-31T19:06:46.067613",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "test.tollpass.xyz",
