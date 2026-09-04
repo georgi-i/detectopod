@@ -3846,5 +3846,11 @@
       "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
+  },
+  {
+    "domain": "tollpass.icu",
+    "score": 100,
+    "detected_at": "2026-09-04T13:55:10.977464",
+    "source": "urlscan.io"
   }
 ]
