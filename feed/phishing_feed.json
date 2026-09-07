@@ -3890,19 +3890,40 @@
     "domain": "test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-07T17:41:23.566322",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "` -> No.\n    *   Pattern 6",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-09-07T18:34:07.246853",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.ucntbtest.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-07T17:41:23.571588",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": ".tollpass.xyz` (or subdomain `ucnt",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-09-07T18:34:14.174181",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "www.test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-07T17:41:23.576841",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Based on the provided rules and standard threat intelligence practices,",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-09-07T18:34:18.583039",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "dev.tollpass.xyz",
