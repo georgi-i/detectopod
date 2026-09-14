@@ -3903,19 +3903,40 @@
     "domain": "www.ucntbtest.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-14T18:01:20.256525",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `www.ucntbtest.tollpass.xyz` uses a suspicious TLD (`.xyz`) and a subdomain (`tollpass`) that could be associated with courier services.\n    *   The presence of \"test\" in the subdomain (`ucntbtest`) is a common tactic to evade detection, often used on phishing sites that mimic legitimate services.\n    *   The domain structure does not align with any legitimate Bulgarian online service (Econt, Speedy, BulgariaPost, MVR e-services).\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-14T19:00:34.293586",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-14T18:01:20.261105",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Domain structure `www.test.tollpass.xyz` does not match any confirmed phishing patterns.\n    * However, the TLD `.xyz` is often associated with malicious activity.\n    * The presence of \"test\" in the domain, combined with the suspicious TLD, suggests a potential test environment for phishing, or a deliberate attempt to evade detection by appearing benign.\n    * The target list includes critical Bulgarian services, increasing the potential impact of any successful phishing attempt.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-14T19:01:47.180128",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "dev.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-14T18:01:20.266008",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    * Suspicious TLD (.xyz) combined with a potentially impersonated brand (\"tollpass\" is often associated with payment/access services, similar to courier or government portals).\n    * The structure \"dev.\" suggests a development or testing environment, which is a common tactic for phishing sites to appear legitimate or to bypass initial scrutiny. This also aligns with the \"Developer/test pages\" exception for false positives, but the context of impersonating Bulgarian services elevates the risk.\n    * While not directly matching a confirmed pattern, the domain's characteristics strongly suggest an attempt to mimic legitimate Bulgarian online services, especially given the rule-based system's focus.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-14T19:03:21.802118",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.dev.tollpass.xyz",
