@@ -3864,19 +3864,40 @@
     "domain": "fxktmvrbgsblq.top",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.472266",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `fxktmvrbgsblq.top` does not resemble any legitimate Bulgarian online service.\n    *   The TLD `.top` is often associated with malicious activity.\n    *   The domain is hosted on a free/serverless platform, common for phishing.\n    *   The domain's random string is highly suspicious and lacks any recognizable branding or keywords related to the monitored targets.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-28T19:35:25.279890",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "web-supportpaymentetollpassig.backpackotomot.club",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.532831",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `web-supportpaymentetollpassig.backpackotomot.club` uses a suspicious TLD (`.club`) and a long, obfuscated subdomain.\n    *   The subdomain `web-supportpaymentetollpassig` strongly suggests impersonation of payment and toll services, common in phishing campaigns targeting Bulgarian users.\n    *   The overall pattern aligns with typical phishing tactics designed to trick users into revealing credentials or payment information.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-28T19:36:38.267293",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.538288",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    *   Domain structure `test.<brand>.<tld>` with a suspicious TLD (`.xyz`).\n    *   The presence of `tollpass` in the domain, potentially impersonating a service related to road tolls or access, which could be linked to government or transport services.\n    *   The `.xyz` TLD is often used for malicious purposes and is not typical for legitimate Bulgarian services.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-28T19:37:58.575613",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.ucntbtest.tollpass.xyz",
