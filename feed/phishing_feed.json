@@ -3903,19 +3903,40 @@
     "domain": "www.ucntbtest.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.543685",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1.  **Threat Level:** HIGH\n2.  **Confidence:** 100%\n3.  **Key Indicators:**\n    *   Domain structure `www.ucntbtest.tollpass.xyz` contains \"test\" which, while often benign, is used here in conjunction with a suspicious TLD (`.xyz`) and a potentially impersonating subdomain (`tollpass`).\n    *   The combination of \"tollpass\" and the `.xyz` TLD is highly suspicious for Bulgarian online services, often used to mimic legitimate payment or tracking portals.\n    *   The rule-based system flagged this domain with a perfect score (100/100) against patterns targeting Bulgarian courier services and MVR e-services.\n4.  **Decision:** BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-28T20:22:52.664841",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.test.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.549115",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Based on the provided rules and domain details",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-09-28T20:23:20.209079",
+      "threat_level": "UNKNOWN",
+      "decision": "UNKNOWN"
+    }
   },
   {
     "domain": "dev.tollpass.xyz",
     "score": 100,
     "detected_at": "2026-09-28T19:33:30.554649",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "1. Threat Level: HIGH\n2. Confidence: 100%\n3. Key Indicators:\n    *   Domain `dev.tollpass.xyz` uses a suspicious TLD (`.xyz`) and a generic subdomain (`dev`) often used for impersonation.\n    *   The structure `tollpass` is a common lure for courier services (like Econt or Speedy) or government services requiring payment/identification.\n    *   The domain is hosted on a free/serverless platform, which is a common tactic for phishing operations to evade detection and reduce costs.\n4. Decision: BLOCK",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-09-28T20:25:14.193258",
+      "threat_level": "HIGH",
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.dev.tollpass.xyz",
