@@ -5,15 +5,20 @@ on:
     workflows: ["Scheduled Detection"]  # fires right after detection adds new domains
     types:
       - completed
-  schedule:
-    - cron: '0 14 * * 1'  # Every Monday at 2 PM UTC (2h after detection)
   workflow_dispatch:  # Allow manual trigger
+  # (no separate cron: it used to run a second time, 2h after the workflow_run trigger)
 
 permissions:
   contents: write
 
+concurrency:
+  group: feed-writer
+  cancel-in-progress: false
+
 jobs:
   analyze:
+    # workflow_run fires even when detection failed - only continue on success
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -38,7 +43,9 @@ jobs:
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: |
-        python detection/llm_analyzer.py --days 90 --max-analyze 3 --min-score 75
+        # --days 400 + UNKNOWN re-queue: drains the backlog of truncated analyses.
+        # Known false positives (feed/false_positives.json) are skipped automatically.
+        python detection/llm_analyzer.py --days 400 --max-analyze 100 --min-score 75
 
     - name: Check for changes
       id: check_changes

@@ -11,7 +11,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "ww38.speedy-tower-battles.visioniq.cfd",
@@ -25,7 +26,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "ww38.speedy-current-affairs-2023-english-pdf.boldness.cfd",
@@ -39,7 +41,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-glass.cfd",
@@ -53,7 +56,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-math-calculator.pages.dev",
@@ -67,7 +71,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-assignment.pages.dev",
@@ -81,7 +86,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-medical-services.pages.dev",
@@ -95,7 +101,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-marketing.pages.dev",
@@ -109,7 +116,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-removals.pages.dev",
@@ -123,7 +131,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-cash-home-offers.pages.dev",
@@ -137,7 +146,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-youtube-grabber.pages.dev",
@@ -151,7 +161,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
@@ -165,7 +176,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "www.speedy-concrete.adtrakwl.185-124-160-15.cpanel.site",
@@ -179,7 +191,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-tech-fix.click",
@@ -193,7 +206,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-test.pages.dev",
@@ -207,7 +221,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-puppy-75.pages.dev",
@@ -221,7 +236,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "kyr-speedy-net-worth.pages.dev",
@@ -235,7 +251,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-morman-birthday.pages.dev",
@@ -249,7 +266,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "www.speedy-mind-allianh0fe.rollout.site",
@@ -263,7 +281,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy.startupbuilder.club",
@@ -277,7 +296,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "calvin-speedy-wilburn-net-worth.pages.dev",
@@ -291,7 +311,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-bus-company-dashboard.pages.dev",
@@ -305,7 +326,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-tech-support.pages.dev",
@@ -319,7 +341,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-wow.pages.dev",
@@ -333,7 +356,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-potato-salad-with-olives-green-onions.pages.dev",
@@ -347,7 +371,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-deployment.pages.dev",
@@ -361,7 +386,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-bookkeeper-hub.pages.dev",
@@ -375,7 +401,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-mind-allianh0fe.rollout.site",
@@ -389,7 +416,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-claxton-net-worth.pages.dev",
@@ -403,7 +431,8 @@
       "threat_level": "LOW",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-video.pages.dev",
@@ -417,7 +446,8 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
   },
   {
     "domain": "speedy-vegan-burrito.pages.dev",
@@ -431,6 +461,37 @@
       "threat_level": "UNKNOWN",
       "decision": "FALSE_POSITIVE"
     },
-    "flagged_false_positive": true
+    "flagged_false_positive": true,
+    "subdomains": false
+  },
+  {
+    "domain": "tollpass.xyz",
+    "subdomains": true,
+    "reason": "manual: reviewed by maintainer",
+    "added_at": "2026-10-02T19:09:43.668364"
+  },
+  {
+    "domain": "tollpass.online",
+    "subdomains": true,
+    "reason": "manual: reviewed by maintainer",
+    "added_at": "2026-10-02T19:09:43.671311"
+  },
+  {
+    "domain": "tollpass.one",
+    "subdomains": true,
+    "reason": "manual: reviewed by maintainer",
+    "added_at": "2026-10-02T19:09:43.673902"
+  },
+  {
+    "domain": "fxktmvrbgsblq.top",
+    "subdomains": false,
+    "reason": "manual: reviewed by maintainer",
+    "added_at": "2026-10-02T19:09:43.676091"
+  },
+  {
+    "domain": "web-supportpaymentetollpassig.backpackotomot.club",
+    "subdomains": false,
+    "reason": "manual: reviewed by maintainer",
+    "added_at": "2026-10-02T19:09:43.678439"
   }
 ]

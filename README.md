@@ -163,10 +163,30 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
 - **Auto-commit**: Updates feed automatically
 
 ### LLM Analysis (`llm_analysis.yml`)
-- **Frequency**: Every Monday at 2 PM UTC (2h after detection)
-- **Model**: Claude Sonnet 4.5 via OpenRouter
+- **Trigger**: Right after a successful Scheduled Detection run (or manually)
+- **Model**: Gemini 3.5 Flash (fallback: 2.5 Flash-Lite) via Google AI Studio, JSON output
 - **Purpose**: Validate detections and remove false positives
-- **Max domains**: 1000 per run (BYOK, no artificial cap)
+- **Max domains**: 100 per run; entries with a truncated (`UNKNOWN`) analysis are re-queued automatically
+
+### Mark False Positive (`mark_false_positive.yml`)
+Manual workflow: enter a domain, it is added to `feed/false_positives.json` and removed from the feed.
+
+## 🚫 False Positives
+
+`feed/false_positives.json` is the single source of truth for "never show this again".
+The detector and the LLM analyzer both read it, so a listed domain is never re-added.
+
+```json
+{ "domain": "tollpass.xyz", "subdomains": true }
+```
+
+- default: exact match (`www.` is ignored)
+- `"subdomains": true`: the domain **and** all its subdomains (`test.`, `dev.`, `www.` ...)
+- add one from the CLI: `python detection/fp.py tollpass.xyz --subdomains`
+- or via the **Mark False Positive** workflow in the Actions tab
+- hosts starting with `test.`, `dev.`, `staging.`, `qa.`, `uat.`, `sandbox.` are skipped automatically
+
+Offline tests: `python -m unittest discover -s tests`
 
 ## 🎯 Detection Logic
 

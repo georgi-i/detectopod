@@ -6,7 +6,7 @@ import sys
 import time
 import requests
 import re
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from feedlib import FalsePositives, normalize_domain
 
 # Usage: python detectopod.py [--duration SECONDS] [--sources urlscan google cloudflare]
 
@@ -199,9 +199,11 @@ INFRASTRUCTURE_PATTERNS = (
 )
 
 OUTPUT_FILE = 'feed/phishing_feed.json'
-STATS_FILE = 'feed/stats.json'
-START_TIME = None
-MAX_DURATION = None
+
+# Leading labels that mark a dev/test/staging environment. A host like
+# test.tollpass.xyz or dev.tollpass.xyz is a developer sandbox, not a phishing
+# page, so it is skipped (and logged) instead of landing in the feed.
+DEV_LABELS = frozenset({'test', 'dev', 'staging', 'stage', 'qa', 'uat', 'sandbox'})
 
 # Configure logging
 logging.basicConfig(
@@ -228,25 +230,10 @@ def save_feed(feed_data):
         logging.error(f"Error saving feed: {e}")
 
 
-def add_to_feed(domain, score, source='urlscan'):
-    """Add a suspicious domain to the feed"""
-    feed_data = load_existing_feed()
-    
-    # Check if already in feed
-    for entry in feed_data:
-        if entry['domain'] == domain:
-            logging.debug(f"Domain {domain} already in feed")
-            return
-    
-    entry = {
-        'domain': domain,
-        'score': score,
-        'detected_at': datetime.datetime.now().isoformat(),
-        'source': source
-    }
-    
-    feed_data.append(entry)
-    save_feed(feed_data)
+def is_dev_host(domain):
+    """True for hosts whose first label is a dev/test/staging marker."""
+    parts = normalize_domain(domain).split('.')
+    return len(parts) > 2 and parts[0] in DEV_LABELS
 
 
 def calculate_score(domain):
@@ -1020,6 +1007,12 @@ def scan_domains(duration=None, sources=['urlscan']):
     logging.info(f"Processing {len(all_domains)} total domains...")
     logging.info("=" * 60)
 
+    false_positives = FalsePositives.load()
+    feed_data = load_existing_feed()
+    known_domains = {normalize_domain(e.get('domain')) for e in feed_data}
+    new_entries = []
+    skipped_fp = 0
+
     for item in all_domains:
         if duration:
             elapsed = (datetime.datetime.now() - start_time).total_seconds()
@@ -1027,13 +1020,20 @@ def scan_domains(duration=None, sources=['urlscan']):
                 logging.info(f"Duration limit reached. Processed {len(processed_domains)} domains")
                 break
 
-        domain = item.get('domain', '').strip()
+        # Normalise (lower-case, strip www.) so www.x and x are one domain
+        domain = normalize_domain(item.get('domain', ''))
         source = item.get('source', 'unknown')
 
         if not domain or domain.startswith('*') or domain in processed_domains:
             continue
 
         processed_domains.add(domain)
+
+        # STEP 0: Known false positives (false_positives.json) are never re-added
+        if domain in false_positives:
+            skipped_fp += 1
+            logging.debug(f"[SKIP] Known false positive: {domain}")
+            continue
 
         # STEP 1: Skip infrastructure/internal domains
         if is_infrastructure_domain(domain):
@@ -1054,20 +1054,36 @@ def scan_domains(duration=None, sources=['urlscan']):
             logging.debug(f"[SKIP] Not on suspicious platform: {domain}")
             continue
 
+        # STEP 3b: Dev/test/staging hosts are sandboxes, not phishing pages
+        if is_dev_host(domain):
+            logging.info(f"[SKIP] Dev/test host: {domain}")
+            continue
+
         # STEP 4: Calculate score
         score = calculate_score(domain)
 
         if score >= SCORE_THRESHOLD:
+            if domain in known_domains:
+                logging.debug(f"Domain {domain} already in feed")
+                continue
+
             findings_count += 1
+            known_domains.add(domain)
 
             logging.warning(
-                f"🚨 PHISHING DETECTED: {domain} | "
+                f"🚨 NEW PHISHING DETECTED: {domain} | "
                 f"Score: {score}/100 | "
                 f"Keywords: {', '.join(brand_keywords)} | "
                 f"Source: {source}"
             )
 
-            add_to_feed(domain, score, source)
+            new_entries.append({
+                'domain': domain,
+                'score': score,
+                'detected_at': datetime.datetime.now().isoformat(),
+                'source': source,
+                'keywords': brand_keywords,
+            })
 
         else:
             logging.info(
@@ -1075,13 +1091,18 @@ def scan_domains(duration=None, sources=['urlscan']):
                 f"Keywords: {', '.join(brand_keywords)}"
             )
 
+    # Single write at the end (was: re-read + re-write the whole file per domain)
+    if new_entries:
+        save_feed(feed_data + new_entries)
+    logging.info(f"Skipped {skipped_fp} known false positives")
+
     elapsed = (datetime.datetime.now() - start_time).total_seconds()
     save_run_stats(len(processed_domains), findings_count, elapsed)
     
     logging.info("=" * 60)
     logging.info("Scan complete!")
     logging.info(f"Domains processed: {len(processed_domains)}")
-    logging.info(f"Phishing domains found: {findings_count}")
+    logging.info(f"New phishing domains found: {findings_count}")
     logging.info(f"Elapsed time: {elapsed:.1f}s")
     logging.info("=" * 60)
 
@@ -1090,8 +1111,6 @@ def scan_domains(duration=None, sources=['urlscan']):
 
 
 def main():
-    global START_TIME, MAX_DURATION
-
     import argparse
     parser = argparse.ArgumentParser(description='Phishing Domain Detector - Courier & Government Edition')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
@@ -1102,7 +1121,6 @@ def main():
     args = parser.parse_args()
 
     MAX_DURATION = args.duration
-    START_TIME = datetime.datetime.now()
 
     logging.info("=" * 60)
     logging.info("Phishing Domain Detector - Courier & Government Edition")

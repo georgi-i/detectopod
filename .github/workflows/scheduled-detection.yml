@@ -6,10 +6,11 @@ on:
   # Allow manual trigger for testing
   workflow_dispatch:
   
-# Prevent multiple workflows from running at the same time
+# All workflows that write to feed/ share one group so they never race on the
+# same JSON files (and never cancel each other mid-write).
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: feed-writer
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -36,8 +37,6 @@ jobs:
         echo "Installing dependencies from requirements.txt..."
         cat detection/requirements.txt
         python -m pip install -r detection/requirements.txt
-        # Install cryptography for direct CT log querying
-        python -m pip install cryptography
         echo "Verifying installations..."
         python -c "import requests; print(f'requests {requests.__version__} installed')"
         python -c "import cryptography; print(f'cryptography {cryptography.__version__} installed')"
