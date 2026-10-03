@@ -53,6 +53,7 @@ jobs:
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         MAX_ANALYZE: ${{ inputs.max_analyze || '100' }}
+        PYTHONUNBUFFERED: '1'  # without this a killed run shows no output at all
       run: |
         # --days 400 + UNKNOWN re-queue: drains the backlog of truncated analyses.
         # Known false positives (feed/false_positives.json) are skipped automatically.
