@@ -126,15 +126,10 @@ jobs:
           # Show last 5 findings
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**🔍 Recent Findings (last 5):**" >> $GITHUB_STEP_SUMMARY
-          cat feed/phishing_feed.json | python -c "
-          import sys, json
-          data = json.load(sys.stdin)
-          for entry in data[-5:]:
-            print(f\"- {entry.get('domain', 'N/A')} (score: {entry.get('score', 0)}) - {entry.get('source', 'unknown')}\")
-            " >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- Unable to parse recent findings" >> $GITHUB_STEP_SUMMARY
+          python -c 'import json; d = json.load(open("feed/phishing_feed.json")); [print("- " + str(e.get("domain", "N/A")) + " (score: " + str(e.get("score", 0)) + ") - " + str(e.get("source", "unknown"))) for e in d[-5:]]' >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- Unable to parse recent findings" >> $GITHUB_STEP_SUMMARY
         fi
 
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**🎯 Targets:** Bulgarian couriers (Econt, Speedy, BulgariaPost, DHL) + MVR government e-services (e-uslugi.mvr.bg)" >> $GITHUB_STEP_SUMMARY
+        echo "**🎯 Targets:** Bulgarian couriers (Econt, Speedy, BulgariaPost, DHL) + MVR government e-services (e-uslugi.mvr.bg) + TollPass/Vinetki toll services" >> $GITHUB_STEP_SUMMARY
         echo "**🌐 Monitored TLDs:** .cfd .tk .sbs .cam .shop .one .autos .life .qpon .uno .ink .cyou .top .icu .ml .ga .xyz and more" >> $GITHUB_STEP_SUMMARY
         echo "**☁️ Monitored Platforms:** Firebase, Heroku, Cloudflare Pages, Netlify, Vercel, Render, and more" >> $GITHUB_STEP_SUMMARY
