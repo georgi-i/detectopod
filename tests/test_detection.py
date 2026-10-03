@@ -62,6 +62,21 @@ class ScanEndToEnd(unittest.TestCase):
             self.assertEqual(result[1]['keywords'], ['tollpass'])
 
 
+class ExtractDomains(unittest.TestCase):
+    def test_sources_dedupe_and_url_fallback(self):
+        results = [
+            {'page': {'domain': 'a.top', 'url': 'http://a.top/x'}, 'task': {'time': 't1'}},
+            {'page': {'domain': 'a.top'}},                                  # duplicate
+            {'task': {'domain': 'b.top'}},                                  # task fallback
+            {'page': {'url': 'https://c.top/login'}},                       # url fallback
+            {'page': {}},                                                   # nothing usable
+        ]
+        out = detectopod.extract_domains(results, set(), 'urlscan.io-.top')
+        self.assertEqual([d['domain'] for d in out], ['a.top', 'b.top', 'c.top'])
+        self.assertEqual(out[0]['source'], 'urlscan.io-.top')
+        self.assertEqual(out[0]['scan_time'], 't1')
+
+
 class LlmParsing(unittest.TestCase):
     a = llm_analyzer.GeminiAnalyzer('k')
 
