@@ -220,6 +220,33 @@ Respond with ONLY a JSON object, no prose and no markdown fences, using exactly 
         return {'threat_level': level, 'decision': decision, 'confidence': confidence}
 
 
+SAVE_EVERY = 10  # persist progress after this many analysed domains
+
+
+def save_progress(feed, feed_file):
+    """Write the feed (minus false positives) and false_positives.json.
+
+    Called every SAVE_EVERY domains and once at the end, so a crash or a CI
+    timeout in the middle of a long run keeps everything analysed so far.
+    Returns the list of entries that are false positives.
+    """
+    def is_fp(entry):
+        return (entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
+                or entry.get('flagged_false_positive'))
+
+    false_positive_domains = [e for e in feed if is_fp(e)]
+    clean_feed = [e for e in feed if not is_fp(e)]
+    save_json_list(feed_file, clean_feed)
+
+    fp_file = os.path.join(os.path.dirname(feed_file), 'false_positives.json')
+    existing_fps = load_json_list(fp_file)
+    existing_fp_domains = {normalize_domain(e['domain']) for e in existing_fps}
+    existing_fps.extend(e for e in false_positive_domains
+                        if normalize_domain(e['domain']) not in existing_fp_domains)
+    save_json_list(fp_file, existing_fps)
+    return false_positive_domains, clean_feed, fp_file
+
+
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
@@ -337,29 +364,11 @@ def main():
             stats['errors'] += 1
             print(f"   ❌ Analysis failed")
 
-    false_positive_domains = [
-        entry for entry in feed
-        if entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
-        or entry.get('flagged_false_positive')
-    ]
-    clean_feed = [
-        entry for entry in feed
-        if not (
-            entry.get('llm_analysis', {}).get('decision') == 'FALSE_POSITIVE'
-            or entry.get('flagged_false_positive')
-        )
-    ]
+        if i % SAVE_EVERY == 0:
+            save_progress(feed, args.feed_file)
+            print(f"   💾 Progress saved ({i}/{len(to_analyze)})")
 
-    with open(args.feed_file, 'w') as f:
-        json.dump(clean_feed, f, indent=2)
-
-    fp_file = os.path.join(os.path.dirname(args.feed_file), 'false_positives.json')
-    existing_fps = load_json_list(fp_file)
-    existing_fp_domains = {normalize_domain(e['domain']) for e in existing_fps}
-    new_fps = [e for e in false_positive_domains
-               if normalize_domain(e['domain']) not in existing_fp_domains]
-    existing_fps.extend(new_fps)
-    save_json_list(fp_file, existing_fps)
+    false_positive_domains, clean_feed, fp_file = save_progress(feed, args.feed_file)
 
     if false_positive_domains:
         print(f"\n🗑️  Removed {len(false_positive_domains)} false positive(s) from feed:")
