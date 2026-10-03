@@ -18,8 +18,9 @@ Detectopod identifies phishing domains that:
 
 - **Multi-Source Detection**: Queries URLScan.io, Google CT logs, and Cloudflare CT logs
 - **Automated Scanning**: Runs weekly via GitHub Actions
-- **Smart Scoring**: ML-enhanced scoring system (0-100) based on domain patterns
-- **LLM Analysis**: AI-powered review using Gemini 3.5 Flash to reduce false positives
+- **Rule-based Scoring**: Transparent scoring system (0-100) based on brand, TLD, hosting and domain patterns
+- **LLM Analysis**: AI-powered review using Gemini 3.5 Flash (structured JSON output) to reduce false positives
+- **False-Positive Memory**: Domains you reject are remembered in `feed/false_positives.json` and never re-added
 - **Public Threat Feed**: JSON feed of detected domains updated in real-time
 - **Zero Infrastructure**: Fully serverless using GitHub Actions
 
@@ -59,14 +60,14 @@ Detection Rate: 2.7%
                                     ▼
                            ┌──────────────────┐
                            │ LLM Analyzer     │
-                           │ (Claude S. 4.5)  │
+                           │ (Gemini 3.5)     │
                            └──────────────────┘
                                     │
                                     ▼
-                           ┌───────────────────┐
-                           │  Threat Feed      │
-                           │ phishing_feed.json│
-                           └───────────────────┘
+                           ┌───────────────────┐   ┌────────────────────┐
+                           │  Threat Feed      │◀──│ false_positives.json│
+                           │ phishing_feed.json│   │ (never re-added)   │
+                           └───────────────────┘   └────────────────────┘
 ```
 
 ## 🔧 Installation
@@ -74,26 +75,25 @@ Detection Rate: 2.7%
 ### Prerequisites
 - Python 3.10+
 - URLScan.io API key (free tier available)
-- OpenRouter API key (for LLM analysis, optional)
+- Google AI Studio API key (`GEMINI_API_KEY`, for LLM analysis, optional)
 
 ### Setup
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/detectopod.git
+   git clone https://github.com/georgi-i/detectopod.git
    cd detectopod
    ```
 
 2. **Install dependencies**
    ```bash
-   pip install -r detection/requirements.txt
-   pip install cryptography  # For CT log support
+   pip install -r detection/requirements.txt  # requests + cryptography (CT logs)
    ```
 
 3. **Set environment variables**
    ```bash
    export URLSCAN_API_KEY="your_urlscan_api_key"
-   export OPENROUTER_API_KEY="your_openrouter_key"  # Optional
+   export GEMINI_API_KEY="your_gemini_key"  # Optional, for LLM analysis
    ```
 
 4. **Run the scanner**
@@ -126,12 +126,15 @@ python detection/detectopod.py --duration 600 --sources urlscan
 ### LLM Analysis
 
 ```bash
-# Analyze last 24 hours of detections
+# Analyze detections from the last 24 hours
 python detection/llm_analyzer.py --days 1 --max-analyze 50
 
 # Analyze with custom threshold
 python detection/llm_analyzer.py --min-score 80 --max-analyze 100
 ```
+
+Entries whose analysis was truncated (`UNKNOWN`) are re-queued automatically, and domains
+listed in `feed/false_positives.json` are skipped.
 
 ### Accessing the Feed
 
@@ -143,7 +146,14 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
     "domain": "speedy.bg-pk.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.161773",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "keywords": ["speedy"],
+    "llm_analysis": {
+      "model": "gemini-3.5-flash",
+      "threat_level": "HIGH",
+      "confidence": 98,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrbg.sbs",
@@ -154,19 +164,27 @@ The threat feed is automatically updated at `feed/phishing_feed.json`:
 ]
 ```
 
+Domains are stored without the `www.` prefix. `keywords` and `llm_analysis` are added by the
+detector and the analyzer respectively (older entries may lack them).
+
+Other files in `feed/`: `false_positives.json` (suppression list), `run_stats.json` and
+`llm_analysis_stats.json` (last-run statistics).
+
 ## 🤖 GitHub Actions Workflows
 
 ### Scheduled Detection (`scheduled-detection.yml`)
-- **Frequency**: Every Monday at noon UTC
+- **Frequency**: Every Monday at noon UTC (or manually)
 - **Sources**: URLScan.io + Google CT + Cloudflare CT
 - **Timeout**: 20 minutes
 - **Auto-commit**: Updates feed automatically
+- All workflows that write to `feed/` share the `feed-writer` concurrency group, so they never run at the same time
 
 ### LLM Analysis (`llm_analysis.yml`)
 - **Trigger**: Right after a successful Scheduled Detection run (or manually)
 - **Model**: Gemini 3.5 Flash (fallback: 2.5 Flash-Lite) via Google AI Studio, JSON output
 - **Purpose**: Validate detections and remove false positives
-- **Max domains**: 100 per run; entries with a truncated (`UNKNOWN`) analysis are re-queued automatically
+- **Max domains**: 100 per run (`max_analyze` input when run manually); entries with a truncated (`UNKNOWN`) analysis are re-queued automatically
+- **Branch runs**: when started from a branch other than `main` it never pushes; the resulting feed is uploaded as an artifact instead
 
 ### Mark False Positive (`mark_false_positive.yml`)
 Manual workflow: enter a domain, it is added to `feed/false_positives.json` and removed from the feed.
@@ -253,7 +271,7 @@ Render, GitHub Pages, and more.
 `cityexpressbg`, `expressonebg`, `dhl`
 
 **Government brands (MVR):**
-`mvr`, `mvrbg`, `e-uslugi`, `euslugi`
+`mvr`, `mvrbg`, `mvr-bg`, `mvr-gov`, `e-uslugi`, `euslugi`
 
 **Toll/vignette brands (TollPass / Vinetki):**
 `tollpass`, `vinetki`
@@ -273,11 +291,12 @@ SCORE_THRESHOLD = 80  # Minimum score for feed inclusion
 
 ## 📈 Performance
 
-Recent scan statistics:
-- **Domains scanned**: ~1,800 per run
-- **Processing time**: ~18 seconds
-- **Detection rate**: ~5%
-- **False positive rate**: <10% (with LLM validation)
+See the live numbers in [Current Stats](#-current-stats) above (updated after every scan from
+`feed/run_stats.json`). A full URLScan run processes several thousand domains in a few minutes;
+LLM analysis takes a few seconds per domain and is rate limited by Google AI Studio.
+
+Note: the rule-based score saturates at 100 for most matches, so the LLM review is what separates
+real phishing from look-alikes.
 
 ## 🔐 Security Considerations
 
@@ -303,7 +322,7 @@ MIT License - see LICENSE file for details.
 
 - [URLScan.io](https://urlscan.io/) - Primary data source
 - [Certificate Transparency](https://certificate.transparency.dev/) - CT log infrastructure
-- [OpenRouter](https://openrouter.ai/) - LLM analysis API
+- [Google AI Studio (Gemini)](https://aistudio.google.com/) - LLM analysis API
 - Bulgarian cybersecurity community
 
 ## 📞 Contact
@@ -317,4 +336,4 @@ This tool is for educational and defensive security purposes only. The threat fe
 
 ---
 
-**Status**: 🟢 Active | **Last Updated**: 2026-05-08 | **Version**: 1.1
+**Status**: 🟢 Active | **Version**: 1.2
