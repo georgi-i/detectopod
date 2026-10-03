@@ -5,15 +5,24 @@ on:
     workflows: ["Scheduled Detection"]  # fires right after detection adds new domains
     types:
       - completed
-  schedule:
-    - cron: '0 14 * * 1'  # Every Monday at 2 PM UTC (2h after detection)
   workflow_dispatch:  # Allow manual trigger
+    inputs:
+      max_analyze:
+        description: 'Max domains to analyze this run'
+        default: '100'
+  # (no separate cron: it used to run a second time, 2h after the workflow_run trigger)
 
 permissions:
   contents: write
 
+concurrency:
+  group: feed-writer
+  cancel-in-progress: false
+
 jobs:
   analyze:
+    # workflow_run fires even when detection failed - only continue on success
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -37,8 +46,11 @@ jobs:
     - name: Run LLM analysis on recent detections
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        MAX_ANALYZE: ${{ inputs.max_analyze || '100' }}
       run: |
-        python detection/llm_analyzer.py --days 90 --max-analyze 3 --min-score 75
+        # --days 400 + UNKNOWN re-queue: drains the backlog of truncated analyses.
+        # Known false positives (feed/false_positives.json) are skipped automatically.
+        python detection/llm_analyzer.py --days 400 --max-analyze "${MAX_ANALYZE}" --min-score 75
 
     - name: Check for changes
       id: check_changes
@@ -51,8 +63,17 @@ jobs:
           echo "No changes from LLM analysis"
         fi
 
+    # Runs from any branch other than main (e.g. testing a PR) must NOT push:
+    # the commit step below pushes to main and would drag the branch along.
+    - name: Upload analysis result (non-main runs)
+      if: github.ref != 'refs/heads/main'
+      uses: actions/upload-artifact@v4
+      with:
+        name: feed-after-llm-analysis
+        path: feed/
+
     - name: Commit analysis results
-      if: steps.check_changes.outputs.has_changes == 'true'
+      if: github.ref == 'refs/heads/main' && steps.check_changes.outputs.has_changes == 'true'
       run: |
         git config --global user.name 'LLM Analyzer Bot'
         git config --global user.email 'llm-bot@detectopod'

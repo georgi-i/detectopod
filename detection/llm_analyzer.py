@@ -12,6 +12,8 @@ import argparse
 import requests
 from datetime import datetime, timedelta
 
+from feedlib import FalsePositives, normalize_domain, load_json_list, save_json_list
+
 # Google Gemini models — called directly via Google AI Studio REST API.
 # No OpenRouter account needed; only your GEMINI_API_KEY is required.
 #
@@ -45,12 +47,13 @@ class GeminiAnalyzer:
         prompt = f"""Analyze this potential phishing domain flagged by a rule-based system targeting Bulgarian online services.
 
 Domain: {domain}
-Rule-based Score: {score}/100
+Rule-based Score: {score}/100 (the score saturates at 100 for almost everything - do not treat it as evidence)
 Keywords: {', '.join(keywords_found) if keywords_found else 'None'}
 Hosting: Free/serverless platform or suspicious TLD
-Targets monitored:
-  - Bulgarian courier services: Econt, Speedy, BulgariaPost
-  - Bulgarian Ministry of Interior (MVR) e-services portal: e-uslugi.mvr.bg
+Targets monitored (legitimate sites in brackets):
+  - Bulgarian courier services: Econt, Speedy, BulgariaPost  [econt.com, speedy.bg, bgpost.bg]
+  - Bulgarian Ministry of Interior (MVR) e-services portal  [e-uslugi.mvr.bg]
+  - Bulgarian toll/vignette services: TollPass, Vinetki  [tollpass.bg, vinetki.bg]
 
 === CONFIRMED PHISHING PATTERNS — ALWAYS BLOCK ===
 These domain structures are unambiguous phishing. If the domain matches, BLOCK immediately
@@ -77,23 +80,30 @@ without considering false positive scenarios:
    → The legitimate portal is e-uslugi.mvr.bg only. Any other domain with this prefix is
      phishing.
 
+7. tollpass<random>.<tld> or tollpass.<random>.<tld>  e.g. tollpass.klgf.cam, tollpassapp.top,
+   tollpassss.cc
+   → TollPass only operates from tollpass.bg. A random/short suffix on a cheap TLD is phishing.
+
 === FALSE POSITIVE CHECK — only apply when NO confirmed pattern above matches ===
-Only consider a domain a false positive if it CLEARLY indicates an unrelated legitimate
-business with no plausible courier or government impersonation angle:
+Answer FALSE_POSITIVE when the domain CLEARLY indicates an unrelated or non-malicious host
+with no plausible courier, government or toll impersonation angle:
+- Developer / test / staging environments: a leading label of test, dev, staging, qa, uat,
+  sandbox, or a name containing "test" (test.tollpass.xyz, dev.tollpass.xyz, ucntbtest.x.xyz).
+  A dev host is not a phishing page, even on a cheap TLD.
 - Unrelated businesses where "speedy" is a generic adjective: speedy-glass, speedy-loans,
   speedy-removals, speedy-medical, speedy-marketing, speedy-bookkeeper
 - Personal/entertainment pages: birthdays, pets, gaming, celebrity net worth
-- Developer/test pages: domains containing "test", "test-project", "qa", "backoffice"
 - Productivity tools: calculators, assignment helpers
 - Router/IoT hostnames
 
-Provide structured analysis:
-1. Threat Level: HIGH/MEDIUM/LOW
-2. Confidence: 0-100%
-3. Key Indicators: List 2-3 specific reasons for your decision
-4. Decision: BLOCK/INVESTIGATE/FALSE_POSITIVE
+Use INVESTIGATE only when the domain genuinely could be either and you cannot decide from the
+name alone. Do NOT default to BLOCK just because the TLD is cheap or the score is high.
 
-Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose BLOCK."""
+Respond with ONLY a JSON object, no prose and no markdown fences, using exactly these keys:
+{{"threat_level": "HIGH" | "MEDIUM" | "LOW",
+  "confidence": <integer 0-100>,
+  "indicators": [<2-3 short strings>],
+  "decision": "BLOCK" | "INVESTIGATE" | "FALSE_POSITIVE"}}"""
 
         models_to_try = [self.model]
         if MODEL_FALLBACK and MODEL_FALLBACK != self.model:
@@ -114,16 +124,28 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                                 {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
                                 {"role": "user", "content": prompt}
                             ],
-                            "temperature": 0.3,
-                            "max_tokens": 300,
+                            "temperature": 0.2,
+                            # Generous: gemini-3.5-flash is a thinking model and its
+                            # reasoning tokens count against this budget. 300 used to
+                            # truncate the answer mid-sentence (-> decision UNKNOWN).
+                            "max_tokens": 4096,
+                            "response_format": {"type": "json_object"},
                         },
-                        timeout=30
+                        timeout=90
                     )
 
                     if response.status_code == 200:
                         result = response.json()
-                        analysis = result['choices'][0]['message']['content']
+                        choice = result['choices'][0]
+                        analysis = choice['message'].get('content') or ''
                         self.requests_made += 1
+                        parsed = self._parse_response(analysis)
+                        if choice.get('finish_reason') == 'length' or parsed is None:
+                            # Truncated / malformed: never store it. The entry stays
+                            # un-analysed and is retried on the next run.
+                            print(f"   ⚠️  {model_id} returned an unusable answer, retrying...")
+                            time.sleep(2)
+                            continue
                         if model_id != self.model:
                             print(f"   ↳ used fallback model: {model_id}")
                         time.sleep(1)
@@ -131,8 +153,9 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
                             'analysis': analysis,
                             'model': model_id,
                             'timestamp': datetime.utcnow().isoformat(),
-                            'threat_level': self._extract_threat_level(analysis),
-                            'decision': self._extract_decision(analysis)
+                            'threat_level': parsed['threat_level'],
+                            'confidence': parsed['confidence'],
+                            'decision': parsed['decision'],
                         }
 
                     elif response.status_code == 503:
@@ -162,33 +185,45 @@ Be concise and accurate. When in doubt between BLOCK and FALSE_POSITIVE, choose 
         print(f"❌ All models/retries exhausted for {domain}")
         return None
 
-    def _extract_threat_level(self, analysis):
-        """Extract threat level from analysis text"""
-        analysis_upper = analysis.upper()
-        if 'THREAT LEVEL: HIGH' in analysis_upper or 'HIGH' in analysis_upper.split('\n')[0]:
-            return 'HIGH'
-        elif 'THREAT LEVEL: MEDIUM' in analysis_upper or 'MEDIUM' in analysis_upper.split('\n')[0]:
-            return 'MEDIUM'
-        elif 'THREAT LEVEL: LOW' in analysis_upper or 'LOW' in analysis_upper.split('\n')[0]:
-            return 'LOW'
-        return 'UNKNOWN'
+    VALID_LEVELS = ('HIGH', 'MEDIUM', 'LOW')
+    VALID_DECISIONS = ('BLOCK', 'INVESTIGATE', 'FALSE_POSITIVE')
 
-    def _extract_decision(self, analysis):
-        """Extract decision from analysis text"""
-        analysis_upper = analysis.upper()
-        if 'BLOCK' in analysis_upper:
-            return 'BLOCK'
-        elif 'FALSE_POSITIVE' in analysis_upper or 'FALSE POSITIVE' in analysis_upper:
-            return 'FALSE_POSITIVE'
-        elif 'INVESTIGATE' in analysis_upper:
-            return 'INVESTIGATE'
-        return 'UNKNOWN'
+    def _parse_response(self, text):
+        """Parse the model's JSON answer. Returns a validated dict or None."""
+        text = (text or '').strip()
+        if text.startswith('```'):
+            text = text.strip('`')
+            if text.lower().startswith('json'):
+                text = text[4:]
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            # Last resort: the first {...} block in the text
+            start, end = text.find('{'), text.rfind('}')
+            if start == -1 or end <= start:
+                return None
+            try:
+                data = json.loads(text[start:end + 1])
+            except json.JSONDecodeError:
+                return None
+        if not isinstance(data, dict):
+            return None
+
+        level = str(data.get('threat_level', '')).strip().upper()
+        decision = str(data.get('decision', '')).strip().upper().replace(' ', '_')
+        if level not in self.VALID_LEVELS or decision not in self.VALID_DECISIONS:
+            return None
+        try:
+            confidence = int(data.get('confidence', 0))
+        except (TypeError, ValueError):
+            confidence = 0
+        return {'threat_level': level, 'decision': decision, 'confidence': confidence}
 
 
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
-    parser.add_argument('--max-analyze', type=int, default=1000, help='Maximum domains to analyze')
+    parser.add_argument('--max-analyze', type=int, default=100, help='Maximum domains to analyze')
     parser.add_argument('--min-score', type=int, default=75, help='Minimum score to analyze')
     parser.add_argument('--feed-file', default='feed/phishing_feed.json', help='Feed file path')
     parser.add_argument('--reanalyze', action='store_true',
@@ -207,6 +242,23 @@ def main():
     with open(args.feed_file, 'r') as f:
         feed = json.load(f)
 
+    # Entries analysed earlier with a truncated answer (decision UNKNOWN) carry no
+    # information - drop that analysis so they are picked up again below.
+    unknown = 0
+    for entry in feed:
+        if entry.get('llm_analysis', {}).get('decision') == 'UNKNOWN':
+            entry.pop('llm_analysis')
+            unknown += 1
+    if unknown:
+        print(f"🔁 Re-queued {unknown} entries with an UNKNOWN (truncated) analysis")
+
+    # Never analyse (or keep) anything that is already a known false positive
+    false_positives = FalsePositives.load(os.path.join(os.path.dirname(args.feed_file), 'false_positives.json'))
+    before = len(feed)
+    feed = [e for e in feed if e.get('domain') not in false_positives]
+    if len(feed) != before:
+        print(f"🧹 Dropped {before - len(feed)} known false positive(s) from the feed")
+
     if args.reanalyze:
         stripped = sum(1 for e in feed if 'llm_analysis' in e)
         for entry in feed:
@@ -224,7 +276,7 @@ def main():
         if entry.get('score', 0) < args.min_score:
             continue
 
-        entry_date_str = entry.get('discovered_date') or entry.get('first_seen')
+        entry_date_str = entry.get('detected_at') or entry.get('discovered_date') or entry.get('first_seen')
         if entry_date_str:
             try:
                 entry_date = datetime.fromisoformat(entry_date_str.replace('Z', '+00:00'))
@@ -243,8 +295,8 @@ def main():
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
     print(f"   Model: {MODEL} (Google AI Studio direct)")
-    print(f"   Targets: Bulgarian couriers + MVR e-services")
-    print(f"   Limit: up to 1000 requests (Google AI Studio quota)\n")
+    print(f"   Targets: Bulgarian couriers + MVR e-services + TollPass/Vinetki")
+    print(f"   Limit: up to {args.max_analyze} domains this run\n")
 
     analyzer = GeminiAnalyzer(api_key)
 
@@ -302,18 +354,12 @@ def main():
         json.dump(clean_feed, f, indent=2)
 
     fp_file = os.path.join(os.path.dirname(args.feed_file), 'false_positives.json')
-    existing_fps = []
-    if os.path.exists(fp_file):
-        with open(fp_file, 'r') as f:
-            try:
-                existing_fps = json.load(f)
-            except json.JSONDecodeError:
-                existing_fps = []
-    existing_fp_domains = {e['domain'] for e in existing_fps}
-    new_fps = [e for e in false_positive_domains if e['domain'] not in existing_fp_domains]
+    existing_fps = load_json_list(fp_file)
+    existing_fp_domains = {normalize_domain(e['domain']) for e in existing_fps}
+    new_fps = [e for e in false_positive_domains
+               if normalize_domain(e['domain']) not in existing_fp_domains]
     existing_fps.extend(new_fps)
-    with open(fp_file, 'w') as f:
-        json.dump(existing_fps, f, indent=2)
+    save_json_list(fp_file, existing_fps)
 
     if false_positive_domains:
         print(f"\n🗑️  Removed {len(false_positive_domains)} false positive(s) from feed:")

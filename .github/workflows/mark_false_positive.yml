@@ -1,0 +1,56 @@
+name: Mark False Positive
+
+# Run from the Actions tab: enter one or more domains. They are added to
+# feed/false_positives.json and removed from the live feed, and the detector
+# will never add them again.
+
+on:
+  workflow_dispatch:
+    inputs:
+      domains:
+        description: 'Domain(s) to suppress, space separated (e.g. tollpass.xyz)'
+        required: true
+      subdomains:
+        description: 'Also suppress every subdomain (test.x, dev.x, www.x ...)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed-writer
+  cancel-in-progress: false
+
+jobs:
+  mark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Add to false_positives.json
+      env:
+        DOMAINS: ${{ inputs.domains }}
+        SUBDOMAINS: ${{ inputs.subdomains }}
+      run: |
+        FLAG=""
+        if [[ "$SUBDOMAINS" == "true" ]]; then FLAG="--subdomains"; fi
+        # DOMAINS is passed via env (not interpolated into the script) to avoid injection
+        python detection/fp.py $DOMAINS $FLAG --reason "manual (workflow)"
+
+    - name: Commit and push
+      run: |
+        if [[ -z $(git status -s feed/) ]]; then echo "No changes"; exit 0; fi
+        git config --global user.name 'Detectopod Bot'
+        git config --global user.email 'bot@detectopod'
+        git add feed/
+        git commit -m "Mark false positive(s): ${{ github.run_id }} [skip ci]"
+        git pull --rebase origin main
+        git push origin main

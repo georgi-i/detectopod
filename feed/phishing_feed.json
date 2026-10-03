@@ -130,19 +130,6 @@
     }
   },
   {
-    "domain": "www.speedy-bg-public.cfd",
-    "score": 100,
-    "detected_at": "2026-01-29T18:11:25.164410",
-    "source": "urlscan.io-.cfd",
-    "llm_analysis": {
-      "analysis": "## Analysis: www.speedy-bg-public.cfd\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- **Direct brand impersonation**: \"speedy-bg\" explicitly targets Speedy courier service with Bulgarian country code (.bg reference)\n- **Suspicious TLD**: .cfd domain (free/low-cost TLD commonly abused for phishing)\n- **Deceptive structure**: \"public\" suffix mimics official service portals used by courier companies for tracking\n\n**4. Decision:** BLOCK\n\n**Rationale:**\nThis is not a generic use of \"speedy\" - the combination of \"speedy\" + \"bg\" (Bulgaria) + \"public\" (courier portal terminology) + free hosting infrastructure creates a clear courier service impersonation pattern. Unlike legitimate businesses that might use \"speedy\" descriptively, this domain specifically mimics Speedy Bulgaria's naming convention for what appears to be a fake tracking or customer portal.",
-      "model": "anthropic/claude-sonnet-4-5",
-      "timestamp": "2026-02-21T17:38:53.272277",
-      "threat_level": "UNKNOWN",
-      "decision": "BLOCK"
-    }
-  },
-  {
     "domain": "speedy.bg-pl.cfd",
     "score": 100,
     "detected_at": "2026-01-29T18:11:25.165138",
@@ -970,19 +957,6 @@
       "analysis": "## Analysis: dhl-confirmation-account.ga\n\n**1. Threat Level:** HIGH\n\n**2. Confidence:** 95%\n\n**3. Key Indicators:**\n- Domain explicitly impersonates DHL (major international courier) with account verification theme (\"confirmation-account\")\n- Uses free .ga TLD (Gabon) commonly associated with phishing campaigns\n- Pattern matches classic phishing structure: [brand]-[action]-[credential].TLD designed to harvest account credentials\n\n**4. Decision:** BLOCK\n\n**Rationale:** This is a clear courier service impersonation attempt. While the target mentions Bulgarian couriers, DHL operates extensively in Bulgaria and worldwide. The domain structure is textbook phishing - combining a trusted brand name with an urgent action term to trick users into providing credentials. The free TLD reinforces malicious intent. No legitimate DHL service would use such a domain.",
       "model": "anthropic/claude-sonnet-4-5",
       "timestamp": "2026-02-21T17:45:12.797876",
-      "threat_level": "UNKNOWN",
-      "decision": "BLOCK"
-    }
-  },
-  {
-    "domain": "www.dhl-confirmation-account.ga",
-    "score": 83,
-    "detected_at": "2026-01-29T18:11:25.260352",
-    "source": "urlscan.io-.ga",
-    "llm_analysis": {
-      "analysis": "# Phishing Analysis: www.dhl-confirmation-account.ga\n\n## 1. Threat Level: **HIGH**\n\n## 2. Confidence: **95%**\n\n## 3. Key Indicators:\n- **Brand impersonation**: Domain explicitly uses \"dhl\" (major international courier) combined with urgency-inducing terms \"confirmation-account\"\n- **Suspicious TLD**: .ga (Gabon) free domain commonly abused for phishing campaigns\n- **Social engineering pattern**: \"confirmation-account\" structure designed to trick users into verifying credentials under false pretense\n\n## 4. Decision: **BLOCK**\n\n**Rationale**: This is a clear DHL impersonation attempt. While the rule targets Bulgarian couriers, DHL is a legitimate global courier service frequently targeted in phishing campaigns. The combination of brand name + account verification language + free TLD (.ga) + free hosting is a textbook phishing setup. No legitimate DHL service would use such a domain structure.",
-      "model": "anthropic/claude-sonnet-4-5",
-      "timestamp": "2026-02-21T17:45:22.783061",
       "threat_level": "UNKNOWN",
       "decision": "BLOCK"
     }
@@ -1924,19 +1898,6 @@
     }
   },
   {
-    "domain": "www.new-bgpost.cam",
-    "score": 100,
-    "detected_at": "2026-05-08T11:09:29.270171",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:18.575475",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
     "domain": "new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.273738",
@@ -2509,19 +2470,6 @@
     }
   },
   {
-    "domain": "www.hostmaster.new-bgpost.cam",
-    "score": 100,
-    "detected_at": "2026-05-11T14:26:10.561131",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": " `bgpost-<anything>.<tld",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:24.535498",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
     "domain": "hostmaster.new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.564588",
@@ -2574,19 +2522,6 @@
     }
   },
   {
-    "domain": "www.speedy.bg-in63829.ink",
-    "score": 100,
-    "detected_at": "2026-05-11T14:26:10.636378",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "1. Threat Level: HIGH\n    *   2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:55.610865",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
     "domain": "speedy.bg-in63829.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.639845",
@@ -2635,19 +2570,6 @@
       "model": "google/gemini-3.5-flash",
       "timestamp": "2026-06-03T17:33:21.185526",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
-  },
-  {
-    "domain": "www.mvrbg.cyou",
-    "score": 100,
-    "detected_at": "2026-05-11T14:26:10.655760",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": "TLD) `.cyou`.\n    *   ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:27.268422",
-      "threat_level": "UNKNOWN",
       "decision": "UNKNOWN"
     }
   },
@@ -3533,19 +3455,6 @@
       "timestamp": "2026-07-28T18:53:00.350760",
       "threat_level": "HIGH",
       "decision": "BLOCK"
-    }
-  },
-  {
-    "domain": "www.mvr.govbg.cyou",
-    "score": 100,
-    "detected_at": "2026-07-28T19:45:48.941164",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "gav.mvrbg.<tld>` ->",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-02T08:43:40.577102",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
     }
   },
   {
