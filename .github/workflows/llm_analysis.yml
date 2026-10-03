@@ -44,6 +44,12 @@ jobs:
         python -m pip install requests
 
     - name: Run LLM analysis on recent detections
+      id: analyze
+      # llm_analyzer.py saves progress every 10 domains. If this step times out or
+      # crashes, still commit what was analysed (steps below), then fail the job at
+      # the end so the problem stays visible.
+      timeout-minutes: 75
+      continue-on-error: true
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         MAX_ANALYZE: ${{ inputs.max_analyze || '100' }}
@@ -90,6 +96,12 @@ jobs:
         
         # 4. Finally push
         git push origin main
+
+    - name: Fail if the analysis step failed
+      if: steps.analyze.outcome == 'failure'
+      run: |
+        echo "::error::LLM analysis step failed or timed out - partial results were committed"
+        exit 1
 
     - name: Analysis Summary
       if: always()
