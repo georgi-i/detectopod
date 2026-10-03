@@ -11,6 +11,7 @@ os.environ.setdefault('URLSCAN_API_KEY', 'x')
 import detectopod  # noqa: E402
 import feedlib  # noqa: E402
 import llm_analyzer  # noqa: E402
+import rules  # noqa: E402
 
 
 class FalsePositiveMatching(unittest.TestCase):
@@ -92,6 +93,110 @@ class LlmParsing(unittest.TestCase):
         for bad in ['', 'Based on the provided rules and domain details',
                     '{"threat_level":"HIGH"', '{"threat_level":"HIGH","decision":"MAYBE"}']:
             self.assertIsNone(self.a._parse_response(bad))
+
+
+class RuleBasedTriage(unittest.TestCase):
+    def test_certain_phishing(self):
+        for d in ['speedy.bg-iw.qpon', 'econt.bg-g63829.cfd', 'econt-bg.an537294.sbs', 'bgpost-bga.life',
+                  'mvrbg.cam', 'gav.mvrbg.cam', 'mvr-bg.cfd', 'www.mvrbg.sbs', 'mvr-gov-mk.shop',
+                  'e-uslugicye.top', 'tollpass.klgf.cam', 'tollpassapp.top', 'tollpassss.cc',
+                  'econt.png4kx.icu']:
+            self.assertIsNotNone(rules.rule_based_decision(d), d)
+
+    def test_left_to_the_llm(self):
+        for d in ['fxktmvrbgsblq.top',            # mvrbg buried inside a random string
+                  'tollpass.online', 'tollpass.icu', 'econt.shop', 'bgpost.one',   # apex domains
+                  'speedy-glass.cfd', 'speedy-delivery.online',
+                  'test.tollpass.klgf.cam', 'dev.mvrbg.cam',   # dev/test hosts are never auto-blocked
+                  'e-uslugi.mvr.bg', 'tollpass.bg', 'mvr.qdoz.cam']:
+            self.assertIsNone(rules.rule_based_decision(d), d)
+
+    def test_never_matches_the_reviewed_false_positives(self):
+        path = os.path.join(os.path.dirname(__file__), '..', 'feed', 'false_positives.json')
+        with open(path) as f:
+            for entry in json.load(f):
+                self.assertIsNone(rules.rule_based_decision(entry['domain']), entry['domain'])
+
+
+class FakeResponse:
+    def __init__(self, status, body=None, text=''):
+        self.status_code, self._body, self.text = status, body, text
+
+    def json(self):
+        return self._body
+
+
+def ok_body(decision='BLOCK'):
+    content = json.dumps({'threat_level': 'HIGH', 'confidence': 90, 'indicators': [], 'decision': decision})
+    return {'choices': [{'message': {'content': content}, 'finish_reason': 'stop'}]}
+
+
+class RateLimitHandling(unittest.TestCase):
+    def setUp(self):
+        self.sleeps = []
+        self._sleep, self._post, self._interval = (llm_analyzer.time.sleep, llm_analyzer.requests.post,
+                                                   llm_analyzer.MIN_REQUEST_INTERVAL)
+        llm_analyzer.time.sleep = self.sleeps.append
+        llm_analyzer.MIN_REQUEST_INTERVAL = 0
+
+    def tearDown(self):
+        llm_analyzer.time.sleep, llm_analyzer.requests.post = self._sleep, self._post
+        llm_analyzer.MIN_REQUEST_INTERVAL = self._interval
+
+    def run_analyzer(self, responses):
+        calls = []
+
+        def post(url, headers, json, timeout):
+            calls.append(json['model'])
+            return responses[len(calls) - 1]
+        llm_analyzer.requests.post = post
+        return llm_analyzer.GeminiAnalyzer('k').analyze_domain('x.top', 100, [], {}), calls
+
+    def test_429_falls_through_to_the_other_model_without_sleeping(self):
+        result, calls = self.run_analyzer([FakeResponse(429, text='quota'), FakeResponse(200, ok_body())])
+        self.assertEqual(calls, [llm_analyzer.MODEL, llm_analyzer.MODEL_FALLBACK])
+        self.assertEqual(result['model'], llm_analyzer.MODEL_FALLBACK)
+        self.assertEqual(self.sleeps, [])
+
+    def test_both_models_limited_cools_down_once_then_gives_up(self):
+        result, calls = self.run_analyzer([FakeResponse(429, text='quota')] * 4)
+        self.assertIsNone(result)
+        self.assertEqual(len(calls), 4)                      # 2 models x 2 rounds
+        self.assertEqual(self.sleeps, [llm_analyzer.RATE_LIMIT_COOLDOWN])
+
+
+class MainWithRules(unittest.TestCase):
+    def test_rule_hits_are_free_and_llm_budget_applies_to_the_rest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            feed = os.path.join(tmp, 'phishing_feed.json')
+            domains = ['mvrbg.cam', 'tollpass.klgf.cam',                      # rules
+                       'speedy-delivery.online', 'econt.shop', 'bgpost.one']  # LLM
+            with open(feed, 'w') as f:
+                json.dump([{'domain': d, 'score': 100, 'detected_at': '2999-01-01T00:00:00'} for d in domains], f)
+            with open(os.path.join(tmp, 'false_positives.json'), 'w') as f:
+                json.dump([], f)
+
+            asked = []
+
+            def fake(self, domain, score, kw, entry):
+                asked.append(domain)
+                return {'analysis': '{}', 'model': 'm', 'timestamp': 't', 'threat_level': 'HIGH',
+                        'confidence': 9, 'decision': 'BLOCK'}
+            original = llm_analyzer.GeminiAnalyzer.analyze_domain
+            llm_analyzer.GeminiAnalyzer.analyze_domain = fake
+            os.environ['GEMINI_API_KEY'] = 'x'
+            argv, sys.argv = sys.argv, ['x', '--days', '400', '--max-analyze', '2', '--feed-file', feed]
+            try:
+                llm_analyzer.main()
+            finally:
+                llm_analyzer.GeminiAnalyzer.analyze_domain, sys.argv = original, argv
+
+            self.assertEqual(len(asked), 2)                      # budget of 2 applies to LLM domains only
+            with open(feed) as f:
+                result = {e['domain']: e.get('llm_analysis') for e in json.load(f)}
+            self.assertEqual(result['mvrbg.cam']['model'], 'rule-based')
+            self.assertEqual(result['tollpass.klgf.cam']['model'], 'rule-based')
+            self.assertEqual(sum(1 for v in result.values() if v is None), 1)   # one left for next run
 
 
 if __name__ == '__main__':

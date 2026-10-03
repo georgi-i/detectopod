@@ -13,15 +13,25 @@ import requests
 from datetime import datetime, timedelta
 
 from feedlib import FalsePositives, normalize_domain, load_json_list, save_json_list
+from rules import rule_based_decision
 
-# Google Gemini models — called directly via Google AI Studio REST API.
-# No OpenRouter account needed; only your GEMINI_API_KEY is required.
+# Google Gemini models — called directly via Google AI Studio REST API (free tier
+# is enough: only GEMINI_API_KEY is required).
 #
-# gemini-3.5-flash      → near-Pro reasoning, fast              ← default
-# gemini-2.5-flash-lite → ultra-low latency, cheapest              ← budget option
-MODEL          = "gemini-3.5-flash"
-MODEL_FALLBACK = "gemini-2.5-flash-lite"  # used automatically if primary returns 503
-# MODEL = "gemini-2.5-flash-lite"
+# gemini-2.5-flash-lite → cheapest, no thinking tokens, highest free quota   ← default
+# gemini-3.5-flash      → stronger reasoning but a much smaller free quota   ← fallback
+#
+# Each model has its own quota, so a 429 on one is answered by trying the other
+# straight away instead of sleeping.
+MODEL          = "gemini-2.5-flash-lite"
+MODEL_FALLBACK = "gemini-3.5-flash"
+
+# Minimum seconds between two API requests (keeps us under the free-tier requests per
+# minute instead of bursting and then backing off for minutes). Override with the
+# LLM_MIN_INTERVAL environment variable.
+MIN_REQUEST_INTERVAL = float(os.environ.get('LLM_MIN_INTERVAL', '6'))
+# After every model returned 429, wait this long once before a second round.
+RATE_LIMIT_COOLDOWN = 60
 
 # Google's OpenAI-compatible endpoint — same request/response format,
 # no client library needed.
@@ -37,6 +47,7 @@ class GeminiAnalyzer:
         # Limit is Google AI Studio quota, not a service cap.
         # 1000 is a safe default; raise freely for paid accounts.
         self.max_requests = 1000
+        self._last_request = float('-inf')  # first request never waits
 
     def analyze_domain(self, domain, score, keywords_found, cert_info):
         """Analyze a domain using the Gemini API."""
@@ -109,80 +120,96 @@ Respond with ONLY a JSON object, no prose and no markdown fences, using exactly 
         if MODEL_FALLBACK and MODEL_FALLBACK != self.model:
             models_to_try.append(MODEL_FALLBACK)
 
-        for model_id in models_to_try:
-            for attempt in range(3):  # up to 3 retries per model
-                try:
-                    response = requests.post(
-                        self.base_url,
-                        headers={
-                            "Authorization": f"Bearer {self.api_key}",
-                            "Content-Type": "application/json",
-                        },
-                        json={
-                            "model": model_id,
-                            "messages": [
-                                {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
-                                {"role": "user", "content": prompt}
-                            ],
-                            "temperature": 0.2,
-                            # Generous: gemini-3.5-flash is a thinking model and its
-                            # reasoning tokens count against this budget. 300 used to
-                            # truncate the answer mid-sentence (-> decision UNKNOWN).
-                            "max_tokens": 4096,
-                            "response_format": {"type": "json_object"},
-                        },
-                        timeout=90
-                    )
-
-                    if response.status_code == 200:
-                        result = response.json()
-                        choice = result['choices'][0]
-                        analysis = choice['message'].get('content') or ''
-                        self.requests_made += 1
-                        parsed = self._parse_response(analysis)
-                        if choice.get('finish_reason') == 'length' or parsed is None:
-                            # Truncated / malformed: never store it. The entry stays
-                            # un-analysed and is retried on the next run.
-                            print(f"   ⚠️  {model_id} returned an unusable answer, retrying...")
-                            time.sleep(2)
-                            continue
-                        if model_id != self.model:
-                            print(f"   ↳ used fallback model: {model_id}")
-                        time.sleep(1)
-                        return {
-                            'analysis': analysis,
-                            'model': model_id,
-                            'timestamp': datetime.utcnow().isoformat(),
-                            'threat_level': parsed['threat_level'],
-                            'confidence': parsed['confidence'],
-                            'decision': parsed['decision'],
-                        }
-
-                    elif response.status_code == 503:
-                        wait = 10 * (attempt + 1)  # 10s, 20s, 30s
-                        print(f"   ⚠️  {model_id} overloaded (503), retrying in {wait}s... (attempt {attempt+1}/3)")
-                        time.sleep(wait)
-                        continue
-
-                    elif response.status_code == 429:
-                        wait = 30 * (attempt + 1)
-                        print(f"   ⚠️  {model_id} rate limited (429), retrying in {wait}s... {response.text[:300]!r}")
-                        time.sleep(wait)
-                        continue
-
-                    else:
-                        print(f"❌ API error {response.status_code}: {response.text}")
-                        break  # non-retryable — try next model
-
-                except requests.exceptions.Timeout:
-                    print(f"   ⚠️  {model_id} timed out (attempt {attempt+1}/3), retrying...")
-                    time.sleep(5)
-                    continue
-                except Exception as e:
-                    print(f"❌ Error analyzing {domain}: {e}")
-                    break
+        for round_no in range(2):
+            rate_limited = set()
+            for model_id in models_to_try:
+                result = self._try_model(model_id, prompt, rate_limited)
+                if result:
+                    return result
+            if len(rate_limited) < len(models_to_try) or round_no == 1:
+                break  # failed for a reason other than quota, or already waited once
+            print(f"   ⏳ every model is rate limited, cooling down {RATE_LIMIT_COOLDOWN}s...")
+            time.sleep(RATE_LIMIT_COOLDOWN)
 
         print(f"❌ All models/retries exhausted for {domain}")
+        return None
+
+    def _pace(self):
+        """Sleep so that requests are at least MIN_REQUEST_INTERVAL apart."""
+        wait = MIN_REQUEST_INTERVAL - (time.monotonic() - self._last_request)
+        if wait > 0:
+            time.sleep(wait)
+        self._last_request = time.monotonic()
+
+    def _try_model(self, model_id, prompt, rate_limited):
+        """One model: up to 3 attempts for transient errors. On 429 give up on this
+        model immediately (it has its own quota) and record it in `rate_limited`."""
+        for attempt in range(3):
+            try:
+                self._pace()
+                response = requests.post(
+                    self.base_url,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": model_id,
+                        "messages": [
+                            {"role": "system", "content": "You are a cybersecurity expert. Be concise."},
+                            {"role": "user", "content": prompt}
+                        ],
+                        "temperature": 0.2,
+                        # Generous: gemini-3.5-flash is a thinking model and its
+                        # reasoning tokens count against this budget. 300 used to
+                        # truncate the answer mid-sentence (-> decision UNKNOWN).
+                        "max_tokens": 4096,
+                        "response_format": {"type": "json_object"},
+                    },
+                    timeout=90
+                )
+
+                if response.status_code == 200:
+                    choice = response.json()['choices'][0]
+                    analysis = choice['message'].get('content') or ''
+                    self.requests_made += 1
+                    parsed = self._parse_response(analysis)
+                    if choice.get('finish_reason') == 'length' or parsed is None:
+                        # Truncated / malformed: never store it. The entry stays
+                        # un-analysed and is retried on the next run.
+                        print(f"   ⚠️  {model_id} returned an unusable answer, retrying...")
+                        continue
+                    if model_id != self.model:
+                        print(f"   ↳ used fallback model: {model_id}")
+                    return {
+                        'analysis': analysis,
+                        'model': model_id,
+                        'timestamp': datetime.utcnow().isoformat(),
+                        'threat_level': parsed['threat_level'],
+                        'confidence': parsed['confidence'],
+                        'decision': parsed['decision'],
+                    }
+
+                if response.status_code == 503:
+                    wait = 10 * (attempt + 1)  # 10s, 20s, 30s
+                    print(f"   ⚠️  {model_id} overloaded (503), retrying in {wait}s... (attempt {attempt+1}/3)")
+                    time.sleep(wait)
+                    continue
+
+                if response.status_code == 429:
+                    print(f"   ⚠️  {model_id} rate limited (429): {response.text[:300]!r}")
+                    rate_limited.add(model_id)
+                    return None
+
+                print(f"❌ API error {response.status_code}: {response.text[:300]}")
+                return None  # non-retryable — try next model
+
+            except requests.exceptions.Timeout:
+                print(f"   ⚠️  {model_id} timed out (attempt {attempt+1}/3), retrying...")
+                time.sleep(5)
+            except Exception as e:
+                print(f"❌ Error calling {model_id}: {e}")
+                return None
         return None
 
     VALID_LEVELS = ('HIGH', 'MEDIUM', 'LOW')
@@ -261,7 +288,8 @@ def write_stats(stats, feed_file):
 def main():
     parser = argparse.ArgumentParser(description='LLM Analysis for Phishing Domains')
     parser.add_argument('--days', type=int, default=1, help='Analyze domains from last N days')
-    parser.add_argument('--max-analyze', type=int, default=100, help='Maximum domains to analyze')
+    parser.add_argument('--max-analyze', type=int, default=25,
+                        help='Maximum domains sent to the LLM per run (rule-matched domains are free)')
     parser.add_argument('--min-score', type=int, default=75, help='Minimum score to analyze')
     parser.add_argument('--feed-file', default='feed/phishing_feed.json', help='Feed file path')
     parser.add_argument('--reanalyze', action='store_true',
@@ -325,14 +353,42 @@ def main():
 
         to_analyze.append(entry)
 
-    to_analyze = sorted(to_analyze, key=lambda x: x.get('score', 0), reverse=True)[:args.max_analyze]
+    to_analyze = sorted(to_analyze, key=lambda x: x.get('score', 0), reverse=True)
+
+    # Certain phishing structures are decided by rules.py - no API call, no quota.
+    rule_hits = 0
+    llm_queue = []
+    for entry in to_analyze:
+        rule = rule_based_decision(entry.get('domain', ''))
+        if rule:
+            entry['llm_analysis'] = {
+                'analysis': f"Matched confirmed phishing pattern: {rule}",
+                'model': 'rule-based',
+                'timestamp': datetime.utcnow().isoformat(),
+                'threat_level': 'HIGH',
+                'confidence': 95,
+                'decision': 'BLOCK',
+                'rule': rule,
+            }
+            rule_hits += 1
+        else:
+            llm_queue.append(entry)
+    if rule_hits:
+        print(f"📏 {rule_hits} domain(s) decided by rules (no LLM call)")
+        save_progress(feed, args.feed_file)
+
+    to_analyze = llm_queue[:args.max_analyze]
+    if len(llm_queue) > len(to_analyze):
+        print(f"⏭️  {len(llm_queue) - len(to_analyze)} domain(s) left for the next run")
 
     if not to_analyze:
-        print("✓ No domains need analysis")
+        print("✓ No domains need LLM analysis")
+        write_stats({'analyzed_count': 0, 'high_confidence': 0, 'medium_confidence': 0,
+                     'false_positives': 0, 'errors': 0, 'rule_based': rule_hits}, args.feed_file)
         return
 
     print(f"\n🔍 Analyzing {len(to_analyze)} domains with LLM...")
-    print(f"   Model: {MODEL} (Google AI Studio direct)")
+    print(f"   Model: {MODEL} (fallback {MODEL_FALLBACK}), one request every {MIN_REQUEST_INTERVAL:g}s")
     print(f"   Targets: Bulgarian couriers + MVR e-services + TollPass/Vinetki")
     print(f"   Limit: up to {args.max_analyze} domains this run\n")
 
@@ -343,7 +399,8 @@ def main():
         'high_confidence': 0,
         'medium_confidence': 0,
         'false_positives': 0,
-        'errors': 0
+        'errors': 0,
+        'rule_based': rule_hits,
     }
 
     consecutive_failures = 0
@@ -402,7 +459,8 @@ def main():
     print(f"\n{'='*60}")
     print(f"✓ Analysis Complete")
     print(f"{'='*60}")
-    print(f"  Domains analyzed:          {stats['analyzed_count']}")
+    print(f"  Decided by rules:          {stats['rule_based']}")
+    print(f"  Domains analyzed (LLM):    {stats['analyzed_count']}")
     print(f"  High confidence threats:   {stats['high_confidence']}")
     print(f"  Medium threats:            {stats['medium_confidence']}")
     print(f"  False positives removed:   {stats['false_positives']}")
