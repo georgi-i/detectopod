@@ -2,13 +2,13 @@ import json
 import logging
 import datetime
 import os
-import sys
 import time
 import requests
 import re
+from urllib.parse import urlparse
 from feedlib import FalsePositives, normalize_domain
 
-# Usage: python detectopod.py [--duration SECONDS] [--sources urlscan google cloudflare]
+# Usage: python detectopod.py [--duration SECONDS] [--sources urlscan]
 
 # Configuration
 SCORE_THRESHOLD = 80
@@ -403,19 +403,11 @@ def is_infrastructure_domain(domain):
     
     # Random/generic Cloudflare Pages projects (no brand keywords)
     if '.pages.dev' in domain_lower:
-        has_brand, _ = contains_brand_keyword(domain_lower)
+        has_brand, _ = contains_courier_keyword(domain_lower)
         if not has_brand:
             return True
     
     return False
-
-
-def contains_brand_keyword(domain):
-    """
-    Alias for contains_courier_keyword — checks all monitored brands
-    including government services. Used internally.
-    """
-    return contains_courier_keyword(domain)
 
 
 def contains_courier_keyword(domain):
@@ -541,6 +533,27 @@ def save_run_stats(domains_scanned, phishing_found, elapsed_time):
 # ==================== URLSCAN.IO API INTEGRATION ====================
 
 
+def extract_domains(results, seen_domains, source):
+    """Turn urlscan.io search results into domain dicts, skipping seen domains."""
+    domains = []
+    for result in results:
+        page = result.get('page', {})
+        domain = page.get('domain') or result.get('task', {}).get('domain')
+        if not domain and page.get('url'):
+            domain = urlparse(page['url']).netloc
+
+        if domain and domain not in seen_domains:
+            seen_domains.add(domain)
+            domains.append({
+                'domain': domain,
+                'url': page.get('url', ''),
+                'scan_time': result.get('task', {}).get('time', ''),
+                'verdict': result.get('verdicts', {}).get('overall', {}).get('malicious', False),
+                'source': source,
+            })
+    return domains
+
+
 def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
     """
     Query urlscan.io API for domains matching courier/government keywords
@@ -580,33 +593,8 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
             
             logging.info(f"Found {len(results)} results (total available: {total})")
             
-            domains = []
             seen_domains = set()
-            
-            for result in results:
-                domain = None
-                
-                if 'page' in result and 'domain' in result['page']:
-                    domain = result['page']['domain']
-                elif 'task' in result and 'domain' in result['task']:
-                    domain = result['task']['domain']
-                elif 'page' in result and 'url' in result['page']:
-                    try:
-                        from urllib.parse import urlparse
-                        parsed = urlparse(result['page']['url'])
-                        domain = parsed.netloc
-                    except:
-                        pass
-                
-                if domain and domain not in seen_domains:
-                    seen_domains.add(domain)
-                    domains.append({
-                        'domain': domain,
-                        'url': result.get('page', {}).get('url', ''),
-                        'scan_time': result.get('task', {}).get('time', ''),
-                        'verdict': result.get('verdicts', {}).get('overall', {}).get('malicious', False),
-                        'source': 'urlscan.io'
-                    })
+            domains = extract_domains(results, seen_domains, 'urlscan.io')
             
             logging.info(f"Extracted {len(domains)} unique domains")
             
@@ -635,22 +623,7 @@ def query_urlscan(keywords, max_results=2000, retry_count=0, max_retries=2):
                             tld_data = tld_response.json()
                             tld_results = tld_data.get('results', [])
                             
-                            for result in tld_results:
-                                domain = None
-                                if 'page' in result and 'domain' in result['page']:
-                                    domain = result['page']['domain']
-                                elif 'task' in result and 'domain' in result['task']:
-                                    domain = result['task']['domain']
-                                
-                                if domain and domain not in seen_domains:
-                                    seen_domains.add(domain)
-                                    domains.append({
-                                        'domain': domain,
-                                        'url': result.get('page', {}).get('url', ''),
-                                        'scan_time': result.get('task', {}).get('time', ''),
-                                        'verdict': result.get('verdicts', {}).get('overall', {}).get('malicious', False),
-                                        'source': f'urlscan.io-{tld}'
-                                    })
+                            domains.extend(extract_domains(tld_results, seen_domains, f'urlscan.io-{tld}'))
                             
                             logging.debug(f"  Found {len(tld_results)} on {tld}")
                         
@@ -729,27 +702,7 @@ def query_urlscan_recent(days=7, max_results=1000):
             
             logging.info(f"Found {len(results)} recent submissions")
             
-            domains = []
-            seen_domains = set()
-            
-            for result in results:
-                domain = None
-                
-                if 'page' in result and 'domain' in result['page']:
-                    domain = result['page']['domain']
-                elif 'task' in result and 'domain' in result['task']:
-                    domain = result['task']['domain']
-                
-                if domain and domain not in seen_domains:
-                    seen_domains.add(domain)
-                    domains.append({
-                        'domain': domain,
-                        'url': result.get('page', {}).get('url', ''),
-                        'scan_time': result.get('task', {}).get('time', ''),
-                        'source': 'urlscan.io'
-                    })
-            
-            return domains
+            return extract_domains(results, set(), 'urlscan.io')
         else:
             logging.warning(f"urlscan.io returned status {response.status_code}")
             return []
@@ -759,148 +712,10 @@ def query_urlscan_recent(days=7, max_results=1000):
         return []
 
 
-# ==================== CT LOG SOURCES (Google/Cloudflare) ====================
-
-try:
-    from cryptography import x509
-    from cryptography.hazmat.backends import default_backend
-    CRYPTOGRAPHY_AVAILABLE = True
-except ImportError:
-    CRYPTOGRAPHY_AVAILABLE = False
-    logging.warning("cryptography module not available. Install with: pip install cryptography")
-
-
-CT_LOG_SOURCES = {
-    'google_argon2025h2': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2025h2',
-        'type': 'ct_log',
-        'description': 'Google Argon2025h2 log'
-    },
-    'google_argon2026h1': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2026h1',
-        'type': 'ct_log',
-        'description': 'Google Argon2026h1 log'
-    },
-    'google_argon2026h2': {
-        'url': 'https://ct.googleapis.com/logs/us1/argon2026h2',
-        'type': 'ct_log',
-        'description': 'Google Argon2026h2 log'
-    },
-    'cloudflare_nimbus2025': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2025',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2025'
-    },
-    'cloudflare_nimbus2026': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2026',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2026'
-    },
-    'cloudflare_nimbus2027': {
-        'url': 'https://ct.cloudflare.com/logs/nimbus2027',
-        'type': 'ct_log',
-        'description': 'Cloudflare Nimbus2027'
-    }
-}
-
-
-def extract_domains_from_cert(cert_data):
-    """Extract all domain names from a certificate"""
-    if not CRYPTOGRAPHY_AVAILABLE:
-        return []
-
-    try:
-        cert = x509.load_pem_x509_certificate(cert_data, default_backend())
-        domains = []
-
-        try:
-            cn = cert.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)[0].value
-            domains.append(cn)
-        except:
-            pass
-
-        try:
-            san_ext = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)
-            for san in san_ext.value:
-                if isinstance(san, x509.DNSName):
-                    domains.append(san.value)
-        except:
-            pass
-
-        return domains
-    except Exception as e:
-        logging.debug(f"Error extracting domains from cert: {e}")
-        return []
-
-
-def query_ct_log_direct(log_url, max_entries=500):
-    """Query a CT log directly using RFC 6962 API"""
-    try:
-        import base64
-        
-        sth_url = f"{log_url}/ct/v1/get-sth"
-        response = requests.get(sth_url, timeout=10)
-
-        if response.status_code != 200:
-            logging.warning(f"Failed to get STH from {log_url}: {response.status_code}")
-            return []
-
-        tree_size = response.json().get('tree_size', 0)
-
-        if tree_size == 0:
-            return []
-
-        start = max(0, tree_size - max_entries)
-        end = min(start + max_entries - 1, tree_size - 1)
-
-        entries_url = f"{log_url}/ct/v1/get-entries?start={start}&end={end}"
-        response = requests.get(entries_url, timeout=30)
-
-        if response.status_code != 200:
-            logging.warning(f"Failed to get entries from {log_url}: {response.status_code}")
-            return []
-
-        entries_data = response.json().get('entries', [])
-        results = []
-
-        for entry in entries_data:
-            try:
-                extra_data = base64.b64decode(entry['extra_data'])
-
-                if len(extra_data) > 3:
-                    cert_len = int.from_bytes(extra_data[0:3], 'big')
-                    cert_data = extra_data[3:3+cert_len]
-
-                    pem_cert = b'-----BEGIN CERTIFICATE-----\n'
-                    pem_cert += base64.b64encode(cert_data)
-                    pem_cert += b'\n-----END CERTIFICATE-----\n'
-
-                    domains = extract_domains_from_cert(pem_cert)
-
-                    for domain in domains:
-                        results.append({
-                            'domain': domain,
-                            'source': log_url
-                        })
-            except Exception as e:
-                logging.debug(f"Error parsing CT log entry: {e}")
-                continue
-
-        logging.info(f"Retrieved {len(results)} certificates from {log_url}")
-        return results
-
-    except requests.exceptions.Timeout:
-        logging.warning(f"Timeout querying {log_url}")
-        return []
-    except Exception as e:
-        logging.error(f"Error querying CT log {log_url}: {e}")
-        return []
-
-
 # ==================== MAIN SCANNING LOGIC ====================
 
 
-def scan_domains(duration=None, sources=['urlscan']):
+def scan_domains(duration=None, sources=('urlscan',)):
     """
     Main scanning function using configured sources.
     Monitors both courier brands and government service brands (MVR).
@@ -951,56 +766,6 @@ def scan_domains(duration=None, sources=['urlscan']):
         all_domains.extend(recent_domains)
         
         logging.info(f"Recent submissions: {len(recent_domains)} domains")
-
-    # Google CT Logs - SUPPLEMENTARY
-    if 'google' in sources:
-        if not CRYPTOGRAPHY_AVAILABLE:
-            logging.error("Cannot use Google CT logs: cryptography module not installed")
-        else:
-            logging.info("=" * 60)
-            logging.info("Querying Google CT Logs...")
-            logging.info("=" * 60)
-            
-            for log_key, log_info in CT_LOG_SOURCES.items():
-                if log_key.startswith('google_') and log_info.get('type') == 'ct_log':
-                    if duration:
-                        elapsed = (datetime.datetime.now() - start_time).total_seconds()
-                        if elapsed > duration:
-                            logging.info("Duration limit reached")
-                            break
-                    
-                    ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
-                    
-                    for item in ct_domains:
-                        all_domains.append({
-                            'domain': item['domain'],
-                            'source': f"Google-{log_key}"
-                        })
-
-    # Cloudflare CT Logs - SUPPLEMENTARY
-    if 'cloudflare' in sources:
-        if not CRYPTOGRAPHY_AVAILABLE:
-            logging.error("Cannot use Cloudflare CT logs: cryptography module not installed")
-        else:
-            logging.info("=" * 60)
-            logging.info("Querying Cloudflare CT Logs...")
-            logging.info("=" * 60)
-            
-            for log_key, log_info in CT_LOG_SOURCES.items():
-                if log_key.startswith('cloudflare_') and log_info.get('type') == 'ct_log':
-                    if duration:
-                        elapsed = (datetime.datetime.now() - start_time).total_seconds()
-                        if elapsed > duration:
-                            logging.info("Duration limit reached")
-                            break
-                    
-                    ct_domains = query_ct_log_direct(log_info['url'], max_entries=500)
-                    
-                    for item in ct_domains:
-                        all_domains.append({
-                            'domain': item['domain'],
-                            'source': f"Cloudflare-{log_key}"
-                        })
 
     # Process all collected domains
     logging.info("=" * 60)
@@ -1115,9 +880,9 @@ def main():
     parser = argparse.ArgumentParser(description='Phishing Domain Detector - Courier & Government Edition')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
     parser.add_argument('--sources', nargs='+', 
-                       choices=['urlscan', 'google', 'cloudflare'], 
+                       choices=['urlscan'], 
                        default=['urlscan'],
-                       help='Sources to use (default: urlscan only)')
+                       help='Sources to use (urlscan is the only one; CT logs were removed, see README)')
     args = parser.parse_args()
 
     MAX_DURATION = args.duration

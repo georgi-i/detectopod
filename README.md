@@ -16,7 +16,7 @@ Detectopod identifies phishing domains that:
 
 ## 🚀 Features
 
-- **Multi-Source Detection**: Queries URLScan.io, Google CT logs, and Cloudflare CT logs
+- **URLScan.io Detection**: Per-category brand queries (couriers, government, toll) plus targeted suspicious-TLD searches
 - **Automated Scanning**: Runs weekly via GitHub Actions
 - **Rule-based Scoring**: Transparent scoring system (0-100) based on brand, TLD, hosting and domain patterns
 - **LLM Analysis**: AI-powered review using Gemini 3.5 Flash (structured JSON output) to reduce false positives
@@ -38,17 +38,11 @@ Detection Rate: 2.7%
 ## 🏗️ Architecture
 
 ```
-┌─────────────────┐
-│  URLScan.io API │──┐
-└─────────────────┘  │
-                     │
-┌─────────────────┐  │     ┌──────────────────┐
-│ Google CT Logs  │──┼────▶│  detectopod.py   │
-└─────────────────┘  │     │  (Main Scanner)  │
-                     │     └──────────────────┘
-┌─────────────────┐  │              │
-│ Cloudflare CT   │──┘              │
-└─────────────────┘                 │
+┌─────────────────┐     ┌──────────────────┐
+│  URLScan.io API │────▶│  detectopod.py   │
+└─────────────────┘     │  (Main Scanner)  │
+                        └──────────────────┘
+                                    │
                                     ▼
                            ┌──────────────────┐
                            │ Scoring Engine   │
@@ -87,7 +81,7 @@ Detection Rate: 2.7%
 
 2. **Install dependencies**
    ```bash
-   pip install -r detection/requirements.txt  # requests + cryptography (CT logs)
+   pip install -r detection/requirements.txt  # just `requests`
    ```
 
 3. **Set environment variables**
@@ -98,11 +92,8 @@ Detection Rate: 2.7%
 
 4. **Run the scanner**
    ```bash
-   # Quick scan (URLScan.io only)
+   # Scan (URLScan.io)
    python detection/detectopod.py --sources urlscan
-   
-   # Full scan (all sources)
-   python detection/detectopod.py --sources urlscan google cloudflare
    
    # Time-limited scan
    python detection/detectopod.py --duration 300  # 5 minutes
@@ -113,11 +104,8 @@ Detection Rate: 2.7%
 ### Manual Scanning
 
 ```bash
-# Scan using URLScan.io only (recommended for quick tests)
+# Standard scan
 python detection/detectopod.py --sources urlscan
-
-# Comprehensive scan using all sources
-python detection/detectopod.py --sources urlscan google cloudflare
 
 # Run for specific duration
 python detection/detectopod.py --duration 600 --sources urlscan
@@ -174,7 +162,7 @@ Other files in `feed/`: `false_positives.json` (suppression list), `run_stats.js
 
 ### Scheduled Detection (`scheduled-detection.yml`)
 - **Frequency**: Every Monday at noon UTC (or manually)
-- **Sources**: URLScan.io + Google CT + Cloudflare CT
+- **Sources**: URLScan.io
 - **Timeout**: 20 minutes
 - **Auto-commit**: Updates feed automatically
 - All workflows that write to `feed/` share the `feed-writer` concurrency group, so they never run at the same time
@@ -292,7 +280,7 @@ SCORE_THRESHOLD = 80  # Minimum score for feed inclusion
 ## 📈 Performance
 
 See the live numbers in [Current Stats](#-current-stats) above (updated after every scan from
-`feed/run_stats.json`). A full URLScan run processes several thousand domains in a few minutes;
+`feed/run_stats.json`). A full run processes several thousand domains in a few minutes;
 LLM analysis takes a few seconds per domain and is rate limited by Google AI Studio.
 
 Note: the rule-based score saturates at 100 for most matches, so the LLM review is what separates
@@ -321,7 +309,6 @@ MIT License - see LICENSE file for details.
 ## 🙏 Acknowledgments
 
 - [URLScan.io](https://urlscan.io/) - Primary data source
-- [Certificate Transparency](https://certificate.transparency.dev/) - CT log infrastructure
 - [Google AI Studio (Gemini)](https://aistudio.google.com/) - LLM analysis API
 - Bulgarian cybersecurity community
 
