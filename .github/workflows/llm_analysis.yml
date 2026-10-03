@@ -5,12 +5,16 @@ on:
     workflows: ["Scheduled Detection"]  # fires right after detection adds new domains
     types:
       - completed
+  schedule:
+    # Daily drain of the backlog. The free Gemini tier only allows a few LLM calls per
+    # run, so domains left over by one run are picked up by the next. A run with
+    # nothing to analyse exits in seconds.
+    - cron: '17 5 * * *'
   workflow_dispatch:  # Allow manual trigger
     inputs:
       max_analyze:
-        description: 'Max domains to analyze this run'
-        default: '100'
-  # (no separate cron: it used to run a second time, 2h after the workflow_run trigger)
+        description: 'Max domains sent to the LLM this run'
+        default: '25'
 
 permissions:
   contents: write
@@ -52,7 +56,7 @@ jobs:
       continue-on-error: true
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        MAX_ANALYZE: ${{ inputs.max_analyze || '100' }}
+        MAX_ANALYZE: ${{ inputs.max_analyze || '25' }}
         PYTHONUNBUFFERED: '1'  # without this a killed run shows no output at all
       run: |
         # --days 400 + UNKNOWN re-queue: drains the backlog of truncated analyses.
@@ -108,7 +112,7 @@ jobs:
       if: always()
       run: |
         echo "### LLM Analysis Summary" >> $GITHUB_STEP_SUMMARY
-        echo "- **Model**: Gemini 3.5 Flash (Google AI Studio direct)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Model**: Gemini 2.5 Flash-Lite (fallback 3.5 Flash) + rule-based triage" >> $GITHUB_STEP_SUMMARY
         echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Time**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
@@ -120,7 +124,9 @@ jobs:
           ERRORS=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('errors', 0))" 2>/dev/null || echo "0")
 
           echo "**📊 Analysis Results:**" >> $GITHUB_STEP_SUMMARY
-          echo "- Domains analyzed: **$ANALYZED**" >> $GITHUB_STEP_SUMMARY
+          RULES=$(cat feed/llm_analysis_stats.json | python -c "import sys, json; print(json.load(sys.stdin).get('rule_based', 0))" 2>/dev/null || echo "0")
+          echo "- Decided by rules (no LLM call): **$RULES**" >> $GITHUB_STEP_SUMMARY
+          echo "- Analyzed by the LLM: **$ANALYZED**" >> $GITHUB_STEP_SUMMARY
           echo "- High confidence threats: **$HIGH_CONF** 🚨" >> $GITHUB_STEP_SUMMARY
           echo "- False positives removed: **$FALSE_POS** ✅" >> $GITHUB_STEP_SUMMARY
           echo "- Errors: **$ERRORS**" >> $GITHUB_STEP_SUMMARY

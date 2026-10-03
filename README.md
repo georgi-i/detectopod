@@ -19,7 +19,8 @@ Detectopod identifies phishing domains that:
 - **URLScan.io Detection**: Per-category brand queries (couriers, government, toll) plus targeted suspicious-TLD searches
 - **Automated Scanning**: Runs weekly via GitHub Actions
 - **Rule-based Scoring**: Transparent scoring system (0-100) based on brand, TLD, hosting and domain patterns
-- **LLM Analysis**: AI-powered review using Gemini 3.5 Flash (structured JSON output) to reduce false positives
+- **Rule-based Triage**: Domains with an unambiguous phishing structure (`mvrbg.*`, `econt.bg-*`, `tollpass.<random>.*` ...) are decided without an API call (`detection/rules.py`)
+- **LLM Analysis**: The remaining domains are reviewed by Gemini (structured JSON output), sized for the free API tier
 - **False-Positive Memory**: Domains you reject are remembered in `feed/false_positives.json` and never re-added
 - **Public Threat Feed**: JSON feed of detected domains updated in real-time
 - **Zero Infrastructure**: Fully serverless using GitHub Actions
@@ -115,14 +116,15 @@ python detection/detectopod.py --duration 600 --sources urlscan
 
 ```bash
 # Analyze detections from the last 24 hours
-python detection/llm_analyzer.py --days 1 --max-analyze 50
+python detection/llm_analyzer.py --days 1 --max-analyze 25
 
 # Analyze with custom threshold
-python detection/llm_analyzer.py --min-score 80 --max-analyze 100
+python detection/llm_analyzer.py --min-score 80 --max-analyze 25
 ```
 
-Entries whose analysis was truncated (`UNKNOWN`) are re-queued automatically, and domains
-listed in `feed/false_positives.json` are skipped.
+Entries whose analysis was truncated (`UNKNOWN`) are re-queued automatically, domains
+listed in `feed/false_positives.json` are skipped, and domains matching `detection/rules.py`
+are decided without calling the API (their `llm_analysis.model` is `rule-based`).
 
 ### Accessing the Feed
 
@@ -168,10 +170,11 @@ Other files in `feed/`: `false_positives.json` (suppression list), `run_stats.js
 - All workflows that write to `feed/` share the `feed-writer` concurrency group, so they never run at the same time
 
 ### LLM Analysis (`llm_analysis.yml`)
-- **Trigger**: Right after a successful Scheduled Detection run (or manually)
-- **Model**: Gemini 3.5 Flash (fallback: 2.5 Flash-Lite) via Google AI Studio, JSON output
-- **Purpose**: Validate detections and remove false positives
-- **Max domains**: 100 per run (`max_analyze` input when run manually); entries with a truncated (`UNKNOWN`) analysis are re-queued automatically
+- **Trigger**: Right after a successful Scheduled Detection run, daily at 05:17 UTC (drains the backlog), or manually
+- **Triage**: domains matching a confirmed phishing pattern are decided by rules (`detection/rules.py`), no API call
+- **Model**: Gemini 2.5 Flash-Lite (fallback: 3.5 Flash) via the free Google AI Studio tier, JSON output
+- **Free-tier friendly**: at most 25 LLM calls per run (`max_analyze` input), one request every 6 s (`LLM_MIN_INTERVAL`), a 429 on one model switches to the other immediately, and the run stops after 3 failed domains in a row. What is left is picked up by the next run
+- **Purpose**: Validate detections and remove false positives; entries with a truncated (`UNKNOWN`) analysis are re-queued automatically
 - **Branch runs**: when started from a branch other than `main` it never pushes; the resulting feed is uploaded as an artifact instead
 
 ### Mark False Positive (`mark_false_positive.yml`)
@@ -281,7 +284,7 @@ SCORE_THRESHOLD = 80  # Minimum score for feed inclusion
 
 See the live numbers in [Current Stats](#-current-stats) above (updated after every scan from
 `feed/run_stats.json`). A full run processes several thousand domains in a few minutes;
-LLM analysis takes a few seconds per domain and is rate limited by Google AI Studio.
+LLM analysis is limited by the free Google AI Studio quota, hence the rule-based triage and the small per-run budget.
 
 Note: the rule-based score saturates at 100 for most matches, so the LLM review is what separates
 real phishing from look-alikes.
