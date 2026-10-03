@@ -1669,11 +1669,12 @@
     "detected_at": "2026-05-08T11:09:28.634196",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "**1. Threat Level:** HIGH\n\n**2. Confidence:** 98%\n\n**3. Key Indicators:**\n- **\"e-us",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T16:42:25.310474",
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 100,\n  \"indicators\": [\n    \"Matches confirmed pattern e-uslugi<anything>.<tld>\",\n    \"Impersonates Bulgarian Ministry of Interior (MVR) e-services portal\",\n    \"Registration on suspicious TLD (.top) mimicking official government domain\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-03T05:31:54.202850",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
+      "confidence": 100,
+      "decision": "BLOCK"
     }
   },
   {
@@ -1708,11 +1709,12 @@
     "detected_at": "2026-05-08T11:09:28.642756",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:26:41.256940",
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvrbg\",\n    \"suspicious tld\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T05:34:16.820322",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
+      "confidence": 95,
+      "decision": "BLOCK"
     }
   },
   {
@@ -1721,11 +1723,12 @@
     "detected_at": "2026-05-08T11:09:28.645789",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "100%\n    *   Key",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:26:51.358140",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 100,\n  \"indicators\": [\n    \"mvr-bg.<tld>\",\n    \"suspicious TLD\",\n    \"impersonates MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T05:37:49.185623",
+      "threat_level": "HIGH",
+      "confidence": 100,
+      "decision": "BLOCK"
     }
   },
   {
@@ -1786,11 +1789,12 @@
     "detected_at": "2026-05-08T11:09:28.686876",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH  \n2. **Confidence**: 95%  \n3. **Key Indicators",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T17:13:11.610383",
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr.bggov.cam\",\n    \"suspicious TLD\",\n    \"impersonates MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T05:40:51.249936",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
+      "confidence": 95,
+      "decision": "BLOCK"
     }
   },
   {
@@ -1799,25 +1803,19 @@
     "detected_at": "2026-05-08T11:09:28.690729",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:26:57.579279",
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"mvr.govbg.one structure\",\n    \"potential MVR impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T05:43:53.508640",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
+      "confidence": 95,
+      "decision": "BLOCK"
     }
   },
   {
     "domain": "www.mvr-bg.autos",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.694129",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:27:14.229280",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "e-uslugimad.top",
@@ -1838,25 +1836,19 @@
     "detected_at": "2026-05-08T11:09:28.701647",
     "source": "urlscan.io",
     "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:27:31.357144",
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 100,\n  \"indicators\": [\n    \"mvrbg\",\n    \"suspicious_tld\",\n    \"impersonation_mvr\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T05:54:27.430092",
       "threat_level": "HIGH",
-      "decision": "UNKNOWN"
+      "confidence": 100,
+      "decision": "BLOCK"
     }
   },
   {
     "domain": "econt-bg.an537294.sbs",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.964380",
-    "source": "urlscan.io-.sbs",
-    "llm_analysis": {
-      "analysis": ".sbs`? Wait, the domain is `",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:27:47.995363",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.sbs"
   },
   {
     "domain": "bgpost.sbs",
@@ -1864,38 +1856,25 @@
     "detected_at": "2026-05-08T11:09:28.993844",
     "source": "urlscan.io-.sbs",
     "llm_analysis": {
-      "analysis": "` is `<brand>.<tld>`.\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:04.940327",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates BulgariaPost\",\n    \"potential subdomain abuse\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-03T06:05:01.323660",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
     }
   },
   {
     "domain": "mvr.govmk.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.229880",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:12.371811",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvrgovmk.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.237389",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. Threat Level: HIGH  \n2. Confidence: 95%  \n3. Key Indicators:  \n   - Domain combines \u201cmvr\u201d (Ministry of Interior) with \u201cgov\u201d and a suspicious free\u2011hosting TLD (.cam)  \n   - No legitimate business or service context; does not match",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T17:14:48.767927",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "new-bgpost.cam",
@@ -1927,14 +1906,7 @@
     "domain": "mvr-gov-mk.shop",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.288754",
-    "source": "urlscan.io-.shop",
-    "llm_analysis": {
-      "analysis": "**1. Threat Level:** HIGH  \n\n**2. Confidence:** 96%  \n\n**3. Key Indicators:**  \n- Domain name combines \u201cmvr\u201d (Ministry of Interior) with \u201cgov\u201d and a country code \u201cmk\u201d, mimicking a government e\u2011services URL.  \n- Uses a suspicious free/serverless TLD \u201c.shop\u201d (common in phishing kits) and no legitimate business keywords.  \n- No clear association with a legitimate courier or commercial service; the pattern",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T17:16:13.579333",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.shop"
   },
   {
     "domain": "speedy.bg-m34289.one",
@@ -1953,40 +1925,19 @@
     "domain": "speedy.bg-m24169.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.466697",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": ").\n\n3.  **Determine Action:**\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:24.852421",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "speedy.bg-e73818.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.475865",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:30.652362",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "econt.bg-m24169.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.479922",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:36.732979",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "econt.bg-m34289.one",
@@ -2005,92 +1956,43 @@
     "domain": "speedy.bg-l2342.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.487972",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:42.780254",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "econt-bg.in95826.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.570443",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "**Threat Level:** HIGH  \n**Confidence:**",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T17:17:53.187153",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "econt-bg.inkl63179.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.574834",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "bg` as a subdomain of `inkl6",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:48.755385",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "speedy-bg.inkl63179.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.579004",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:28:55.096121",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "bgpost-bg.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.618339",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence**: ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:29:01.394746",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "speedy.bg-niu.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.629153",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": " Matches confirmed phishing pattern `speedy.bg-<anything",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:29:18.246786",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-sp.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.633467",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:29:24.352735",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-g.qpon",
@@ -2122,14 +2024,7 @@
     "domain": "speedy.bg-ti.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.653643",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "We need to analyze domain: speedy.bg-ti.qpon\n\nRule-based score 100/100. No keywords. Hosting: free/serverless platform or suspicious TLD. TLD .qpon is suspicious (coupon). Domain includes \"speedy.bg-ti\". The pattern: \"speedy\" is a courier service name (Speedy). The domain includes \"speedy.bg-ti.qpon\". It's like speedy.bg-ti.qpon. The legitimate Speedy courier site is speedy.bg (Bulgarian courier). This domain tries to mimic speedy.bg with extra .bg-ti? Actually it's speedy.bg-ti.qpon: subdomain speedy.bg-ti under .qpon TLD. So it's using speedy.bg as part of subdomain? The domain is speedy.bg-ti.qpon. The second-level domain is bg-ti? Actually .qpon is TLD, then domain is speedy.bg-ti? Wait: The format: speedy.bg-ti.qpon. So TLD .qpon, second-level domain is bg-ti? Actually domain labels: speedy (subdomain), bg-ti (second-level?), .qpon TLD. So the domain is speedy.bg-ti.qpon. It includes \"speedy\" and \"bg\". The pattern for courier phishing: they might use speedy + something + suspicious T",
-      "model": "openrouter/free",
-      "timestamp": "2026-05-09T17:20:39.417843",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-il.qpon",
@@ -2148,27 +2043,13 @@
     "domain": "speedy-delivery.online",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.663331",
-    "source": "urlscan.io-.online",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:29:30.408947",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.online"
   },
   {
     "domain": "speedy.bg-yh.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.663331",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "bg`) via subdomain/domain abuse.\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:29:47.126273",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-pot.qpon",
@@ -2187,430 +2068,199 @@
     "domain": "www.bgpost.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.713584",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "Domain: `www.bgpost.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:03.732135",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "www.gav.mvrbg.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.723584",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "-uslugi.mvr.bg) using",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:10.208468",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "bgpost-bga.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.733584",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:16.397252",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "speedy.bg-iw.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.743584",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:22.557452",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-ip.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.753584",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:28.819409",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "speedy.bg-po.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.763584",
-    "source": "urlscan.io-.qpon",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:39.312312",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.qpon"
   },
   {
     "domain": "www.mvr-bg.cfd",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.cfd",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence:** 100%\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:45.580849",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cfd"
   },
   {
     "domain": "mvrbg.ink",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:52.267428",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.ink"
   },
   {
     "domain": "mvrbg.cyou",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:30:58.523124",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cyou"
   },
   {
     "domain": "mvr.govbg.work",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.work",
-    "llm_analysis": {
-      "analysis": "gav.mvrbg.<tld>` -> No.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:04.818375",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.work"
   },
   {
     "domain": "e-uslugi.mvrbge.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.436954",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "uslugi.mvr.bg only",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:11.340587",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "ritualnieuslugi-tomsk.online",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.442788",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "**Threat Analysis: ritualnieus",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:17.431374",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "e-uslugi.mvrbgc.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.446794",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "mvrbgc.top`).\n    *   Let",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:23.571267",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "e-uslugivrl.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.450237",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:29.571500",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvrbg.shop",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.455307",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:35.475791",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-gov-mk.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.462015",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": " is the legitimate North Macedonian Ministry of Internal Affairs). Wait",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:41.786851",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "www.bg-speedy.xyz",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.465581",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "anything>.<tld>` ->",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:47.676487",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "e-uslugi-mvr.sbs",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.470351",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:53.781691",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-bggov.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.475304",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "vr-bggov.top`\n    ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:31:59.958075",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "pocztoweuslugi278995449.cfd",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.501104",
-    "source": "urlscan.io-.cfd",
-    "llm_analysis": {
-      "analysis": "gav.mvrbg.<tld>` ->",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:05.838002",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cfd"
   },
   {
     "domain": "olx.poctoweuslugi829104.cfd",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.508184",
-    "source": "urlscan.io-.cfd",
-    "llm_analysis": {
-      "analysis": "g., `econt.bg-g63",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:12.160987",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cfd"
   },
   {
     "domain": "1e135c42-6444-4920-ac18-97f5687133c8.new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.557608",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:18.378757",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "hostmaster.new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.564588",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "bgpost` vs `bgpost-<anything>`).",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:30.775599",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "econt.shop",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.573407",
-    "source": "urlscan.io-.shop",
-    "llm_analysis": {
-      "analysis": "mvrbg.<tld>` or `",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:36.979090",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.shop"
   },
   {
     "domain": "econt.view971.one",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.587147",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": ").\n    *   Domain:",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:42.988242",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "bgpost.one",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.590481",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": "` (Bulgarian Post / \u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u043f\u043e\u0449\u0438,",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:32:49.139744",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "speedy.bg-in63829.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.639845",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:01.850616",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.ink"
   },
   {
     "domain": "www.speedy.bg-e758391.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.643594",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "tld>` impersonating the Bulgarian courier service",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:08.348194",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.ink"
   },
   {
     "domain": "bgpost-bg.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.647806",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:15.104323",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.ink"
   },
   {
     "domain": "speedy.bg-e72647.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.651787",
-    "source": "urlscan.io-.ink",
-    "llm_analysis": {
-      "analysis": "Threat Level: HIGH\n    *   Confidence:",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:21.185526",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.ink"
   },
   {
     "domain": "mvr-gov-mk.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.659102",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": "*   Pattern 4: `bg",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:33.353920",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cyou"
   },
   {
     "domain": "econt.korak-paketa.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.662610",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:39.469097",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cyou"
   },
   {
     "domain": "e-uslugimvrbgc.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.668426",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": "ld>`? Yes, `<anything>` is `mvrb",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:45.598855",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "e-uslugirbc.top",
@@ -2629,651 +2279,301 @@
     "domain": "e-uslugimvrbgb.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.675213",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": " No.\n    *   *Pattern 5:*",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:33:57.831637",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "e-uslugiaca.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.682362",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": "uslugiaca.top`) -> **MATCH**.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:03.642973",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "e-uslugil.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.686445",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:09.873314",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "bgpost-new.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.696940",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence**: 100%\n3. **Key Indicators**:\n   ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:16.006390",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.png4kx.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.700638",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": ".<tld>` -> No.\n    *   ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:21.975121",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.fpfqdi.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.704128",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": " Subdomain: `econt` (exact match",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:28.198323",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.x2pnbz.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.707715",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "...` - No.\n        2. `mv",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:34.428651",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.1g9bxa.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.712390",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": ".mvrbg.<tld>` -> No.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:40.738547",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.fz47ys.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.715940",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": " Brand: `econt` (Bul",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:46.833346",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.payseting.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.719677",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "bgpost-<anything>.<tld>` -> No\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:53.081197",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.id-94281.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.724409",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "bg-` in it. It has `econt",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:34:59.231661",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.8a5z2f.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.728033",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "ishing Pattern 3? No (`<brand>.<geo",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:05.227952",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.polychevane.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.731564",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "tld>` -> No match.\n    *   ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:11.111865",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.pl903y.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.735143",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:17.433699",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.4pqm4p.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.738597",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:23.600386",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.bg-d94716.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.742055",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:30.513579",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.lgi8e5.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.745433",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": " `speedy.bg-<anything>.<tld",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:36.736591",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "bgpost.confirmed-application.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.749032",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "**Threat Level:** HIGH\n**Confidence:**",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:42.837123",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.c1z9gk.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.753820",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "-<anything>.<tld>` -> No.\n    ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:48.963899",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "econt.w0bqjw.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.757428",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:35:55.674088",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "bgpost.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:01.629295",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "mvrgovbg.lol",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lol",
-    "llm_analysis": {
-      "analysis": " Evaluate against General Threat Indicators (Contextual Analysis):**",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:07.549044",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lol"
   },
   {
     "domain": "mvrx.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:14.357499",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvr.qdoz.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:20.805978",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.niaj.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "*: While it doesn't strictly match the exact regex of",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:27.223901",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.zeyd.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "Refinement*: While it doesn't match the *",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:33.203261",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.ktwr.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:39.060744",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.lnub.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:45.125298",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.ogfn.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "*   Pattern 6: `e-",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:51.690131",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvri.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "**Threat Level:** HIGH\n**",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:36:57.695835",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvrn.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "mvrbg.<tld>` ->",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:03.618305",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvrs.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:09.380754",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvrv.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "anything>.<tld>` -> No match.\n\n3",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:15.136170",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvrgovmk.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:21.138656",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cyou"
   },
   {
     "domain": "mvrbg.pics",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.pics",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:27.015607",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.pics"
   },
   {
     "domain": "mvrbg.icu",
     "score": 100,
     "detected_at": "2026-05-12T20:03:10.162398",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:37:39.426379",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "mvr.chtm.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": ">` -> No.\n    *   ",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:38:44.566357",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.ftch.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "Pattern 5: `gav.mvrbg.<",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:38:50.485459",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvr.govno.top",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:38:56.422676",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "mvr.lxax.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:02.449019",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cam"
   },
   {
     "domain": "mvrc.lat",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.lat",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:08.335649",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.lat"
   },
   {
     "domain": "mvrgovbg.top",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.top",
-    "llm_analysis": {
-      "analysis": "   Pattern 6: `e-",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:14.305172",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.top"
   },
   {
     "domain": "mvr.bggov.one",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.one",
-    "llm_analysis": {
-      "analysis": "bgpost-<anything>.<tld",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:20.405832",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.one"
   },
   {
     "domain": "mvr.govbg.cyou",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cyou",
-    "llm_analysis": {
-      "analysis": ".<tld>`, but it is extremely",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:26.371461",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cyou"
   },
   {
     "domain": "mvr-govm.click",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.757030",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:32.552943",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-govm.top",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.761449",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:38.618150",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "euslugimvr-paynow.sbs",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.767747",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "Pattern 5:* `gav.mvrbg.<",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:45.306292",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "e-uslugion.life",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.867219",
-    "source": "urlscan.io-.life",
-    "llm_analysis": {
-      "analysis": "lugion.life` match `e-uslugi",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:51.266561",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.life"
   },
   {
     "domain": "mvr-bg.icu",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.912419",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:39:59.592976",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "mvrbge.top",
     "score": 100,
     "detected_at": "2026-06-01T17:15:31.764751",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "gav.mvrbg.<tld>` -> No.",
-      "model": "google/gemini-3.5-flash",
-      "timestamp": "2026-06-03T17:40:05.632158",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-bgi.cyou",
@@ -3370,27 +2670,13 @@
     "domain": "speedy-bg.id2954728.shop",
     "score": 100,
     "detected_at": "2026-07-13T14:47:21.544201",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-07-13T16:29:06.148336",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "new-bgpost.icu",
     "score": 100,
     "detected_at": "2026-07-16T06:08:52.863366",
-    "source": "urlscan.io-.icu",
-    "llm_analysis": {
-      "analysis": "low-cost TLD).\n        *   ",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-07-16T06:09:29.053364",
-      "threat_level": "LOW",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.icu"
   },
   {
     "domain": "tollpass.xlyr.cam",
@@ -3461,14 +2747,7 @@
     "domain": "euslugi-remit.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.954425",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-02T08:43:46.003555",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-gov.eu.cc",
@@ -3487,118 +2766,55 @@
     "domain": "euslugimvr-paynow.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.968357",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "VR) e-services portal (`e-usl",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T11:21:05.612465",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "euslugimvr-taksa.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.977407",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": " This is a highly specific government impersonation attempt targeting M",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T11:21:21.172147",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "vse-uslugi.online",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.982806",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2. **Confidence",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T11:21:29.333426",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "euslugimvr-platen.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.036022",
-    "source": "urlscan.io-.cc",
-    "llm_analysis": {
-      "analysis": "ld>` -> The domain is `",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T14:55:45.374846",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cc"
   },
   {
     "domain": "euslugimvr-billing.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.045299",
-    "source": "urlscan.io-.cc",
-    "llm_analysis": {
-      "analysis": " `e-uslugi.mvr",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T14:55:56.040434",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cc"
   },
   {
     "domain": "euslugi-system.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.052219",
-    "source": "urlscan.io-.cc",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T14:56:10.576898",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cc"
   },
   {
     "domain": "euslugicharge.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.057159",
-    "source": "urlscan.io-.cc",
-    "llm_analysis": {
-      "analysis": "`.\n        *   Even without the hyphen,",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T16:19:22.498610",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cc"
   },
   {
     "domain": "tollpass.klgf.cam",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.069683",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "tld>` -> No match.\n    *   Pattern",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T16:19:37.135731",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpassss.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.074494",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": " (Bulgarian Online Services):**\n    *   ",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-03T16:20:00.509514",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpassapp.top",
@@ -3617,14 +2833,7 @@
     "domain": "tollpasss.sbs",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.084033",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level:** HIGH\n2",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-06T12:05:51.119104",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.sbs",
@@ -3643,130 +2852,60 @@
     "domain": "tollpasss.xyz",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.093650",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": " Rule-based score: 100/",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T13:23:37.857248",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "econt.eu.cc",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.317159",
-    "source": "urlscan.io-.cc",
-    "llm_analysis": {
-      "analysis": "? No. \"Econt\" is highly",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T13:23:40.837085",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io-.cc"
   },
   {
     "domain": "tollpass.cjba.cam",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.412847",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T13:23:44.828522",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.fkvx.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.075026",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "*   The domain is `tollpass",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T14:53:08.993176",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.usnk.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.079891",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "uslugi<anything>.<",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T14:53:11.653715",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.tqcl.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.085602",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "1. **Threat Level**: HIGH\n2. **Confidence",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-10T14:53:14.459219",
-      "threat_level": "HIGH",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.vqio.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.090480",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": ".<tld>` -> No.\n    *",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-17T12:56:42.434183",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "mvr-gov-mk.cam",
     "score": 100,
     "detected_at": "2026-08-10T13:23:10.977464",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "brand>.<geo>-<anything>.<t",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-17T12:56:45.460584",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "euslugi-bulgaria.cc",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.319571",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": " in Bulgarian) combined with \"bulgaria\" on a",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-08-31T19:05:07.967893",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   },
   {
     "domain": "tollpass.icu",
     "score": 100,
     "detected_at": "2026-09-04T13:55:10.977464",
-    "source": "urlscan.io",
-    "llm_analysis": {
-      "analysis": "less platform or suspicious TLD.\n",
-      "model": "gemini-3.5-flash",
-      "timestamp": "2026-09-07T17:41:41.600340",
-      "threat_level": "UNKNOWN",
-      "decision": "UNKNOWN"
-    }
+    "source": "urlscan.io"
   }
 ]
