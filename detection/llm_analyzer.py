@@ -166,7 +166,7 @@ Respond with ONLY a JSON object, no prose and no markdown fences, using exactly 
 
                     elif response.status_code == 429:
                         wait = 30 * (attempt + 1)
-                        print(f"   ⚠️  {model_id} rate limited (429), retrying in {wait}s...")
+                        print(f"   ⚠️  {model_id} rate limited (429), retrying in {wait}s... {response.text[:300]!r}")
                         time.sleep(wait)
                         continue
 
@@ -221,6 +221,10 @@ Respond with ONLY a JSON object, no prose and no markdown fences, using exactly 
 
 
 SAVE_EVERY = 10  # persist progress after this many analysed domains
+# Stop the run after this many failures in a row. A failure means every retry and the
+# fallback model were exhausted (~6 min per domain when the API quota is used up), so
+# continuing would only burn the CI time budget.
+MAX_CONSECUTIVE_FAILURES = 3
 
 
 def save_progress(feed, feed_file):
@@ -245,6 +249,13 @@ def save_progress(feed, feed_file):
                         if normalize_domain(e['domain']) not in existing_fp_domains)
     save_json_list(fp_file, existing_fps)
     return false_positive_domains, clean_feed, fp_file
+
+
+def write_stats(stats, feed_file):
+    stats['timestamp'] = datetime.utcnow().isoformat()
+    stats_file = os.path.join(os.path.dirname(feed_file), 'llm_analysis_stats.json')
+    with open(stats_file, 'w') as f:
+        json.dump(stats, f, indent=2)
 
 
 def main():
@@ -335,6 +346,7 @@ def main():
         'errors': 0
     }
 
+    consecutive_failures = 0
     for i, entry in enumerate(to_analyze, 1):
         domain = entry.get('domain', 'unknown')
         score = entry.get('score', 0)
@@ -345,6 +357,7 @@ def main():
         result = analyzer.analyze_domain(domain, score, keywords, entry)
 
         if result:
+            consecutive_failures = 0
             entry['llm_analysis'] = result
             stats['analyzed_count'] += 1
 
@@ -362,11 +375,18 @@ def main():
                 print(f"   ℹ️  {result['threat_level']}")
         else:
             stats['errors'] += 1
+            consecutive_failures += 1
             print(f"   ❌ Analysis failed")
 
         if i % SAVE_EVERY == 0:
             save_progress(feed, args.feed_file)
+            write_stats(stats, args.feed_file)
             print(f"   💾 Progress saved ({i}/{len(to_analyze)})")
+
+        if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+            print(f"::warning::Stopping after {consecutive_failures} failures in a row "
+                  f"(API quota/rate limit?). {len(to_analyze) - i} domains left for the next run.")
+            break
 
     false_positive_domains, clean_feed, fp_file = save_progress(feed, args.feed_file)
 
@@ -377,10 +397,7 @@ def main():
         print(f"   Saved to: {fp_file}")
 
     stats['false_positives'] = len(false_positive_domains)
-    stats['timestamp'] = datetime.utcnow().isoformat()
-    stats_file = os.path.join(os.path.dirname(args.feed_file), 'llm_analysis_stats.json')
-    with open(stats_file, 'w') as f:
-        json.dump(stats, f, indent=2)
+    write_stats(stats, args.feed_file)
 
     print(f"\n{'='*60}")
     print(f"✓ Analysis Complete")
