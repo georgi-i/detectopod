@@ -6,7 +6,7 @@ import time
 import requests
 import re
 from urllib.parse import urlparse
-from feedlib import FalsePositives, normalize_domain
+from feedlib import FalsePositives, is_dev_host, normalize_domain
 
 # Usage: python detectopod.py [--duration SECONDS] [--sources urlscan]
 
@@ -200,10 +200,6 @@ INFRASTRUCTURE_PATTERNS = (
 
 OUTPUT_FILE = 'feed/phishing_feed.json'
 
-# Leading labels that mark a dev/test/staging environment. A host like
-# test.tollpass.xyz or dev.tollpass.xyz is a developer sandbox, not a phishing
-# page, so it is skipped (and logged) instead of landing in the feed.
-DEV_LABELS = frozenset({'test', 'dev', 'staging', 'stage', 'qa', 'uat', 'sandbox'})
 
 # Configure logging
 logging.basicConfig(
@@ -228,12 +224,6 @@ def save_feed(feed_data):
         logging.info(f"Feed saved with {len(feed_data)} entries")
     except Exception as e:
         logging.error(f"Error saving feed: {e}")
-
-
-def is_dev_host(domain):
-    """True for hosts whose first label is a dev/test/staging marker."""
-    parts = normalize_domain(domain).split('.')
-    return len(parts) > 2 and parts[0] in DEV_LABELS
 
 
 def calculate_score(domain):

@@ -27,6 +27,17 @@ def normalize_domain(domain):
     return d
 
 
+# Leading labels that mark a dev/test/staging environment. A host like
+# test.tollpass.xyz or dev.tollpass.xyz is a developer sandbox, not a phishing page.
+DEV_LABELS = frozenset({'test', 'dev', 'staging', 'stage', 'qa', 'uat', 'sandbox'})
+
+
+def is_dev_host(domain):
+    """True for hosts whose first label is a dev/test/staging marker."""
+    parts = normalize_domain(domain).split('.')
+    return len(parts) > 2 and parts[0] in DEV_LABELS
+
+
 def load_json_list(path):
     if not os.path.exists(path):
         return []
