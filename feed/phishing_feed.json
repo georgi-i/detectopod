@@ -1815,7 +1815,16 @@
     "domain": "www.mvr-bg.autos",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.694129",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705264",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "e-uslugimad.top",
@@ -1848,7 +1857,16 @@
     "domain": "econt-bg.an537294.sbs",
     "score": 100,
     "detected_at": "2026-05-08T11:09:28.964380",
-    "source": "urlscan.io-.sbs"
+    "source": "urlscan.io-.sbs",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705274",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "bgpost.sbs",
@@ -1868,13 +1886,29 @@
     "domain": "mvr.govmk.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.229880",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr.govmk.cam\",\n    \"suspicious TLD\",\n    \"impersonates MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:15:51.291800",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrgovmk.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.237389",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"suspicious tld\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:15:57.409695",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "new-bgpost.cam",
@@ -1906,7 +1940,16 @@
     "domain": "mvr-gov-mk.shop",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.288754",
-    "source": "urlscan.io-.shop"
+    "source": "urlscan.io-.shop",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705291",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "speedy.bg-m34289.one",
@@ -1925,19 +1968,46 @@
     "domain": "speedy.bg-m24169.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.466697",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705295",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-e73818.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.475865",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705298",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "econt.bg-m24169.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.479922",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705301",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt.bg-*"
+    }
   },
   {
     "domain": "econt.bg-m34289.one",
@@ -1956,43 +2026,106 @@
     "domain": "speedy.bg-l2342.one",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.487972",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705304",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "econt-bg.in95826.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.570443",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705309",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "econt-bg.inkl63179.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.574834",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705313",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "speedy-bg.inkl63179.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.579004",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705317",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "bgpost-bg.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.618339",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705321",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "speedy.bg-niu.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.629153",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705324",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-sp.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.633467",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705327",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-g.qpon",
@@ -2024,7 +2157,16 @@
     "domain": "speedy.bg-ti.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.653643",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705330",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-il.qpon",
@@ -2043,13 +2185,30 @@
     "domain": "speedy-delivery.online",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.663331",
-    "source": "urlscan.io-.online"
+    "source": "urlscan.io-.online",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"speedy-delivery\",\n    \"suspicious TLD\",\n    \"impersonation target\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:14.825954",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-yh.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.663331",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705340",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-pot.qpon",
@@ -2068,199 +2227,485 @@
     "domain": "www.bgpost.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.713584",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"brand_impersonation\",\n    \"potential_courier_phishing\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:20.707366",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "www.gav.mvrbg.cam",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.723584",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705350",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "bgpost-bga.life",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.733584",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: bgpost-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705355",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "bgpost-*"
+    }
   },
   {
     "domain": "speedy.bg-iw.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.743584",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705358",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-ip.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.753584",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705361",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "speedy.bg-po.qpon",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.763584",
-    "source": "urlscan.io-.qpon"
+    "source": "urlscan.io-.qpon",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705364",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "www.mvr-bg.cfd",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705369",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvrbg.ink",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.ink"
+    "source": "urlscan.io-.ink",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705373",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvrbg.cyou",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.cyou"
+    "source": "urlscan.io-.cyou",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705377",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvr.govbg.work",
     "score": 100,
     "detected_at": "2026-05-08T11:09:29.773584",
-    "source": "urlscan.io-.work"
+    "source": "urlscan.io-.work",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr.govbg.work\",\n    \"suspicious TLD\",\n    \"impersonates MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:26.717703",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "e-uslugi.mvrbge.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.436954",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705389",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "ritualnieuslugi-tomsk.online",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.442788",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"unrelated geo\",\n    \"potential impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:32.838701",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "e-uslugi.mvrbgc.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.446794",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705402",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "e-uslugivrl.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.450237",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705407",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "mvrbg.shop",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.455307",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705411",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvr-gov-mk.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.462015",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705416",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "www.bg-speedy.xyz",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.465581",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates Speedy courier\",\n    \"free/serverless platform\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:49.843890",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "e-uslugi-mvr.sbs",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.470351",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705425",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "mvr-bggov.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.475304",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr-bg impersonation\",\n    \"suspicious TLD\",\n    \"potential MVR phishing\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:16:59.490549",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "pocztoweuslugi278995449.cfd",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.501104",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonation attempt\",\n    \"generic structure\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:17:33.608343",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "olx.poctoweuslugi829104.cfd",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.508184",
-    "source": "urlscan.io-.cfd"
+    "source": "urlscan.io-.cfd",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"impersonation_attempt\",\n    \"free_hosting\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:17:46.554798",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "1e135c42-6444-4920-ac18-97f5687133c8.new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.557608",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"random subdomain\",\n    \"impersonation attempt\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:17:49.822815",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "hostmaster.new-bgpost.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.564588",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates BulgariaPost\",\n    \"potential subdomain abuse\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:18:34.237646",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt.shop",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.573407",
-    "source": "urlscan.io-.shop"
+    "source": "urlscan.io-.shop",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"impersonation_attempt\",\n    \"free_hosting\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:18:40.267005",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "econt.view971.one",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.587147",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705469",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "bgpost.one",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.590481",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"brand_impersonation\",\n    \"bgpost\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:18:46.290118",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "speedy.bg-in63829.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.639845",
-    "source": "urlscan.io-.ink"
+    "source": "urlscan.io-.ink",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705476",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "www.speedy.bg-e758391.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.643594",
-    "source": "urlscan.io-.ink"
+    "source": "urlscan.io-.ink",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705479",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "bgpost-bg.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.647806",
-    "source": "urlscan.io-.ink"
+    "source": "urlscan.io-.ink",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705483",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "speedy.bg-e72647.ink",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.651787",
-    "source": "urlscan.io-.ink"
+    "source": "urlscan.io-.ink",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: speedy.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705489",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "speedy.bg-*"
+    }
   },
   {
     "domain": "mvr-gov-mk.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.659102",
-    "source": "urlscan.io-.cyou"
+    "source": "urlscan.io-.cyou",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705494",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "econt.korak-paketa.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.662610",
-    "source": "urlscan.io-.cyou"
+    "source": "urlscan.io-.cyou",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705518",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "e-uslugimvrbgc.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.668426",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705525",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "e-uslugirbc.top",
@@ -2279,127 +2724,315 @@
     "domain": "e-uslugimvrbgb.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.675213",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705530",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "e-uslugiaca.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.682362",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705535",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "e-uslugil.top",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.686445",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705539",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "bgpost-new.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.696940",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: bgpost-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705543",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "bgpost-*"
+    }
   },
   {
     "domain": "econt.png4kx.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.700638",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705551",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.fpfqdi.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.704128",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705557",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.x2pnbz.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.707715",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705563",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.1g9bxa.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.712390",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705568",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.fz47ys.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.715940",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705574",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.payseting.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.719677",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705580",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.id-94281.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.724409",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705589",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.8a5z2f.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.728033",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705595",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.polychevane.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.731564",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705601",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.pl903y.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.735143",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705607",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.4pqm4p.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.738597",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705612",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.bg-d94716.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.742055",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt.bg-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705615",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt.bg-*"
+    }
   },
   {
     "domain": "econt.lgi8e5.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.745433",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705621",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "bgpost.confirmed-application.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.749032",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705629",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.c1z9gk.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.753820",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705635",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "econt.w0bqjw.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.757428",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705640",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "bgpost.icu",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"brand_impersonation\",\n    \"bgpost\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:18:52.252441",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrgovbg.lol",
@@ -2411,7 +3044,15 @@
     "domain": "mvrx.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"MVR impersonation\",\n    \"potential courier phishing\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-05T12:20:05.282525",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.qdoz.cam",
@@ -2483,13 +3124,31 @@
     "domain": "mvrbg.pics",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.pics"
+    "source": "urlscan.io-.pics",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705692",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvrbg.icu",
     "score": 100,
     "detected_at": "2026-05-12T20:03:10.162398",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705695",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvr.chtm.cam",
@@ -2543,31 +3202,76 @@
     "domain": "mvr-govm.click",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.757030",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705731",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "mvr-govm.top",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.761449",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705737",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "euslugimvr-paynow.sbs",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.767747",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705743",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "e-uslugion.life",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.867219",
-    "source": "urlscan.io-.life"
+    "source": "urlscan.io-.life",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705748",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "mvr-bg.icu",
     "score": 100,
     "detected_at": "2026-05-25T14:33:47.912419",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvrbg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705752",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvrbg label"
+    }
   },
   {
     "domain": "mvrbge.top",
@@ -2670,7 +3374,16 @@
     "domain": "speedy-bg.id2954728.shop",
     "score": 100,
     "detected_at": "2026-07-13T14:47:21.544201",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: brand-bg label",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705760",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "brand-bg label"
+    }
   },
   {
     "domain": "new-bgpost.icu",
@@ -2747,7 +3460,16 @@
     "domain": "euslugi-remit.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.954425",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705769",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "mvr-gov.eu.cc",
@@ -2766,13 +3488,31 @@
     "domain": "euslugimvr-paynow.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.968357",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705775",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "euslugimvr-taksa.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.977407",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705780",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "vse-uslugi.online",
@@ -2784,37 +3524,91 @@
     "domain": "euslugimvr-platen.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.036022",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705790",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "euslugimvr-billing.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.045299",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705796",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "euslugi-system.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.052219",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705801",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "euslugicharge.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.057159",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705805",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "tollpass.klgf.cam",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.069683",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705812",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpassss.cc",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.074494",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass<suffix>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705819",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass<suffix>"
+    }
   },
   {
     "domain": "tollpassapp.top",
@@ -2833,7 +3627,16 @@
     "domain": "tollpasss.sbs",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.084033",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass<suffix>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705824",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass<suffix>"
+    }
   },
   {
     "domain": "tollpass.sbs",
@@ -2852,55 +3655,136 @@
     "domain": "tollpasss.xyz",
     "score": 100,
     "detected_at": "2026-07-28T19:45:49.093650",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass<suffix>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705829",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass<suffix>"
+    }
   },
   {
     "domain": "econt.eu.cc",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.317159",
-    "source": "urlscan.io-.cc"
+    "source": "urlscan.io-.cc",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705834",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpass.cjba.cam",
     "score": 100,
     "detected_at": "2026-07-29T19:22:56.412847",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705840",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpass.fkvx.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.075026",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705846",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpass.usnk.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.079891",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705852",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpass.tqcl.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.085602",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705857",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "tollpass.vqio.cam",
     "score": 100,
     "detected_at": "2026-08-02T08:30:13.090480",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: tollpass.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705863",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "tollpass.<random>.<tld>"
+    }
   },
   {
     "domain": "mvr-gov-mk.cam",
     "score": 100,
     "detected_at": "2026-08-10T13:23:10.977464",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: mvr-gov-*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705868",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "mvr-gov-*"
+    }
   },
   {
     "domain": "euslugi-bulgaria.cc",
     "score": 100,
     "detected_at": "2026-08-31T19:03:58.319571",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: e-uslugi*",
+      "model": "rule-based",
+      "timestamp": "2026-10-05T12:15:50.705873",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "e-uslugi*"
+    }
   },
   {
     "domain": "tollpass.icu",
