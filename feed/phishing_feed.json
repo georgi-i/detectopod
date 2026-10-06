@@ -3122,7 +3122,15 @@
     "domain": "mvr.lnub.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"MVR impersonation\",\n    \"Suspicious TLD\",\n    \"Potential subdomain abuse\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:24.224869",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.ogfn.cam",
@@ -3170,7 +3178,15 @@
     "domain": "mvrs.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"MVR impersonation\",\n    \"Suspicious TLD\",\n    \"Potential subdomain abuse\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:30.175949",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrv.lat",
@@ -3190,7 +3206,15 @@
     "domain": "mvrgovmk.cyou",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cyou"
+    "source": "urlscan.io-.cyou",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvrgovmk\",\n    \"cyou\",\n    \"impersonation of MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:36.077146",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrbg.pics",
@@ -3240,43 +3264,99 @@
     "domain": "mvr.ftch.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"suspicious tld\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:41.985826",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.govno.top",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"govno.top\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:47.977949",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.lxax.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"suspicious TLD\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:01:54.114069",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrc.lat",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"MVR impersonation\",\n    \"potential courier phishing\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:00.159832",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrgovbg.top",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.top"
+    "source": "urlscan.io-.top",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"mvr_impersonation\",\n    \"potential_government_phishing\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:06.348424",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.bggov.one",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.one"
+    "source": "urlscan.io-.one",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr.bggov.one\",\n    \"suspicious TLD\",\n    \"impersonation of MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:12.002212",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.govbg.cyou",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cyou"
+    "source": "urlscan.io-.cyou",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr.govbg.cyou\",\n    \"suspicious TLD\",\n    \"impersonates MVR\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:31.438035",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr-govm.click",
@@ -3357,7 +3437,15 @@
     "domain": "mvrbge.top",
     "score": 100,
     "detected_at": "2026-06-01T17:15:31.764751",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"MVR impersonation\",\n    \"potential brand confusion\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:38.345840",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr-bgi.cyou",
@@ -3469,7 +3557,15 @@
     "domain": "new-bgpost.icu",
     "score": 100,
     "detected_at": "2026-07-16T06:08:52.863366",
-    "source": "urlscan.io-.icu"
+    "source": "urlscan.io-.icu",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates BulgariaPost\",\n    \"free/serverless platform\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:43.897568",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "tollpass.xlyr.cam",
@@ -3598,7 +3694,15 @@
     "domain": "vse-uslugi.online",
     "score": 100,
     "detected_at": "2026-07-28T19:45:48.982806",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates Bulgarian services\",\n    \"generic structure\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:49.545853",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "euslugimvr-platen.cc",
@@ -3870,6 +3974,14 @@
     "domain": "tollpass.icu",
     "score": 100,
     "detected_at": "2026-09-04T13:55:10.977464",
-    "source": "urlscan.io"
+    "source": "urlscan.io",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious_tld\",\n    \"impersonation_tollpass\",\n    \"free_hosting_platform\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T12:02:55.481095",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   }
 ]
