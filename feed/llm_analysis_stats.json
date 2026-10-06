@@ -1,9 +1,9 @@
 {
-  "analyzed_count": 16,
-  "high_confidence": 16,
-  "medium_confidence": 0,
+  "analyzed_count": 10,
+  "high_confidence": 8,
+  "medium_confidence": 2,
   "false_positives": 0,
-  "errors": 4,
-  "rule_based": 84,
-  "timestamp": "2026-10-05T12:23:38.501000"
+  "errors": 6,
+  "rule_based": 0,
+  "timestamp": "2026-10-06T05:39:52.950363"
 }

@@ -3038,7 +3038,15 @@
     "domain": "mvrgovbg.lol",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lol"
+    "source": "urlscan.io-.lol",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"bg\",\n    \"lol\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T05:27:17.006540",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvrx.lat",
@@ -3058,25 +3066,57 @@
     "domain": "mvr.qdoz.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"MVR impersonation\",\n    \"Suspicious TLD\",\n    \"Free/serverless hosting\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T05:27:23.102867",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.niaj.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 90,\n  \"indicators\": [\n    \"mvr subdomain abuse\",\n    \"suspicious TLD (.cam)\",\n    \"unregistered/random SLD\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:27:45.377606",
+      "threat_level": "HIGH",
+      "confidence": 90,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvr.zeyd.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 85,\n  \"indicators\": [\n    \"mvr_subdomain_abuse\",\n    \"suspicious_tld_cam\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:28:01.793804",
+      "threat_level": "HIGH",
+      "confidence": 85,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvr.ktwr.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 85,\n  \"indicators\": [\n    \"mvr-subdomain-impersonation\",\n    \"suspicious-tld-cam\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:28:19.402795",
+      "threat_level": "HIGH",
+      "confidence": 85,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvr.lnub.cam",
@@ -3088,19 +3128,43 @@
     "domain": "mvr.ogfn.cam",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr\",\n    \"ogfn.cam\",\n    \"suspicious TLD\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-10-06T05:29:27.794674",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvri.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"MEDIUM\",\n  \"confidence\": 85,\n  \"indicators\": [\n    \"possible_mvr_impersonation\",\n    \"suspicious_tld_lat\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:29:48.806168",
+      "threat_level": "MEDIUM",
+      "confidence": 85,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvrn.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"MEDIUM\",\n  \"confidence\": 85,\n  \"indicators\": [\n    \"mvr-acronym-similarity\",\n    \"suspicious-tld-lat\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:30:36.156660",
+      "threat_level": "MEDIUM",
+      "confidence": 85,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvrs.lat",
@@ -3112,7 +3176,15 @@
     "domain": "mvrv.lat",
     "score": 100,
     "detected_at": "2026-05-11T14:26:10.761198",
-    "source": "urlscan.io-.lat"
+    "source": "urlscan.io-.lat",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 85,\n  \"indicators\": [\n    \"mvr-impersonation-typosquat\",\n    \"suspicious-tld-lat\",\n    \"atypical-registration-structure\"\n  ],\n  \"decision\": \"INVESTIGATE\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:33:27.616933",
+      "threat_level": "HIGH",
+      "confidence": 85,
+      "decision": "INVESTIGATE"
+    }
   },
   {
     "domain": "mvrgovmk.cyou",
@@ -3154,7 +3226,15 @@
     "domain": "mvr.chtm.cam",
     "score": 100,
     "detected_at": "2026-05-13T10:03:10.172798",
-    "source": "urlscan.io-.cam"
+    "source": "urlscan.io-.cam",
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvr subdomain\",\n    \"suspicious .cam TLD\",\n    \"impersonation of Bulgarian Ministry of Interior\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-3.5-flash",
+      "timestamp": "2026-10-06T05:36:02.192552",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "mvr.ftch.cam",
