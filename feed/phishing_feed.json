@@ -3983,5 +3983,32 @@
       "confidence": 95,
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "vseuslugi.online",
+    "score": 100,
+    "detected_at": "2026-10-12T21:20:34.124881",
+    "source": "urlscan.io",
+    "keywords": [
+      "euslugi"
+    ]
+  },
+  {
+    "domain": "euslugi-payment.cc",
+    "score": 100,
+    "detected_at": "2026-10-12T21:20:34.125256",
+    "source": "urlscan.io",
+    "keywords": [
+      "euslugi"
+    ]
+  },
+  {
+    "domain": "cs-cztollpass.autos",
+    "score": 100,
+    "detected_at": "2026-10-12T21:20:34.148121",
+    "source": "urlscan.io",
+    "keywords": [
+      "tollpass"
+    ]
   }
 ]
