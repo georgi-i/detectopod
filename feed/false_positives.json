@@ -505,5 +505,17 @@
     "subdomains": false,
     "reason": "manual (workflow)",
     "added_at": "2026-10-13T19:05:42.498542"
+  },
+  {
+    "domain": "vse-uslugi.online",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-10-13T19:22:18.118826"
+  },
+  {
+    "domain": "ritualnieuslugi-tomsk.online",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-10-13T19:22:18.126128"
   }
 ]
