@@ -3985,23 +3985,6 @@
     }
   },
   {
-    "domain": "vseuslugi.online",
-    "score": 100,
-    "detected_at": "2026-10-12T21:20:34.124881",
-    "source": "urlscan.io",
-    "keywords": [
-      "euslugi"
-    ],
-    "llm_analysis": {
-      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"e-uslugi prefix\",\n    \"suspicious TLD\",\n    \"impersonation of mvr.bg\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
-      "model": "gemini-2.5-flash-lite",
-      "timestamp": "2026-10-12T21:20:55.866442",
-      "threat_level": "HIGH",
-      "confidence": 95,
-      "decision": "BLOCK"
-    }
-  },
-  {
     "domain": "euslugi-payment.cc",
     "score": 100,
     "detected_at": "2026-10-12T21:20:34.125256",
@@ -4017,23 +4000,6 @@
       "confidence": 95,
       "decision": "BLOCK",
       "rule": "e-uslugi*"
-    }
-  },
-  {
-    "domain": "cs-cztollpass.autos",
-    "score": 100,
-    "detected_at": "2026-10-12T21:20:34.148121",
-    "source": "urlscan.io",
-    "keywords": [
-      "tollpass"
-    ],
-    "llm_analysis": {
-      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"suspicious TLD\",\n    \"impersonates tollpass.bg\",\n    \"keyword 'tollpass'\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
-      "model": "gemini-2.5-flash-lite",
-      "timestamp": "2026-10-12T21:21:01.909835",
-      "threat_level": "HIGH",
-      "confidence": 95,
-      "decision": "BLOCK"
     }
   }
 ]

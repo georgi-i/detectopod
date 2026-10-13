@@ -493,5 +493,17 @@
     "subdomains": false,
     "reason": "manual: reviewed by maintainer",
     "added_at": "2026-10-02T19:09:43.678439"
+  },
+  {
+    "domain": "vseuslugi.online",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-10-13T19:05:42.491016"
+  },
+  {
+    "domain": "cs-cztollpass.autos",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-10-13T19:05:42.498542"
   }
 ]
