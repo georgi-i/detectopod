@@ -3981,6 +3981,15 @@
     "source": "urlscan.io-.shop",
     "keywords": [
       "econt"
-    ]
+    ],
+    "llm_analysis": {
+      "analysis": "Matched confirmed phishing pattern: econt/bgpost.<random>.<tld>",
+      "model": "rule-based",
+      "timestamp": "2026-10-26T18:34:35.685186",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK",
+      "rule": "econt/bgpost.<random>.<tld>"
+    }
   }
 ]

@@ -4,6 +4,6 @@
   "medium_confidence": 0,
   "false_positives": 0,
   "errors": 0,
-  "rule_based": 0,
-  "timestamp": "2026-10-26T11:05:42.772065"
+  "rule_based": 1,
+  "timestamp": "2026-10-26T18:34:35.690824"
 }
