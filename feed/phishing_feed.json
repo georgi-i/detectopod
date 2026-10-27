@@ -3991,5 +3991,20 @@
       "decision": "BLOCK",
       "rule": "econt/bgpost.<random>.<tld>"
     }
+  },
+  {
+    "domain": "olx.order401-20.shop",
+    "score": 100,
+    "detected_at": "2026-10-27T10:45:08.628827",
+    "source": "manual",
+    "keywords": [],
+    "llm_analysis": {
+      "analysis": "Added manually after review on urlscan.io: same registrable domain as the confirmed phishing domain econt.order401-20.shop, OLX-themed /receive/ page, 17 similar pages.",
+      "model": "manual",
+      "timestamp": "2026-10-27T10:45:08.629315",
+      "threat_level": "HIGH",
+      "confidence": 90,
+      "decision": "BLOCK"
+    }
   }
 ]
