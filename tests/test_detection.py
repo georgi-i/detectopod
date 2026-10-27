@@ -12,6 +12,7 @@ import detectopod  # noqa: E402
 import feedlib  # noqa: E402
 import llm_analyzer  # noqa: E402
 import rules  # noqa: E402
+import siblings  # noqa: E402
 
 
 class FalsePositiveMatching(unittest.TestCase):
@@ -197,6 +198,59 @@ class MainWithRules(unittest.TestCase):
             self.assertEqual(result['mvrbg.cam']['model'], 'rule-based')
             self.assertEqual(result['tollpass.klgf.cam']['model'], 'rule-based')
             self.assertEqual(sum(1 for v in result.values() if v is None), 1)   # one left for next run
+
+
+class SiblingLookup(unittest.TestCase):
+    def test_registrable_domain_eligibility(self):
+        self.assertEqual(siblings.registrable_domain('econt.order401-20.shop'), 'order401-20.shop')
+        self.assertEqual(siblings.registrable_domain('www.mvrbg.sbs'), 'mvrbg.sbs')
+        for d in ['mytollpass.pages.dev',      # free hosting: sibling = unrelated tenant
+                  'econt.eu.cc',               # shared sub-domain provider
+                  'example.com',               # not a risky TLD
+                  'localhost']:
+            self.assertIsNone(siblings.registrable_domain(d), d)
+
+    def test_pick_targets_explicit_first_then_recent(self):
+        feed = [{'domain': 'a.old.top', 'detected_at': '2026-01-01'},
+                {'domain': 'econt.new.shop', 'detected_at': '2026-10-01'},
+                {'domain': 'x.pages.dev', 'detected_at': '2026-10-02'}]
+        self.assertEqual(siblings.pick_targets(feed, ['order401-20.shop'], 3),
+                         ['order401-20.shop', 'new.shop', 'old.top'])
+        self.assertEqual(siblings.pick_targets(feed, ['order401-20.shop'], 1), ['order401-20.shop'])
+
+    def test_analyse_filters_known_fp_dev_and_flags_shared_providers(self):
+        feed = [{'domain': 'econt.order401-20.shop'}]
+        fps = feedlib.FalsePositives([{'domain': 'fp.order401-20.shop'}])
+        hosts = {'econt.order401-20.shop': {}, 'olx.order401-20.shop': {'time': 't', 'url': 'u'},
+                 'fp.order401-20.shop': {}, 'dev.order401-20.shop': {}, 'speedy.order401-20.shop': {}}
+        big = {f'h{i}.shared.top': {} for i in range(siblings.MAX_SIBLINGS + 1)}
+        out = siblings.analyse(['order401-20.shop', 'shared.top'], feed, fps,
+                               lambda apex: hosts if apex == 'order401-20.shop' else big)
+        self.assertEqual([n['host'] for n in out[0]['new']], ['olx.order401-20.shop', 'speedy.order401-20.shop'])
+        self.assertFalse([n for n in out[0]['new'] if n['host'].startswith('olx')][0]['brand_keyword'])
+        self.assertTrue(out[1]['too_many'])
+        self.assertEqual(out[1]['new'], [])
+
+    def test_main_never_modifies_the_feed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            feed = os.path.join(tmp, 'phishing_feed.json')
+            with open(feed, 'w') as f:
+                json.dump([{'domain': 'econt.order401-20.shop', 'detected_at': '2026-10-26'}], f)
+            with open(os.path.join(tmp, 'false_positives.json'), 'w') as f:
+                json.dump([], f)
+            before = open(feed).read()
+            original = siblings.search_apex
+            siblings.search_apex = lambda session, apex, key: {'olx.order401-20.shop': {'time': 't', 'url': 'u'}}
+            siblings.time.sleep = lambda s: None
+            os.environ['URLSCAN_API_KEY'] = 'x'
+            argv, sys.argv = sys.argv, ['x', '--feed-file', feed, '--report', os.path.join(tmp, 'r.json')]
+            try:
+                siblings.main()
+            finally:
+                siblings.search_apex, sys.argv = original, argv
+            self.assertEqual(open(feed).read(), before)
+            with open(os.path.join(tmp, 'r.json')) as f:
+                self.assertEqual(json.load(f)[0]['new'][0]['host'], 'olx.order401-20.shop')
 
 
 if __name__ == '__main__':
