@@ -13,6 +13,7 @@ import feedlib  # noqa: E402
 import llm_analyzer  # noqa: E402
 import rules  # noqa: E402
 import siblings  # noqa: E402
+import campaigns  # noqa: E402
 
 
 class FalsePositiveMatching(unittest.TestCase):
@@ -251,6 +252,81 @@ class SiblingLookup(unittest.TestCase):
             self.assertEqual(open(feed).read(), before)
             with open(os.path.join(tmp, 'r.json')) as f:
                 self.assertEqual(json.load(f)[0]['new'][0]['host'], 'olx.order401-20.shop')
+
+
+class EurovisionCampaign(unittest.TestCase):
+    def test_names(self):
+        for d in ['euro-vision.is', 'eurovision2027-tickets.com', 'evroviziya-bilet.shop', 'eurovizija.bg',
+                  'burgas2027.live', 'esc2027.org', 'eurovison.top']:
+            self.assertTrue(campaigns.matches_name(d), d)
+        for d in ['neurovision.de', 'econt.bg', 'tollpass.icu']:
+            self.assertFalse(campaigns.matches_name(d), d)
+
+    def test_allowlist_covers_subdomains(self):
+        self.assertEqual(campaigns.classify('tickets.eurovision.tv', ''), 'allowlisted')
+        self.assertEqual(campaigns.classify('eurovision.tv.evil.top', ''), 'llm review (name only)')
+
+    def test_bg_url(self):
+        self.assertTrue(campaigns.is_bg_url('https://euro-vision.is/bg/shows/semi-final-1-live'))
+        self.assertTrue(campaigns.is_bg_url('https://x.top/?lang=bg'))
+        self.assertFalse(campaigns.is_bg_url('https://x.top/bgpost'))
+        self.assertEqual(campaigns.classify('euro-vision.is', 'https://euro-vision.is/bg/'), 'block (name + /bg)')
+
+    def test_expires(self):
+        self.assertTrue(campaigns.is_active(campaigns.datetime.date(2027, 5, 31)))
+        self.assertFalse(campaigns.is_active(campaigns.datetime.date(2027, 6, 1)))
+
+    def test_parse_crtsh_recent_only_and_wildcards(self):
+        today = campaigns.datetime.date(2026, 11, 8)
+        entries = [{'name_value': '*.euro-vision.is\neuro-vision.is', 'not_before': '2026-11-04T10:00:00'},
+                   {'name_value': 'old-eurovision.com', 'not_before': '2025-01-01T00:00:00'},
+                   {'name_value': 'bad', 'not_before': 'garbage'}]
+        out = campaigns.parse_crtsh(entries, 14, today)
+        self.assertEqual(sorted(out), ['euro-vision.is'])
+        self.assertEqual(out['euro-vision.is']['first_seen'], '2026-11-04')
+
+    def test_report_uses_url_then_probe_and_skips_false_positives(self):
+        cands = {'euro-vision.is': {'sources': {'urlscan'}, 'urls': {'https://euro-vision.is/bg/x'}, 'first_seen': 't'},
+                 'evrovizia.top': {'sources': {'crt.sh'}, 'urls': set(), 'first_seen': '2026-11-01'},
+                 'esc2027.org': {'sources': {'crt.sh'}, 'urls': set(), 'first_seen': '2026-11-01'},
+                 'fan.eurovision.tv': {'sources': {'crt.sh'}, 'urls': set(), 'first_seen': ''}}
+        probed = []
+
+        def prober(d):
+            probed.append(d)
+            return 'https://evrovizia.top/bg/' if d == 'evrovizia.top' else ''
+        fps = feedlib.FalsePositives([{'domain': 'esc2027.org'}])
+        rows = {r['domain']: r for r in campaigns.build_report(cands, [{'domain': 'euro-vision.is'}], fps, prober)}
+        self.assertEqual(rows['euro-vision.is']['class'], 'block (name + /bg)')
+        self.assertTrue(rows['euro-vision.is']['in_feed'])
+        self.assertEqual(rows['evrovizia.top']['class'], 'block (name + /bg)')
+        self.assertEqual(rows['fan.eurovision.tv']['class'], 'allowlisted')
+        self.assertNotIn('esc2027.org', rows)
+        self.assertEqual(probed, ['evrovizia.top'])    # no probe when a /bg URL is known or allowlisted
+
+    def test_main_never_modifies_the_feed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            feed = os.path.join(tmp, 'phishing_feed.json')
+            with open(feed, 'w') as f:
+                json.dump([{'domain': 'econt.bg-x.cfd'}], f)
+            with open(os.path.join(tmp, 'false_positives.json'), 'w') as f:
+                json.dump([], f)
+            with open(feed) as f:
+                before = f.read()
+            saved = campaigns.urlscan_candidates, campaigns.crtsh_candidates
+            campaigns.urlscan_candidates = lambda s, k, d: {
+                'euro-vision.is': {'sources': {'urlscan'}, 'urls': {'https://euro-vision.is/bg/'}, 'first_seen': ''}}
+            campaigns.crtsh_candidates = lambda s, d: {}
+            os.environ['URLSCAN_API_KEY'] = 'x'
+            argv, sys.argv = sys.argv, ['x', '--feed-file', feed, '--report', os.path.join(tmp, 'r.json')]
+            try:
+                campaigns.main()
+            finally:
+                (campaigns.urlscan_candidates, campaigns.crtsh_candidates), sys.argv = saved, argv
+            with open(feed) as f:
+                self.assertEqual(f.read(), before)
+            with open(os.path.join(tmp, 'r.json')) as f:
+                self.assertEqual(json.load(f)[0]['class'], 'block (name + /bg)')
 
 
 if __name__ == '__main__':
