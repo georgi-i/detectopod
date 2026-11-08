@@ -4006,5 +4006,22 @@
       "confidence": 90,
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "euro-vision.is",
+    "score": 100,
+    "detected_at": "2026-11-08T09:26:35.328467",
+    "source": "manual",
+    "keywords": [],
+    "campaign": "eurovision-2027",
+    "evidence_url": "https://euro-vision.is/bg/shows/semi-final-1-live",
+    "llm_analysis": {
+      "analysis": "Added manually after review: fake \"official ticket office\" for Eurovision 2027 Burgas with a Bulgarian (/bg) page and a card checkout (3-D Secure redirect). Hosted at AlexHost (MD), TLS certificate issued 2026-11-04.",
+      "model": "manual",
+      "timestamp": "2026-11-08T09:26:35.329892",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   }
 ]
