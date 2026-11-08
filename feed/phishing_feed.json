@@ -4023,5 +4023,22 @@
       "confidence": 95,
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "euro-vision.org",
+    "score": 100,
+    "detected_at": "2026-11-08T10:05:56.727741",
+    "source": "manual",
+    "keywords": [],
+    "campaign": "eurovision-2027",
+    "evidence_url": "https://euro-vision.org/bg",
+    "llm_analysis": {
+      "analysis": "Added manually after review: same server as the confirmed Eurovision 2027 ticket phishing euro-vision.is (176.125.243.241). Presents itself as an \"independent editorial guide\" to Eurovision 2027 Burgas with a Bulgarian /bg page; companion site of the fake ticket office.",
+      "model": "manual",
+      "timestamp": "2026-11-08T10:05:56.727734",
+      "threat_level": "HIGH",
+      "confidence": 90,
+      "decision": "BLOCK"
+    }
   }
 ]
