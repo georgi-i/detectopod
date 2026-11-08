@@ -264,6 +264,9 @@ class EurovisionCampaign(unittest.TestCase):
 
     def test_allowlist_covers_subdomains(self):
         self.assertEqual(campaigns.classify('tickets.eurovision.tv', ''), 'allowlisted')
+        self.assertEqual(campaigns.classify('eurovision.com', 'https://eurovision.com/tickets/bg/'), 'allowlisted')
+        self.assertEqual(campaigns.classify('www.eurovision2027.bg', 'https://eurovision2027.bg/bg/'), 'allowlisted')
+        self.assertEqual(campaigns.classify('euro-vision.is', 'https://euro-vision.is/bg/'), 'block (name + /bg)')
         self.assertEqual(campaigns.classify('eurovision.tv.evil.top', ''), 'llm review (name only)')
 
     def test_bg_url(self):

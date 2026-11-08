@@ -31,9 +31,10 @@ ACTIVE_UNTIL = datetime.date(2027, 5, 31)
 NAME_RE = re.compile(r'(?<!n)(euro|evro)-?vi[sz]i(on|ya|a|ja|q)|eurovison|eurovisiion'
                      r'|burgas-?2027|esc-?2027')
 
-# Legitimate sites (and all their sub-domains). Add the official ticket seller when announced.
-ALLOWLIST = ('eurovision.tv', 'eurovision.de', 'eurovisionworld.com', 'wiwibloggs.com',
-             'eurovoix.com', 'escxtra.com', 'bnt.bg')
+# Legitimate sites (and all their sub-domains).
+# The only official ticket sale is eurovision.com/tickets; eurovision2027.bg is BNT's site.
+ALLOWLIST = ('eurovision.tv', 'eurovision.com', 'eurovision.de', 'eurovisionworld.com', 'wiwibloggs.com',
+             'eurovoix.com', 'escxtra.com', 'bnt.bg', 'eurovision2027.bg')
 
 URLSCAN_TERMS = ('eurovision', 'euro-vision', 'evrovizi', 'eurovizi', 'burgas2027', 'esc2027')
 CRTSH_PATTERNS = ('%eurovision%', '%euro-vision%', '%evrovizi%', '%eurovizi%', '%burgas2027%')
