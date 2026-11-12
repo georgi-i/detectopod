@@ -4066,7 +4066,15 @@
     "source": "urlscan.io",
     "keywords": [
       "mvrbg"
-    ]
+    ],
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"mvrbg\",\n    \"suspicious TLD\",\n    \"impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-11-12T15:51:19.266879",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "landing-yuridicheskiye-uslugi.vercel.app",
@@ -4075,7 +4083,15 @@
     "source": "urlscan.io",
     "keywords": [
       "e-uslugi"
-    ]
+    ],
+    "llm_analysis": {
+      "analysis": "{\n  \"threat_level\": \"HIGH\",\n  \"confidence\": 95,\n  \"indicators\": [\n    \"vercel.app TLD\",\n    \"e-uslugi keyword\",\n    \"potential impersonation\"\n  ],\n  \"decision\": \"BLOCK\"\n}",
+      "model": "gemini-2.5-flash-lite",
+      "timestamp": "2026-11-12T15:51:25.260380",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   },
   {
     "domain": "orenf.xyz/mvr.bg/bg/",
