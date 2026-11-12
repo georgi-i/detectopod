@@ -4058,5 +4058,42 @@
       "confidence": 95,
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "mvrbgios.eu.cc",
+    "score": 100,
+    "detected_at": "2026-11-12T15:50:41.945496",
+    "source": "urlscan.io",
+    "keywords": [
+      "mvrbg"
+    ]
+  },
+  {
+    "domain": "landing-yuridicheskiye-uslugi.vercel.app",
+    "score": 100,
+    "detected_at": "2026-11-12T15:50:41.947611",
+    "source": "urlscan.io",
+    "keywords": [
+      "e-uslugi"
+    ]
+  },
+  {
+    "domain": "orenf.xyz/mvr.bg/bg/",
+    "score": 100,
+    "detected_at": "2026-11-12T15:50:41.966215",
+    "source": "urlscan.io-path",
+    "keywords": [
+      "mvr.bg"
+    ],
+    "evidence_url": "https://orenf.xyz/mvr.bg/bg/",
+    "llm_analysis": {
+      "analysis": "Official domain mvr.bg used as a folder in the URL path: https://orenf.xyz/mvr.bg/bg/",
+      "model": "rule-based",
+      "timestamp": "2026-11-12T15:50:41.966222",
+      "threat_level": "HIGH",
+      "confidence": 90,
+      "decision": "BLOCK",
+      "rule": "brand-domain-in-path"
+    }
   }
 ]

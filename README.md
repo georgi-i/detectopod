@@ -29,10 +29,10 @@ Detectopod identifies phishing domains that:
 
 <!-- STATS_START -->
 ```
-Total Domains Detected: 293
-Last Scan: 2026-11-09 22:10:25 UTC
-Domains Processed: 1,865
-Detection Rate: 0.0%
+Total Domains Detected: 297
+Last Scan: 2026-11-12 15:50:41 UTC
+Domains Processed: 3,552
+Detection Rate: 0.1%
 ```
 <!-- STATS_END -->
 
