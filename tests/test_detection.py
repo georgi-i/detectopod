@@ -375,13 +375,12 @@ class PathHitsInScan(unittest.TestCase):
         with open(feed) as f:
             return json.load(f), returned
 
-    hits = [{'domain': 'andoi.cc', 'url': 'https://andoi.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'},
-            {'domain': 'known.cc', 'url': 'https://known.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'},
-            {'domain': 'fp.cc', 'url': 'https://fp.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'}]
+    hits = [{'domain': d, 'path': d + '/mvr.bg/bg/', 'url': f'https://{d}/mvr.bg/bg', 'brand': 'mvr.bg',
+             'source': 'urlscan.io-path'} for d in ('andoi.cc', 'known.cc', 'fp.cc')]
 
     def test_new_path_hit_is_added_with_a_rule_verdict(self):
         feed, _ = self.run_scan(self.hits)
-        self.assertEqual([e['domain'] for e in feed], ['known.cc', 'andoi.cc'])   # known + FP skipped
+        self.assertEqual([e['domain'] for e in feed], ['known.cc', 'andoi.cc/mvr.bg/bg/'])   # known + FP skipped
         added = feed[1]
         self.assertEqual(added['evidence_url'], 'https://andoi.cc/mvr.bg/bg')
         self.assertEqual(added['llm_analysis']['rule'], 'brand-domain-in-path')
@@ -390,7 +389,16 @@ class PathHitsInScan(unittest.TestCase):
     def test_dry_run_does_not_write(self):
         feed, returned = self.run_scan(self.hits, dry_run=True)
         self.assertEqual([e['domain'] for e in feed], ['known.cc'])
-        self.assertEqual([e['domain'] for e in returned], ['andoi.cc'])
+        self.assertEqual([e['domain'] for e in returned], ['andoi.cc/mvr.bg/bg/'])
+
+    def test_entry_with_path_counts_as_its_host(self):
+        # second run: the stored 'andoi.cc/mvr.bg/bg/' must not be added again
+        self.assertEqual(feedlib.normalize_domain('andoi.cc/mvr.bg/bg/'), 'andoi.cc')
+        self.assertEqual(feedlib.normalize_domain('https://WWW.Andoi.cc/mvr.bg'), 'andoi.cc')
+        self.assertIn('andoi.cc/mvr.bg/bg/', feedlib.FalsePositives([{'domain': 'andoi.cc'}]))
+        self.assertEqual(detectopod.brand_path('https://andoi.cc/mvr.bg/bg/?__eat=54c5'), ('mvr.bg', 'andoi.cc/mvr.bg/bg/'))
+        self.assertEqual(detectopod.brand_path('https://andoi.cc/mvr.bg'), ('mvr.bg', 'andoi.cc/mvr.bg/'))
+        self.assertEqual(detectopod.brand_path('https://x.top/a/b/mvr.bg/bg/fines'), ('mvr.bg', 'x.top/a/b/mvr.bg/bg/'))
 
 
 if __name__ == '__main__':
