@@ -4040,5 +4040,23 @@
       "confidence": 90,
       "decision": "BLOCK"
     }
+  },
+  {
+    "domain": "andoi.cc",
+    "score": 100,
+    "detected_at": "2026-11-12T15:34:32.581016",
+    "source": "manual",
+    "keywords": [
+      "mvr"
+    ],
+    "evidence_url": "https://andoi.cc/mvr.bg/bg",
+    "llm_analysis": {
+      "analysis": "Added manually: clone of the MVR (Ministry of Interior) fines portal reported by Kaldata (kaldata.com, article 725199). The brand is in the URL path (/mvr.bg/bg), not in the domain name, so the keyword-based detector cannot see it.",
+      "model": "manual",
+      "timestamp": "2026-11-12T15:34:32.581005",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   }
 ]
