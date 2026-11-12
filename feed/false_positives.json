@@ -523,5 +523,11 @@
     "subdomains": false,
     "reason": "manual (workflow)",
     "added_at": "2026-10-20T19:00:19.650251"
+  },
+  {
+    "domain": "landing-yuridicheskiye-uslugi.vercel.app",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-11-12T15:53:44.515324"
   }
 ]
