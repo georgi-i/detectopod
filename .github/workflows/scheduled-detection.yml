@@ -5,6 +5,11 @@ on:
     - cron: '0 12 * * 1'  # Every Monday at noon UTC
   # Allow manual trigger for testing
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: report what would be added, do not write or commit the feed'
+        type: boolean
+        default: false
   
 # All workflows that write to feed/ share one group so they never race on the
 # same JSON files (and never cancel each other mid-write).
@@ -42,10 +47,14 @@ jobs:
     - name: Run detection script
       env:
         URLSCAN_API_KEY: ${{ secrets.URLSCAN_API_KEY }}
+        DRY_RUN: ${{ inputs.dry_run }}
       run: |
-        python detection/detectopod.py --sources urlscan
+        FLAG=""
+        if [[ "$DRY_RUN" == "true" ]]; then FLAG="--dry-run"; fi
+        python detection/detectopod.py --sources urlscan $FLAG
 
     - name: Update README stats
+      if: ${{ inputs.dry_run != true }}
       run: python detection/update_readme.py
 
     - name: Check for changes
@@ -61,7 +70,7 @@ jobs:
         fi
 
     - name: Commit and push changes
-      if: steps.check_changes.outputs.has_changes == 'true'
+      if: steps.check_changes.outputs.has_changes == 'true' && inputs.dry_run != true
       run: |
         git config --global user.name 'Detectopod Bot'
         git config --global user.email 'bot@detectopod'

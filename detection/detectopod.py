@@ -198,6 +198,15 @@ INFRASTRUCTURE_PATTERNS = (
     'preview.vercel.app',
 )
 
+# Official domains of the monitored brands. Phishing kits often keep the cloned site in a
+# folder named after the real domain, e.g. andoi.cc/mvr.bg/bg. Such hosts carry no brand in
+# their name, so they are found by the URL path instead (see brand_domain_in_path).
+BRAND_DOMAINS_IN_PATH = ('mvr.bg', 'e-uslugi.mvr.bg', 'econt.com', 'speedy.bg', 'bgpost.bg',
+                         'tollpass.bg', 'vinetki.bg')
+# Services that legitimately put other domains in their paths (site-info pages, archives).
+PATH_CHECK_EXCLUDED_HOSTS = ('web.archive.org', 'archive.ph', 'archive.org', 'website.informer.com',
+                             'similarweb.com', 'hypestat.com', 'urlscan.io', 'virustotal.com')
+
 OUTPUT_FILE = 'feed/phishing_feed.json'
 
 
@@ -702,10 +711,60 @@ def query_urlscan_recent(days=7, max_results=1000):
         return []
 
 
+def brand_domain_in_path(url):
+    """Official brand domain used as a folder in the URL path of another host, else None.
+
+    Matches when a path segment is exactly an official domain (mvr.bg, econt.com ...) and it
+    is either the FIRST segment (andoi.cc/mvr.bg/...) or followed by a /bg segment
+    (host/anything/mvr.bg/bg). Site-info pages such as similarweb.com/website/mvr.bg do not
+    match: the domain is neither first nor followed by /bg.
+    """
+    parsed = urlparse(url or '')
+    host = normalize_domain(parsed.netloc.split('@')[-1].split(':')[0])
+    if not host:
+        return None
+    if any(host == h or host.endswith('.' + h) for h in BRAND_DOMAINS_IN_PATH + PATH_CHECK_EXCLUDED_HOSTS):
+        return None
+    segments = [seg.lower() for seg in parsed.path.split('/') if seg]
+    for i, seg in enumerate(segments):
+        if seg in BRAND_DOMAINS_IN_PATH and (i == 0 or segments[i + 1:i + 2] == ['bg']):
+            return seg
+    return None
+
+
+def query_urlscan_paths(days=30, max_results=1000):
+    """Pages on OTHER hosts whose URL contains an official brand domain (andoi.cc/mvr.bg/bg)."""
+    try:
+        since = (datetime.date.today() - datetime.timedelta(days=days)).isoformat()
+        urls = ' OR '.join(f'page.url:*{d}*' for d in BRAND_DOMAINS_IN_PATH)
+        official = ' OR '.join(f'page.apexDomain:{d}' for d in BRAND_DOMAINS_IN_PATH if d.count('.') == 1)
+        query = f'({urls}) AND NOT ({official}) AND date:>{since}'
+        response = requests.get("https://urlscan.io/api/v1/search/",
+                                headers={"API-Key": URLSCAN_API_KEY},
+                                params={'q': query, 'size': min(max_results, 10000)}, timeout=60)
+        if response.status_code != 200:
+            logging.warning(f"urlscan.io path search returned {response.status_code}: {response.text[:200]}")
+            return []
+        hits, seen = [], set()
+        for result in response.json().get('results', []):
+            url = result.get('page', {}).get('url', '')
+            brand = brand_domain_in_path(url)
+            domain = normalize_domain(urlparse(url).netloc.split(':')[0])
+            if brand and domain and domain not in seen:
+                seen.add(domain)
+                hits.append({'domain': domain, 'url': url, 'brand': brand, 'source': 'urlscan.io-path'})
+        logging.info(f"Path search: {len(response.json().get('results', []))} results, "
+                     f"{len(hits)} host(s) with a brand domain in the URL path")
+        return hits
+    except Exception as e:
+        logging.error(f"Error in urlscan.io path search: {e}")
+        return []
+
+
 # ==================== MAIN SCANNING LOGIC ====================
 
 
-def scan_domains(duration=None, sources=('urlscan',)):
+def scan_domains(duration=None, sources=('urlscan',), dry_run=False):
     """
     Main scanning function using configured sources.
     Monitors both courier brands and government service brands (MVR).
@@ -756,6 +815,10 @@ def scan_domains(duration=None, sources=('urlscan',)):
         all_domains.extend(recent_domains)
         
         logging.info(f"Recent submissions: {len(recent_domains)} domains")
+
+        path_hits = query_urlscan_paths(days=30)
+    else:
+        path_hits = []
 
     # Process all collected domains
     logging.info("=" * 60)
@@ -846,6 +909,44 @@ def scan_domains(duration=None, sources=('urlscan',)):
                 f"Keywords: {', '.join(brand_keywords)}"
             )
 
+    # Brand domain in the URL path (andoi.cc/mvr.bg/bg): the host carries no brand, so the
+    # checks above never see it. The path itself is the evidence, so the verdict is set here.
+    for item in path_hits:
+        domain = item['domain']
+        processed_domains.add(domain)
+        if domain in false_positives:
+            skipped_fp += 1
+            continue
+        if domain in known_domains or is_dev_host(domain) or is_infrastructure_domain(domain):
+            continue
+        findings_count += 1
+        known_domains.add(domain)
+        logging.warning(f"🚨 NEW PHISHING DETECTED (brand domain in path): {domain} | {item['url']}")
+        new_entries.append({
+            'domain': domain,
+            'score': 100,
+            'detected_at': datetime.datetime.now().isoformat(),
+            'source': item['source'],
+            'keywords': [item['brand']],
+            'evidence_url': item['url'],
+            'llm_analysis': {
+                'analysis': f"Official domain {item['brand']} used as a folder in the URL path: {item['url']}",
+                'model': 'rule-based',
+                'timestamp': datetime.datetime.utcnow().isoformat(),
+                'threat_level': 'HIGH',
+                'confidence': 90,
+                'decision': 'BLOCK',
+                'rule': 'brand-domain-in-path',
+            },
+        })
+
+    if dry_run:
+        logging.info("=" * 60)
+        logging.info(f"DRY RUN: the feed is NOT modified. Would add {len(new_entries)} entr{'y' if len(new_entries) == 1 else 'ies'}:")
+        for e in new_entries:
+            logging.info(f"  + {e['domain']}  ({e['source']})  {e.get('evidence_url', '')}")
+        return new_entries
+
     # Single write at the end (was: re-read + re-write the whole file per domain)
     if new_entries:
         save_feed(feed_data + new_entries)
@@ -869,6 +970,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description='Phishing Domain Detector - Courier & Government Edition')
     parser.add_argument('--duration', type=int, help='Run for N seconds and then exit', default=None)
+    parser.add_argument('--dry-run', action='store_true', help='Report what would be added; do not write the feed')
     parser.add_argument('--sources', nargs='+', 
                        choices=['urlscan'], 
                        default=['urlscan'],
@@ -894,7 +996,7 @@ def main():
     if not os.path.exists(OUTPUT_FILE):
         save_feed([])
 
-    scan_domains(duration=MAX_DURATION, sources=args.sources)
+    scan_domains(duration=MAX_DURATION, sources=args.sources, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":

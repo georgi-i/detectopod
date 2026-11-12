@@ -53,6 +53,7 @@ class ScanEndToEnd(unittest.TestCase):
             detectopod.query_urlscan = lambda kw, max_results=0: [
                 {'domain': d, 'source': 'urlscan.io'} for d in domains]
             detectopod.query_urlscan_recent = lambda **kw: []
+            detectopod.query_urlscan_paths = lambda **kw: []
             detectopod.OUTPUT_FILE = feed
             feedlib.FALSE_POSITIVES_FILE = fpf
             detectopod.time.sleep = lambda s: None
@@ -330,6 +331,66 @@ class EurovisionCampaign(unittest.TestCase):
                 self.assertEqual(f.read(), before)
             with open(os.path.join(tmp, 'r.json')) as f:
                 self.assertEqual(json.load(f)[0]['class'], 'block (name + /bg)')
+
+
+class BrandDomainInPath(unittest.TestCase):
+    def test_matches(self):
+        for url, brand in [('https://andoi.cc/mvr.bg/bg', 'mvr.bg'),
+                           ('https://andoi.cc/mvr.bg/', 'mvr.bg'),
+                           ('https://x.top/a/b/mvr.bg/bg/fines', 'mvr.bg'),
+                           ('https://x.top/kit/econt.com/bg', 'econt.com'),
+                           ('https://x.top/e-uslugi.mvr.bg/bg', 'e-uslugi.mvr.bg')]:
+            self.assertEqual(detectopod.brand_domain_in_path(url), brand, url)
+
+    def test_no_match(self):
+        for url in ['https://www.similarweb.com/website/mvr.bg/',            # site-info page
+                    'https://web.archive.org/web/2024/https://mvr.bg/bg',    # archive
+                    'https://whois.com/whois/mvr.bg',                        # not first, no /bg after
+                    'https://mvr.bg/bg', 'https://e-uslugi.mvr.bg/mvr.bg/bg', # the real sites
+                    'https://x.top/mvr.bg.html', 'https://x.top/news/mvr.bg-fines', 'https://x.top/a/mvr.bg/en']:
+            self.assertIsNone(detectopod.brand_domain_in_path(url), url)
+
+
+class PathHitsInScan(unittest.TestCase):
+    def run_scan(self, hits, dry_run=False):
+        tmp = tempfile.mkdtemp()
+        feed = os.path.join(tmp, 'phishing_feed.json')
+        fpf = os.path.join(tmp, 'false_positives.json')
+        with open(feed, 'w') as f:
+            json.dump([{'domain': 'known.cc', 'score': 100}], f)
+        with open(fpf, 'w') as f:
+            json.dump([{'domain': 'fp.cc'}], f)
+        saved = (detectopod.query_urlscan, detectopod.query_urlscan_recent, detectopod.query_urlscan_paths,
+                 detectopod.OUTPUT_FILE, feedlib.FALSE_POSITIVES_FILE, detectopod.time.sleep)
+        detectopod.query_urlscan = lambda kw, max_results=0: []
+        detectopod.query_urlscan_recent = lambda **kw: []
+        detectopod.query_urlscan_paths = lambda **kw: hits
+        detectopod.OUTPUT_FILE, feedlib.FALSE_POSITIVES_FILE = feed, fpf
+        detectopod.time.sleep = lambda s: None
+        try:
+            returned = detectopod.scan_domains(sources=['urlscan'], dry_run=dry_run)
+        finally:
+            (detectopod.query_urlscan, detectopod.query_urlscan_recent, detectopod.query_urlscan_paths,
+             detectopod.OUTPUT_FILE, feedlib.FALSE_POSITIVES_FILE, detectopod.time.sleep) = saved
+        with open(feed) as f:
+            return json.load(f), returned
+
+    hits = [{'domain': 'andoi.cc', 'url': 'https://andoi.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'},
+            {'domain': 'known.cc', 'url': 'https://known.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'},
+            {'domain': 'fp.cc', 'url': 'https://fp.cc/mvr.bg/bg', 'brand': 'mvr.bg', 'source': 'urlscan.io-path'}]
+
+    def test_new_path_hit_is_added_with_a_rule_verdict(self):
+        feed, _ = self.run_scan(self.hits)
+        self.assertEqual([e['domain'] for e in feed], ['known.cc', 'andoi.cc'])   # known + FP skipped
+        added = feed[1]
+        self.assertEqual(added['evidence_url'], 'https://andoi.cc/mvr.bg/bg')
+        self.assertEqual(added['llm_analysis']['rule'], 'brand-domain-in-path')
+        self.assertEqual(added['llm_analysis']['decision'], 'BLOCK')
+
+    def test_dry_run_does_not_write(self):
+        feed, returned = self.run_scan(self.hits, dry_run=True)
+        self.assertEqual([e['domain'] for e in feed], ['known.cc'])
+        self.assertEqual([e['domain'] for e in returned], ['andoi.cc'])
 
 
 if __name__ == '__main__':
