@@ -711,13 +711,9 @@ def query_urlscan_recent(days=7, max_results=1000):
         return []
 
 
-def brand_domain_in_path(url):
-    """Official brand domain used as a folder in the URL path of another host, else None.
-
-    Matches when a path segment is exactly an official domain (mvr.bg, econt.com ...) and it
-    is either the FIRST segment (andoi.cc/mvr.bg/...) or followed by a /bg segment
-    (host/anything/mvr.bg/bg). Site-info pages such as similarweb.com/website/mvr.bg do not
-    match: the domain is neither first nor followed by /bg.
+def brand_path(url):
+    """(brand, 'host/.../brand/bg/') when an official brand domain is a folder in the URL
+    path of another host, else None. The second value is what goes into the feed.
     """
     parsed = urlparse(url or '')
     host = normalize_domain(parsed.netloc.split('@')[-1].split(':')[0])
@@ -727,9 +723,23 @@ def brand_domain_in_path(url):
         return None
     segments = [seg.lower() for seg in parsed.path.split('/') if seg]
     for i, seg in enumerate(segments):
-        if seg in BRAND_DOMAINS_IN_PATH and (i == 0 or segments[i + 1:i + 2] == ['bg']):
-            return seg
+        followed_by_bg = segments[i + 1:i + 2] == ['bg']
+        if seg in BRAND_DOMAINS_IN_PATH and (i == 0 or followed_by_bg):
+            kept = segments[:i + 2] if followed_by_bg else segments[:i + 1]
+            return seg, host + '/' + '/'.join(kept) + '/'
     return None
+
+
+def brand_domain_in_path(url):
+    """Official brand domain used as a folder in the URL path of another host, else None.
+
+    Matches when a path segment is exactly an official domain (mvr.bg, econt.com ...) and it
+    is either the FIRST segment (andoi.cc/mvr.bg/...) or followed by a /bg segment
+    (host/anything/mvr.bg/bg). Site-info pages such as similarweb.com/website/mvr.bg do not
+    match: the domain is neither first nor followed by /bg.
+    """
+    found = brand_path(url)
+    return found[0] if found else None
 
 
 def query_urlscan_paths(days=30, max_results=1000):
@@ -745,14 +755,19 @@ def query_urlscan_paths(days=30, max_results=1000):
         if response.status_code != 200:
             logging.warning(f"urlscan.io path search returned {response.status_code}: {response.text[:200]}")
             return []
-        hits, seen = [], set()
+        by_host = {}
         for result in response.json().get('results', []):
             url = result.get('page', {}).get('url', '')
-            brand = brand_domain_in_path(url)
-            domain = normalize_domain(urlparse(url).netloc.split(':')[0])
-            if brand and domain and domain not in seen:
-                seen.add(domain)
-                hits.append({'domain': domain, 'url': url, 'brand': brand, 'source': 'urlscan.io-path'})
+            found = brand_path(url)
+            if not found:
+                continue
+            brand, path = found
+            host = normalize_domain(path)
+            # one entry per host; keep the most specific path (.../mvr.bg/bg/ over .../mvr.bg/)
+            if host not in by_host or len(path) > len(by_host[host]['path']):
+                by_host[host] = {'domain': host, 'path': path, 'url': url, 'brand': brand,
+                                 'source': 'urlscan.io-path'}
+        hits = list(by_host.values())
         logging.info(f"Path search: {len(response.json().get('results', []))} results, "
                      f"{len(hits)} host(s) with a brand domain in the URL path")
         return hits
@@ -923,7 +938,8 @@ def scan_domains(duration=None, sources=('urlscan',), dry_run=False):
         known_domains.add(domain)
         logging.warning(f"🚨 NEW PHISHING DETECTED (brand domain in path): {domain} | {item['url']}")
         new_entries.append({
-            'domain': domain,
+            # full path, not just the host: andoi.cc alone does not show where the clone is
+            'domain': item.get('path') or domain,
             'score': 100,
             'detected_at': datetime.datetime.now().isoformat(),
             'source': item['source'],

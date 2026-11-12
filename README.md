@@ -249,7 +249,9 @@ urlscan.io for URLs that contain an official domain (`mvr.bg`, `e-uslugi.mvr.bg`
 `speedy.bg`, `bgpost.bg`, `tollpass.bg`, `vinetki.bg`). A page counts when that domain is the
 **first** path segment, or is followed by a `/bg` segment (`host/anything/mvr.bg/bg`).
 Site-info pages and archives (`similarweb.com/website/mvr.bg`, `web.archive.org`) do not match.
-Hits are added with `rule: brand-domain-in-path` and the URL as `evidence_url`.
+Hits are added with `rule: brand-domain-in-path`, the URL as `evidence_url`, and **the path kept in
+`domain`** (`andoi.cc/mvr.bg/bg/`), because the host alone does not show where the clone is. For
+de-duplication and `false_positives.json` such an entry counts as its host (`andoi.cc`).
 
 Run the detector with `--dry-run` (or the `dry_run` input of the workflow) to see what would be
 added without writing the feed.

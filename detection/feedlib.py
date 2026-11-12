@@ -20,8 +20,16 @@ FALSE_POSITIVES_FILE = 'feed/false_positives.json'
 
 
 def normalize_domain(domain):
-    """Lower-case, strip whitespace / trailing dot and a leading 'www.'."""
-    d = (domain or '').strip().lower().rstrip('.')
+    """Host name only: lower-case, no scheme, no path, no trailing dot, no leading 'www.'.
+
+    Feed entries found by their URL path keep the path in `domain`
+    (andoi.cc/mvr.bg/bg/); for de-duplication and the false-positive list they count
+    as their host (andoi.cc).
+    """
+    d = (domain or '').strip().lower()
+    if '://' in d:
+        d = d.split('://', 1)[1]
+    d = d.split('/', 1)[0].rstrip('.')
     if d.startswith('www.'):
         d = d[4:]
     return d
