@@ -241,6 +241,19 @@ Offline tests: `python -m unittest discover -s tests`
 
 **Threshold**: Domains scoring ≥80 are added to the feed.
 
+### Brand Domain in the URL Path
+
+Some kits host the clone in a folder named after the real site on an unrelated domain,
+e.g. `andoi.cc/mvr.bg/bg`. The host has no brand in its name, so the detector also searches
+urlscan.io for URLs that contain an official domain (`mvr.bg`, `e-uslugi.mvr.bg`, `econt.com`,
+`speedy.bg`, `bgpost.bg`, `tollpass.bg`, `vinetki.bg`). A page counts when that domain is the
+**first** path segment, or is followed by a `/bg` segment (`host/anything/mvr.bg/bg`).
+Site-info pages and archives (`similarweb.com/website/mvr.bg`, `web.archive.org`) do not match.
+Hits are added with `rule: brand-domain-in-path` and the URL as `evidence_url`.
+
+Run the detector with `--dry-run` (or the `dry_run` input of the workflow) to see what would be
+added without writing the feed.
+
 ### Monitored Platforms
 
 **Suspicious TLDs:**
