@@ -1,9 +1,9 @@
 {
-  "analyzed_count": 0,
-  "high_confidence": 0,
+  "analyzed_count": 1,
+  "high_confidence": 1,
   "medium_confidence": 0,
   "false_positives": 0,
   "errors": 0,
   "rule_based": 0,
-  "timestamp": "2026-11-16T13:37:20.447730"
+  "timestamp": "2026-11-16T21:52:15.381168"
 }
