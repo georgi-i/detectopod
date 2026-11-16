@@ -529,5 +529,11 @@
     "subdomains": false,
     "reason": "manual (workflow)",
     "added_at": "2026-11-12T15:53:44.515324"
+  },
+  {
+    "domain": "vseuslugi.site",
+    "subdomains": false,
+    "reason": "manual (workflow)",
+    "added_at": "2026-11-16T23:51:38.859623"
   }
 ]
