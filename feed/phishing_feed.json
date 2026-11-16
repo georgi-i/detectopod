@@ -4094,5 +4094,33 @@
       "decision": "BLOCK",
       "rule": "brand-domain-in-path"
     }
+  },
+  {
+    "domain": "vseuslugi.site",
+    "score": 100,
+    "detected_at": "2026-11-16T21:51:55.124420",
+    "source": "urlscan.io",
+    "keywords": [
+      "euslugi"
+    ]
+  },
+  {
+    "domain": "qiivo.click/mvr.bg/bg/",
+    "score": 100,
+    "detected_at": "2026-11-16T21:51:55.139684",
+    "source": "urlscan.io-path",
+    "keywords": [
+      "mvr.bg"
+    ],
+    "evidence_url": "https://qiivo.click/mvr.bg/bg/",
+    "llm_analysis": {
+      "analysis": "Official domain mvr.bg used as a folder in the URL path: https://qiivo.click/mvr.bg/bg/",
+      "model": "rule-based",
+      "timestamp": "2026-11-16T21:51:55.139692",
+      "threat_level": "HIGH",
+      "confidence": 90,
+      "decision": "BLOCK",
+      "rule": "brand-domain-in-path"
+    }
   }
 ]
