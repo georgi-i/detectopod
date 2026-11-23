@@ -30,8 +30,8 @@ Detectopod identifies phishing domains that:
 <!-- STATS_START -->
 ```
 Total Domains Detected: 298
-Last Scan: 2026-11-16 21:51:55 UTC
-Domains Processed: 1,545
+Last Scan: 2026-11-23 23:41:10 UTC
+Domains Processed: 1,924
 Detection Rate: 0.1%
 ```
 <!-- STATS_END -->
