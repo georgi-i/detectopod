@@ -4132,5 +4132,23 @@
       "decision": "BLOCK",
       "rule": "brand-domain-in-path"
     }
+  },
+  {
+    "domain": "dhi-bg.eu.cc",
+    "score": 100,
+    "detected_at": "2026-11-27T12:20:46.295017",
+    "source": "manual",
+    "keywords": [
+      "dhl"
+    ],
+    "evidence_url": "https://dhi-bg.eu.cc/bg/",
+    "llm_analysis": {
+      "analysis": "Added manually after review: DHL Express Bulgaria \"failed delivery / invalid address\" phishing with a Bulgarian /bg/ page and an \"update delivery address\" form. Typosquat dhi (capital i) for dhl. Hosted at Tencent (AS132203, 43.162.92.86) like mvrbgios.eu.cc; urlscan verdict Potentially Malicious (DHL). TLS certificate issued 2026-11-27.",
+      "model": "manual",
+      "timestamp": "2026-11-27T12:20:46.295012",
+      "threat_level": "HIGH",
+      "confidence": 95,
+      "decision": "BLOCK"
+    }
   }
 ]
